@@ -30,7 +30,7 @@ Verilog Solutions team works closely with major ecosystems and Web3 projects and
 
 | Severity      | Description |
 | ------------- | ----------- |
-|<span style="color:red">   High          </span>|Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.|
+|<span style="color:red">High</span>|Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.|
 |<span style="color:orange">Medium        </span>|Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.                                   |
 |<span style="color:green"> Low           </span>|Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.    |
 |<span style="color:blue">  Informational </span>|Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.                                            |
