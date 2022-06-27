@@ -42,6 +42,15 @@ Verilog Solutions team works closely with major ecosystems and Web3 projects and
 | --------------- | -------------------------------------------- | ----------- |
 | Cronus Finance Protocol| https://notion.verilog.solutions/audit/cronus_finance | June 15, 2022|
 
+### Untangle Protocol Audit Report
+| Untangled Protocol is a decentralized lending and liquidity protocol for
+real-world asset collaterals.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Untangle Protocol| https://notion.verilog.solutions/audit/untangle_finance
+| June 3, 2022|
+
 
 ---
 ## Severity Categories Standards
