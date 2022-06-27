@@ -19,9 +19,28 @@ Verilog Solutions team works closely with major ecosystems and Web3 projects and
 
 ---
 ## Audit
+| our engineering engagement with project teams
 
+### BendDAO Audit Report
+| a decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ETH liquidity to the lending pool to earn interest, while borrowers can borrow ETH from the lending pool using NFTs as collateral.
 
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Lending Protocol| https://www.verilog.solutions/audits/BendDAO | May 24, 2022|
 
+### Gnosis Audit Report
+| GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| GNO Token V2.0.0| https://notion.verilog.solutions/audit/gno_token | April 22, 2022|
+
+### Cronus Finance Audit Report
+| Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Cronus Finance Protocol| https://notion.verilog.solutions/audit/cronus_finance | June 15, 2022|
 
 
 ---
