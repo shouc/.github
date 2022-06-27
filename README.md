@@ -22,7 +22,7 @@ Verilog Solutions team works closely with major ecosystems and Web3 projects and
 | our engineering engagement with project teams
 
 ### BendDAO Audit Report
-| a decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ETH liquidity to the lending pool to earn interest, while borrowers can borrow ETH from the lending pool using NFTs as collateral.
+| A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ETH liquidity to the lending pool to earn interest, while borrowers can borrow ETH from the lending pool using NFTs as collateral.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
