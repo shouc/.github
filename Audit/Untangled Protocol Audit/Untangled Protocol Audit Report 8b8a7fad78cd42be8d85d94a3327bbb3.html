@@ -1,0 +1,818 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Untangled Protocol Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="58e41656-0b84-4298-87a4-22b9a3d75b92" class="page sans"><header><h1 class="page-title">Untangled Protocol Audit Report</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Stage</th><td><span class="selected-value select-value-color-gray">released</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>status</th><td><span class="selected-value">locked</span></td></tr></tbody></table></header><div class="page-body"><blockquote id="8a2f802a-c1af-4c84-8817-86acda63070f" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="04c156b7-1cc6-4fda-8db4-3c917fc7c973" class="">June 3, 2022</p><p id="d109a17b-7ace-4dae-8a4b-3c216a6890c5" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="8b8a7fad-78cd-42be-8d85-d94a3327bbb3" class="image"><a href="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/UNTANGLED_Audit_Report.png"><img style="width:1920px" src="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/UNTANGLED_Audit_Report.png"/></a></figure><p id="517ae15c-a22e-4d11-b7de-1f9e00eca7ae" class="">This report presents our engineering engagement with the Untangled Finance team on the Untangled Protocol, a digital securitization platform bridging real-world assets to decentralized finance.</p><table id="f9690dd7-44a8-43c7-9cfd-5204e9fcf29e" class="simple-table"><tbody><tr id="e05c6000-4803-4315-9c8f-7de1df41a8a4"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:375px">Untangled Protocol</td></tr><tr id="83940de6-8ebc-4e47-afa4-35ae5152c2a5"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:375px">https://github.com/untangledfinance/untangled-protocol-open</td></tr><tr id="27b22619-61e0-4a0c-a30f-24a4b73c27b3"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:375px"><a href="https://github.com/untangledfinance/untangled-protocol-open/commit/8333a14e6497efd824a425d5bf4dc7c243fed5e6">8333a14e6497efd824a425d5bf4dc7c243fed5e6</a></td></tr><tr id="61a22804-6ab8-4bb9-aca3-8e169cc4dea0"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:375px">Solidity</td></tr><tr id="d5c170af-4726-4240-a766-a66db062bb5c"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:375px">Celo</td></tr></tbody></table><h2 id="563aa5ea-c0b8-48f4-b4d9-0e75ba99d9dd" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="74dc4918-3ced-44a3-8068-47628bafdc70" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="3093dbcb-ad6a-416d-bdd8-14834efa0d3b" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="fbd3eb60-8374-4ef0-9a43-941c4c0d9128" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="03031141-7805-49c1-9e30-4b3d44ae017d" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#563aa5ea-c0b8-48f4-b4d9-0e75ba99d9dd">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fbd3eb60-8374-4ef0-9a43-941c4c0d9128">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#791554dd-b5d4-4ef2-addc-51fd258ec0a1">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9f6f6d02-47ac-4b56-bb97-56321a155a75">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0545dbbe-322f-4aa7-a1db-9ac4b76c6f87"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#71d13bba-a5ce-4a39-86d4-39c8129b317b">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0df44b36-9c14-46c3-a4a8-8af13c6f4b23">Off-Chain OpSec </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0178aaac-19b0-45fa-89b0-432ffc6a6fe7">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6a5517c4-07b2-4a29-ade5-5a5ec7ddbde7">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#79841825-3344-405e-a767-1cdf18707f85">Disclaimer</a></div></nav></div><h2 id="791554dd-b5d4-4ef2-addc-51fd258ec0a1" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="adc2fd04-6818-4bc3-ad99-e48d5afb22c2" class=""><details open=""><summary>Service Stages</summary></details></h3><div class="indented"><p id="d3bf4293-1e5b-44e8-905b-4feb88a9d11c" class="">Our auditing service includes the following two stages:</p><ol type="1" id="598c0ea0-e2ed-4fcd-a7f7-a6a7985c6a1d" class="numbered-list" start="1"><li><strong>Pre-Audit Consulting Service</strong><ul id="dc2f9616-6e17-4bf5-8c34-fae6ea798f9b" class="bulleted-list"><li style="list-style-type:disc">As a part of the pre-audit service, the Verilog team worked closely with the project development team to discuss potential vulnerability and smart contract development best practices. Verilog team is very appreciative of establishing an efficient and effective communication channel with the project team, as new findings are often exchanged promptly and fixes were deployed quickly, during the preliminary report stage. </li></ul></li></ol><ol type="1" id="8105fa6e-b848-4d7f-8b6f-3db7b0d2caa9" class="numbered-list" start="2"><li><strong>Smart Contract Auditing Service</strong><ul id="feefcdc7-7b4d-43f8-91a5-3df61139cf64" class="bulleted-list"><li style="list-style-type:disc">Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions</strong></li></ul></li></ol></div><h3 id="3463ed00-ec8e-4e5d-9138-f337ce6591ce" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="e8ff4732-c404-4655-a8d1-9852f6f31db2" class="bulleted-list"><li style="list-style-type:disc">Code Assessment</li></ul><ul id="d97f4fb2-fe51-4624-a097-8c0a8602a41d" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis</li></ul><ul id="6554f74c-232b-4ea3-b820-c8449cf63554" class="bulleted-list"><li style="list-style-type:disc">Business Logic Analysis</li></ul><ul id="53a6bef9-e64b-479d-974e-dcdd798bb383" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis</li></ul><ul id="87623ce6-07e9-4abc-bb74-33fd0316188d" class="bulleted-list"><li style="list-style-type:disc">Use Cases Analysis</li></ul></div><h3 id="a844e543-1a93-4c28-85f3-8cceb57e3685" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><figure id="ba125bda-0ed7-422a-bf49-95d710068ef1" class="image"><a href="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/Untitled.png"><img style="width:432px" src="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/Untitled.png"/></a></figure></div></div><h2 id="9f6f6d02-47ac-4b56-bb97-56321a155a75" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="75dc2dd8-bdb9-413b-8575-80afa5e503b5" class="">Untangled Protocol is a decentralized lending and liquidity protocol for
+real-world asset collaterals.</p><p id="7e94d82b-4655-4af3-8dec-380309583b0b" class="">Below is a graph explaining the connections and relations between contracts:</p><figure id="6374f33b-d959-408a-8ea9-b22b0f4d2bf9" class="image"><a href="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/Untitled%201.png"><img style="width:1623px" src="Untangled%20Protocol%20Audit%20Report%208b8a7fad78cd42be8d85d94a3327bbb3/Untitled%201.png"/></a></figure><hr id="e6531885-56c6-484f-af87-78e77e55b3d9"/><ul id="81055ad3-ad98-48f1-a698-35d269df4dfc" class="bulleted-list"><li style="list-style-type:disc"><strong>Asset Pool: </strong>a new instance of <code>SecuritizationPool</code>(Asset Pool) can be created by the approved pool creator. The pool purchases assets with its reserve in stablecoins. Asset Pool borrows from Liquidity Pool (automatically) and Pool Backers (manually) (collectively called Funders) in order to purchase Assets from Originator. The interest of Funders within an Asset Pool could be represented by a Trustee, an independent and trusted third party in the real
+world.</li></ul><ul id="938964a7-6c47-4c30-af8a-468ce794b41e" class="bulleted-list"><li style="list-style-type:disc"><strong>Liquidity Pool: </strong>a smart contract that receives stablecoins from Liquidity Providers
+and automatically lends to an Asset Pool once its minimum first loss has been
+reached i.e. the Asset has enough Backers, in exchange for Asset Pool’s
+SOTs. A Liquidity Pool can lend to many Asset Pools.</li></ul><ul id="0f3cdd9e-703f-42fd-9c26-07ed7ba5144d" class="bulleted-list"><li style="list-style-type:disc"><strong>Borrower:</strong> an entity that borrows from Asset Pool and uses the proceeds to
+develop a project, e.g. sustainability-linked loans where disbursement is made
+on-chain and rewards are available for achieving certain sustainability targets.</li></ul><ul id="a7e3b518-0eff-4365-9cd1-e6cc36d80a5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Assets: </strong>each Asset purchased by Asset Pool is represented by an NFT<ul id="1e6a4233-193f-42c0-92c6-6ef578f4351e" class="bulleted-list"><li style="list-style-type:circle">A yield asset (such as a green project loan) is represented by LAT</li></ul><ul id="3b41077e-d9f5-4bf2-ad7b-8aaaee04e3e9" class="bulleted-list"><li style="list-style-type:circle">A non-yield asset (such as a trade finance invoice) is represented by AIT</li></ul></li></ul><ul id="437a9620-d21e-44af-823b-5635f1b7a902" class="bulleted-list"><li style="list-style-type:disc"><strong>Asset Pool Tranches:</strong><ul id="3865b2bc-a2fe-436c-89b9-ee69b5b3284a" class="bulleted-list"><li style="list-style-type:circle">Senior tranche financing is represented by SOT, an ERC-20 token with
+the currency value of 1 but is continuously compounded with interest.</li></ul><ul id="6b7ded0c-b129-459e-adc2-48b97bbc4def" class="bulleted-list"><li style="list-style-type:circle">Junior tranche financing is represented by JOT, an ERC-20 token acting as
+the first loss piece in an Asset Pool.</li></ul></li></ul></div><h2 id="0545dbbe-322f-4aa7-a1db-9ac4b76c6f87" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="af040da4-f0fe-4c46-8231-f783065c1a82" class="simple-table"><tbody><tr id="6f98db42-4210-470d-a2a6-441c9b47c83d"><td id="G&gt;ax" class="" style="width:120px"><strong>Severity</strong></td><td id="T&lt;wm" class="">          <strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class="">      <strong>Resolved</strong></td></tr><tr id="0f8ee7b3-d93f-43af-bac3-81f7abdefade"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">             5</td><td id="@mfj" class="">              5</td><td id="|V?N" class="">             5</td></tr><tr id="1759c03b-7000-42de-aa9b-7b46f0665dfe"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">             3</td><td id="@mfj" class="">              3</td><td id="|V?N" class="">             3</td></tr><tr id="c4374443-994a-49f9-98bd-248cf17b2d0b"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">             6</td><td id="@mfj" class="">              6</td><td id="|V?N" class="">             6</td></tr><tr id="25876b6b-8911-4966-8bad-cd2034662f72"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">             6</td><td id="@mfj" class="">              6</td><td id="|V?N" class="">             5</td></tr></tbody></table><h3 id="8192675b-286f-4b7e-a12c-ef5564db65f1" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><ol type="1" id="b55e2f0b-5e8c-4508-a5e6-c01c9b526c1a" class="numbered-list" start="1"><li><strong>Inconsistency in the documentation and actual implementation</strong><table id="de31879b-2119-4a01-ade4-6a89a5e0d19e" class="simple-table"><tbody><tr id="f9fd2f69-22c6-4317-a3c2-9d86c7bf7305"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="cc3b31ee-4428-48d4-ac47-85e271df1a1c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/SecuritizationManager.sol#L51;</td></tr><tr id="9f47f278-4251-4e40-bd81-750be5d4dcb7"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/a41e9eeef21ae4e603d044ed3621b1c1461cd911">commit a41e9eeef21ae4e603d044ed3621b1c1461cd911</a>;</td></tr></tbody></table><ul id="37a2325d-b483-49af-a630-521ca715c9d4" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="02e273f0-2c56-4736-8614-4cf0fc25047e" class="">Anyone can create new pools while the Untangled documents state that only the approved entity can create new pools.  A malicious pool can be created by an attacker to drain the user’s funds.</p><ol type="1" id="252a200e-9140-4a26-ac78-a5473c5a5c74" class="numbered-list" start="1"><li>In the Untangled Platform App User Guide, it states that only Originator/Issuer can create a new pool:<blockquote id="76f2e620-b970-45f3-a91c-df3a8c5ed8e5" class="">“Business users who have been designated as Originator/Issuer can create a new pool under Portfolio/Pool”</blockquote></li></ol><ol type="1" id="c9a545f4-55b6-407f-9cb5-d5a0e4fb6a3d" class="numbered-list" start="2"><li>In the Untangled Whitepaper, it states that those who are approved by governance can create a new pool:<blockquote id="3b29f4a4-eece-4600-a030-83cedf58a685" class="">“Anyone approved by Governance can create a Borrowing Pool …”</blockquote></li></ol><p id="196dee1b-208b-4c63-813c-ec9ccc92245f" class="">However, in the code implementation, there is no access control on function <code>SecuritizationManager.newPoolInstance()</code> and anyone can create new pool instances by calling this function. Also, there is no check against who creates the pool in other components that interact with pools. Anyone can create a pool with his/her own desired settings for the pool(e.g. set the currency token of the pool or modify the pot address of the pool). </p><p id="6fc46c20-9513-46c8-b3c8-8bb1b45f277b" class="">Though attacking surfaces are limited because the pool implementation is set by admin roles. The code logic of the pool cannot be modified and only a new pool instance can be created. However, an attacker can create a pool with a malicious currency token. The pool and related contracts only work properly under the assumption that the currency token is a normal ERC20 token. Because of the malicious token breaking the assumption, the pool and all the related components will work improperly, which would put users’ funds at risk. </p><p id="0af5bb24-987a-4108-ad46-4782d01982f5" class="">Besides, based on the documents, all pools can only be created by trusted entities with verified ERC721 tokens representing real-world assets. Users might assume the pool created by the attacker is also a trusted pool and interact with it. Pool settings can be configured by the pool owner(attacker). An attacker can set the pot that is used to receive currency tokens with his/her own address or set an arbitrary interest rate.</p></details></li></ul><ul id="2568fca9-cfdc-401f-bc49-37756c018b74" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="8dd47116-5000-4f8a-8c0e-b96dec3441ea" class="">Attacker Mallory creates a pool with non-verified ERC721 assets and the pool accepts USDC as currency. Mallory sets the pot that is used to collect currency tokens with his own address. User Alice assumes the pool created by Mallory is an official and trusted pool created by Untangled Finance team and interacts with this malicious pool. USDC tokens are transferred to the pot and Mallory withdraws all the USDC stored in the pot. Alice loses her funds.</p></details></li></ul><ul id="257eb013-e97d-48f9-9638-bd49aa54d319" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="b1fd7208-500a-478f-992e-f30c0bb0ddc1" class="">We recommend adding an access control for the <code>SecuritizationManager.newPoolInstance()</code> according to the design stated in the Untangled documents. </p><p id="c223cd79-6a3a-48e2-b476-d1f8240b4b06" class="">Such an access control ensures that only designated roles or accounts can create new pool instances. With only pools created by trusted parties, the overall protocol safety level will be greatly improved.</p></details></li></ul><ul id="2387eb94-318d-471f-ad93-94b1b957c86a" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="28b083e4-1ab7-4847-b4ed-bd21626e199f" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/a41e9eeef21ae4e603d044ed3621b1c1461cd911">commit a41e9eeef21ae4e603d044ed3621b1c1461cd911</a>.  Untangled Finance team added a new role <code>POOL_CREATOR</code> and only <code>POOL_CREATEOR</code> can create a new pool instance.</p><p id="241ed163-0118-49a2-8de0-4f31cb194fd3" class="">A new privileged role was introduced in this fix commit. We recommend modifying the instructions and explanations on Untangled documents accordingly.</p></details></li></ul></li></ol><ol type="1" id="cb390ee3-a781-4ed3-b88a-032f2762ba44" class="numbered-list" start="2"><li><strong>Lack of access control on critical functions</strong><table id="6eb0d159-dbf5-41bc-a36a-91326092b042" class="simple-table"><tbody><tr id="dfa28103-b92b-451e-bd51-a487b492bad9"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="d439b8c3-12d4-4b3a-8c97-46480c44568c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/crowdsale/TimedCrowdsale.sol#L45;</td></tr><tr id="2e2c7c0a-d171-4f49-90af-49d23f46a223"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/d570a6e950d6c0ab641ece08fc657a5ccad606ee">commit d570a6e950d6c0ab641ece08fc657a5ccad606ee</a>;</td></tr></tbody></table><ul id="b35e30c0-d968-4f26-a390-22a983659c6b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a6ad6120-d23c-439c-8f8d-14dbbdd6baf7" class="">There is no access control on a function that can change critical state variables. Anyone can call this function to affect the status of the sale round.</p><p id="b1cc77d2-4409-404f-8b08-6367c4c8116c" class="">Function <code>TimedCrowdsale.newSaleRoundTime()</code> sets <code>openingTime</code> and <code>closingTime</code> of current sale round. They are two very critical state variables that can determine the status of the current sale round (whether the sale is open or closed). Ideally, only owner roles can extend the sale round by calling the function <code>TimedCrowdsale.extendTime()</code>, which is a function that only can be called by <code>OWENR_ROLE</code>. However, anyone can just call <code>TimedCrowdsale.newSaleRoundTime()</code> to bypass the <code>OWNER_ROLE</code> check and reset the<code>closingTime</code>.  </p><p id="ae74647a-9e48-4ce1-8491-1b42db2333a1" class="">Any user can determine the status of the sale, which violates the design that only privileged roles like <code>OWNER_ROLE</code> can modify the status of the sale round. Users can just stop or reopen or extend the sale round themselves by calling this function. Token sales will be interrupted and sales amount will be unexpected, which can have a great impact on pool shares distribution and hurt token holders’ interest.</p></details></li></ul><ul id="00f52adb-56ad-4418-938d-d1c22ff7a0f7" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="032475e0-daa4-40f9-a099-cf9a7177c5da" class="">The token sale ends and attacker Mallory sets the <code>closingTime</code> through the public function <code>TimedCrowdsale.newSaleRoundTime()</code> to reopen the sale and buy more tokens. More tokens are sold than expected, which dilutes the existing token holder’s share and value.</p></details></li></ul><ul id="418871f6-8c95-44ff-8c3f-717b719708b6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="7f1fcbdc-15ff-4d1f-85fd-04cc788f8719" class="">Add access control to function <code>TimedCrowdsale.newSaleRoundTime()</code>. </p><p id="a24177aa-8363-47ba-8c40-e5a44b2a6d7f" class="">Access control on this function ensures that only approved roles have the ability to modify the two critical variables through this function. Token sales status can no longer be modified by unauthorized users.</p></details></li></ul><ul id="01aa10f1-f740-4c86-a52c-6d0e3e415158" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="9c99e582-a0eb-4eeb-ac34-840ea154f49e" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/d570a6e950d6c0ab641ece08fc657a5ccad606ee">commit d570a6e950d6c0ab641ece08fc657a5ccad606ee</a>. An <code>onlyRole</code> modifier has been added to the function.</p><p id="f6fc1dcf-cbcd-441e-bddc-e8d3cf82cccb" class="">Same as function<code>TimedCrowdsale.extendTime()</code>, <code>TimedCrowdsale.newSaleRoundTime()</code> can only be called by <code>OWNER_ROLE</code>. Sale round status can only be modified by <code>OWNER_ROLE</code>, no more unexpected interruptions on token sales from unauthorized users.</p></details></li></ul></li></ol><ol type="1" id="aedd1b3e-8a12-4110-88a2-a9faace2bf12" class="numbered-list" start="3"><li><strong>Inconsistency in the function name and actual implementation </strong><table id="0716a76d-6a92-419b-b358-a38c963950bd" class="simple-table"><tbody><tr id="5d10955c-775d-4e40-8579-399a78a2e9a4"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="674a378d-12a7-487b-b175-66a6b94bb1e5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/crowdsale/Crowdsale.sol#L108;</td></tr><tr id="ac85337b-ad7c-4345-be33-2007761e8609"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in  <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/d570a6e950d6c0ab641ece08fc657a5ccad606ee">commit d570a6e950d6c0ab641ece08fc657a5ccad606ee</a>;</td></tr></tbody></table><ul id="fef58ec5-6bf4-46c7-bfd3-6582f157ceb0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7bb5123c-5c6c-4360-b01c-29acccda9bd7" class="">The name of function <code>getTimeStartEarningInterest()</code> indicates that it should return time starts earning interest instead of <code>block.timestamp</code>. Incorrect implementation eventually affects the calculation of the long sale token amount that the user can buy.</p><p id="f5f96a41-9058-45cb-861e-05a70e2d878a" class="">According to the name of function <code>Crowdsale.getTimeStartEarningInterest()</code>, it should return the starting earning interest time. However, in the actual implementation, this function returns <code>block.timestamp</code>. This function is used in <code>getLongSaleTokenPrice()</code> to return the long sale token price, which is eventually used in the calculation of the long sale token amount that a user can buy.  The <code>getLongSaleTokenPrice()</code> reverts if <code>getTimeStartEarningInterest()</code> returns zero value and user will not be able to buy tokens.</p><p id="5120313d-1c78-4360-9ae6-0d4aaf3b0585" class="">Under current implementation,  <code>getTimeStartEarningInterest()</code> will always return <code>block.timestamp</code> which is always non-zero, thus it will never cause require statement in <code>getLongSaleTokenPrice()</code> to revert. There will be no difference with or without the check.</p><p id="02115db7-324f-4927-a373-613bc0c26499" class="">The wrong implementation of the function located in the base contract will affect the proper operations of all other functions that rely on it. Under current code implementation, users are able to buy tokens regardless of the time starts earning interest that Untangled protocol wishes to set. An unexpected token amount will be sold to users without the correct setting on the starting earn interest time.</p></details></li></ul><ul id="ba3da2b9-dbf7-4933-956a-f86b1545dc96" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="826a713b-7b8f-4049-8ab1-b8695b8fb7be" class="">The time starts earning interest cannot be set and user Alice can always buy tokens from the token sale contracts regardless of the actual start earning interest time that Untangled protocol wishes to set. Alice ends up obtaining more note tokens than she should.</p></details></li></ul><ul id="c76cffae-48e5-4c22-8d5f-e19a1ebb77ce" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3e6f19b0-3052-4caa-983e-8d59e7940ed4" class="">Check and rewrite the implementation code of function <code>Crowdsale.getTimeStartEarningInterest()</code>. </p><p id="75a2e295-1864-4a1f-8d94-dbf64080696d" class="">Correct implementation can ensure other functions that rely on this function works properly.</p></details></li></ul><ul id="d35ee376-42a3-4a4f-8a7e-4b28c5a120c6" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="5ec11d65-d0e8-438f-802b-e774f161359f" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/d570a6e950d6c0ab641ece08fc657a5ccad606ee">commit d570a6e950d6c0ab641ece08fc657a5ccad606ee</a>. function <code>Crowdsale.getTimeStartEarningInterest()</code> was removed from base contract <code>Crowdsale.sol</code> and was replaced by the variable <code>timeStartEarningInterest</code> exists in the contract <code>MintedIncreasingInterestTGE.sol </code>and <code>MintedNormalTGE.sol</code>, which would only have limited effect inside the contract and contracts that inherit it. </p><p id="d0581eb3-caff-40e3-8f0d-eafecd6dfaa7" class="">The value of <code>timeStartEarningInterest</code> can be set inside function <code>setupLongSale()</code>. The require statement will revert if the value is not set correctly.  Variable <code>timeStartEarningInterest</code> works properly as expected.</p></details></li></ul></li></ol><ol type="1" id="16fd00fe-61e1-41c4-953b-e338135c878c" class="numbered-list" start="4"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="41f3b303-8aa3-4afc-97e8-eecd59d4af0a" class="simple-table"><tbody><tr id="9a2ddc1e-16f9-4911-a6e1-215ccb68c97a"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="ceea8b42-6118-40b7-a48c-dde4d229f230"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/base/SecuritizationPoolServiceBase.sol#L18, #L32;</td></tr><tr id="cd68c178-5e98-473e-bfa0-6b0c38e56790"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/a2909c0ac25e76953fa3fd0ee42b667619e8cf23">commit a2909c0ac25e76953fa3fd0ee42b667619e8cf23</a>;</td></tr></tbody></table><ul id="4aee71a7-6431-436c-8e64-5dbeed46cba6" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="23b2176f-018b-4bfc-b029-f71963b9da39" class="">Functions used to convert token values are implemented with incorrect equations. It would result in incorrect calculation of note token values and users’ share proportion in the pool, which directly affects the proper operations of the whole protocol. </p><p id="96a2c1c4-f717-490e-ae6b-159bf9e3bd06" class=""><code>SecuritizationPoolServiceBase.convertTokenValueToCurrencyAmount()</code> and <code>SecuritizationPoolServiceBase.convertCurrencyAmountToTokenValue()</code> convert token values from one token to another token by comparing decimal differences of the two tokens. However, the equations used to convert token values are incorrect. converted token value should be <code>10**(bigger_decimal- smaller_decimal)</code> rather than <code>10**bigger_decimal- smaller_decimal</code> .</p><p id="ba5dfa49-ee4d-4477-89f3-91cf4e521c96" class="">These two functions are used in various important operations used for calculating token price and token value such as <code>DistributionAssessor.getSOTTokenPrice()</code> and <code>SecuritizationPoolValueService.getExpectedERC20AssetValue()</code>.  It eventually affects the calculation of note token value and users’ share proportion in the pool. Incorrect implementation of these two critical functions can result in incorrect calculations of the number of all the users’ funds and yields and loans in the pool.</p></details></li></ul><ul id="28132116-1d5d-4ec8-aac5-8cc0417fe611" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="22af11fc-a53c-4c72-9832-7548420dbec9" class="">User Alice’s note token value is calculated incorrectly and it’s far less than it should be.</p></details></li></ul><ul id="14bc131b-f079-48fb-8c2a-833295ac7117" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="b587fb20-1a3f-4993-85d2-812c0c61e988" class="">Change the function implementation to the following suggestions:</p><pre id="e7e11788-b163-4877-b1ed-6d0f7bad66f2" class="code code-wrap"><code>function convertTokenValueToCurrencyAmount(
+        address pool,
+        address tokenAddress,
+        uint256 tokenValue
+    ) internal view returns (uint256) {
+        uint256 currencyDecimals = ERC20(ISecuritizationPool(pool).underlyingCurrency()).decimals();
+        uint256 tokenDecimals = ERC20(tokenAddress).decimals();
+
+        return
+            currencyDecimals &gt; tokenDecimals
+                ? tokenValue * (10**(currencyDecimals - tokenDecimals))
+                : tokenValue / (10**(tokenDecimals - currencyDecimals));
+    }
+
+    function convertCurrencyAmountToTokenValue(
+        address pool,
+        address tokenAddress,
+        uint256 currencyAmount
+    ) internal view returns (uint256) {
+        uint256 currencyDecimals = ERC20(ISecuritizationPool(pool).underlyingCurrency()).decimals();
+        uint256 tokenDecimals = ERC20(tokenAddress).decimals();
+
+        return
+            currencyDecimals &gt; tokenDecimals
+                ? currencyAmount / (10**(currencyDecimals - tokenDecimals))
+                : currencyAmount * (10**(tokenDecimals - currencyDecimals));
+    }</code></pre></details></li></ul><ul id="df463a27-93ad-421e-a282-5faf4d60453f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a3796eb5-0376-4b69-96cc-497948c4a3bf" class="">Resolved in  <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/a2909c0ac25e76953fa3fd0ee42b667619e8cf23">commit a2909c0ac25e76953fa3fd0ee42b667619e8cf23</a>. Token value conversions are now calculated with correct equations. </p></details></li></ul></li></ol><ol type="1" id="dbf9baa4-bde7-42f6-a0a3-9d79a2d6f7b5" class="numbered-list" start="5"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="4a613939-299c-4e7e-ab52-7a744ccccbd0" class="simple-table"><tbody><tr id="fc051f8a-485a-4816-8dfc-9281649fb134"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="7b6954be-9872-43ff-9c27-1868f8698593"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/DistributionAssessor.sol#L13;</td></tr><tr id="b9d6f443-f3f0-42d9-8a24-3013cd3d24cd"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0ee18c763347a7ade21528d47b7cfc765fda0be9">commit 0ee18c763347a7ade21528d47b7cfc765fda0be9</a>;</td></tr></tbody></table><ul id="19b68933-129f-4f22-86a6-f33aa4e99359" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="c4477286-7764-4e7c-a649-df6bcd8e3c26" class=""><code>getSOTTokenPrice()</code> only returns the accumulated interest, without adding the default initial price. Incorrect SOT token price causes the currency redemption amount calculation incorrect and users’ shares of the pool are distributed unfairly.</p><p id="ff7e01b2-8ff0-41a7-8e98-6d6a99907ea5" class="">SOT token price consists of two parts. It increases from the default price and it will be bigger than the default token price with accumulated interest. However, function <code>DistributionAssessor.getSOTTokenPrice()</code>  directly returns the interest part calculated by function <code>_calculateInterestForDuration()</code>. The token default price is not added on top of the calculated interest. </p><p id="c2372a5a-c90b-4538-8ac3-042c65915d72" class="">This incorrect calculation results in all the calculated SOT token prices being smaller than they should be. SOT token price stands for the share proportion of users owned in the pool. Users can redeem more funds than they should. Users who redeem early can redeem more funds than they should and there might not be enough funds for users who redeem late. This issue puts funds in the pool at great risk.</p></details></li></ul><ul id="57382e8b-f972-4e68-8913-b085753fe604" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="50cda418-d1ef-4cef-9803-84193add8004" class="">User Alice makes the redeem request while the pool still has enough funds and she receives more tokens than she should. </p></details></li></ul><ul id="a5461c43-6c94-4a36-86e5-59b6333b3ca3" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="d3f33b10-796f-40dd-92cd-20f0d9f7785c" class="">Add the initial token price to the return value of the cumulated interest in function <code>getSOTTokenPrice()</code>  to make sure token prices are calculated correctly and funds in the pool are distributed fairly to note token holders.</p><pre id="e86fbb5a-015a-4e20-af31-979554d61ecf" class="code"><code>function getSOTTokenPrice(address pool, uint256 timestamp) public view override returns (uint256) {
+        ISecuritizationPool securitizationPool = ISecuritizationPool(pool);
+        ERC20 noteToken = ERC20(securitizationPool.sotToken());
+
+        if (address(noteToken) == address(0) || noteToken.totalSupply() == 0) return 0;
+        uint256 ONE_SOT_DEFAULT_PRICE = convertTokenValueToCurrencyAmount(
+            address(securitizationPool),
+            address(noteToken),
+            1 * 10**uint256(noteToken.decimals())
+        );
+        uint256 openingBlockTimestamp = securitizationPool.openingBlockTimestamp();
+
+        if (timestamp &lt; openingBlockTimestamp) return ONE_SOT_DEFAULT_PRICE;
+
+        uint32 interestRateSOT = securitizationPool.interestRateSOT();
+
+        return ONE_SOT_DEFAULT_PRICE + _calculateInterestForDuration(ONE_SOT_DEFAULT_PRICE, interestRateSOT, timestamp - openingBlockTimestamp);
+    }</code></pre></details></li></ul><ul id="1e23dac6-0c8c-4903-98ae-1d8e50f17989" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="5da50bf7-e6b2-41b6-be38-f6f50ef60dde" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0ee18c763347a7ade21528d47b7cfc765fda0be9">commit 0ee18c763347a7ade21528d47b7cfc765fda0be9</a>. <code>ONE_SOT_DEFAULT_PRICE</code> is added on top of the return value of <code>_calculateInterestForDuration()</code>. SOT token prices are calculated correctly.</p></details></li></ul></li></ol></div><h3 id="792c6e89-22a7-43f7-a763-d0d640ad8727" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="3a49b5d9-8303-4c54-b8c8-18cab4808ea3" class="numbered-list" start="1"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="f4712735-0e6f-4114-be25-71d66b47dd55" class="simple-table"><tbody><tr id="fa3a2e71-1c9d-452b-b467-d3ff7e7d5655"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><mark class="highlight-orange"><strong>Medium</strong></mark></td></tr><tr id="9ee5f7e2-7756-4956-bedc-85b7dc80975e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/SecuritizationPoolValueService.sol#L36, #L122;</td></tr><tr id="9296ad80-6172-4331-befe-bc73c689c51b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b69d2226bd47b296e80b86c309262f6086efb34c">commit b69d2226bd47b296e80b86c309262f6086efb34c</a>;</td></tr></tbody></table><ul id="f307b8cf-88c7-4f1c-9b4a-640500faa66d" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="c0e82670-3374-493f-a18a-e05af7037f13" class="">Expected asset values are calculated incorrectly due to incorrect calculation of total debt. It would affect users and frontend implementation when querying information with this function.</p><p id="779b3089-c99c-4a24-99a5-93abd8e66021" class="">Function <code>SecuritizationPoolValueService.getExpectedAssetValue()</code> and <code>SecuritizationPoolValueService.getExpectedERC20AssetValue()</code> are two functions which calculate the expected ERC721/ERC20 asset value. These two functions should have similar logic on implementation. Expected value are calculated with total debt and present value. However, the <code>totalDebt</code> in <code>SecuritizationPoolValueService.getExpectedAssetValue()</code> is calculated incorrectly. It should be calculated with <code>timestamp</code>, instead of <code>expirationTimestamp</code>. </p><p id="4284957b-4525-4355-a030-a0e6bad61610" class="">When the debt is overdue, the computed user’s debt will be smaller than expected. When the debt is not overdue, the computed user’s debt will be bigger than expected. In Either way, the user’s debt is not calculated correctly, thus it will affect the calculation of the expected asset value. </p><p id="e70da6a9-3efa-444e-9076-5a1721b8aa78" class="">Public function<code>getExpectedAssetValue()</code> is currently only used in an external view function and not referenced by any other contracts. Incorrect asset value will be given when querying from the protocol, which might affect the frontend implementation. Pool funds will not be affected by the incorrect calculation. </p></details></li></ul><ul id="b479893b-2cce-455e-9f6e-3e8c1dfc8965" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="cb48e8df-4dd2-4649-a226-697275b9c4a6" class="">Incorrect expected asset values are given to users or used in the frontend when querying this function. </p></details></li></ul><ul id="6ac315ed-0451-4b5a-925a-c8865aca0595" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3ebb715b-43fa-4752-8a39-07b1eba2e634" class="">Calculate the total debt with <code>timestamp</code> instead of <code>expirationTimestamp</code>.</p><pre id="a9c5956d-fbb5-457a-b3a9-193cff34d6be" class="code"><code>function getExpectedAssetValue(
+        address poolAddress,
+        address tokenAddress,
+        uint256 tokenId,
+        uint256 timestamp
+    ) public view returns (uint256) {
+        IUntangledERC721 loanAssetToken = IUntangledERC721(tokenAddress);
+        uint256 expirationTimestamp = loanAssetToken.getExpirationTimestamp(tokenId);
+
+        uint256 overdue = timestamp &gt; expirationTimestamp ? timestamp - expirationTimestamp : 0;
+        uint256 totalDebt = loanAssetToken.getTotalExpectedRepaymentValue(tokenId, timestamp);
+
+        uint256 presentValue = getPresentValueWithNAVCalculation(
+            poolAddress,
+            totalDebt,
+            loanAssetToken.getInterestRate(tokenId),
+            loanAssetToken.getRiskScore(tokenId),
+            overdue,
+            loanAssetToken.getAssetPurpose(tokenId)
+        );
+
+        if (timestamp &lt; expirationTimestamp) {
+            totalDebt = loanAssetToken.getTotalExpectedRepaymentValue(tokenId, timestamp);
+        }
+
+        return presentValue &lt; totalDebt ? presentValue : totalDebt;
+    }</code></pre></details></li></ul><ul id="4fc81f85-9ecc-4cb2-9eff-f993b5e5a0ef" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="54d08eff-f44a-4e94-96fd-070557bdddd3" class="">Resolved in  <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b69d2226bd47b296e80b86c309262f6086efb34c">commit b69d2226bd47b296e80b86c309262f6086efb34c</a>. <code>totalDebt</code> is now calculated correctly with <code>timestamp</code>.</p></details></li></ul></li></ol><ol type="1" id="d6d9e50f-bff1-4cbf-bbbe-95c18ac8f941" class="numbered-list" start="2"><li><strong>Lack of state assertion on critical functions </strong><table id="8b9c13a5-ccc6-42dc-9fdd-efc4baae60c4" class="simple-table"><tbody><tr id="103d9190-160a-4def-94cf-0a83cb6141b6"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="9b8b1d3f-003e-4a7e-b91d-afda3947ef18"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/loan/LoanInterestTermsContract.sol#L134;</td></tr><tr id="9ff811a4-1e53-4a56-9437-acdc6c21e898"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0857c34e2cf88e447205d7b779a64196c35dd0c5">commit 0857c34e2cf88e447205d7b779a64196c35dd0c5</a>;</td></tr></tbody></table><ul id="f2db2332-f6d0-4ba2-aff7-675b623cac75" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="c207440e-80f3-4d1b-bb22-6ffac428da9d" class="">Missing loan status check on function <code>LoanInterestTermsContract.registerRepayment()</code> allows loan repayments to be made on loans that are already concluded or not started. Unnecessary Repayments on inadequate loans can interfere the loan management and cause loss of user funds.</p><p id="1583be9b-ac47-46b5-afe8-6e1a632e097a" class=""><code>LoanInterestTermsContract.registerRepayment()</code> is called in function <code>LoanRepaymentRouter._doRepay()</code> to help users to make loan repayments. However, both of the functions miss the loan status check. Loan Repayments can be made on loans that are already concluded or not started.</p><p id="a1dd0426-b24b-4781-ba1f-313f670a6ddb" class="">Loans that are concluded or not started should not be allowed for accepting repayments. Loan repayments on loans with incorrect status allow users to make unnecessary loan repayments, thus it results in loss of funds.</p></details></li></ul><ul id="86b80cb1-b833-41f7-997a-70e728c918c1" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="0e090266-0aa3-4eb6-be92-be27794c73e0" class="">Alice accidentally makes a repayment on the loan that has already concluded. She lost the part of funds that are used to make repayments.</p></details></li></ul><ul id="f59ad2cc-4dd6-4930-affd-782c0d15c55d" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="48cd6ca9-07c2-4231-9fd1-6fc786b49c2d" class="">Add loan status check on <code>LoanInterestTermsContract.registerRepayment()</code> to filter out loans with incorrect status. </p><p id="f485e391-63ab-403f-9e91-a868022f2384" class="">It can prevent loss of funds due to repayments on inadequate loans.</p></details></li></ul><ul id="a02bdc69-842c-4f62-995d-9d936c9ee76b" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="abb2fb0e-e4e8-426f-ba1d-cdc814c71221" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0857c34e2cf88e447205d7b779a64196c35dd0c5">commit 0857c34e2cf88e447205d7b779a64196c35dd0c5</a>. A require statement for loan status check has been added to function <code>LoanInterestTermsContract.registerRepayment()</code>.</p></details></li></ul></li></ol><ol type="1" id="b03bc395-18f8-4496-b9d6-bd8465e65995" class="numbered-list" start="3"><li><strong>Inconsistency in the function name and actual implementation </strong><table id="83e7374a-4a34-4de9-8a49-3eebea8ca32b" class="simple-table"><tbody><tr id="9a080c2d-38fd-4d61-bbe1-de0778abf6c8"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="5c4387c4-3d3b-4b5b-a369-5180f5417041"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/fab/NoteTokenFactory.sol#L52, #59</td></tr><tr id="626e9046-4d7e-4e79-a288-c07464b69b9e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>;</td></tr></tbody></table><ul id="595132a9-20d4-445a-a06f-93048dbfd3ae" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="89fc69cd-0ddf-455a-8e7b-372f37a8fb83" class="">The function name indicates it should be able to pause and unpause tokens. However, they can only pause tokens and tokens cannot be unpaused once they are paused. The system can not go back to normal operations once tokens are paused.</p><p id="54926d75-5c22-4b74-9a44-411f59e33cb9" class="">As the names of function <code>NoteTokenFactory.pauseUnpauseToken()</code> and <code>NoteTokenFactory.pauseUnpauseAllTokens()</code> indicates, it should be able to pause and unpause tokens. However, under the current implementation, they can only be used to pause tokens. Paused tokens can result in failures of protocol operations which are heavily dependent on the note tokens. And there are no other functions that are designed to unpause the paused token. This critical operation is irreversible and will result in the failure of the whole protocol. </p><pre id="e1c7caef-7f67-4602-89d8-61bd6d4bc38e" class="code"><code>function pauseUnpauseToken(address tokenAddress) external whenNotPaused nonReentrant onlyRole(DEFAULT_ADMIN_ROLE) {
+	require(isExistingTokens[tokenAddress], &#x27;NoteTokenFactory: token does not exist&#x27;);
+	NoteToken token = NoteToken(tokenAddress);
+	if (token.paused()) token.unpause(); // redundant unpause
+	token.pause();
+}
+function pauseUnpauseAllTokens() external whenNotPaused nonReentrant onlyRole(DEFAULT_ADMIN_ROLE) {
+	for (uint256 i = 0; i &lt; tokens.length; i++) {
+		if (tokens[i].paused()) tokens[i].unpause();
+		else tokens[i].pause();
+	}
+}</code></pre></details></li></ul><ul id="b0cf1d1f-599f-46b1-be2c-a4923e09c3c8" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="0aff112b-6083-409c-b3f2-fab3200c2c1f" class="">Admin accidentally calls the function to pause all tokens and the whole system cannot work properly because of the paused note tokens.</p></details></li></ul><ul id="c45281d5-4ed0-46fe-8571-7c43127af7cf" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ff97e19c-e330-4400-9964-7b84c21bd8fd" class="">Rewrite these two functions, so they can pause or unpause tokens.</p></details></li></ul><ul id="3c2e1464-a2d3-4a6b-a3a7-6ce3e6160ac8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="78a051b0-097c-4e31-9567-819d693864b8" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>. These two functions are available to pause and unpause tokens.</p></details></li></ul></li></ol></div><h3 id="848b2f25-ffa5-46f9-b013-644b418ab56b" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="c1444ddd-27a6-4406-a751-8b440dd7b8ce" class="numbered-list" start="1"><li><strong>Mismatched array length</strong><table id="f0512e17-18fe-4cbc-90f4-6fd0a599231d" class="simple-table"><tbody><tr id="844f822c-9319-4874-97c2-a3b09447efbb"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="9f06e505-4c8d-4713-a832-6cbd29be02d8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/SecuritizationPool.sol#L189, #L219;</td></tr><tr id="ce7ffd92-2fd7-4f6e-820a-d46544010835"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0e12cc6adf8eea62639a823ec8284334cb1ee2a6">commit 0e12cc6adf8eea62639a823ec8284334cb1ee2a6</a>;</td></tr></tbody></table><ul id="af77b98e-14c9-42d7-9936-46af585a9f4b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="b1fdad11-b342-47b7-ac26-279cfa0bfa87" class="">The number of times the for loop would run in <code>withdrawAssets()</code> and <code>withdrawERC20Assets()</code> functions are based on one of its input array lengths, therefore, if the decisive parameter is input wrong, these two functions can still run without error but not as the user expected.</p><p id="e873e92d-2af9-406d-b150-2893601135d2" class="">Shown as the code below, if the for loop decisive parameter <code>tokenIds</code> is input wrong by mistake,  the recipients will not be able to receive their tokens. And more importantly, if the tokenIds and recipients is mismatch, token will be transferred to the wrong recipient.</p><pre id="9569a3ff-de8b-4abe-9aca-abba4d468cf9" class="code code-wrap"><code>function withdrawAssets(
+        address[] calldata tokenAddresses,
+        uint256[] calldata tokenIds,
+        address[] calldata recipients
+    ) external override whenNotPaused nonReentrant onlyRole(OWNER_ROLE) {
+        for (uint256 i = 0; i &lt; tokenIds.length; i++) {
+            require(removeNFTAsset(tokenAddresses[i], tokenIds[i]), &#x27;SecuritizationPool: Asset does not exist&#x27;);
+            IUntangledERC721(tokenAddresses[i]).safeTransferFrom(address(this), recipients[i], tokenIds[i]);
+        }
+    }</code></pre></details></li></ul><ul id="fec90cc9-2e86-48d5-a0b2-b27418d44a72" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="8931692f-63ec-4d57-928f-f0b0a75fbed3" class="">N/A</p></details></li></ul><ul id="4e4cfadf-3505-4702-8d57-78ad65e1a7a6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="0cacd7b9-e32b-4f8f-93d2-c42589325479" class=""> Check if the input arrays’ lengths are equal.</p></details></li></ul><ul id="a538362b-4b43-44bd-a9ae-a3de6ca2be9f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="c5d2484e-7e61-43d9-bc2a-e7c52ce7fad4" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/0e12cc6adf8eea62639a823ec8284334cb1ee2a6">commit 0e12cc6adf8eea62639a823ec8284334cb1ee2a6</a>. a require statement was added to confirm the length of the three input arrays is equal.</p></details></li></ul></li></ol><ol type="1" id="9c375106-84f0-44b7-8c2c-ec340a5c5fa9" class="numbered-list" start="2"><li><strong>Inconsistency in variable names and actual implementation</strong><table id="e3654cd0-4a71-45ee-aa18-a57835fcfafe" class="simple-table"><tbody><tr id="6443203c-18b7-44e9-acc3-5be13499df90"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="ac1ccd91-e5ec-4c50-a19c-075b87b1dc3f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">tokens/ERC721/invoice/AcceptedInvoiceToken.sol#L99;</td></tr><tr id="4e7097d3-b5a4-4467-b43d-871f541fb7de"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b5d7c9fb3283902bccc8ace0210a8d7495021554">commit b5d7c9fb3283902bccc8ace0210a8d7495021554</a>;</td></tr></tbody></table><ul id="7b0570e1-c563-42d4-afad-56734ef6d349" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7e50f420-a60b-47ae-9c07-f0a1d3ac1d5e" class="">Fiat amount instead of the repaid amount is updated when a loan is not fully repaid and repaid amount only gets updated upon full repayments. Updates of these two state variables are confusing and do work in the way that their variable names indicate.</p><p id="304e495d-f93a-42bd-aff7-a90cc42055ec" class="">The repaid amount of the AIT token only gets updated upon the full repayment of the loan. When a loan is not fully repaid, the fiat amount instead of the repaid amount is updated. </p><p id="6bcdb049-b120-434e-8e42-cf883ae36069" class="">The way how these two variables get updated does not work as their names indicate. Fiat amount should be a variable that shows how much the total loan amount is in total and it should stay unchanged on repayments. The repaid amount should be a variable that keeps track of how many repayments users have made. Right now, the fiat amount gets deducted every time when a repayment is made and repaid amount only gets updated upon full repayments. Decreasing of fiat amount loses its function to record the total loans that users owe. The names of these two variables are confusing and do not reflect how they work in the protocol.</p></details></li></ul><ul id="7c309878-974e-459e-a459-e090ddc23f0b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="7d9ac109-ad54-4d79-bbdc-714a25c3a96a" class="">Protocol fails to obtain the total loan data due to the deduction on fiat amount every time a repayment is made.</p></details></li></ul><ul id="06ae5c6d-69e0-4d0a-a664-947b39de09ae" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="cb4e4f62-2980-4350-b7c8-5fb2e67124af" class="">Update the repay amount whenever the repayment is made Instead of the fiat amount. In this way, the system can keep a correct track of repaid amounts and total fiat amounts.</p></details></li></ul><ul id="7cb3d48d-52e0-4653-aa76-8c017b0b2b80" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="bc92d37d-3af0-43e5-bf63-47060d7ce9a6" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b5d7c9fb3283902bccc8ace0210a8d7495021554">commit b5d7c9fb3283902bccc8ace0210a8d7495021554</a>. The paid amount fiat amount gets update upon repayments. Current fix is:</p><pre id="944d6931-72ec-4b01-997a-02c6eda98ae2" class="code"><code>if (fiatAmountRemain == 0) {
+    metadata.paidAmount += payAmounts[i];
+    super._burn(tokenIds[i]);
+} else {
+    metadata.paidAmount += payAmounts[i];
+}</code></pre><p id="095542a8-2383-41c7-b58d-6b7e95203a24" class="">The code can be optimized:</p><pre id="15e5c57a-1e09-4843-9dd9-01f89d879cd5" class="code"><code>metadata.paidAmount += payAmounts[i];
+if (fiatAmountRemain == 0) {
+    super._burn(tokenIds[i]);
+}</code></pre><p id="16ccb59a-6add-493a-a1bc-904150f08146" class="">
+</p></details></li></ul></li></ol><ol type="1" id="e93ce4d2-4c66-4765-a995-9d9a8ffd727c" class="numbered-list" start="3"><li><strong>Lack of function </strong><code><strong>virtual</strong></code><strong> modifier</strong><table id="8fef5ae7-ca89-41d7-8d10-9edc652aad98" class="simple-table"><tbody><tr id="aa0338e4-c391-4c04-aa54-20a7b6321ddd"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="8715ac13-aafd-43aa-ac69-be11cb1cc51e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/crowdsale/Crowdsale.sol;</td></tr><tr id="3fce85c5-bda3-4b0c-b550-db18ca3e7c7d"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b7bb0e71577d153766452d83968b06f4638ab8fe">commit b7bb0e71577d153766452d83968b06f4638ab8fe</a>;</td></tr></tbody></table><ul id="982c93bb-f1a3-424b-b417-c810aa2db4a0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="46001056-40ac-4d82-ac85-92f49b43bf8c" class="">The function names do not reflect their actual behaviors. It confuses both users and future developers. After deep dive into the inheritance structure, we think the function shown below should be <code>virtual</code> .</p><ul id="f94ee975-d0b7-42d4-9479-b0e5f23d2025" class="bulleted-list"><li style="list-style-type:disc"><code>isLongSale()</code> returns <code>false</code>, which should return a correct status of whether this crowd sale is a long sale. If this function is not meant to be implemented in the crowd sale base class, mark it as <code>virtual</code> and implement it later. Otherwise, remove <code>isLongSale()</code> in <code>Crowdsale.sol</code></li></ul><ul id="6f4b1e8c-8a98-4035-9dda-02a17f8952e0" class="bulleted-list"><li style="list-style-type:disc"><code>getLongSaleTokenAmount()</code> returns the <code>rate</code> state variable.  The <code>rate</code> state variable indicates the exchange rate between selling token &lt;&gt; stable coins (with 10^4 decimals), but the function name indicates it returns the token amount of the sale. If this function is not meant to be implemented in the crowd sale base class, mark it as <code>virtual</code> and implemented it later. Otherwise, remove <code>getLongSaleTokenAmount()</code> in <code>Crowdsale.sol</code></li></ul></details></li></ul><ul id="b4ba2a4a-4a40-4d2d-a6d0-38e7ac6c9150" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="710c3901-e90d-4cfa-a4ba-3691b1750f1e" class="">N/A</p></details></li></ul><ul id="8d68e3f6-d376-47f6-acd9-d259707296cc" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="102c873b-84f6-4f1b-bfd8-53a0f4229361" class="">Mark the base class function as a virtual</p></details></li></ul><ul id="ef9f1592-9eea-41fe-9a90-4bfbc7e61b5f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d3b0b2ba-79b2-4562-8a8c-e1495e27c942" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b7bb0e71577d153766452d83968b06f4638ab8fe">commit b7bb0e71577d153766452d83968b06f4638ab8fe</a>.</p></details></li></ul></li></ol><ol type="1" id="7f7db122-b86a-49d4-8431-a366c19b5279" class="numbered-list" start="4"><li><strong>Unused functions</strong><table id="fac1110b-fb52-48f4-ba2f-1b836aeb8cf8" class="simple-table"><tbody><tr id="06ff3e7a-eb42-44cd-8781-0b975bb67717"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="d298c6d0-d602-489b-a45b-95517b4df3d3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/DistributionOperator.sol#L76;
+pool/SecuritizationPool.sol#L351, L362;
+protocols/loan/LoanRegistry.sol#L133;</td></tr><tr id="c9112fd4-57d8-458a-8344-e8bbc6fb642a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>;</td></tr></tbody></table><ul id="94ea29f7-fed5-4e81-9155-9acf20b89131" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><ul id="337a5f96-0a0f-40b3-8c9d-25c84a6f0c78" class="bulleted-list"><li style="list-style-type:disc">function <code>DistributionOperator._distributeJOTInBatch()</code> is never used.</li></ul><ul id="71dff439-ed40-48ce-9111-a30d5ed2866a" class="bulleted-list"><li style="list-style-type:disc"><code>SecuritizationPool.increasePaidInterestAmountSOT()</code>
+ and <code>SecuritizationPool.increasePaidPrincipalAmountSOT()</code>
+ are two functions only can be called by  <code>onlyDistributionOperator()</code>. But they are not called by <code>DistributionOperator</code>.</li></ul><ul id="56a1c854-2007-4b3d-91cc-00a8c7845ea4" class="bulleted-list"><li style="list-style-type:disc">Function <code>setCompletedLoan</code> is defined as <code>onlyLoanKernel</code>, but the contract<code>LoanKernel</code> does not call it.</li></ul><p id="97b84912-2ab6-4547-a178-8892c836bcdc" class="">Unused functions waste gas when deploying the contract.</p></details></li></ul><ul id="4f7304ae-fcdd-4ab6-a798-f98708235082" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="2e8e2ece-e8c4-4098-8f17-f9bab7705152" class="">N/A</p></details></li></ul><ul id="81b43b1a-84db-4b17-ab4a-868d6e23e438" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="47d5e4b6-fef3-4a53-a4f9-0f31f3fc5a3c" class="">Remove unused functions.</p></details></li></ul><ul id="c85a142e-23fc-48cd-9427-91ee90336b1c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="25c42b34-63e7-44a0-9232-bdf3fffa2abd" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>. Unused functions have been removed.</p></details></li></ul></li></ol><ol type="1" id="deb5344e-e133-430a-a1d1-a727ff87ecc1" class="numbered-list" start="5"><li><strong>Unreachable Code</strong><table id="f8914e27-440e-4a7b-b4de-d942a1d1a7f1" class="simple-table"><tbody><tr id="6f17dab1-aa64-48a7-991e-795453cdbab1"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="6e21ae52-a4eb-44c5-b5de-93aef6473c73"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/loan/LoanInterestTermsContract.sol#L175;</td></tr><tr id="6b83adcd-5d0c-4328-9f38-0283b56a2a17"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/fc46523db3fb60ab655ff2ed406db023d2498f00">commit fc46523db3fb60ab655ff2ed406db023d2498f00</a>;</td></tr></tbody></table><ul id="af8c0772-d39f-4dcc-8ff5-154a34e6990b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="1f415c02-0b21-4fe5-b550-0b78c64d86c2" class="">There is a if-else path that can never be reached. </p><p id="c5f7997f-2d5e-4b49-8944-bc92af5bec49" class="">When <code>expectedInterest</code> == 0,  the statement <code>unitsOfRepayment &lt; expectedPrincipal</code> will always be true because <code>unitsOfRepayment</code> &lt; <code>expectedPrincipal</code> + <code>expectedInterest</code>. So the path where is stated above can never be reached. This part of code can be removed.</p><pre id="98d1cdaf-2764-4555-ab5b-dba905fba40d" class="code"><code>if (unitsOfRepayment &gt;= expectedPrincipal + expectedInterest) {
+    _setCompletedRepayment(agreementId);
+    _addRepaidInterestAmount(agreementId, expectedInterest);
+    _addRepaidPrincipalAmount(agreementId, expectedPrincipal);
+    remains = unitsOfRepayment - (expectedPrincipal + expectedInterest);
+} else {
+    if (expectedInterest == 0) {
+				// == Start of Unreachable Code ==
+				// since unitsOfRepayment &lt; expectedPrincipal + expectedInterest
+				// &amp;&amp; expectedInterest == 0
+				// so unitsOfRepayment &lt; expectedPrincipal is for sure
+        if (unitsOfRepayment &gt;= expectedPrincipal) {
+            _addRepaidPrincipalAmount(agreementId, expectedPrincipal);
+            remains = unitsOfRepayment - expectedPrincipal;
+        }
+				// == End of Unreachable Code ==
+				else {
+            _addRepaidPrincipalAmount(agreementId, unitsOfRepayment);
+        }
+}</code></pre></details></li></ul><ul id="1b99d992-d934-4e54-956e-1a5e37cf67e9" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="b0a75d50-4765-4cf0-bf22-a47230ca1b55" class="">N/A</p></details></li></ul><ul id="8256003e-7d4b-42b5-b030-9adc9c1d6dca" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="9e9957b4-f0ef-47bc-8fe0-580a5c0be824" class="">Remove the unreachable code stated above.</p></details></li></ul><ul id="dd654ca3-fea1-455e-8e3f-2030b532226f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="bca54240-1a4e-42fb-893e-0da7115f7205" class="">Resolved by removing the unreachable code in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/fc46523db3fb60ab655ff2ed406db023d2498f00">commit fc46523db3fb60ab655ff2ed406db023d2498f00</a>.</p></details></li></ul></li></ol><ol type="1" id="e3d13593-8cef-4e58-9a49-055c7325c0a6" class="numbered-list" start="6"><li><strong>Redundant code</strong><table id="8a638403-a591-4024-be3c-0a6779eab538" class="simple-table"><tbody><tr id="236e3884-b559-4f63-8fc3-974bd3a38557"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="3be3f35d-f3a4-4515-bfb1-3ce75c8b05e9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">pool/SecuritizationPool.sol;
+pool/DistributionTranche.sol;
+protocols/loan/LoanInterestTermsContract.sol;
+protocols/note-sale/MintedIncreasingInterestTGE.sol;</td></tr><tr id="400acc8f-7daf-425c-b54e-5c08ac427732"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/7d2e07e06c3de02ac39a9a880228ac0bbf185d93">commit 7d2e07e06c3de02ac39a9a880228ac0bbf185d93</a>;</td></tr></tbody></table><ul id="0bce86be-4dd1-480f-954a-18e21bdf5428" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f756e684-e164-4b0b-8907-f85ff7452868" class="">Functions that have no external calls / only atomic operation need no Reentrancy Guard. Unnecessary Reentrancy Guard wastes gas.</p><ol type="1" id="ac94e739-1c47-4361-a17e-fc2b04f4b210" class="numbered-list" start="1"><li><code>SecuritizationPool.sol</code> <code>increaseLockedDistributeBalance()</code>  no external calls</li></ol><ol type="1" id="474b6497-f051-4027-aeb7-ec2e8f01bcc8" class="numbered-list" start="2"><li><code>DistributionTranche.sol</code> <code>redeemToken()</code> only atomic operation</li></ol><ol type="1" id="eecbb4a4-bf4a-4e86-991c-ac18aa944ca2" class="numbered-list" start="3"><li><code>LoanInterestTermsContract.sol</code> <code>registerTermStart() </code> no external calls + only atomic operation</li></ol><ol type="1" id="1f67300a-59c1-4f84-82e9-b2db7c329884" class="numbered-list" start="4"><li><code>SecuritizationPool.sol</code> <code>setupRiskScores</code> no external calls</li></ol><ol type="1" id="3d83e44d-9f5e-4718-8c2b-902af281ad46" class="numbered-list" start="5"><li><code>MintedIncreasingInterestTGE.sol</code> <code>setYield()</code> no external calls</li></ol></details></li></ul><ul id="5b39ee47-c8e1-4287-b824-63e8d75bd8c3" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9254322f-3fbd-4a16-a722-74e4cd4cc4b3" class="">N/A</p></details></li></ul><ul id="f0ce6f0a-9739-4776-8193-e27c153d49a6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="d92aeb3f-d749-45e8-9218-e14cc86d5fa2" class="">Remove no need Reentrancy Guard to save gas.</p></details></li></ul><ul id="dba08371-2333-4d7c-8582-53f50406d142" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="592df017-53b5-46c9-a50d-45b7c3e5c8fa" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/7d2e07e06c3de02ac39a9a880228ac0bbf185d93">commit 7d2e07e06c3de02ac39a9a880228ac0bbf185d93</a>.</p></details></li></ul></li></ol></div><h3 id="732927a5-67f7-4cfe-8aeb-527fd1af34a6" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="41b207ab-0780-4d2f-be24-eb083b4dd364" class="numbered-list" start="1"><li><strong>Floating solidity pragma version</strong><table id="78e69d8f-4120-4d33-a323-566766f7dd68" class="simple-table"><tbody><tr id="d29bb916-f86a-46c3-a3e5-8d0415ab6c7d"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="2078aa27-2ef6-48b6-b965-2c8878aecbba"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">Untangle protocol</td></tr><tr id="dcbc20a1-12b9-4e3b-b770-5c8601a271a1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Acknowledged</td></tr></tbody></table><ul id="8968310c-060b-41b8-b2bc-6c619cd41429" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="65f38fd4-48e8-4a34-a11d-2512b3d84652" class="">Current smart contracts use <code>^0.8.0</code>. And compilers within versions<code>≥ 0.8.0</code> and <code>&lt;0.9.0</code> can be used to compile those contracts. Therefore, the contract may be deployed with a newer or latest compiler version which generally has higher risks of undiscovered bugs. </p><p id="9de9430e-db57-4578-8137-bbc7481f4074" class="">It is a good practice to fix the solidity pragma version if the contract is not designed as a package or library that will be used by other projects or developers. </p><p id="984445b3-5b14-4193-b15b-fc69bb81d6f1" class="">Reference: <a href="https://swcregistry.io/docs/SWC-103">SWC-103</a>.</p></details></li></ul><ul id="4a55158f-d368-464b-b6f4-3c09277f0a28" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="99dc5055-231b-4495-8311-b3929ff18c0f" class="">N/A</p></details></li></ul><ul id="e3a7a964-a8a3-4726-a0fa-9782a500f787" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="e6824949-2195-409f-a2c5-1b5b5f911001" class="">Use the fixed solidity pragma version.</p></details></li></ul><ul id="37ca5c3f-1be3-4067-8b84-27842e8c16a1" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="ba67f791-c746-4735-8eda-7ff78a94abe8" class="">Acknowledged. The untangled team acknowledged that the solidity version should be fixed. However, for the convenience of future upgrades, they decided that just set the solidity compiler version in hardhat config files.</p></details></li></ul></li></ol><ol type="1" id="c80b8f59-321c-48e2-b73a-e9a60136bc80" class="numbered-list" start="2"><li><strong>State variable initialization in the wrong place</strong><table id="485b6539-2adf-49d4-89a4-8e5276dfd01a" class="simple-table"><tbody><tr id="dc8b42bd-6314-456a-81d4-9bd93ece323f"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="e67b67aa-8d4c-4771-98b2-c953a107bd80"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/crowdsale/Crowdsale.sol;</td></tr><tr id="48c77a17-2225-4996-969d-6ad1025e0276"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>;</td></tr></tbody></table><ul id="d17f7980-ad18-4912-a2fc-03af8576c0d6" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="cefadce7-1288-41d7-ab42-569cebd19545" class="">State variables defined in <code>crowdsale.sol</code> are initialized in <code>MintedNormalTGE.sol</code> and <code>MintedIncreasingInterestTGE.sol</code>. The misplaced initialization confuses users and future developers.</p><ul id="31d1a515-a0bd-4002-8101-7fa799fb759b" class="bulleted-list"><li style="list-style-type:disc"><code>registry</code>: defined in <code>crowdsale.sol</code> but initialized in <code>MintedNormalTGE.sol</code>and <code>MintedIncreasingInterestTGE</code>.</li></ul><ul id="06123b72-4c7a-4bd2-a168-690bd6025ad6" class="bulleted-list"><li style="list-style-type:disc"><code>pool</code>: defined in <code>crowdsale.sol</code> but initialized in <code>MintedNormalTGE.sol</code>and <code>MintedIncreasingInterestTGE</code>.</li></ul><ul id="4ad94c67-a047-4955-9761-553cd8eb19e7" class="bulleted-list"><li style="list-style-type:disc"><code>token</code>: defined in <code>crowdsale.sol</code> but initialized in <code>MintedNormalTGE.sol</code>and <code>MintedIncreasingInterestTGE</code>.</li></ul><ul id="dc27630a-ffdb-4dab-92d5-4a11902fce25" class="bulleted-list"><li style="list-style-type:disc"><code>currency</code>: defined in <code>crowdsale.sol</code> but initialized in <code>MintedNormalTGE.sol</code>and <code>MintedIncreasingInterestTGE</code>.</li></ul></details></li></ul><ul id="26784cb2-1d3a-4f61-a4dd-278f6ff009e0" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="6aef76c6-5df9-45bd-b5e4-214c72022c32" class="">N/A</p></details></li></ul><ul id="c0e21434-d540-467c-ae10-af4d58881a03" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="21ff1e34-62e4-4aaa-8503-fbeee00b86b6" class="">Initialize the state variables in the class where it was defined.</p></details></li></ul><ul id="074a79ca-7a18-45b8-915a-89c916fb99aa" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="51f77953-1a33-4c04-9718-e394e3f87a91" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>.</p></details></li></ul></li></ol><ol type="1" id="b4ed5387-7d5c-418a-a07b-151c5a714e8b" class="numbered-list" start="3"><li><strong>Naming issues</strong><table id="fa71bb21-f853-4f09-8765-f3e5bd0f27b6" class="simple-table"><tbody><tr id="90ce49b5-0240-48fd-9e14-ed6d45cabbc9"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="21817d0a-6c25-46c3-a488-5bce2abbfd56"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">Untangled protocol</td></tr><tr id="d9295f0c-3f63-4497-b1b4-119cb027e2ad"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/f83a44d8fc6be599c9ee3f68877ad0f855d500ae">commit f83a44d8fc6be599c9ee3f68877ad0f855d500ae</a>;</td></tr></tbody></table><ul id="1bb00973-b5e5-466a-977c-33bb10ab7274" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="afc7c686-9678-4db5-9de2-bbd6f99fc8da" class="">The coding style is inconsistent. Inconsistent coding style reduces code readability.</p><p id="61cb6bae-b973-43b6-8021-a6165348b13c" class="">Some private/internal function names have underscore prefixes and some don’t. Therefore, co-developers may use the wrong function because of the Inconsistent coding style and has a bigger chance to write an insecure smart contract. </p></details></li></ul><ul id="b97078c2-ba60-4c22-9963-b2b79a4bf08b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="2bce1ad5-9a2f-41d5-b5ab-363a1b3148a2" class="">N/A</p></details></li></ul><ul id="ce0f6c29-fb51-4a2a-ab06-472a82a93b43" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="761d40ee-a21b-4203-8c46-299007303645" class="">We suggest all function names of private/internal functions contain an underscore as a prefix for better readability and coding style practice.</p></details></li></ul><ul id="7d0b7475-bc55-4951-a50f-3a0af398bf04" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="c340e403-e5ac-428f-9786-0dac13845985" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/f83a44d8fc6be599c9ee3f68877ad0f855d500ae">commit f83a44d8fc6be599c9ee3f68877ad0f855d500ae</a>.</p></details></li></ul></li></ol><ol type="1" id="18484e12-ac8d-4260-974e-fdb4e8f2b60f" class="numbered-list" start="4"><li><strong>Non-descriptive error message</strong><table id="e54c31d6-dc0f-4104-8845-d68385f27dc2" class="simple-table"><tbody><tr id="3e1f2441-a443-465a-b7f0-943139a8298b"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="f614d861-6523-4f88-a6da-79a618ebf6d5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/loan/LoanKernel.sol#L18; 
+protocols/loan/LoanInterestTermsContract.sol#L79;</td></tr><tr id="8fe8f85a-b790-4bd2-aed1-47431d92d1c0"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a> and <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/317baf65131faf60d9c97d86066d02760f896907">commit 317baf65131faf60d9c97d86066d02760f896907;</a></td></tr></tbody></table><ul id="33287ebf-62ec-4a36-aa27-985cb4040e9d" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="c633dff1-0a9f-4fd1-80ea-7212950b4f30" class="">Shown as code below, the error message provided by<code>validFillingOrderAddresses</code> is unclear. Therefore, it is difficult for a user or developer to locate the error when the unclear error messages occurs.</p><pre id="7be8f21a-6ec4-4fe2-886c-b776925065c3" class="code code-wrap"><code>modifier validFillingOrderAddresses(address[] memory _orderAddresses) {
+  require(_orderAddresses[uint8(FillingAddressesIndex.CREDITOR)] != address(0x0), &#x27;PARAM1&#x27;);
+  require(_orderAddresses[uint8(FillingAddressesIndex.REPAYMENT_ROUTER)] != address(0x0), &#x27;PARAM4&#x27;);
+  require(_orderAddresses[uint8(FillingAddressesIndex.TERM_CONTRACT)] != address(0x0), &#x27;PARAM5&#x27;);
+  require(_orderAddresses[uint8(FillingAddressesIndex.PRINCIPAL_TOKEN_ADDRESS)] != address(0x0), &#x27;PARAM2&#x27;);
+  _;
+}</code></pre><pre id="079ed6f2-81c5-4520-8929-73cdf06058b5" class="code"><code>modifier onlyHaventStartedLoan(bytes32 agreementId) {
+    require(!startedLoan[agreementId], &#x27;LOAN1&#x27;);
+    _;
+}</code></pre></details></li></ul><ul id="7b37883c-3d4a-4993-982f-b9be571bfd14" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="ea45f8cf-8a91-4fb6-a2ad-8b22e299164b" class="">N/A</p></details></li></ul><ul id="7408de64-711c-4c71-85f8-044b7ee598dc" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="34915bcd-a445-4100-8881-0480e85a7c74" class="">Use descriptive error message.</p><pre id="5b9483b1-2629-4dfd-83a4-3def540663a3" class="code"><code>&quot;LoanKernel: orderAddresses[CREDITOR] is zero address.&quot;</code></pre><p id="2d4fbcd1-80a3-4aef-9da4-5e4004108902" class="">Or provide an error message reference table, so one can find the detailed explanation with the error message code.</p></details></li></ul><ul id="35392f53-e5be-4b2f-a034-eecfdf892daf" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="2325bbe0-6de1-4ef1-8bfc-6f0ae5d77cfc" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a> and <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/317baf65131faf60d9c97d86066d02760f896907">commit 317baf65131faf60d9c97d86066d02760f896907</a>.</p></details></li></ul></li></ol><p id="ffa3b3ac-9420-48c7-8b1b-15fe996b8686" class="">
+</p><ol type="1" id="fce210bb-94c5-4d66-a0ce-7fd8d19d4b67" class="numbered-list" start="5"><li><strong>Lack of state assertion on critical functions</strong><table id="a065e89f-2031-4f53-ba75-ba2695565169" class="simple-table"><tbody><tr id="eb819b61-cbde-4c09-8699-da21fa0817fd"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="fdaab784-92c9-4e10-83cd-54223d854927"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/base/LongSaleInterest.sol#L20;</td></tr><tr id="b6422e8b-5951-48d9-a950-c2e1c0ca3af7"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>;</td></tr></tbody></table><ul id="375b996f-a62b-490e-86c1-537928b19302" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="3dca336e-b1b2-4c6b-b30e-95e8d89ca3eb" class="">Inside function<strong> </strong><code>LongSaleInterest.getPurchasePrice()</code>, it subtract <code>_durationLengthInSec</code> from <code>_termLengthInSeconds</code> and the purchase price is base on this subtract operation. It may fail with subtraction underflow and leads to an incorrect price. </p></details></li></ul><ul id="dd6284a5-4d03-4644-b9e4-5db3447b7cb1" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="37041e7a-e19c-4eff-b6bb-d59a0c3ae28b" class="">N/A</p></details></li></ul><ul id="8bb1e516-7b51-42d7-8f69-a8e2e8d6d240" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="695f5e1f-58eb-49a6-b320-9150023cd9cc" class="">We recommend adding a require function to require <code>_termLengthInSeconds</code> not smaller than <code>_durationLengthInSec</code> with an error message.</p></details></li></ul><ul id="5f570927-1103-4bd1-b25a-3abc52164297" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="2a13fa0d-448c-42bb-9b6a-23057f124746" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26">commit 9ed09bcf4eb60e975ec9cbc403f2fb9d5bab5a26</a>.</p></details></li></ul></li></ol><ol type="1" id="3c5a5eb1-09ec-4c99-a884-d1ca8f1b2fb4" class="numbered-list" start="6"><li><strong>Unused variables</strong><table id="9edbb109-30fa-44b7-a0d0-af12d13c21ce" class="simple-table"><tbody><tr id="0b9e070b-0b39-48ee-9c03-175d4b3f11d2"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3e192df9-f003-4e53-80cd-dda396aacf1b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">protocols/note-sale/crowdsale/Crowdsale.sol#L33;
+pool/SecuritizationPool.sol#L120;
+tokens/ERC721/invoice/AcceptedInvoiceToken.sol#L163;</td></tr><tr id="afd100c9-6c16-49dd-8d84-cceb68d19eab"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/f83a44d8fc6be599c9ee3f68877ad0f855d500ae">commit f83a44d8fc6be599c9ee3f68877ad0f855d500ae</a> and <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b20946fe0f24a8528e6574d456d5f5e7a0cc34e4">commit b20946fe0f24a8528e6574d456d5f5e7a0cc34e4</a>;</td></tr></tbody></table><ul id="e1fca1d8-cd0c-4d6d-b20f-c6e3532c77d7" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><ul id="a25dd224-0668-477f-8192-6089fc488a61" class="bulleted-list"><li style="list-style-type:disc">State variable unused:<ul id="2f464711-4024-4789-b002-aadde37d6c1b" class="bulleted-list"><li style="list-style-type:circle"> <code>Crowdsale.sol</code>L33 <code>initialized</code>.</li></ul></li></ul><ul id="73d9f55e-115f-4e7c-ac60-b23ece6a0a5a" class="bulleted-list"><li style="list-style-type:disc">Function parameter unused: <ul id="627a9435-a88e-48c0-909b-bb7e0fd66400" class="bulleted-list"><li style="list-style-type:circle"><code>SecuritizationPool.sol</code> L120  <code>operator, from, data</code> ;</li></ul><ul id="ba41f32a-7009-4395-baf9-c42bf8e72c54" class="bulleted-list"><li style="list-style-type:circle"><code>AcceptedInvoiceToken.sol</code> L163 <code>timestamp</code>.</li></ul></li></ul><p id="b8f7ef29-f3cf-44fb-ae66-f4bf1d7c3210" class="">these unused parameters and state variables waste gas. </p></details></li></ul><ul id="c03d420d-d7ca-410c-ab81-19c5df1aa375" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="b068a00f-d23f-4114-88b7-b2084372bd4d" class="">N/A</p></details></li></ul><ul id="603ca81e-449f-4041-bb7f-c0bba6375188" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><ol type="1" id="42e77ea9-191f-49b5-bb37-89752b681089" class="numbered-list" start="1"><li>Remove unused state variables.</li></ol><ol type="1" id="4b7db4bb-3e44-482b-ab3b-43ed5642a396" class="numbered-list" start="2"><li>Remove unused parameters, or add placeholders to mute the warnings:</li></ol><pre id="af22cf2f-1d9d-4d2e-9dca-d961502f6bfd" class="code"><code>function getExpectedRepaymentValues(uint256 tokenId, uint256 timestamp) public view returns (uint256, uint256) {
+	timestamp; // placeholder
+	return (entries[bytes32(tokenId)].fiatAmount - entries[bytes32(tokenId)].paidAmount, 0);
+}</code></pre></details></li></ul><ul id="67712c9a-0bd9-40c3-9e63-ae1a256e6361" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a17723f1-774d-4e6d-b180-731e7b1854d6" class="">Resolved in <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/f83a44d8fc6be599c9ee3f68877ad0f855d500ae">commit f83a44d8fc6be599c9ee3f68877ad0f855d500ae</a> and <a href="https://github.com/untangledfinance/untangled-protocol-open/commit/b20946fe0f24a8528e6574d456d5f5e7a0cc34e4">commit b20946fe0f24a8528e6574d456d5f5e7a0cc34e4</a>.</p></details></li></ul></li></ol></div></div><h2 id="71d13bba-a5ce-4a39-86d4-39c8129b317b" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><ul id="78700755-a766-4e08-a438-c2cc31978b30" class="toggle"><li><details open=""><summary><code>SecuritizationPool.sol</code></summary><ul id="9c49ea39-0ecb-4e0e-904d-ab9b864d0c8b" class="bulleted-list"><li style="list-style-type:disc"><code>owner</code><ul id="862eeb9e-e34e-4927-9ea6-11a9363f657c" class="bulleted-list"><li style="list-style-type:circle"><code>setPot()</code></li></ul><ul id="1586e630-aab9-46f6-a54e-1855f6c7fa5c" class="bulleted-list"><li style="list-style-type:circle"><code>setupRiskScores()</code></li></ul><ul id="c10bdad3-fde8-40a4-9209-6864f50f5c90" class="bulleted-list"><li style="list-style-type:circle"><code>exportAssets()</code></li></ul><ul id="2810674c-f3f8-4bc2-ad66-adcb5773537f" class="bulleted-list"><li style="list-style-type:circle"><code>withdrawAssets()</code></li></ul><ul id="46c8a3c5-69f2-4db1-893c-d31a5dd819f9" class="bulleted-list"><li style="list-style-type:circle"><code>withdrawERC20Assets()</code></li></ul><ul id="0cc553e6-c880-4293-a976-c44b6c08f20f" class="bulleted-list"><li style="list-style-type:circle"><code>claimCashRemain()</code></li></ul><ul id="30863273-f393-4e97-b89e-9a6735a697b6" class="bulleted-list"><li style="list-style-type:circle"><code>startCycle()</code></li></ul></li></ul><ul id="f6777419-cc29-44ac-aa22-e584cc317323" class="bulleted-list"><li style="list-style-type:disc"><code>ORIGINATOR_ROLE</code><ul id="0b18185e-49d9-4130-8c3a-7fa046dc93f9" class="bulleted-list"><li style="list-style-type:circle"><code>collectERC20Assets()</code></li></ul></li></ul><ul id="c63694f3-be7a-43d6-995e-e3aa64c8365f" class="bulleted-list"><li style="list-style-type:disc"><code>SecuritizationManager</code>(contract)<ul id="50f7b2eb-8497-4917-b839-65ca270f9186" class="bulleted-list"><li style="list-style-type:circle"><code>injectTGEAddress()</code></li></ul></li></ul><ul id="ba55bc88-434f-4e2e-afa9-0027a93c53b0" class="bulleted-list"><li style="list-style-type:disc"><code>DistributionOperator</code>(contract)<ul id="1d23831e-9400-43ef-8fca-4d1527bb560e" class="bulleted-list"><li style="list-style-type:circle"><code>increaseLockedDistributeBalance()</code></li></ul><ul id="0b6ead18-74f5-4564-bc20-edc97716a91a" class="bulleted-list"><li style="list-style-type:circle"><code>decreaseLockedDistributeBalance()</code></li></ul><ul id="ca02ec2e-d558-43c2-a77f-99bf13b9a593" class="bulleted-list"><li style="list-style-type:circle"><code>increasePaidInterestAmountSOT()</code></li></ul><ul id="d995c8c7-84a7-43a6-8278-2fd39b0715c3" class="bulleted-list"><li style="list-style-type:circle"><code>increasePaidPrincipalAmountSOT()</code></li></ul></li></ul><ul id="068214d0-36f9-4e28-9c9d-5d9d06ef0c2c" class="bulleted-list"><li style="list-style-type:disc"><code>tge</code><ul id="51e86331-6fb9-40dc-981d-3e83052d26c1" class="bulleted-list"><li style="list-style-type:circle"><code>setInterestRateForSOT()</code></li></ul></li></ul><ul id="b1116105-aa1e-48e4-9ff6-345864fe907b" class="bulleted-list"><li style="list-style-type:disc"><code>DistributionTranch</code> (contract)<ul id="3cdfb1fb-854d-4894-aa45-faa3088f1dc4" class="bulleted-list"><li style="list-style-type:circle"><code>redeem()</code></li></ul></li></ul></details></li></ul><ul id="208b1bcd-c1a0-4317-9ea2-c57e52110e22" class="toggle"><li><details open=""><summary><code>SecuritizationManager.sol</code></summary><ul id="368ff8e0-671a-45fe-9930-f6717f9161f7" class="bulleted-list"><li style="list-style-type:disc"><code>manager</code> (require caller to be pool owner)<ul id="048de94c-a860-4661-a6a5-f8a2c642ce87" class="bulleted-list"><li style="list-style-type:circle"><code>initialTGEForSOT()</code></li></ul><ul id="83e86e1b-deb8-4d9e-a04a-a778850a5e60" class="bulleted-list"><li style="list-style-type:circle"><code>initialTGEForJOT()</code></li></ul></li></ul><ul id="6e5a5630-400b-412b-b4e0-dad498e59b67" class="bulleted-list"><li style="list-style-type:disc"><code>admin</code><ul id="be00fcad-0510-441a-afe2-69ecfb5b4712" class="bulleted-list"><li style="list-style-type:circle"><code>pausePool()</code></li></ul><ul id="4b964c54-24e7-4c0d-9000-522e026eba84" class="bulleted-list"><li style="list-style-type:circle"><code>unpausePool()</code></li></ul><ul id="2ecb494a-0785-47e8-9b02-ac2614850c00" class="bulleted-list"><li style="list-style-type:circle"><code>pauseAllPools()</code></li></ul><ul id="a355190c-f5c3-4d6b-847c-f98b2a8a16f4" class="bulleted-list"><li style="list-style-type:circle"><code>unpauseAllPools()</code></li></ul></li></ul></details></li></ul><ul id="581f959d-c49a-467c-8a69-d91d8aa80547" class="toggle"><li><details open=""><summary><code>AcceptedInvoiceToken.sol</code></summary><ul id="313af731-0593-42aa-a16f-1b094af81006" class="bulleted-list"><li style="list-style-type:disc">invoice creator<ul id="ff32e8fb-5e7d-40bc-ba63-765386f7a8bf" class="bulleted-list"><li style="list-style-type:circle"><code>createBatch()</code></li></ul></li></ul></details></li></ul><p id="d5936a97-e912-4ffb-8d4d-587a7d12b474" class="">Also see the table in <strong>Off-Chain OpSec.</strong></p></div><h2 id="0df44b36-9c14-46c3-a4a8-8af13c6f4b23" class=""><details open=""><summary>Off-Chain OpSec </summary></details></h2><div class="indented"><p id="5a006869-39d6-4bf4-9427-5804bfbbda25" class="">Untangled Protocol creates a platform that connects real-world assets to the blockchain. Blockchains cannot inherently interact with data existing outside their native blockchain environment. To bridge the real-world assets on-chain, Untangled Protocol is heavily dependent on operations of off-chain components. <strong>In order to ensure the security and operations of the protocol, the following is a series of requirements and assumptions that off-chain components have to meet:</strong></p><ul id="f8e1968a-396f-49d6-aff8-503ba2826c11" class="bulleted-list"><li style="list-style-type:disc">The real-world assets are represented by NFTs in Untangled Protocol. The real-world assets purchased by the Asset Pool are validated by validators and validators are auditors in the real world, providing the service for a fee.</li></ul><ul id="089cb6b1-f3f3-42ac-88e3-284cf01dd116" class="bulleted-list"><li style="list-style-type:disc">The Asset Pool is set up by a trusted third party who represents the interests of investors. They are either independent directors or trustees and are reputable companies. </li></ul><ul id="639383f6-21e8-45bc-be4f-f77e376d9f07" class="bulleted-list"><li style="list-style-type:disc">Pool owners are bounded by underlying contracts(off-chain) to represent the interest of investors</li></ul><ul id="c9431106-8add-4474-ad84-227672c6c6aa" class="bulleted-list"><li style="list-style-type:disc">Originators are trusted third parties who are voted by Governance to sell assets to the pool. They are bound by off-chain legal agreements (asset purchase agreements) with the pool owner.</li></ul><p id="46a0a37d-a5f2-4c50-967e-e6d8da781cc8" class="">The following is a table that classifies the on-chain and off-chain data operations:</p><table id="37801449-225e-45b2-b660-0b691577ba29" class="simple-table"><thead class="simple-table-header"><tr id="28403f41-bf43-4c1f-bb65-f54e16282f86"><th id="v]Al" class="simple-table-header-color simple-table-header" style="width:164px"><strong>Key processes/functionalities</strong></th><th id="}T@q" class="simple-table-header-color simple-table-header" style="width:164px"><strong>Off chain data</strong></th><th id="T}WF" class="simple-table-header-color simple-table-header" style="width:327px"><strong>Who can update</strong></th></tr></thead><tbody><tr id="76cc5fd5-d1cd-4095-96fe-5c7d925d5c2f"><td id="v]Al" class="" style="width:164px"><strong>Open new account</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="59552cb7-00c4-4bdd-95ff-c6d0605544a3"><td id="v]Al" class="" style="width:164px">- personal</td><td id="}T@q" class="" style="width:164px">KYC info</td><td id="T}WF" class="" style="width:327px">Personal User</td></tr><tr id="263a7697-b0b2-490e-a669-0becc42f772f"><td id="v]Al" class="" style="width:164px">- business</td><td id="}T@q" class="" style="width:164px">KYB info</td><td id="T}WF" class="" style="width:327px">Business User</td></tr><tr id="0d1ce4da-81f0-408e-b73f-c5e47471fdb9"><td id="v]Al" class="" style="width:164px"><strong>Create new pool</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="74cf4711-4cda-459d-8063-8b1785d60c0a"><td id="v]Al" class="" style="width:164px">- the minimum first loss</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">Set up by Pool Owner</td></tr><tr id="8b2d0f86-c59f-4f37-a8cd-f8b664f9c646"><td id="v]Al" class="" style="width:164px">- asset type</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="9007bbb6-9e2f-46ca-8341-f88cb97ff2e8"><td id="v]Al" class="" style="width:164px">- currency</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="8fac243c-3eb5-47ff-8f0a-0ea3eece2030"><td id="v]Al" class="" style="width:164px"><strong>Review pool</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="74557019-0647-4686-bb54-6538046480ee"><td id="v]Al" class="" style="width:164px">- risk score</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">Set up by Pool Owner</td></tr><tr id="cabbc773-6443-4dce-9699-f955a3e3843b"><td id="v]Al" class="" style="width:164px"><strong>Generate and sign documents</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="fb67a4ed-f326-4c68-83d6-0bc0c88a7baa"><td id="v]Al" class="" style="width:164px">- receivable purchase agreement</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px">Generated by Pool Owner according to the relevant template </td></tr><tr id="d99b5c47-35d0-4783-891c-6bd269dcc35c"><td id="v]Al" class="" style="width:164px">- SOT subscription agreement</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="4f02e0b7-f613-4fef-a5fb-4c6f6d27b673"><td id="v]Al" class="" style="width:164px">- JOT subscription agreement</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="92dc8ca5-4da8-48e0-abe4-de8824c57253"><td id="v]Al" class="" style="width:164px"><strong>Issue note</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="f0c339e0-e1c9-4c09-b379-c2b74010bd54"><td id="v]Al" class="" style="width:164px">-SOT target amount</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">Set up, updated by Pool Owner</td></tr><tr id="efd01507-a910-4a80-a29f-c683019dea76"><td id="v]Al" class="" style="width:164px">- JOT target amount</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="238ae562-b1ee-4bbf-a267-50581977cb51"><td id="v]Al" class="" style="width:164px">- Ensure JOT/SOT satisfies first loss</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="73c284ed-dc94-4166-b56e-356da858f196"><td id="v]Al" class="" style="width:164px">- Set auction parameters</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="21cfd786-d8fa-4fb1-8db2-4641ea363cd5"><td id="v]Al" class="" style="width:164px"><strong>Subscribe JOT</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="2f31c749-4f9e-4807-a27f-4afdc2822aa3"><td id="v]Al" class="" style="width:164px">- View price</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="b7cb3ff0-9b39-479d-bbab-4e3ca820b1f5"><td id="v]Al" class="" style="width:164px">- input amount</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="f9ca4d53-871a-4f95-86b0-76c55d8d2aa8"><td id="v]Al" class="" style="width:164px">- sign contract</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="fccb6766-c040-4caf-8412-039fa3bdf755"><td id="v]Al" class="" style="width:164px">- link wallet and approve spend</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="a8a23581-d316-4a77-ba9f-9bacdca30017"><td id="v]Al" class="" style="width:164px"><strong>SOT sale starts at later of start auction or JOT sale completed</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="3a0dff72-b06f-433e-ae29-f06c33688a25"><td id="v]Al" class="" style="width:164px">- view interest</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="70792699-bfeb-4e7f-8a73-686a3189141a"><td id="v]Al" class="" style="width:164px">- input amount</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="7e2cc2d7-ea88-4fc7-bd3b-967b19ab9f69"><td id="v]Al" class="" style="width:164px">- sign contract</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="019e1028-b82a-4f1d-8595-f0fa98a9261c"><td id="v]Al" class="" style="width:164px">- link wallet and approve spend</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="2ebfb19a-0bd1-4e04-a19c-c9b93e6a882f"><td id="v]Al" class="" style="width:164px"><strong>Pool view</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="b12b6ad7-2ff7-428c-9044-e2160ae96485"><td id="v]Al" class="" style="width:164px">- Subscribed SOT/JOT</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="b0d42a5a-6ada-458b-983b-3f3516181a7e"><td id="v]Al" class="" style="width:164px">- Pool reserve</td><td id="}T@q" class="" style="width:164px">On-chain linked wallet</td><td id="T}WF" class="" style="width:327px">Pool Owner</td></tr><tr id="7f20e248-4d64-41c4-a023-5966e45d08fb"><td id="v]Al" class="" style="width:164px">- Price of SOT</td><td id="}T@q" class="" style="width:164px">On-chain calc</td><td id="T}WF" class="" style="width:327px">A pool owner can update yield to maturity which affects the price</td></tr><tr id="0f4d48dd-428c-44d4-85fe-ca2a96ad3b23"><td id="v]Al" class="" style="width:164px">- Price of JOT</td><td id="}T@q" class="" style="width:164px">On-chain calc</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="1ecac616-5bd0-42ea-83cc-c6ad4b92cdfb"><td id="v]Al" class="" style="width:164px">- Performance charts</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="cfb66adb-752d-48aa-bdb7-862a164978d8"><td id="v]Al" class="" style="width:164px"><strong>Pool update</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="c2554947-1cfd-4360-ad28-181958d4b2a2"><td id="v]Al" class="" style="width:164px">Target JOT amount</td><td id="}T@q" class="" style="width:164px">Off-chain to on-chain</td><td id="T}WF" class="" style="width:327px">Pool Owner</td></tr><tr id="76d5ce82-dfa0-4104-9219-84c2f8c46066"><td id="v]Al" class="" style="width:164px">Target SOT amount</td><td id="}T@q" class="" style="width:164px">Off-chain to on-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="740cb8c6-1e6a-4833-9c56-3b7271279086"><td id="v]Al" class="" style="width:164px">Yield to maturity</td><td id="}T@q" class="" style="width:164px">Off-chain to on-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="213e1593-9f68-4750-8d9b-ebcebdc67ddc"><td id="v]Al" class="" style="width:164px"><strong>Upload assets</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="7fcb7ab0-5fd9-4b75-86d7-dcf92598b9a0"><td id="v]Al" class="" style="width:164px">- map fields (compulsory: borrowerID, Current balance, Original balance, Current interest, Final maturity date, Origination date, Loan denomination currency,)</td><td id="}T@q" class="" style="width:164px">NFT metadata includes asset type (loan, invoices), amount, due date, yield, and owner - all other data are off-chain</td><td id="T}WF" class="" style="width:327px">Off-chain data is on the database with Azure</td></tr><tr id="546cb2fd-ad05-43a8-ad34-e9c8988e556e"><td id="v]Al" class="" style="width:164px">- Approver/no approver</td><td id="}T@q" class="" style="width:164px">Approver = Validator </td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="428b9c8e-d91c-4072-a7bb-398412deaff8"><td id="v]Al" class="" style="width:164px">Asset repayment</td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="703cb090-3504-46df-9d60-5deb1894ef2e"><td id="v]Al" class="" style="width:164px">- originator uploads repayments</td><td id="}T@q" class="" style="width:164px">Off-chain to on-chain</td><td id="T}WF" class="" style="width:327px">Originators through API</td></tr><tr id="0dd50efe-04d2-4331-ad4a-2c60d96b1314"><td id="v]Al" class="" style="width:164px">- currency amount transferred from originator wallet</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px">Originator</td></tr><tr id="bf031cfe-3217-4a30-872b-9f12a911c115"><td id="v]Al" class="" style="width:164px"><strong>Redemption</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="af7a3765-d6ff-4cdf-9af9-b60dab1d8bb2"><td id="v]Al" class="" style="width:164px">- SOT holder make a redemption request</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="ddfe4392-78ea-453a-85e3-57dcd1a296ca"><td id="v]Al" class="" style="width:164px">- Pool payout of from reserve according to the calculation</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="9eb387cd-ea56-419a-b036-ade7fbe3ab17"><td id="v]Al" class="" style="width:164px">- JOT redemption</td><td id="}T@q" class="" style="width:164px">On-chain</td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="3635db99-c984-4fc5-b52e-f8442737ee47"><td id="v]Al" class="" style="width:164px"><strong>Investor view</strong></td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr><tr id="d5647b1c-9a24-4910-8c82-daa9a9b1f477"><td id="v]Al" class="" style="width:164px">- pool investment opportunity (different tabs)</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="0d32a92e-6cb3-474f-81df-87152349a76b"><td id="v]Al" class="" style="width:164px">- profile (need to add wallet address)</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="caa7eade-3b6d-402b-906e-791693cbc4b1"><td id="v]Al" class="" style="width:164px">- wallet</td><td id="}T@q" class="" style="width:164px">Non-custodial</td><td id="T}WF" class="" style="width:327px">User</td></tr><tr id="371eb454-6d66-4b09-827a-76a72b28c94e"><td id="v]Al" class="" style="width:164px">- document signing /repository</td><td id="}T@q" class="" style="width:164px">Off-chain</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="16a8d9b1-8257-4a74-b680-58c6f9939cea"><td id="v]Al" class="" style="width:164px">- Portfolio</td><td id="}T@q" class="" style="width:164px">N/A</td><td id="T}WF" class="" style="width:327px">N/A</td></tr><tr id="f99d3bc0-ec4a-4b13-875c-55562b4f8f77"><td id="v]Al" class="" style="width:164px">- Currency only USDC, cUSD, DAI to start</td><td id="}T@q" class="" style="width:164px"></td><td id="T}WF" class="" style="width:327px"></td></tr></tbody></table></div><h2 id="0178aaac-19b0-45fa-89b0-432ffc6a6fe7" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="f2ac2a82-fadb-4eee-9f4c-b31d78bcdd14" class="simple-table"><thead class="simple-table-header"><tr id="a803ba4b-d0b1-40c6-aa39-6a53b60f317a"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="83138d35-c3e4-4ad3-97a5-cf349b08f03a"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="9ec9290f-e2fe-453e-8b9e-4dec9e76210c"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="b7e41117-491b-40fa-a19c-006cfbfd5b58"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="ce9965b6-5b59-4935-b7cd-2fe7fea1c16b"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="6a5517c4-07b2-4a29-ade5-5a5ec7ddbde7" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="dcb362b0-6f7c-4a47-88e6-57d15e4e0bea" class="simple-table"><thead class="simple-table-header"><tr id="d08f856e-ba8e-4e88-8dfc-cb8b5d01ab19"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:521px"><strong>Description</strong></th></tr></thead><tbody><tr id="8fc89196-1546-4a83-b20a-44dada0242cf"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:521px">The issue is not acknowledged and not resolved.</td></tr><tr id="6fd98017-880c-4d74-a930-69866b13a29c"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been partially resolved</td></tr><tr id="f07dff78-1adc-40b9-a880-73fced0d617d"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:521px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="2fbd904b-3079-4dcb-bb36-430974c853be"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been sufficiently resolved</td></tr></tbody></table></div><h2 id="79841825-3344-405e-a767-1cdf18707f85" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="4d454ffa-3d83-4371-a0ec-cca235f98492" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="20cc1cf7-9df8-4880-ba3c-2fb93cb88946" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article></body></html>

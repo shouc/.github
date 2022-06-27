@@ -1,0 +1,769 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cronus Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5afed147-c9a2-44ba-85e7-dca2f41f6580" class="page sans"><header><h1 class="page-title">Cronus Audit Report</h1><table class="properties"><tbody><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Stage</th><td><span class="selected-value select-value-color-gray">released</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>status</th><td><span class="selected-value">locked</span></td></tr></tbody></table></header><div class="page-body"><blockquote id="fa76c95b-6aa0-42a8-9115-2bd353f7b4ab" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="3721e593-22f5-41c3-90de-1a8730dc668a" class="">June 15, 2022</p><p id="2e9b54f0-4555-4ff3-856f-9c8a168c4055" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="bbf63331-78cb-4ef9-b551-e9b26f09f87b" class="image"><a href="Cronus%20Audit%20Report%20bbf6333178cb4ef9b551e9b26f09f87b/Untitled.png"><img style="width:672px" src="Cronus%20Audit%20Report%20bbf6333178cb4ef9b551e9b26f09f87b/Untitled.png"/></a></figure><p id="40e788c5-b9d6-4cc2-b999-b9640d08304f" class="">This report presents our engineering engagement with Cronus Finance, a decentralized exchange deployed on the EVMOS ecosystem. Cronus Finance is an AMM DEX with liquidity mining rewards. Cronus Finance has its own governance token, $CRN, which can be staked into $sCRN and earn staking rewards denominated in stablecoin.</p><table id="7521306c-8ae0-4a30-a198-8c461d3df4c9" class="simple-table"><tbody><tr id="8d8eac0d-6931-43d2-9407-cb91298048a6"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:524px">Cronus Finance Protocol</td></tr><tr id="f9fb2fbe-d875-47ff-9d64-a3d8ec9a1c3c"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:524px"><a href="https://github.com/cronus-finance/cronus-core/tree/main">https://github.com/cronus-finance/cronus-core/tree/main</a></td></tr><tr id="4f14fccb-7d41-4112-9a01-08e536ab449e"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:524px"><a href="https://github.com/cronus-finance/cronus-core/commit/06820480fcf5bfe6906d5ddae0ff52f3e0907d0f"><strong>06820480fcf5bfe6906d5ddae0ff52f3e0907d0f</strong></a></td></tr><tr id="80384950-7da2-4d73-8878-53f6e16c96a2"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:524px">Solidity</td></tr><tr id="7645b1b3-8b71-4d45-b09e-87dd8ecf668e"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:524px">EVMOS</td></tr></tbody></table><h2 id="e5c02e41-9ebb-4f0f-90d7-af84a3dbfd55" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="1434e82e-cc23-49c0-a427-e36f11412495" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="b2e1c1df-3636-41f8-86c6-d35549f5dac3" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="006076ab-c094-4d2e-a168-aba125be2bcc" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="749aee3b-3901-46a1-86ec-6a6d70445e7e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e5c02e41-9ebb-4f0f-90d7-af84a3dbfd55">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#006076ab-c094-4d2e-a168-aba125be2bcc">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d55ce56c-cf95-4f7c-8c2e-887d566c2282">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8b1ef5ea-1fb4-4f97-a918-8b76da8303ce">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c09beb87-f9de-4443-9474-701698b41ffe"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#43be3a47-1af7-4e57-9828-5eb4e00013e8">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fc8c943f-1bf4-442c-8057-025895ae362c">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#97e65af9-0067-48c7-9c6a-b0afbfbf5ff0">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#62b585d0-b1da-4cfc-8597-2ec305fb7b16">Disclaimer</a></div></nav></div><h2 id="d55ce56c-cf95-4f7c-8c2e-887d566c2282" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="4d71a590-ef54-4634-8e25-51639c6f4e80" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><p id="59840b69-450b-4468-b336-68f871104b05" class="">Our auditing service includes the following two stages:</p><ol type="1" id="73e7b930-82ce-4924-926b-8e5aeb1c9169" class="numbered-list" start="1"><li><strong>Pre-Audit Consulting Service</strong><ul id="e35bc984-5f36-44bf-adea-a932f7e743e4" class="bulleted-list"><li style="list-style-type:disc">As a part of the pre-audit service, the Verilog team worked closely with the project development team to discuss potential vulnerability and smart contract development best practices. Verilog team is very appreciative of establishing an efficient and effective communication channel with the project team, as new findings are often exchanged promptly and fixes were deployed quickly, during the preliminary report stage. </li></ul></li></ol><ol type="1" id="7030e25f-9323-492e-a109-e5576368676d" class="numbered-list" start="2"><li><strong>Smart Contract Auditing Service</strong><ul id="b1b1fe65-5dd8-4808-aa41-3cf00acf348c" class="bulleted-list"><li style="list-style-type:disc">Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions</strong></li></ul></li></ol></div><h3 id="c58473d9-35ee-43d3-8d71-e92d1617fbfd" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><p id="5d1bac77-a27e-4d53-834c-5574d7a45e21" class="">Our auditing for Cronus Finance covered the following components:</p><ul id="bd403582-17fd-4420-9b95-be6a18d0ddcb" class="bulleted-list"><li style="list-style-type:disc">AMM DEX</li></ul><ul id="f97a697b-69b7-42a9-a267-0e0ae122aa46" class="bulleted-list"><li style="list-style-type:disc">Liquidity Mining Farm</li></ul><ul id="2e59af13-0399-45b4-95b3-276ec2e1b9b5" class="bulleted-list"><li style="list-style-type:disc">$CRN Token</li></ul><ul id="2ebe45d6-9a73-41e5-9c70-d142fe6cdae2" class="bulleted-list"><li style="list-style-type:disc">Stable Cronus Staking</li></ul><table id="da4ffe90-4f73-4abd-a3e0-12e8bafc7ec9" class="simple-table"><thead class="simple-table-header"><tr id="3fb4fac9-8105-4299-af77-a8c2a83141bc"><th id="tY`p" class="simple-table-header-color simple-table-header" style="width:575px">File Name</th></tr></thead><tbody><tr id="4a97f9e6-3c91-43f4-9cae-1bf32e592c26"><td id="tY`p" class="" style="width:575px">.\contracts\CronusFactory.sol</td></tr><tr id="93430bd8-41cb-478a-b510-ad7c8f7eb445"><td id="tY`p" class="" style="width:575px">.\contracts\CronusPair.sol</td></tr><tr id="f96d6653-f3a2-4086-af44-28da15edd28d"><td id="tY`p" class="" style="width:575px">.\contracts\CronusRouter02.sol</td></tr><tr id="81855e8c-9e6f-4385-926a-6a9ca6e7c68d"><td id="tY`p" class="" style="width:575px">.\contracts\CronusToken.sol</td></tr><tr id="d2b06aaa-45ea-4272-bf7c-3e0855ce0b4c"><td id="tY`p" class="" style="width:575px">.\contracts\LPToken.sol</td></tr><tr id="2df4319a-c8c3-4c39-b2cc-f606266a97cb"><td id="tY`p" class="" style="width:575px">.\contracts\MasterChefCronus.sol</td></tr><tr id="7c4abdd5-b020-48e1-999a-c740f3df8a5d"><td id="tY`p" class="" style="width:575px">.\contracts\MathUtils.sol</td></tr><tr id="283f2a35-d2e7-4a50-81c3-dd2887bb0eaf"><td id="tY`p" class="" style="width:575px">.\contracts\MoneyMaker.sol</td></tr><tr id="e8193c77-cd3c-4fde-9f74-ac5bb0926c23"><td id="tY`p" class="" style="width:575px">.\contracts\StableCronusStaking.sol</td></tr><tr id="41e109df-ca85-48df-8cf8-71db931ca24b"><td id="tY`p" class="" style="width:575px">.\contracts\weth.sol</td></tr><tr id="6f62917c-116f-4f29-9d0e-7f40b32f7e36"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\IAllowlist.sol</td></tr><tr id="5258d80e-b852-462a-bfed-8c2784245eb4"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusCallee.sol</td></tr><tr id="7eb58bdc-5f2a-4e3d-96d5-64db50245d0d"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusERC20.sol</td></tr><tr id="695b0fad-97b8-4f94-a980-62fcbf993ee6"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusFactory.sol</td></tr><tr id="cb2ed33c-c20e-4398-bb00-f06ac6e7422d"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusPair.sol</td></tr><tr id="29682c3b-2192-4e89-ac3e-d49669772763"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusRouter01.sol</td></tr><tr id="d565e2ed-f838-422d-888b-658e42b95e55"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ICronusRouter02.sol</td></tr><tr id="8b7d3e48-723a-48b5-9b4c-7581eb07da5f"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\IERC20.sol</td></tr><tr id="1547cc60-8257-43aa-a925-e144cfd23a1f"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\ISwap.sol</td></tr><tr id="f41ad126-37d3-4748-b87d-304430831daf"><td id="tY`p" class="" style="width:575px">.\contracts\interfaces\IWEVMOS.sol</td></tr><tr id="8291fa47-7aff-4868-a7cb-65f8f9644c70"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\BoringERC20.sol</td></tr><tr id="4bd47b2f-06f0-4526-904d-d6a91cc2770c"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\CronusLibrary.sol</td></tr><tr id="f23e20cd-b3c2-4c86-b63d-788bb5c86be8"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\Math.sol</td></tr><tr id="7d561444-b460-4bb2-852b-3b1a12b072bd"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\OwnablePausable.sol</td></tr><tr id="5ef534bc-2837-4b94-8aa4-44b934813448"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\SafeERC20.sol</td></tr><tr id="0f948e4e-e2e3-4b25-8666-224d83d1ca64"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\SafeMath.sol</td></tr><tr id="15fa3c74-baaa-4d31-89ca-9165e471af71"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\TransferHelper.sol</td></tr><tr id="e9de0a13-9995-49b3-abf2-f92621b68e54"><td id="tY`p" class="" style="width:575px">.\contracts\libraries\UQ112x112.sol</td></tr><tr id="e54f748c-a4aa-49ac-a884-5a50b213c9f5"><td id="tY`p" class="" style="width:575px">.\contracts\multicall\BlockTimestamp.sol</td></tr><tr id="49f2682d-ce16-4d2e-8330-5c66026c14ca"><td id="tY`p" class="" style="width:575px">.\contracts\multicall\IMulticall.sol</td></tr><tr id="94c3dd7b-5fd4-46f7-b387-edfd2aec5776"><td id="tY`p" class="" style="width:575px">.\contracts\multicall\Multicall.sol</td></tr><tr id="da47dc9d-987b-48a6-9f1d-8837de48967f"><td id="tY`p" class="" style="width:575px">.\contracts\multicall\PeripheryValidation.sol</td></tr><tr id="299f76bc-fe2c-4f5f-9ce3-fe618c79954f"><td id="tY`p" class="" style="width:575px">.\contracts\rewarder\BoringOwnable.sol</td></tr><tr id="18fce1b4-cc59-4762-bfc4-f87e540b3a32"><td id="tY`p" class="" style="width:575px">.\contracts\rewarder\SimpleRewarder.sol</td></tr><tr id="87274f70-c528-4e40-8668-af86a5f17541"><td id="tY`p" class="" style="width:575px">.\contracts\test\ERC20.sol</td></tr><tr id="7735eb78-35fe-4f8f-9e7f-bfe3adfe4035"><td id="tY`p" class="" style="width:575px">.\contracts\test\ERC20test1.sol</td></tr><tr id="d23140ab-0bca-44b5-b7f4-bd3da0747fbe"><td id="tY`p" class="" style="width:575px">.\contracts\test\ERC20test2.sol</td></tr><tr id="dc0f2242-a69c-45a3-9072-959805b4c050"><td id="tY`p" class="" style="width:575px">.\contracts\test\MockERC20.sol</td></tr></tbody></table></div></div><h2 id="8b1ef5ea-1fb4-4f97-a918-8b76da8303ce" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="466b4168-cb0b-4cbc-9e98-16f9def8b693" class="">Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.</p><hr id="13096335-499c-4469-b78a-96daf19c08db"/><figure id="9f6dd56c-bc87-4847-9628-d6e51610111b" class="image"><a href="Cronus%20Audit%20Report%20bbf6333178cb4ef9b551e9b26f09f87b/Untitled%201.png"><img style="width:963px" src="Cronus%20Audit%20Report%20bbf6333178cb4ef9b551e9b26f09f87b/Untitled%201.png"/></a></figure><hr id="fe4eeedd-47e1-43cc-b7b7-0642a7e674e9"/><ol type="1" id="b2ecd6a8-215a-4f3f-b576-978ad229d175" class="numbered-list" start="1"><li><strong>AMM DEX</strong><p id="999624f4-2bf5-4e44-847f-769ea418fa4c" class="">The AMM DEX part of Cronus Finance is based on SushiSwap, which is based on the Uniswap V2. Users can add/remove liquidity and swap assets by interacting with the <code>CronusRouter02.sol</code> contract. For adding liquidity, <code>CronusRouter02.sol</code> will first check whether the pair exists. If the pair does not exist, A <code>CronusPair.sol</code> will be deployed by <code>CronusFactory.sol</code>. If the pair exists, <code>CronusRouter02.sol</code> will query the reserve of <code>tokenA</code> and <code>tokenB</code> of the pair by calling <code>CronusLibrary</code> contract. <code>CronusRouter02.sol</code> will then check whether the user is depositing the minimal amount of <code>tokenA</code> and <code>tokenB</code> to the pair. If the check passes, then <code>CronusRouter02.sol</code> will the <code>tokenA</code> and <code>tokenB</code> that the user is depositing to the <code>CronusPair.sol</code> contract of the pair. The <code>CronusPair.sol</code> contract of the pair will then mint LP tokens to the user, representing the liquidity provided by the user. </p><p id="598f5a12-e91d-4959-911f-a760cad1ac4c" class="">For removing liquidity, <code>CronusRouter02.sol</code> will first query the address of the deployed <code>CronusPair.sol</code> for the pair by calling <code>CronusLibrary</code> contract. The <code>CronusPair.sol</code> contract of the pair will then transfer the LP token from the user to the <code>CronusPair.sol</code> contract of the pair. The <code>CronusPair.sol</code> contract of the pair will then burn the LP tokens and send the amount (corresponding to the amount of LP tokens and the reserves) of <code>tokenA</code> and <code>tokenB</code> to the user. </p><p id="54697ff7-c563-4293-b3c8-9478fd027190" class="">For swapping tokens. <code>CronusRouter02.sol</code> will query the <code>CronusLibrary</code> contract for the number of tokens that the user should receive/send. <code>CronusRouter02.sol</code> will first query the address of the deployed <code>CronusPair.sol</code> for the first hop of pairs in the <code>path</code> by calling <code>CronusLibrary</code> contract. The <code>CronusPair.sol</code> contract of the pair will then transfer the token that needs to be swapped from the user to the <code>CronusPair.sol</code> contract of the first hop of pairs in the <code>path</code>. Then a low-level function <code>_swap</code> is called to swap tokens between the hops in the <code>path</code>. </p></li></ol><ol type="1" id="6c17d66f-337d-4f47-9250-05055c02c3af" class="numbered-list" start="2"><li><strong>Liquidity Mining Farm</strong><p id="4d678050-44be-4c70-9b42-fa03a30f390a" class="">The liquidity mining farm part of Cronus Finance is based on SushiSwap MasterChef contracts. The <code>MasterChefCronus.sol</code> mints new $CRN tokens at each call to the <code>updatePool</code> function. New $CRN tokens are minted to the developer address, treasury address, investor address, and the deployed <code>MasterChefCronus.sol</code> contract based on a proportion defined in the <code>MasterChefCronus.sol</code> contract. The proportions can be changed by the owner of the <code>MasterChefCronus.sol</code> contract. </p><p id="b51d25d2-323d-4a85-9cf3-25518cf883fa" class="">The owner of the <code>MasterChefCronus.sol</code> can add a new reward pool to the liquidity mining contract by calling <code>add</code> function. Each reward pool needs to be specified with three parameters: <code>_allocPoint</code>, <code>_lpToken</code>, <code>_rewarder</code>. <code>_allocPoint</code> determines the proportion of the $CRN liquidity mining rewards that the reward pool is allocated. <code>_lpToken</code> determines which LP token is accepted by the reward pool. <code>_rewarder</code> is optional and used when a reward pool has double rewards in $CRN and another token. The <code>owner</code> of <code>MasterChefCronus.sol</code> can also later adjust the <code>_allocPoint</code> and <code>_rewarder</code> parameters by calling <code>set</code>. </p><p id="0c35111c-9aa1-416c-8e05-029125c48c96" class="">The function <code>updatePool</code> will update the rewards metrics of a particular pool, specified by <code>_pid</code>. The <code>updatePool</code> function will calculate the amount of $CRN that should be minted based on the time of the last update for the particular pool, the amount of $CRN to be minted every second, and the allocation point of the particular pool. The function would then mint the $CRN tokens to the <code>devAddr</code>, <code>treasuryAddr</code>, <code>investorAddr</code>, and the liquidity mining contract itself. The amount of $CRN tokens minted is determined by <code>devPercent</code>, <code>treasuryPercent</code>, and <code>investorPercent</code>, which can be set by the owner of the liquidity mining contract. The number of $CRN that each share of LP token deposit is then calculated and stored in the reward pool data structure as <code>accCronusPerShare</code>.</p><p id="42dd5465-cd23-4c86-a0b7-6f06846325d4" class="">The function <code>deposit</code> handles the deposit of LP tokens into the liquidity mining pool. The <code>deposit</code> function will first call <code>updatePool</code> to update the rewards metrics for the reward pool to the latest state, corresponding to the latest timestamp. Then the <code>deposit</code> function will check whether the user has already deposited LP tokens into the reward pair. If the user has already deposited into the reward pair, the already accumulated rewards will be harvested and sent to the user. Then the <code>deposit</code> function will calculate and store <code>rewardDebt</code> for the user that is depositing LP tokens. <code>rewardDebt</code> is the amount of $CRN token accumulated to date, before the user’s deposit, for the amount of LP token that the user is depositing. Therefore, when calculating the amount of $CRN that the user is earning, the smart contract only needs to multiply the number of $CRN per share by the number of reward pool shares that the user holds, minus the <code>rewardDebt</code> for the user. The <code>deposit</code> function will also call the <code>onCronusReward</code> function of the <code>rewarder</code> contract associated with the reward pool, if available. Lastly, the <code>deposit</code> function will transfer the LP token from the user to the liquidity mining farm. </p><p id="4720080e-877c-40d3-9e84-6d9f57c5141d" class="">The function <code>withdraw</code> handles the withdrawal of LP tokens from the liquidity mining pool. The <code>withdraw</code> function will first call <code>updatePool</code> to update the rewards metrics for the reward pool to the latest state, corresponding to the latest timestamp. Then the already accumulated rewards will be harvested and sent to the user. Then the <code>withdraw</code> function will calculate and store <code>rewardDebt</code> for the user that is depositing LP tokens. The <code>withdraw</code> function will also call the <code>onCronusReward</code> function of the <code>rewarder</code> contract associated with the reward pool, if available. Lastly, the <code>withdraw</code> function will transfer the LP token to the user from the liquidity mining farm.</p></li></ol><ol type="1" id="cd4f5100-4b44-4e2d-9582-11642b9b9df1" class="numbered-list" start="3"><li><strong>$CRN Token</strong><p id="1ba1bb6a-52b4-404d-a99a-8facda44d563" class=""><code>CronusToken.sol</code> inherits <code>SafeERC20.sol</code> from OpenZepplin. <code>CronusToken.sol</code> has additional governance-related features such as <code>delegateBySig</code> <code>delegates</code>.</p></li></ol></div><h2 id="c09beb87-f9de-4443-9474-701698b41ffe" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="c4be10ed-4c7d-4524-87de-b5ee46b58e81" class="simple-table"><tbody><tr id="aae94fd6-3b64-4575-baa8-10389038ca28"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="897bebfe-26b5-4c93-86a9-0371c7125601"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">3</td><td id="@mfj" class="">3</td><td id="|V?N" class="">3</td></tr><tr id="743630ff-459d-4af3-993b-10eaab33cfb2"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="dc760810-68b9-474d-a505-6f61af7455d0"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">1</td></tr><tr id="878379ac-497f-4d30-b282-f44a5479e2dd"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">8</td><td id="@mfj" class="">4</td><td id="|V?N" class="">3</td></tr></tbody></table><h3 id="ac8fadac-06b6-4caf-bc6d-f8809fb2d74e" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><ol type="1" id="400c5d86-00b1-44e6-b926-be19534c9f07" class="numbered-list" start="1"><li><strong>Critical State variables are not updated after critical operations</strong><table id="780b079e-b612-4a55-9660-1e46f4c1bfff" class="simple-table"><tbody><tr id="e4ee4391-1b75-4d14-9042-9ea97677de17"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="49f1caed-d417-4bb0-a69f-bdc2f929933b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MasterChefCronus.sol#L429;</td></tr><tr id="c3da1c9e-cdfd-4ef2-ab43-cdcb09fc95ea"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/5508803e0acbf40688557a8e68342581810c2a30">commit 5508803e0acbf40688557a8e68342581810c2a30</a>;</td></tr></tbody></table><ul id="41c9e40f-cdcb-41f6-b623-67e719ea8995" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f78fc809-4094-4202-809d-9f4a9eacfafb" class=""><code>UserInfo.rewardDebt</code> is not updated in <code>MasterChefCronus.collectAllPoolRewards()</code>. Attackers can call this function to drain the Cronus tokens in pool.</p><p id="45bd0f94-8ff3-4dc9-93f3-d2248463b0f6" class=""><code>MasterChefCronus.collectAllPoolRewards()</code> loops through all pools and transfers rewards of each pool to the user. However, <code>UserInfo.rewardDebt</code>is not updated as expected. Because <code>memory</code> instead of <code>storage</code> is used when fetching <code>UserInfo</code>.  So the userInfo that was updated inside the function is just a local copy of the original variable and thus the update has no impact on the state variable reward debt. <code>UserInfo.rewardDebt</code>still remains unchanged after <code>MasterChefCronus.collectAllPoolRewards()</code>.</p><p id="634f9f5c-daa2-472c-9df4-a1859d85968b" class="">The user’s reward debt is not updated and remains unchanged after claiming rewards. The calculated claimable rewards will also stay unchanged. Users can get the same Cronus token rewards again even if they have claimed. The attacker can just call this function multiple times to drain the Cronus token in the pool.</p></details></li></ul><ul id="33337366-4f34-437d-8e3b-cddb92454590" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="ea5e1642-402d-484e-8547-8acec96b59ce" class="">Malloy stakes some tokens in the pool and accumulates some rewards. He then calls <code>MasterChefCronus.collectAllPoolRewards()</code> many times to drain all the Cronus tokens in the pool.</p></details></li></ul><ul id="2eb355f7-63e0-4e45-9d72-a1d799775a38" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="a0f69bb6-4499-48c1-9603-081694770497" class="">Use <code>storage </code>instead of <code>memory </code>for <code>UserInfo</code></p><pre id="f372f6a5-f928-4753-aaea-8b3fe854309f" class="code"><code>function collectAllPoolRewards() public {
+    for (uint256 _pid = 0; _pid &lt; poolInfo.length; _pid++) {
+        PoolInfo memory pool = poolInfo[_pid];
+        // * suggestion: use `storage` *
+        UserInfo storage user = userInfo[_pid][msg.sender];
+        updatePool(_pid);
+        if (user.amount &gt; 0) {
+            // Harvest Cronus
+            uint256 pending = user.amount.mul(pool.accCronusPerShare).div(1e12).sub(user.rewardDebt);
+            safeCronusTransfer(msg.sender, pending);
+            emit Harvest(msg.sender, _pid, pending);
+        }
+        user.rewardDebt = user.amount.mul(pool.accCronusPerShare).div(1e12);
+
+        IRewarder rewarder = poolInfo[_pid].rewarder;
+        if (address(rewarder) != address(0)) {
+            rewarder.onCronusReward(msg.sender, user.amount);
+        }
+    }
+}</code></pre><p id="22d83021-3940-4052-8989-fa549129f8ed" class="">In this way, <code>UserInfo</code> gets updated correctly and the function works as expected.</p></details></li></ul><ul id="1c54e98b-f548-41c1-ad98-452ec817407a" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="e471820e-26a5-4723-a425-0c1cb588f629" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/5508803e0acbf40688557a8e68342581810c2a30">commit 5508803e0acbf40688557a8e68342581810c2a30</a>. The issue was fixed by changing the <code>memory</code> to <code>storage</code> for <code>UserInfo</code>.</p></details></li></ul></li></ol><ol type="1" id="1c40f936-c673-44c0-acc8-623ed3a583dd" class="numbered-list" start="2"><li><strong>Inter-contract state variables inconsistency</strong><table id="853f00b2-e4b8-47ef-ae79-dd844fb64523" class="simple-table"><tbody><tr id="332f015e-40ff-44b0-86da-2d24639161bf"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="4ab4724b-d246-4260-9f41-80ddff1bb481"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MasterChefCronus.sol#L354;</td></tr><tr id="31892c3c-7b58-47d6-9225-c684cdbb70b4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/84e287b3512fee5fb308ab15c9603ce63ff9651e">commit 84e287b3512fee5fb308ab15c9603ce63ff9651e</a>;</td></tr></tbody></table><ul id="15c0b792-13a4-4d76-861a-f7a88e63c098" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="dc755b6a-fdeb-4b57-8320-6c5da6fd8264" class="">Reward amount of <code>rewarder</code>contract is not reset in <code>emergencyWithdraw()</code>. Rewards on the rewarder contract can still be claimed after the user withdraws all the staked tokens.</p><p id="84c64a56-e735-4cb3-aa27-cc6b36eb55e8" class=""><code>MasterChefCronus.emergencyWithdraw()</code> is a function for users to withdraw all the staked tokens and give up all the unclaimed rewards. All the rewards that the user has earned should be reset to zero and staked tokens are transferred back to the user. However, the reward amount on the rewarder contract is not reset to zero. Users are still able to claim rewards from the rewarder contract after they emergency withdraw all the staked tokens.</p></details></li></ul><ul id="453ee752-f61d-4baf-9301-5a62e2e34caf" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ul id="6d00c606-302b-41a9-9d34-85d758e1d2ea" class="bulleted-list"><li style="list-style-type:disc">Attacker Mallory takes a flash loan.</li></ul><ul id="9001e00f-189f-451a-bed5-f7f806b7a5d1" class="bulleted-list"><li style="list-style-type:disc">Deposits x LP tokens into any double reward farm. He then </li></ul><ul id="b6f453f8-7f99-4aa2-84b8-56d7c0606b0c" class="bulleted-list"><li style="list-style-type:disc">Emergency withdraws his LP tokens.</li></ul><ul id="f27767ba-27cc-4cee-95d6-f5e05abcd50c" class="bulleted-list"><li style="list-style-type:disc">Deposits a single LP token back into the same farm and waits n number of days.</li></ul><ul id="35bcb235-eb34-4517-a08e-e593b179ea53" class="bulleted-list"><li style="list-style-type:disc">Harvests the bonus reward</li></ul><ul id="40fe45df-f6dc-4fa0-9f02-9c98baecb0bd" class="bulleted-list"><li style="list-style-type:disc">Mallory now has rewards as he has x number of LP tokens instead of 1 LP token.</li></ul></details></li></ul><ul id="a8b17315-4f93-4c2d-8b8f-dba498dabd42" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f96b2a4c-89c9-4766-9ffc-8955245679cf" class="">Fix the mistake in <code>emergencyWithddraw()</code>function, clear user data in <code>rewarder</code>contract.</p><pre id="5f5c1cbd-bd74-47f3-b5c1-c8e37036e65f" class="code"><code>/// @notice Withdraw without caring about rewards. EMERGENCY ONLY.
+/// @param pid The index of the pool. See `poolInfo`.
+function emergencyWithdraw(uint256 pid) external nonReentrant {
+    PoolInfo memory pool = poolInfo[pid];
+    UserInfo storage user = userInfo[pid][msg.sender];
+    uint256 amount = user.amount;
+    user.amount = 0;
+    user.rewardDebt = 0;
+    // * suggestion: update amount of rewarder contract *
+    IRewarder _rewarder = pool.rewarder;
+    if (address(_rewarder) != address(0)) {
+        _rewarder.onCronusReward(msg.sender, 0);
+    }
+
+    // Note: transfer can fail or succeed if `amount` is zero.
+    pool.lpToken.safeTransfer(msg.sender, amount);
+    emit EmergencyWithdraw(msg.sender, pid, amount);
+}</code></pre></details></li></ul><ul id="daac6e6c-3361-4d3b-93b3-56d5b962d4e0" class="toggle"><li><details open=""><summary><strong>Result</strong></summary><p id="79e46f69-997e-4881-9838-e7641db849c5" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/84e287b3512fee5fb308ab15c9603ce63ff9651e">commit 84e287b3512fee5fb308ab15c9603ce63ff9651e</a>. The user’s amount in the rewarder contract is reset to zero inside this function.</p></details></li></ul></li></ol><ol type="1" id="e6295ec3-75b2-45b6-9485-d2ab66f6d0db" class="numbered-list" start="3"><li><strong>Critical State variables are not updated after critical operations</strong><table id="56d26106-c17d-4dcd-ba7d-d198751d7ef0" class="simple-table"><tbody><tr id="3013ac8a-5aaf-47a0-9892-7e777154500d"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="4c52edf3-4d36-47d4-ab6d-83f4d54e5fad"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/StableCronusStaking.sol#L287;</td></tr><tr id="0ce70838-7b21-4dc6-b7e6-b46ceb42ac89"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/4909443408e4c01ef17684455f8dd021de4547ec">commit 4909443408e4c01ef17684455f8dd021de4547ec</a>;</td></tr></tbody></table><ul id="2d5febaa-e99b-4309-8713-b4edd6c8fe6a" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="14a7ba42-bd69-4c23-931f-085dc69d5f3f" class="">A critical variable used to calculate rewards is not updated in  <code>StableCronusStaking.emergencyWithdraw()</code>. It will result in incorrect calculation of rewards and may cause the calls on critical functions to fail. </p><p id="b404c4c5-6f66-45fe-b78c-7ce483272cf3" class=""><code>internalCronusBalance</code>is a variable used to track the balance of Cronus tokens. It should be updated every time the Cronus token is transferred to/from the current contract. In <code>emergencyWithdraw()</code>, the amount is not deducted from the <code>internalCronusBalance</code> when the Cronus token is transferred from this contract to users. The <code>internalCronusBalance</code> will be bigger than it should be.</p><p id="5678aec4-1157-416c-a43b-1cbc6860de68" class=""><code>internalCronusBalance</code>is used to calculate rewards in function <code>StableCronusStaking.pendingReward()</code>. The inaccurate <code>internalCronusBalance</code> will result in incorrect rewards calculation as well. The reward will be smaller than it should be. Besides, this may also cause the reward calculation to revert on subtraction underflow (it deducts <code>internalCronusBalance</code>
+ from the token balance), which will make calls to <code>deposit()</code>, <code>addRewardToken()</code>,<code>removeRewardToken()</code>, <code>withdraw()</code>fail because of the revert on <code>updateReward()</code>.</p></details></li></ul><ul id="894f03fc-1e8d-43ff-9e93-56762691c1ac" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="45ecf605-f004-47c8-b96b-8c6d882bb74c" class="">Because of the Incorrect internal Cronus token balance tracking, the amount of Cronus token rewards Alice can claim is smaller than it should be. </p></details></li></ul><ul id="61c06850-6b4d-42e5-a9c6-6f45f4e6ddd5" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="583f33ac-e5e9-45b0-9654-2af4d322424b" class="">update the <code>internalCronusBalance</code> inside <code>StableCronusStaking.emergencyWithdraw()</code>.</p><pre id="3d679437-5530-4a34-81c7-5d958983ba26" class="code"><code>function emergencyWithdraw() external {
+    UserInfo storage user = userInfo[_msgSender()];
+
+    uint256 _amount = user.amount;
+    user.amount = 0;
+    uint256 _len = rewardTokens.length;
+    for (uint256 i; i &lt; _len; i++) {
+        IERC20 _token = rewardTokens[i];
+        user.rewardDebt[_token] = 0;
+    }
+    // *suggestion: update internalCronusBalance*
+    internalCronusBalance = internalCronusBalance.sub(_amount);
+    
+    CRN.safeTransfer(_msgSender(), _amount);
+    emit EmergencyWithdraw(_msgSender(), _amount);
+}</code></pre></details></li></ul><ul id="e7cdaf1e-ae7d-47b2-bfea-0a5e9cb8dcde" class="toggle"><li><details open=""><summary><strong>Result</strong></summary><p id="451c7239-0db1-4971-9d99-3f8c8624c722" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/4909443408e4c01ef17684455f8dd021de4547ec">commit 4909443408e4c01ef17684455f8dd021de4547ec</a>. <code>internalCronusBalance</code> is updated when Cronus token gets transferred out through function <code>StableCronusStaking.emergencyWithdraw()</code>.</p></details></li></ul></li></ol></div><h3 id="97f38a7c-cabb-43cf-8821-1ece14608420" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><p id="e5e546b3-7679-4403-b994-9c6626d72fc9" class="">None ; )</p></div><h3 id="e92e2eb5-ce91-4721-a4a3-94612b02162e" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="42dd4c24-74a1-4a8c-8c0f-f53c5e34ffee" class="numbered-list" start="1"><li><strong>Gas-inefficient array operations</strong><table id="b9ef0382-2f67-41c2-8d1f-279edd987e01" class="simple-table"><tbody><tr id="34e36fbd-b707-4005-ba68-641d1a93832d"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="d26a4e22-bedf-4298-af16-186418fdd74b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/StableCronusStaking.sol#L198;</td></tr><tr id="de6051eb-b606-4fb3-bf96-ba2597c76c4a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/9fe1b898da869d3c22fdb9757becd062b50219ba">commit 9fe1b898da869d3c22fdb9757becd062b50219ba</a>;</td></tr></tbody></table><ul id="1e406607-e7c7-48ae-add8-f2462c2b07ad" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f32cbc53-4e19-423b-941c-4d86f7a55d87" class="">In order to remove one reward token, <code>removeRewardToken()</code>
+ function loops through all the reward tokens. Loop can be avoided by using more optimized data structures. It would cost extra unneeded time.</p><pre id="64682519-d6c3-49de-badd-22b057f40c83" class="code"><code>function removeRewardToken(IERC20 _rewardToken) external onlyOwner {
+    require(isRewardToken[_rewardToken], &quot;StableCronusStaking: token can&#x27;t be removed&quot;);
+    updateReward(_rewardToken);
+    isRewardToken[_rewardToken] = false;
+    uint256 _len = rewardTokens.length;
+    for (uint256 i; i &lt; _len; i++) {
+        if (rewardTokens[i] == _rewardToken) {
+            rewardTokens[i] = rewardTokens[_len - 1];
+            rewardTokens.pop();
+            break;
+        }
+    }
+    emit RewardTokenRemoved(address(_rewardToken));
+}</code></pre></details></li></ul><ul id="8faf6543-f2d6-4176-8aaf-a87c5e149351" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="5d1b2290-94e2-4aad-8063-8ad09dba5d8e" class="">N/A</p></details></li></ul><ul id="af59f11b-17d5-4f3d-bf4e-d1e8eefcd987" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="0a950e79-abe5-4223-9119-9bbfd01a8076" class="">Use EnumerableSet (See code below). <code>tokenIndex</code>can also serve as <code>isRewardToken</code>to further save gas. All <code>require(isRewardToken[_token])</code>should change to <code>require(tokenIndex[_token] != 0)</code>.</p><pre id="84d889fd-1576-4c02-91ab-fee03012801c" class="code"><code>mapping(IERC20 =&gt; uint256) tokenIndex;
+//mapping(IERC20 =&gt; bool) isRewardToken;  // removed
+function addRewardToken(IERC20 _rewardToken) external onlyOwner {
+    uint256 valueIndex = tokenIndex[_rewardToken]; // 0 index is reserve as null identifier
+    require(valueIndex, &quot;StableCronusStaking: rewardToken already exists.&quot;);
+    
+    rewardTokens.push(_rewardToken);
+    tokenIndex[_rewardToken] = rewardTokens.length;
+    
+    updateReward(_rewardToken);
+    emit RewardTokenAdded(address(_rewardToken));
+}
+function removeRewardToken(IERC20 _rewardToken) external onlyOwner {
+    uint256 valueIndex = tokenIndex[_rewardToken];
+    require(valueIndex, &quot;StableCronusStaking: rewardToken does not exist.&quot;);
+    
+    updateReward(_rewardToken);
+    
+    uint256 toDeleteIndex = tokenIndex[_rewardToken] - 1;
+    uint256 lastIndex = rewardTokens.length - 1;
+    
+    if (lastIndex != toDeleteIndex) {
+        address lastValue = rewardTokens[lastIndex]
+        rewardTokens[toDeleteIndex] = lastValue;    // update last value to the removed value
+        tokenIndex[lastValue] = valueIndex;    // update index
+    }
+    
+    rewardTokens.pop();
+    detele tokenIndex[_rewardToken];
+    
+    emit RewardTokenRemoved(address(_rewardToken));
+}</code></pre></details></li></ul><ul id="974224d8-00de-4c4f-8691-692d1cd6660c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="e6a3ae70-beb5-47bb-a373-64ce51e791ba" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/9fe1b898da869d3c22fdb9757becd062b50219ba">commit 9fe1b898da869d3c22fdb9757becd062b50219ba</a>. The Cronus Finance team fixed this issue by using EnumerableSet</p></details></li></ul></li></ol></div><h3 id="fe86a550-9ac5-4c38-88ae-b27ceb5b3f69" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="db87b82c-04df-4143-90da-436e50def15a" class="numbered-list" start="1"><li><strong>Lack of Re-entrancy Guard for critical function with external dependency</strong><table id="01423f7e-1f1e-49d6-ac89-904db74d3a41" class="simple-table"><tbody><tr id="25dc4801-2fc8-452a-8791-d75c4f88c130"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="d00e4717-618e-4cf6-8d4c-c8bf16b4d9a9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MasterChefCronus.sol(#L294, #L321, #L350, #L358);</td></tr><tr id="2717272c-484a-4a81-a3f1-25adb04f7c58"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Unresolved;</td></tr></tbody></table><ul id="69b1ef2c-a8b6-4519-8f99-3a3569c36a0b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="05cb42e3-a9b7-4d00-8c21-3b25812d404e" class="">The snippets are following a proper check-effects-interaction pattern. However, attention should be paid to the external <code>lptoken.safeTransfer</code> and <code>lptoken.safeTransferFrom </code>that is interacted. Be cautious when adding support for tokens like ERC777 that have before after transfer hooks. It brings in reentrancy vulnerabilities even when following a check-effects-interaction pattern.</p></details></li></ul><ul id="9fd4eced-b5f9-4dc6-bd64-8aa47dd18317" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="52790f93-d985-4940-b4fb-95d5ad99b476" class="">N/A</p></details></li></ul><ul id="8fd918a3-82ac-44cd-97be-7740b46f65f6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="86badecd-6c13-41a2-b19e-b0b37bde0280" class="">Be cautious when adding support for new tokens. <code>ReentrancyGaurd</code> can be added to functions that contain interactions with the external token transfer.</p></details></li></ul><ul id="2bc7d525-6ae5-4dc5-8532-e5d4f33e429f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="cb5e2646-a6e6-45df-a354-48b35931cdbb" class="">The suggestion is not adopted</p></details></li></ul></li></ol><ol type="1" id="13f99327-d832-43e4-9531-518627208622" class="numbered-list" start="2"><li> <strong>Magic numbers</strong><table id="beba5562-b9bf-4884-bf3c-47af8ee3bda6" class="simple-table"><tbody><tr id="b9a3f7c6-b74c-41ea-88af-3ae6db130e45"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="4764c626-e486-4cdb-980a-e5e6b6335f05"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/StableCronusStaking.sol(#L106, #L187, #L218);</td></tr><tr id="bff5c0c8-68cb-467d-b328-95b2aeb5a06c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Unresolved;</td></tr></tbody></table><ul id="bf383c39-903c-4db8-a008-28db2c2727b5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="007351fe-a491-4b88-8652-f7c04a1ba25f" class="">There are several magic numbers (<code>5e17</code>, <code>25</code>) used in the contracts.</p><p id="17c6d1c0-e936-4d61-9d24-9377d382d11c" class="">It’s a better practice to make those magic numbers constant variables and have sufficient comments on their usage, which can greatly improve code readability.</p></details></li></ul><ul id="b21a349d-f466-4dd3-afa0-9bea5922b06b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="a1cb132f-741e-41db-8cbb-b781797407cc" class="">N/A</p></details></li></ul><ul id="126b9b31-46fb-4400-a7f1-e8780b44b87d" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="34aec715-9a4f-4b96-b25f-c3794aad3523" class="">Use constant state variables to represent those magic numbers.</p></details></li></ul><ul id="238b9223-4178-4c7d-a2e6-7055d9307325" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="bb9396ea-9422-4521-ab43-d602dffeb1d7" class="">Unresolved. The suggestion is not adopted.</p></details></li></ul></li></ol><ol type="1" id="c17ae8c5-c733-4091-b202-79951e46ea6c" class="numbered-list" start="3"><li><strong>Naming issues</strong><table id="8748ee7b-b632-4836-b9f1-25969f7c8213" class="simple-table"><tbody><tr id="c7f75807-935e-4c0a-9e0c-bdc3a7e1c94d"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="6e9a7cfe-a612-4826-b004-0ef9f66ece72"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/StableCronusStaking.sol#L78;</td></tr><tr id="fd641594-7ba7-4d8a-8c58-18352088953b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>;</td></tr></tbody></table><ul id="c8475df7-80c6-47c6-ad13-491ead5e7645" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="0d432915-c3eb-484c-8694-e747c4241438" class=""><code>event ClaimReward()</code>does not follow the “noun + verb past participle” naming scheme.</p></details></li></ul><ul id="6f0324de-4c4a-4471-b168-44d577515b31" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="e3def1dc-e51c-485c-bec2-fbc9b36751a0" class="">N/A</p></details></li></ul><ul id="4b119bb0-6f57-4c6e-83fd-2a4113844d6f" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="8fa56a1b-7166-4c51-8053-2593a4dfed65" class="">Events and indexed values of events can be used to monitor contract operations. Thus, event names similar to contract function names must keep best practice by using the “noun + verb past participle” naming scheme. Therefore, we suggest changing the event name to <code>RewardClaimed</code>.</p></details></li></ul><ul id="16c027dc-1c94-4372-9bf4-a644567ae880" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="948cc7ad-7fc1-403b-b296-52a9f9a341b5" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>. The event name has been changed to <code>RewardClaimed</code>.</p></details></li></ul></li></ol><ol type="1" id="c1913601-b49e-4d24-8288-ccf0bf5fc6eb" class="numbered-list" start="4"><li><strong>Missing </strong><strong><code>indexed </code></strong><strong>variables in event</strong><table id="c7292fe6-a5b9-434e-b65c-e13234926c48" class="simple-table"><tbody><tr id="331206d1-d382-41ec-9644-5415bce04ecc"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="34fd117d-a0fd-4ba0-897a-08be97ba7f6e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/StableCronusStaking.sol#L84;</td></tr><tr id="11763202-e3ef-436d-9031-00f69b634ba2"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Partially resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>;</td></tr></tbody></table><ul id="01b00ad3-a924-4606-b90b-8c8e6ec606c5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="5361e4bc-2575-4215-84f3-98a785212f31" class=""><code>event RewardTokenAdded(address token)</code>and <code>event RewardTokenRemoved(address token)</code>do not index the added/removed token address.</p><p id="2ff853c3-5168-4fde-852b-4e7fcdb1fe21" class="">Events and indexed values of events can be used to monitor contract operations.  It’s recommended to have events emitted on important function calls and index those critical variables.</p></details></li></ul><ul id="8c01a949-5451-4494-924e-2e61671105f6" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9910d79e-80f9-496c-9156-b3305564ea68" class="">N/A</p></details></li></ul><ul id="61eac7b9-3956-46ab-b23e-4e25de52b330" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="da46e89e-5d35-444f-a3bb-b3268354ec94" class="">The indexed parameters for logged events will allow users/developers to search for these events using the indexed parameters as filters. We suggest adding <code>indexed</code> to keep the best practice of smart contract programming </p></details></li></ul><ul id="24275967-5204-4384-9e92-f86888938734" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="11108a0b-4764-42f9-adf9-1aec002173cc" class="">Partially resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>.  <code>indexed</code>was added to  <code>event RewardTokenAdded(address token)</code>, but not added to <code>event RewardTokenRemoved</code>.</p></details></li></ul></li></ol><ol type="1" id="7d45719c-e15f-45d3-be97-09102188d8c5" class="numbered-list" start="5"><li><strong>Unbounded gas usage in recursive function</strong><table id="84cd484d-3451-40c1-bafd-aa21b11a2235" class="simple-table"><tbody><tr id="c6eaafd0-ac77-4c7e-85ef-1e0a82612f0a"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="9a038f60-3628-48c9-af90-66dceb26a715"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MoneyMaker.sol#L253;</td></tr><tr id="bfff3823-d189-4683-8fc9-be9c0e9b6522"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Unresolved;</td></tr></tbody></table><ul id="fe144c2e-c9ea-454d-8373-4180bc93d976" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="3587fa26-2ceb-4f0d-968e-21ad2b10ed5a" class="">In <code>_convertStep()</code>, the recursive function will recuse all the input tokens until all of them are converted to <code>tokenTo</code>, however, if the <code>bridgeOf(token)</code>graph has a loop, the recursive function will be in a dead loop and revert due to out-of-gas. Example: The path of token bridges must not contain any loop (Say, A - B - C - A), otherwise the <code>convert()</code>will be in a dead loop.</p></details></li></ul><ul id="523c8302-4708-4eda-8c02-e79092d758a6" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="cbf79697-b9e8-45e0-b038-ff9ffe232e9b" class="">As described above, under certain edge cases, <code>convert()</code>will be in a dead loop</p></details></li></ul><ul id="be898f36-e40a-46b9-b8f8-39b2856d03bd" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="50713979-a6fc-4bd0-9eb6-df4299eaa67d" class="">Check Directed Acyclic Graph(DAG) compliance before calling <code>setBridge()</code>.</p></details></li></ul><ul id="bb3ff38b-f7ba-47f0-aefd-c69bdb4f561f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="9327932b-d0e8-4a1c-986b-ef8e7a99f48b" class="">Unresolved. The suggestion is not adopted.</p></details></li></ul></li></ol><ol type="1" id="62d86878-d139-4e9f-aae4-52c92079c0cd" class="numbered-list" start="6"><li><strong>Inconsistency in variable name and actual implementation</strong><table id="3e9e9ac8-3538-4986-a275-d97193b92a55" class="simple-table"><tbody><tr id="c4dc4a96-c23d-4451-afcb-f5157d56d574"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="149b1b6f-25e1-4d7a-9ef4-d93d824079f8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MoneyMaker.sol;</td></tr><tr id="82629721-441a-4bb8-8b29-4ed10a6125f3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>;</td></tr></tbody></table><ul id="cc1fb206-ab8e-4384-8e58-067fbcd7c612" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="1cbcecb0-8875-4d2b-bde5-0c0dbb5ce0f3" class=""><code>wavax</code>is from Trader Joe XYZ’s implementation which is deployed on Avalanche. Using <code>wavax</code>is a bit confusing in the code since Cronus is deployed on Evmos. The name is misleading and confusing to future developers.</p></details></li></ul><ul id="e4fc6173-2013-4b20-a6c5-5c541abde166" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="c2272aa6-9009-443d-b88f-1c67d71fe76a" class="">N/A </p></details></li></ul><ul id="e0076b32-be9f-4f1e-95d3-239ebacb8119" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="a5082f2e-9be4-44df-a3af-a900f18c75e8" class="">Use another name like <code>wevmos</code></p></details></li></ul><ul id="8576f9ca-b0f4-4dd9-8612-afb61e2b6888" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="538466ff-d0eb-4b47-a080-4e74655ab7ff" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>. <code>wavax</code> has been changed to <code>wevmos</code>.</p></details></li></ul></li></ol><ol type="1" id="924d5acc-219c-4356-9ddd-185f694a397a" class="numbered-list" start="7"><li><strong>Missing variables in events</strong><table id="172274a7-d147-41db-9aff-7756c7dd2937" class="simple-table"><tbody><tr id="1adff175-f7b3-40c0-946e-fbb2a5aaba8f"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="4724ab1e-e2ec-43c1-9fc3-ed91704255f4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/MoneyMaker.sol;</td></tr><tr id="b5a3d801-7cb4-4b57-8572-e1b17585c5da"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>;</td></tr></tbody></table><ul id="efff94f3-035c-4b0e-8661-a9ef4c9fa728" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="0ab3f4d0-401c-4f67-bf4c-32c8b0e39287" class="">Events on updating state variables (<code>SetDevAddr SetDevCut SetTokenTo</code>) do not include the old values. </p><p id="4036efa2-03aa-4c17-8ba0-012ebb85b21e" class="">Events are usually used to monitor contracts. Including old values in events emitted when there is a critical variable set to a new value is good practice. It can help monitor the state variable changing and have a track of the value change.</p></details></li></ul><ul id="f1771600-ff51-4455-839e-bcc0b2758e40" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="66b70630-f31d-4d8d-af58-e32bf9f96a38" class="">N/A</p></details></li></ul><ul id="b0dddacb-38db-4980-b78f-6b24e3109a19" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><pre id="59311dfc-baa0-46fa-b572-a683f9c37d0f" class="code"><code>event SetDevAddr(address indexed newDevAddr, address indexed oldDevAddr);
+event SetDevCut(uint256 indexed newDevCut, uint256 indexed oldDevCut);
+event SetTokenTo(address indexed newTokenTo, address indexed oldTokenTo);</code></pre></details></li></ul><ul id="e8630656-05be-49a7-940e-d9b41dee5c2b" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="36ab0419-c06b-40db-9fa4-b0ee8611d248" class="">Resolved in <a href="https://github.com/cronus-finance/cronus-core/commit/68790c5370be9411d2ac181a33088bf206c2b427">commit 68790c5370be9411d2ac181a33088bf206c2b427</a>. The old variable value has been added to the events. </p></details></li></ul></li></ol><ol type="1" id="b65211ae-0764-4c42-a110-f490c3fa1a52" class="numbered-list" start="8"><li><strong>Missing error message</strong><table id="5f266efa-1eb3-462b-9632-d7b6e71e9b69" class="simple-table"><tbody><tr id="d2e6c57c-0e12-4a7b-b440-c4475e0c4e36"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3145984b-b2a6-4468-ade3-e691eb21c7c4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">contracts/CronusRouter02.sol;</td></tr><tr id="c76e8ead-c6fa-4e4e-a631-9948572b6629"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Unresolved;</td></tr></tbody></table><ul id="7eac7109-c11d-4756-8740-69218464f1e4" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="e7641590-fbd4-4548-ae9b-da91957c7255" class="">The majority of the <code>require </code>statement in the <code>CronusRouer02.sol</code>has no error message, which is not a good practice in smart contract programming. Missing <code>require </code>error messages may result in users do not understand why their transaction failed.</p></details></li></ul><ul id="ffe1dcf3-a5b6-4f2f-b973-d102a5f96206" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="5e9a82df-948e-4c41-8e3c-07d6533c26fa" class="">N/A</p></details></li></ul><ul id="9b8fee01-8756-409d-b11d-812d51e4e219" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="509755b2-c7eb-4eb7-90a7-689e016a488c" class="">Add error string to  <code>require </code>statements in the <code>CronusRouer02.sol</code></p></details></li></ul><ul id="783a7e5b-a52d-4b89-994b-c553a89d9ce8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="f6c48e24-c721-4b2c-934c-ce94ebf66113" class="">Unresolved. The suggestion is not adopted.</p></details></li></ul></li></ol></div></div><h2 id="43be3a47-1af7-4e57-9828-5eb4e00013e8" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="a8fb5263-28d4-48bf-9458-f0aad1d262b1" class="">We list the privileged roles that have special access to critical functions.</p><ol type="1" id="73c1d6f3-001c-4ecb-b056-684bb203c565" class="numbered-list" start="1"><li><code>CronusToken.sol</code><ul id="6c1fa10f-2fac-49a4-9975-60d9a175ceae" class="bulleted-list"><li style="list-style-type:disc"><code>owner</code>: mint new tokens.</li></ul><ul id="4cd09386-3af1-44a5-9c29-e2c9978943fa" class="bulleted-list"><li style="list-style-type:disc"><code>keeper</code>: update <code>maxSupply</code> limit.</li></ul></li></ol><ol type="1" id="09c51551-d369-4023-afbb-e91761d2f76d" class="numbered-list" start="2"><li><code>CronusFactory.sol</code><ul id="d146b89a-b7ea-447f-8897-38de01c8894b" class="bulleted-list"><li style="list-style-type:disc"><code>feeTo</code>: the address that can receive the mint fee when the lp token is minted.</li></ul><ul id="b95378db-23b3-4015-9c6a-95c77c597e70" class="bulleted-list"><li style="list-style-type:disc"><code>feeToSetter</code>: set <code>feeTo</code> and <code>feeToSetter</code> address.</li></ul></li></ol><ol type="1" id="4877fa41-2121-4b7b-b0a4-a458d2b44814" class="numbered-list" start="3"><li><code>MasterChefCronus.sol</code><ul id="d4fefe40-3ef9-4d65-9676-f46e517f68e8" class="bulleted-list"><li style="list-style-type:disc"><code>owner</code> :<code>add</code>and <code>set</code> pool.</li></ul><ul id="215395bc-d061-4872-9ca6-0b958ac98e9d" class="bulleted-list"><li style="list-style-type:disc"><code>admin</code>: deposit token for a user.</li></ul></li></ol><ol type="1" id="a3860056-2ef6-4652-8700-46c7dccac6c4" class="numbered-list" start="4"><li><code>MoneyMaker.sol</code><ul id="0d349859-3e3f-4217-bd2b-1df2ec74158e" class="bulleted-list"><li style="list-style-type:disc"><code>auth</code>: authorized address. It can set bridge, dev cut, dev address, <code>tokenTo</code> address. It can also convert pairs of tokens to <code>tokenTo</code></li></ul><ul id="ee32cbeb-e43a-4fbc-ade3-9aabcaa52052" class="bulleted-list"><li style="list-style-type:disc"><code>owner</code>: add/remove <code>auth</code> role.</li></ul></li></ol><ol type="1" id="ddf3548f-d4c8-45e9-a1d7-8e39aff7ed31" class="numbered-list" start="5"><li><code>StableCronusStaking.sol</code><ul id="ffc5dc95-a2f2-48d6-8037-46460c91884f" class="bulleted-list"><li style="list-style-type:disc"><code>owner</code>: add/remove reward token and set deposit fee percent.</li></ul></li></ol></div><h2 id="fc8c943f-1bf4-442c-8057-025895ae362c" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="28990788-8aaa-4805-ba97-f069eb589a86" class="simple-table"><thead class="simple-table-header"><tr id="5c0165cb-719e-4386-8127-991d57bfb8e2"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="624e1b48-42da-45a1-83d4-ab9780400720"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="0750ae1b-0ebc-4dc1-bdfb-f9b01aa90696"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="18d3a478-2653-4910-b785-fa9c55049f48"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="eb6c8d90-7f01-46a2-986d-62eeb63d6672"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="97e65af9-0067-48c7-9c6a-b0afbfbf5ff0" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="e86c3483-a9d1-4a69-b5bc-e31b82304cfe" class="simple-table"><thead class="simple-table-header"><tr id="12b12d55-adc3-4eee-8b2c-9a09cd5fb9ac"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="61a5ef34-5342-42c3-88d4-41da63ce619d"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="75f5f213-697b-49b8-9c29-c948cacde01b"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved</td></tr><tr id="014c90e3-9795-46df-b9b4-0b3c7b45763c"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="8ebb6caa-9d1f-4ddd-91eb-3d1348812a42"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved</td></tr></tbody></table></div><h2 id="62b585d0-b1da-4cfc-8597-2ec305fb7b16" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="b1a2438b-8631-4646-a29f-949572662d57" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="1b1b4c65-83cb-48b1-adbf-e891fcb528eb" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div><p id="3787c4f6-525d-4800-b977-3a4f87c29dc7" class="">
+</p></div></article></body></html>
