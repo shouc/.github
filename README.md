@@ -48,8 +48,7 @@ real-world asset collaterals.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Untangle Protocol| https://notion.verilog.solutions/audit/untangle_finance
-| June 3, 2022|
+| Untangle Protocol| https://notion.verilog.solutions/audit/untangle_finance| June 3, 2022|
 
 
 ---
