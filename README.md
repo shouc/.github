@@ -26,14 +26,14 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Lending Protocol| https://notion.verilog.solutions/audit/benddao| May 24, 2022|
+| Lending Protocol| coming soon | May 24, 2022|
 
 ### :briefcase: STEPN Audit
 A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| STEPN           | | June 3, 2022|
+| STEPN           | coming soon | June 3, 2022|
 
 ### :briefcase: Gnosis Audit
 GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.
@@ -47,21 +47,21 @@ Unlike popular Automated Market Making (AMM) or Proactive Market Making (PMM), W
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| WOOFi Swap      | | October 17, 2021 |
+| WOOFi Swap      | coming soon | October 17, 2021 |
 
 ### :briefcase: Vesta Finance Audit
 Vesta Finance is an Arbitrum-based lending protocol. Users can collateralize ETH and other supported assets to borrow $VST, which is Vesta Finance’s stablecoin. Vesta will support other collateral after the launch.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Vesta Finance   | | January 30, 2022|
+| Vesta Finance   | coming soon | January 30, 2022|
 
 ### :briefcase: Ubeswap Audit
 A mobile-first DeFi exchange on the Celo network. Ubeswap provides decentralized exchange and automated market marker protocol for Celo assets. Ubeswap is recently adding new features including limit order.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Ubeswap         | | March 20, 2022 |
+| Ubeswap         | coming soon  | March 20, 2022 |
 
 ### :briefcase: Cronus Finance Audit
 Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
@@ -83,23 +83,23 @@ One of the first DEX projects for the Emerald paratime on the Oasis Network. Yuz
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| YuzuSwap DEX    | | January 4, 2022|
-| YuzuSwap Staking Contracts| | March 30, 2022|
+| YuzuSwap DEX    | coming soon | January 4, 2022|
+| YuzuSwap Staking Contracts| coming soon | March 30, 2022|
 
 ### :briefcase: Fountain Protocol Audit
 Fountain Protocol is one of the first Lending protocols on the Emerald Paratime of Oasis Network.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Fountain Protocol| |February 18, 2022|
-| Fountian Protocol Incremental Audit| | April 12, 2022|
+| Fountain Protocol| coming soon  |February 18, 2022|
+| Fountian Protocol Incremental Audit| coming soon | April 12, 2022|
 
 ### :briefcase: TGT Finance Audit
 TGT Protocol is one of the first lending protocols and margin trading platforms on the Emerald Paratime of Oasis Network.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| TGT Protocol| |February 24, 2022|
+| TGT Protocol| coming soon |February 24, 2022|
 
 ---
 ## :round_pushpin: Severity Categories Standards
@@ -110,7 +110,7 @@ TGT Protocol is one of the first lending protocols and margin trading platforms 
 | **High**      |Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.|
 | **Medium**    |Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.                                   |
 | **Low**       |Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.    |
-| **Informational** |Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.                                            |
+| **Informational** |Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision. |
 
 ---
 ## :triangular_flag_on_post: Status Categories
