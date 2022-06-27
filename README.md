@@ -6,7 +6,7 @@
     </a>
   </p>
 
-  <p align="center">A curated list of awesome <a href="https://www.verilog.solutions/">Verilog</a> resources, libraries, tools and more.</p>
+  <p align="center">A curated list of awesome <a href="https://www.verilog.solutions/">Verilog</a> resources, information, audits, standards and more.</p>
 
 </div>
 
