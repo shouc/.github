@@ -1,0 +1,731 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>STEPN Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="61e4f585-2c9d-426c-8ac4-9f8f4080599d" class="page sans"><header><h1 class="page-title">STEPN Audit Report</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><blockquote id="5cdf2a55-9d11-4768-9bdd-b7a44ce088be" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="565dc7ec-a18b-42c2-b565-f7f6d0c40dbf" class="">April 4, 2022</p><p id="136ecf84-5f12-4001-9df2-418b77bfa808" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="c1093e0a-2a00-41c3-bb3c-d8bb1e141482" class="image"><a href="STEPN%20Audit%20Report%20c1093e0a2a0041c3bb3cd8bb1e141482/Untitled.png"><img style="width:1920px" src="STEPN%20Audit%20Report%20c1093e0a2a0041c3bb3cd8bb1e141482/Untitled.png"/></a></figure><p id="877d374c-c28d-4d03-b153-221ed0b0f54f" class="">This report presents our engineering engagement with STEPN, a Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities. STEPN has two tokens: <strong>GST </strong>&amp; <strong>GMT</strong>.</p><table id="9ca2c9ad-5fa7-4ddd-928c-be44669301d1" class="simple-table"><tbody><tr id="5d4da62f-aff3-4d1c-a704-e261fb1e09c1"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:400px">STEPN</td></tr><tr id="6234c690-3115-42ae-94ae-577bbcefdbb0"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:400px"></td></tr><tr id="2808395b-f6ad-401f-8af5-42e129b5aa2d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:400px"><a href="https://github.com/stepnxyz/bnbcontracts/tree/c07ff86e5e8060de0cd10d6842405964c2cc5d13"><strong>c07ff86e5e8060de0cd10d6842405964c2cc5d13</strong></a></td></tr><tr id="d846d706-47cf-42a8-acdd-1ff06482ef43"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:400px">Solidity, Rust</td></tr><tr id="070f8d63-6913-41d9-a0c0-9ef65bbc5f1b"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:400px">BSC, Solana</td></tr></tbody></table><h2 id="1d9c20eb-e7aa-492f-92d5-404cb5b9fc3e" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="ef4c2dd2-1369-4ddf-9fd9-b5f91365944c" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="76aee1de-5224-4179-a7ad-e66228ee1d98" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="3ad4b6a2-9b4b-4e99-bc64-990700c601df" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="fd8decca-4515-408b-afd0-42868bab2347" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1d9c20eb-e7aa-492f-92d5-404cb5b9fc3e">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3ad4b6a2-9b4b-4e99-bc64-990700c601df">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5f796967-f974-461d-a3b1-9b23eb3cdce4">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5fe0b0a6-d156-4931-ada7-370e3a680c98">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#23e21a0c-ba85-447a-ac7f-5eacbd39177c"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ea35d2b7-3a46-41ad-89b2-d57e8c67f0ea">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5307c48d-3798-44bc-a833-26aa88725551">Reference Code</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2047ed42-bc8c-4191-9dce-16395c4cdc27">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9536e1e7-8846-4d99-b358-ec23564d5fac">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b3888105-3ba6-485c-a70e-a1ddd0d162b2">Disclaimer</a></div></nav></div><h2 id="5f796967-f974-461d-a3b1-9b23eb3cdce4" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="147bd377-dfb0-4ac5-a906-2deba0c44d32" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><p id="76342126-4dc4-4781-ac16-bdde1e173166" class="">Our auditing service for STEPN includes the following two stages:</p><ul id="54f5252e-d22b-4919-85e7-34de95b82ab1" class="bulleted-list"><li style="list-style-type:disc">Pre-Audit Consulting Service</li></ul><ul id="5ce85bb7-4d47-4e58-a08d-b4d55527938b" class="bulleted-list"><li style="list-style-type:disc">Audit Service</li></ul><ol type="1" id="93569df5-4ac9-4017-bef7-d219753fd125" class="numbered-list" start="1"><li><strong>Pre-Audit Consulting Service</strong><p id="31ae251c-7a94-46db-8b9b-e671189b26b8" class="">As a part of the pre-audit service, the Verilog Solutions team worked closely with the STEPN development team to discuss potential vulnerability and smart contract development best practices in a timely fashion. Verilog Solutions team is very appreciative of establishing an efficient and effective communication channel with the STEPN team, as new findings are often exchanged promptly and fixes were deployed quickly, during the preliminary report stage.</p></li></ol><ol type="1" id="f2663d98-1ec4-45ee-9f9b-893f7ed07fe2" class="numbered-list" start="2"><li><strong>Audit Service</strong><p id="5ef234c9-b3ad-41f7-afea-4d33425d3899" class="">The Verilog Solutions team conducted a thorough study of the STEPN code. The list of findings, along with the severity and solution, is available under the section <a href="https://www.notion.so/STEPN-Audit-Report-61e4f5852c9d426c8ac49f8f4080599d"><strong>Findings &amp; Improvement Suggestions</strong></a>.</p></li></ol></div><h3 id="968edfb3-cebc-4ef9-b740-d1f3de84adcc" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><p id="7fa4e781-307c-4ce2-abee-f32cbd5a0365" class="">Our auditing for STEPN covered the repository:</p><ul id="12e280c4-91ab-4d82-bcd1-ee505d8dac45" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/stepnxyz/bnbcontracts">https://github.com/stepnxyz/bnbcontracts</a>: <p id="e5bb4bec-3514-4b05-ac6a-d5bc75f2aaa0" class="">commit hash <a href="https://github.com/stepnxyz/bnbcontracts/tree/c07ff86e5e8060de0cd10d6842405964c2cc5d13"><strong>c07ff86e5e8060de0cd10d6842405964c2cc5d13</strong></a></p><p id="c8a5fb5f-0305-4573-ac07-ae509d604882" class="">contains the smart contracts source code for GST &amp; upcoming BSC NFT contract.</p></li></ul></div></div><h2 id="5fe0b0a6-d156-4931-ada7-370e3a680c98" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="efe724d7-92b1-494a-9ee8-1782436d145e" class="">STEPN is a Game-Fi/Social-Fi project with a dual-token system (GMT and GST) and an NFT system (STEPN Sneaker). Users acquire the STEPN Sneaker to participate in the move-and-earn program and earn GST and/or GMT. GMT and GST can be used to upgrade Sneakers and increase the rate of earning. GMT is the governance token, and it is currently deployed on Solana and BNB Chain. GST is the unlimited-supply reward token, and it is currently deployed on Solana.</p></div><h2 id="23e21a0c-ba85-447a-ac7f-5eacbd39177c" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="3d3a04d9-bb93-4658-b844-5e4de8bd4900" class="simple-table"><tbody><tr id="2e07abf2-e655-4abc-8354-780125c7c52b"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="6a3994f7-e1b5-4662-a103-da5a5818d625"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="9f8e3f20-cc43-456a-8d56-385e5bb30804"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">0</td></tr><tr id="fd180de0-d7bb-4276-89bb-a180ab8bc39f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="d68879ef-9117-4ef7-9b71-75783f93ba93"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr></tbody></table><h3 id="ada24096-8c51-47c4-92da-e8ba16798e0d" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="a980dd3a-ed06-467d-8b77-63a7bb81a11b" class="">none ; )</p></div><h3 id="3f7373f8-2e77-4932-a0b6-9187cf59e1c2" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="dd85735b-f93e-4e27-8cf2-cfff26014b19" class="numbered-list" start="1"><li>Centralization Risks on <code>GreenSatoshiToken.sol</code><table id="3ba1a2b7-1618-4637-b23f-acfc0506ac9f" class="simple-table"><tbody><tr id="2b55b96c-2492-4ff2-8e21-eb9242e77e72"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px">Severity</th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="08143872-92b0-4c23-85e3-90676288b76b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Source</th><td id="y}lo" class="" style="width:528px"><strong>contracts/GreenSatoshiToken.sol:</strong> <a href="https://github.com/stepnxyz/bnbcontracts/blob/c07ff86e5e8060de0cd10d6842405964c2cc5d13/contracts/GreenSatoshiToken.sol#L16">#L16</a></td></tr><tr id="565c3448-5a7a-4da6-a5ea-0a8e3565e672"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Status</th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="fdb764eb-618b-4747-85f7-fd2020f2e33c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a0b22084-d336-4cc1-98ab-0635dc0d32c3" class="">The current contract code, GST token has centralization risks which means the project team has the ability to control the token supply without any limitation.</p><p id="622f4831-1b7d-4bd0-8f4e-48385c08bd49" class=""><code>GreenSatoshiToken.sol</code> is an ERC20 standard token contract, it inherits openzeppelin’s <code>ERC20.sol</code>, <code>ERC20Burnable.sol</code>, and <code>Ownable.sol</code>.  GST token has a <code>mint()</code> function which allows <code>Owner</code> of the contract to mint more tokens to a certain address.</p><p id="da5fb2e8-38bf-44f0-9c57-5f20e0ea5676" class="">We do not suggest this type of owner address to be an EOA because private key leaks may result in the unlimited token supply issue. Besides, some hard-coded limitations such as limited inflation rate, and limitation on interaction per day would help to enhance the overall security as well.</p></details></li></ul><ul id="011e90b7-4bd8-4506-a3b4-e00e6f7e8215" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="37a3337d-aaf7-4fa0-b1d5-91b307281f1e" class="">Since the current contract design involves admin control. Thus, the leakage of the <code>owner</code>&#x27;s private key may result in irreparable loss. The hacker who got access to the contract address can call function <code>transferOwnership()</code> to change the <code>owner</code> to a new address that is fully controlled by the hacker himself.</p></details></li></ul><ul id="ed0a32d2-5f7d-4aa2-b66c-9411dba757be" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f554c3b5-80a3-4254-88cd-844b76c51cd9" class="">uses a <code>multi-sig wallet</code> to prevent a single point of failure. Moreover, each signer of the <code>multi-sig wallet</code> should use a hardware wallet to securely manage their private key. </p></details></li></ul><ul id="de05a8ab-4914-4c12-b2e4-458c99edd692" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="5fa91cee-c159-4651-996e-0ed7a5c6d98a" class=""><strong>Acknowledged. </strong></p><p id="496c73fc-8422-44da-8619-21c905fda841" class=""><strong>[Reply from Project Team] </strong>As disclosed in the STEPN white paper, GST has an unlimited supply therefore we have to enable the function to mint an unlimited amount of GST.</p><p id="c23fde46-de63-4191-bba7-c20b228adcf9" class="">
+</p></details></li></ul></li></ol><ol type="1" id="4f6fd228-ed60-4023-b706-82d65e64c14a" class="numbered-list" start="2"><li>Centralization Risks on <code>STEPNNFT.sol</code><table id="5e77ada0-4511-4a6c-9673-820bb6dd74f3" class="simple-table"><tbody><tr id="bf0c1e0a-0e68-4ca4-9d80-526019d6e231"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px">Severity</th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="9344b340-3086-414c-abbc-9ac1cd75c322"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Source</th><td id="y}lo" class="" style="width:528px"><strong>contracts/STEPNNFT.sol:</strong> <a href="https://github.com/stepnxyz/bnbcontracts/blob/c07ff86e5e8060de0cd10d6842405964c2cc5d13/contracts/STEPNNFT.sol#L28">#L28</a></td></tr><tr id="be293785-3561-46fd-a5af-56d0d990a9bd"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Status</th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="8e5ce66b-a559-471c-afe5-c43410329a2e" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="d1deda9d-274d-4f02-88e2-61cb64e14d22" class="">The current <code>STEPNNFT</code>contract comes with centralization risks, which means the project team has control over supply of ERC721 tokens.</p><p id="824ea19a-264e-45c1-9306-761575603cc4" class=""><code>STEPNNFT.sol</code> inherits methods from openzeppelin’s <code>ERC721.sol</code> and <code>Ownable.sol</code> contracts which come with the <code>_safemint()</code> function and <code>onlyOwner()</code> modifier respectively. In this case, the <code>mint()</code> function from <code>STEPNNFT.sol</code> allows the owner to mint unlimited NFT tokens with the <code>tokenId</code> specified in the second parameter to the <code>address</code> specified in the first parameter.</p><p id="869aa07e-e094-4dee-bc5e-f5a7e92aafcf" class="">A private key leak from the owner of the contract may result in the supply of NFT tokens without limitations. Furthermore, restrictions over the interaction or amount of tokens allowed to be minted during a certain time would help improve the security.</p></details></li></ul><ul id="1f0aa12e-9f28-4b65-ae2d-654f148533b0" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="95c122f3-e6c8-433c-8080-dcfc75ee45d4" class="">Since the current contract design involves admin control, the leakage of the <code>owner</code>&#x27;s private key may result in irreparable loss. The hacker who got access to the contract address can call function <code>transferOwnership()</code> to change the <code>owner</code> to a new address that is fully controlled by the hacker himself.</p></details></li></ul><ul id="6e305c9f-b301-4646-bdef-4ed0c1b21675" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="8975f588-2d5c-4d3b-b5ed-5076dbfeafa2" class="">The use of a <code>multi-sig</code> wallet would prevent a single point of failure. Moreover, each signer of the <code>multi-sig wallet</code> should use a hardware wallet to securely store their private key. </p></details></li></ul><ul id="61bf61b9-c2aa-4182-9192-cb3d2bd454c3" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="e3ba55d9-9fbf-4943-b00f-117b6f25a69d" class=""><strong>Acknowledged.</strong></p><p id="d48d54f9-eca2-4b66-a5d9-83c99c53ad08" class=""><strong>[Reply from Project Team] </strong>STEPN’s NFT sneaker also has an unlimited supply, therefore we have to beagle the function to allow an unlimited amount of NFT sneakers to be minted by our users.</p></details></li></ul></li></ol></div><h3 id="fd1854c7-e64d-4348-be2c-964b6d1322d5" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><p id="6b62ba0a-fc5f-4fb8-a0a6-71bc99ee6255" class="">none ; )</p></div><h3 id="c2dff2c7-2ad5-430b-a66f-5d88e630090a" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><p id="c696645e-964c-4b73-957e-7746babb56f6" class="">none ; )</p></div></div><h2 id="ea35d2b7-3a46-41ad-89b2-d57e8c67f0ea" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="fde24188-aa5e-440e-a5ee-ca8d830b4738" class=""><strong>Below is the summary of GMT &amp; GST token info:</strong></p><div id="f89d6ee3-60f6-4842-981c-0bdac10c6036" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Network</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Token</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Token Address</th></tr></thead><tbody><tr id="1eeed9a2-d248-4e74-ac25-b57f2e1ff74a"><td class="cell-title"><a href="https://www.notion.so/Solana-1eeed9a2d2484e74ac25b57f2e1ff74a">Solana</a></td><td class="cell-uL\o">GMT</td><td class="cell-HJaR"><a href="https://solscan.io/token/7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx">7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx</a></td></tr><tr id="2af925a8-5f2a-4955-8547-0d2574a575b8"><td class="cell-title"><a href="https://www.notion.so/Solana-2af925a85f2a495585470d2574a575b8">Solana</a></td><td class="cell-uL\o">GST</td><td class="cell-HJaR"><a href="https://solscan.io/token/AFbX8oGjGpmVFywbVouvhQSRmiW2aR1mohfahi4Y2AdB">AFbX8oGjGpmVFywbVouvhQSRmiW2aR1mohfahi4Y2AdB</a></td></tr><tr id="16525188-479d-4b48-a97e-b9ba50921b98"><td class="cell-title"><a href="https://www.notion.so/BNB-16525188479d4b48a97eb9ba50921b98">BNB</a></td><td class="cell-uL\o">GMT</td><td class="cell-HJaR"><a href="https://bscscan.com/address/0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1">0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1</a></td></tr><tr id="7a5869b7-2b70-42b3-958d-56a482751dd2"><td class="cell-title"><a href="https://www.notion.so/BNB-7a5869b72b7042b3958d56a482751dd2">BNB</a></td><td class="cell-uL\o">GST</td><td class="cell-HJaR">n/a (coming soon)</td></tr></tbody></table></div><h3 id="09dd7fb2-2637-429e-a987-38e61d8b8401" class=""><details open=""><summary>Deployment on Solana</summary></details></h3><div class="indented"><p id="31f18da0-aa06-4e7e-a1ee-edd5ffea2022" class="">STEPN dev team used Solana Token Program to create both <strong>GMT</strong> &amp; <strong>GST</strong> tokens. Token Program defines a common implementation for Fungible and Non-Fungible tokens.</p><p id="96936914-9a4d-42fe-a03a-98cb793554cb" class="">The document of the Token Program: <a href="https://spl.solana.com/token">https://spl.solana.com/token</a></p><p id="ba68c732-4933-41ae-b308-df67776eee61" class="">The Github of Token Program: <a href="https://github.com/solana-labs/solana-program-library">https://github.com/solana-labs/solana-program-library</a></p><p id="81586131-8504-4373-91c0-1aa269f8a429" class=""><strong>As can be seen from the Solscan, both GMT &amp; GST tokens used Solana Token Program:</strong></p><figure id="112dbd8a-f135-47f6-aebe-b278cc5e5dd4" class="image"><a href="https://hackmd.io/_uploads/HyASfSFm9.png"><img src="https://hackmd.io/_uploads/HyASfSFm9.png"/></a></figure><figure id="37fa76f4-a05b-45f4-8579-a20381f241f2" class="image"><a href="https://hackmd.io/_uploads/S1ZoT7KX9.png"><img src="https://hackmd.io/_uploads/S1ZoT7KX9.png"/></a></figure><p id="35aeb6eb-97dc-4dd1-bbb1-86ff56c77fe7" class="">Besides, the STEPN project dev team already turned off the emission right for GMT Token as can be seen in the screenshot, GMT token has a fixed supply.</p><figure id="69c46874-e9e4-48ba-81f8-c9e703473228" class="image"><a href="https://hackmd.io/_uploads/B10HQrtmq.png"><img src="https://hackmd.io/_uploads/B10HQrtmq.png"/></a></figure></div><h3 id="243606c5-aec7-4db2-9e7e-92cc5a07bc38" class=""><details open=""><summary><strong>Deployment on BNB Chain</strong></summary></details></h3><div class="indented"><p id="42954af3-ffc7-49d6-b392-6d187e07d2a7" class="">Currently, only the GMT token has been deployed on BNB Chain, and the token has been implemented by the Binance Bridge team. The contract deployment address is <a href="https://bscscan.com/address/0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1">0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1</a>.</p><p id="06773f2b-2d7a-499d-a799-0eb685043370" class="">
+</p><p id="a2c4ecc5-f7ec-4a87-a819-de93a8ba64d1" class=""><strong>Below is the summary of the GMT token on the BNB Chain:</strong></p><div id="cef2025c-0957-4de5-bf40-1e1a693591d6" class="collection-content"><h4 class="collection-title">GMT Info</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Title</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Info</th></tr></thead><tbody><tr id="b00649ca-22db-494e-9494-9b78fe78f0d5"><td class="cell-title"><a href="https://www.notion.so/Network-b00649ca22db494e94949b78fe78f0d5">Network</a></td><td class="cell-:BY:">BNB Chain</td></tr><tr id="a838618c-b0a9-4393-80e1-5c805a26481e"><td class="cell-title"><a href="https://www.notion.so/Token-a838618cb0a9439380e15c805a26481e">Token</a></td><td class="cell-:BY:">GMT</td></tr><tr id="9c9856a5-0840-4ed3-a528-782937f6098b"><td class="cell-title"><a href="https://www.notion.so/Upgradable-Contract-9c9856a508404ed3a528782937f6098b">Upgradable Contract?</a></td><td class="cell-:BY:">Yes</td></tr><tr id="74df0d4a-76dc-4298-b7d3-40f313b78ae0"><td class="cell-title"><a href="https://www.notion.so/Proxy-Address-74df0d4a76dc4298b7d340f313b78ae0">Proxy Address</a></td><td class="cell-:BY:"><a href="https://bscscan.com/address/0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1">0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1</a></td></tr><tr id="5b1e2c78-1b6f-4f03-9a0d-f8c76939c16e"><td class="cell-title"><a href="https://www.notion.so/Implementation-Address-5b1e2c781b6f4f039a0df8c76939c16e">Implementation Address</a></td><td class="cell-:BY:"><a href="https://bscscan.com/address/0xba5fe23f8a3a24bed3236f05f2fcf35fd0bf0b5c">0xba5fe23f8a3a24bed3236f05f2fcf35fd0bf0b5c</a></td></tr></tbody></table></div><p id="a9bd0428-2720-4af3-ba89-b7af5bf0badf" class="">Implementation Contract Source Code can be found in <a href="https://hackmd.io/YDOoOM3YQfG0ISlEH6q4rA###GMT-BNB-Smart-Chain-Implementation-Code"><strong>GMT BNB Implementation</strong></a>. In summary, the implemented smart contracts follow the ERC20 standards.</p></div></div><h2 id="5307c48d-3798-44bc-a833-26aa88725551" class=""><details open=""><summary>Reference Code</summary></details></h2><div class="indented"><p id="79a9a82c-4c0c-4f0d-b43f-fd8a33d0fcdf" class="">In this section, we listed the deployed contract on-chain for your reference.</p><h3 id="e602f9c9-7d78-434f-aa4d-c143f839c721" class=""><details open=""><summary><strong><strong>GST Token Contract</strong></strong></summary></details></h3><div class="indented"><p id="8b3f52c3-b10a-4243-8622-76b6f58f0cbb" class="">STEPN team implemented a solidity version of GST token, which uses <code>Openzeppelin</code>’s ERC20 standard libraries:</p><pre id="997f7cb3-94cb-47ac-9845-1b8c66036141" class="code"><code>// contracts/GreenSatoshiToken.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import &quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;;
+import &quot;@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol&quot;;
+import &quot;@openzeppelin/contracts/access/Ownable.sol&quot;;
+
+/**
+ * Green Satoshi Token
+ * @author STEPN
+ */
+contract GreenSatoshiToken is ERC20, ERC20Burnable, Ownable {
+    constructor() ERC20(&quot;GreenSatoshiToken&quot;, &quot;GST&quot;) {}
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    function decimals() public view virtual override returns (uint8) {
+        return 8;
+    }
+}</code></pre></div><h3 id="92f64a2f-a880-4542-84b3-b787fb5fd01d" class=""><details open=""><summary><strong><strong>STEPN NFT contract</strong></strong></summary></details></h3><div class="indented"><p id="cc579006-bee9-44bb-ae80-7483ae0c640b" class="">STEPN team implemented a solidity version of GST token, which uses <code>Openzeppelin</code>’s ERC20 standard libraries:</p><pre id="f39a7065-8fa6-4ac1-98f3-6ebcdb09d71c" class="code"><code>// contracts/STEPNNFT.sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import &quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;;
+import &quot;@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol&quot;;
+import &quot;@openzeppelin/contracts/access/Ownable.sol&quot;;
+
+/**
+ * STEPN NFTs
+ * @author STEPN
+ */
+contract STEPNNFT is ERC721Enumerable, Ownable {
+    // base uri for nfts
+    string private _buri;
+
+    constructor() ERC721(&quot;STEPNNFT&quot;, &quot;SNFT&quot;) {}
+
+    function _baseURI() internal view override returns (string memory) {
+        return _buri;
+    }
+
+    function setBaseURI(string memory buri) public onlyOwner {
+        require(bytes(buri).length &gt; 0, &quot;wrong base uri&quot;);
+        _buri = buri;
+    }
+
+    function mint(address to, uint256 tokenId) public onlyOwner {
+        _safeMint(to, tokenId);
+    }
+
+    function burn(uint256 tokenId) public virtual {
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            &quot;burn caller is not owner nor approved&quot;
+        );
+        _burn(tokenId);
+    }
+}</code></pre></div></div><h2 id="2047ed42-bc8c-4191-9dce-16395c4cdc27" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="14b90cff-8816-4d36-84e2-2f6eeba8378e" class="simple-table"><thead class="simple-table-header"><tr id="8dd8f5e4-7321-4b70-8854-8dd93612d13b"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="9a352587-883a-4ba7-9d01-c0673d843403"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="2aac1916-6ee6-490f-b998-93b0be18137e"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="aa86d873-3d68-41bd-bf12-4d07940738b2"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="8893c430-f76e-4c42-89de-efad40d51b83"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="9536e1e7-8846-4d99-b358-ec23564d5fac" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="b62a9a37-f72c-4508-94b0-97ed43d7f9e9" class="simple-table"><thead class="simple-table-header"><tr id="180eba82-6177-4e31-bb06-2adc18c853b0"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="c9a5c792-1079-48df-9a08-a63c41415b2b"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="6b8a0b8a-d566-40ac-99da-e6ee37ad6971"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved</td></tr><tr id="5836b996-3992-40c6-b154-5b7d608ff695"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="e7467df4-75f2-4461-8079-f9555ea0b1d5"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved</td></tr></tbody></table></div><h2 id="b3888105-3ba6-485c-a70e-a1ddd0d162b2" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="d0ac87cf-8681-403c-9a28-1f1ddc4d622a" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit is detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="7cecab71-9e04-4208-b01b-6c5da3cdbe53" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article></body></html>
