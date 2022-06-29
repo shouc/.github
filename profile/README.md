@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="verilog logo" src="https://raw.githubusercontent.com/Verilog-Solutions/.github/main/assets/verilog-logo.png" width="300" >
+  <img alt="verilog logo" src="https://raw.githubusercontent.com/Verilog-Solutions/.github/main/assets/verilog-logo.svg" width="300"  />
   <p align="center">
     <a href="https://github.com/sindresorhus/awesome">
       <img alt="awesome list badge" src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg">
