@@ -27,6 +27,7 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
+| Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | Augest 3, 2022|
 
 ### :briefcase: STEPN Audit
 A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
