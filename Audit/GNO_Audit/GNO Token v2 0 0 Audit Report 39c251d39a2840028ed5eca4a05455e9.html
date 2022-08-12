@@ -1,707 +1,703 @@
-<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-light.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GNO Token v2.0.0 Audit Report</title><link rel="icon" href="https://www.verilog.solutions/images/logo.svg" /><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-details {
-    pointer-events: none;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-	
-details {
-    pointer-events: none;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 3px;
-	padding: 1rem;
-}
-
-figure {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.column-list {
-	display: flex;
-	justify-content: space-between;
-}
-
-.column {
-	padding: 0 1em;
-}
-
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding: 0.125rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
-}
-
-table {
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	text-indent: -1.7em;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-block;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-	overflow-x: hidden;
-	overflow-y: auto;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1.25em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.highlight-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.highlight-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.highlight-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.highlight-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.block-color-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.block-color-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.block-color-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.block-color-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
-.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
-.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
-.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
-.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
-.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
-.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
-.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
-.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-	
-</style></head><body><article id="f599c806-6f1d-4368-9fc2-d7c835617012" class="page sans"><header><h1 class="page-title">GNO Token v2.0.0 Audit Report</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><blockquote id="95725112-c491-42a1-ad71-1e792bebe417" class=""><mark class="highlight-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.</mark><p id="68323add-326c-4e10-aced-df94f6e32806" class=""><mark class="highlight-gray">April 22, 2022</mark></p><p id="df476350-7867-4bac-a044-9059710b2645" class=""><mark class="highlight-gray">by </mark><mark class="highlight-gray"><strong>Verilog Solutions</strong></mark></p></blockquote><figure id="39c251d3-9a28-4002-8ed5-eca4a05455e9" class="image"><a href="images/banner.png"><img style="width:672px" src="images/banner.png"/></a></figure><p id="d2bcb506-8d3c-465c-85ab-d627b458872a" class="">This report presents our engineering engagement with the Gnosis team on the GNO Token v2.0.0, an ERC20 standard token contract used in various GNO ecosystem products.</p><table id="f212ac47-07f4-4817-8def-7d6f7fb980c6" class="simple-table"><tbody><tr id="7cead1c0-defe-47e5-8401-fafee47dfa00"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:375px">GNO Token v2.0.0</td></tr><tr id="af38017e-ed7f-4b7c-b46d-23ee265fe5d0"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:375px"><a href="https://github.com/gnosis/gno-token">https://github.com/gnosis/gno-token</a></td></tr><tr id="9dcd0d9d-e63b-4819-aceb-141977f976e2"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:375px"><a href="https://github.com/gnosis/gno-token/tree/1cc6023ecd6494dd4e37591c4864bb487f1b0373"><strong>1cc6023ecd6494dd4e37591c4864bb487f1b0373</strong></a></td></tr><tr id="3c8d5d87-bc65-4584-a950-d70419823605"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:375px">Solidity</td></tr><tr id="c7119535-48ce-4053-9788-7947c76e6156"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:375px">Gnosis Chain, Ethereum</td></tr></tbody></table><h2 id="e6e9ab12-a0c2-44ab-966c-e64a46d25085" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="cb6f91c9-132c-4d5b-866d-c66ee341c6e1" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="bd14023b-9254-4497-b0c4-998324421b9e" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="f140da82-ebe2-449d-b322-2b953245e759" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="4a4f0aa8-484d-46cb-bda9-daa05adc8f79" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e6e9ab12-a0c2-44ab-966c-e64a46d25085">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f140da82-ebe2-449d-b322-2b953245e759">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#64ed8622-25ff-45d4-87ec-1cf0d8f38119">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#944cb9f8-f643-4e1c-be7b-d6dd00795946">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2d222db5-b9c4-4988-bc9b-5c9ec884d114"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0bdeef63-a919-4d2a-b767-db0f998eca7a">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d7370fcb-f235-471d-b3de-b85c4a093ad2">Off-Chain OpSec </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#32ea103a-59e4-4d42-9010-81b6defd8760">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#743f1522-f8db-45e3-acdf-64dbfdff636c">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7b68a910-c373-46b7-8412-44032dcb28a8">Disclaimer</a></div></nav></div><h2 id="64ed8622-25ff-45d4-87ec-1cf0d8f38119" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="60a26745-538a-4e64-8370-f2d469282c2e" class=""><details open=""><summary>Service Stages</summary></details></h3><div class="indented"><p id="ee58a22f-06cf-4d1f-ab13-c717e3263f20" class="">Our review focused on the <a href="https://github.com/gnosis/gno-token/tree/v2.0.0"><strong>v2.0.0</strong></a><a href="https://github.com/gnosis/gno-token/tree/v2.0.0"> branch</a>, specifically, commit hash <a href="https://github.com/gnosis/gno-token/tree/1cc6023ecd6494dd4e37591c4864bb487f1b0373"><strong>1cc6023ecd6494dd4e37591c4864bb487f1b0373</strong></a>.</p><p id="8cb368cf-b638-4cd3-9909-165086fe8eaa" class="">Below is the summary of the GNO token v2.0.0 audit:</p><ol type="1" id="42f8ed2e-b14f-4eb5-9ca6-0dea9171e21c" class="numbered-list" start="1"><li><strong>Smart Contract Auditing Service</strong><ul id="0bd8ea9c-3d6f-4e32-9583-8d10bba04d9a" class="bulleted-list"><li style="list-style-type:disc">Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions</strong></li></ul></li></ol></div><h3 id="1807026d-521d-4685-ad8d-5eb2abd9b0c5" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="9dbab550-bf93-469d-9694-155c75e48639" class="bulleted-list"><li style="list-style-type:disc">Code Assessment</li></ul><ul id="e4d55aca-0331-421c-9439-7b994647953b" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis</li></ul></div><h3 id="b0a06d6c-bd47-40e7-a124-d9fc83c80524" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><p id="a33828f7-47bd-4c68-9f56-e7926dd38801" class="">Our auditing for GNO Token v2.0.0 covered the following components</p><table id="e51339cf-e2ea-42e8-b5b2-6351a820dccb" class="simple-table"><thead class="simple-table-header"><tr id="e7270a41-eb63-458e-8532-cb406a9bcecb"><th id="tY`p" class="simple-table-header-color simple-table-header" style="width:575px">File Name</th></tr></thead><tbody><tr id="68db6686-8691-450c-aa1d-52529935804e"><td id="tY`p" class="" style="width:575px">.\contracts\TokenGNO.sol</td></tr><tr id="b5a9129d-9b8e-4174-962c-357945948466"><td id="tY`p" class="" style="width:575px">.\contracts\GnoDevDependencies.sol</td></tr><tr id="5ff009f7-b9b1-4ff1-8c37-f0d071b3f21c"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\EtherToken.sol</td></tr><tr id="34a23742-2de1-4905-8554-6aef949a2de7"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\GnosisStandard.sol</td></tr><tr id="fe619783-ce89-4d7e-aab6-8659dca1e796"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\HumanFriendlyToken.sol</td></tr><tr id="0cb49c5e-c41b-462d-a84a-d2102645c5fa"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Math.sol</td></tr><tr id="fd4c219f-0a67-4860-8c0c-416feb59a992"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Migrations.sol</td></tr><tr id="e466974e-3838-4d3e-b1aa-329978b1bdee"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Proxy.sol</td></tr><tr id="c360f7a6-a41c-475c-bf08-44bb7ac4656c"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Token.sol</td></tr></tbody></table></div></div><h2 id="944cb9f8-f643-4e1c-be7b-d6dd00795946" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="c501c35f-b2a2-4d97-af1a-60aa74692195" class="">GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.</p><p id="d37524d9-59bf-4819-bd39-3c4d3ca1cd7f" class="">
-</p><p id="bf8a856b-eb51-4590-8f5b-f9cb79b5a001" class=""><strong>Cited from Ethereum Foundation </strong><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a>:</p><p id="3edae7ff-a66b-4bc2-92d5-9c41c38def65" class="">The token should have the following <strong>methods</strong>:</p><pre id="8838513b-2758-4e67-83cc-fcf226fd623f" class="code"><code>// view functions
-function name() public view returns (string)
-function symbol() public view returns (string)
-function decimals() public view returns (uint8)
-function totalSupply() public view returns (uint256)
-function balanceOf(address) public view returns (uint256)
-
-// interaction functions
-function transfer(address, uint256) public returns (bool)
-function transferFrom(address, address, uint256) public returns (bool)
-function approve(address, uint256) public returns (bool)
-function allowance(address, address) public view returns (uint256)</code></pre></div><p id="76543c92-ff6a-4ffc-994d-220f4f2b271a" class=""><div class="indented"><p id="ad2e9e61-aaca-4861-8376-25af05afd561" class="">The token should have the following <strong>events</strong>:</p><pre id="2566515d-c494-415b-bd72-8fff59da0535" class="code"><code>event Transfer(address indexed _from, address indexed _to, uint256 _value)
-event Approval(address indexed _owner, address indexed _spender, uint256 _value)</code></pre><p id="0b545ae9-5d39-45be-91ce-04f6312af625" class="">
-</p><p id="64c92332-1107-48a0-ac42-509616948857" class="">The<strong> GNO token v2.0.0 ERC-20</strong> implementation provides the following functionalities:</p><ul id="d6d43c53-5bed-4fbb-88fa-343ce9a2813c" class="bulleted-list"><li style="list-style-type:disc">transfer tokens from one account to another</li></ul><ul id="64c3a599-7e50-45e8-8b23-4ad8b8048b2d" class="bulleted-list"><li style="list-style-type:disc">retrieve the current token balance of an account</li></ul><ul id="56587fc7-39d4-484c-a0b0-26debb89aa1b" class="bulleted-list"><li style="list-style-type:disc">retrieve the total supply of the token available on the network</li></ul><ul id="fb4deb7d-1bfe-4ba9-b401-8df6a16c3cc7" class="bulleted-list"><li style="list-style-type:disc">approve whether and amount of token from an account can be spent by a third-party account</li></ul></div></p><h2 id="2d222db5-b9c4-4988-bc9b-5c9ec884d114" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="62efa7a6-d5e9-450e-993e-4a01ea51cb16" class="simple-table"><tbody><tr id="0e6ab4c5-2771-475c-b07b-b0b826e355cc"><td id="G&gt;ax" class="" style="width:120px"><strong>Severity</strong></td><td id="T&lt;wm" class="">          <strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class="">      <strong>Resolved</strong></td></tr><tr id="65ee6812-8ff6-4b77-8b2f-9d22aa64458f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">             0</td><td id="@mfj" class="">              0</td><td id="|V?N" class="">             0</td></tr><tr id="5afcfc94-86b6-4b69-b6ff-9c90a9554b9e"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">             0</td><td id="@mfj" class="">              0</td><td id="|V?N" class="">             0</td></tr><tr id="40172e04-107e-43dd-9e5b-8e79c3f9337e"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">             1</td><td id="@mfj" class="">              1</td><td id="|V?N" class="">             0</td></tr><tr id="5700c4b7-4dfe-4c26-a743-525eb903b609"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">             1</td><td id="@mfj" class="">              1</td><td id="|V?N" class="">             0</td></tr></tbody></table><h3 id="29135fc1-8921-469b-9832-2b721ef8be80" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="6f2fa207-4f70-41b5-81b8-47f5dda0f402" class="">none ; )</p></div><h3 id="9402cf72-8a74-490e-a749-d049bd178f3f" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><p id="0380a1ec-493e-4e46-ba1d-e382928ba3ae" class="">none ; )</p></div><h3 id="3da002b2-c5ef-4084-96df-e288a11ae8a4" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="7ad94ebb-3281-4db2-988a-02d78b94a413" class="numbered-list" start="1"><li><strong>Unused components</strong><table id="ddf70e53-6e69-48b5-9e3a-208b2b0cc49e" class="simple-table"><tbody><tr id="a56ac860-7608-4f88-b66a-5b1392606519"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="13b745e5-3918-42e5-bdd3-7be082dead30"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px"><mark class="highlight-gray_background">@gnosis.pm/util-contracts/contracts/GnosisStandardToken.sol:</mark> <a href="https://github.com/gnosis/util-contracts/blob/1373734c128ebaaf67af93cb531a63439895e15a/contracts/GnosisStandardToken.sol#L4">L4</a> ;
-<mark class="highlight-gray_background">GnoDevDependencies.sol:</mark><a href="https://github.com/gnosis/gno-token/blob/156f60f48cbfb27283eb27e6851ecb09749afa99/contracts/GnoDevDependencies.sol#L12"> L12</a>;</td></tr><tr id="21d198f5-4ace-4101-8015-242e33154177"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="f115525b-d31d-43ba-9b10-0a07e772888f" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="2cdbdc4f-9c70-479b-89cb-edf3ea68ed8a" class=""><code>Proxy.sol</code><strong> </strong>has not been used in the <code>GnosisStandardToken.sol</code> and <code>EtherToken.sol</code> has not been used in the <code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code><mark class="highlight-gray_background">.</mark></p><p id="d4affe62-ecf2-44a1-a04d-569a8b831773" class=""><code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code> is a standard token contract implemented by the Gnosis team. <code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code> imported 3 solidity files:</p><ol type="1" id="ae6db234-f265-4008-bcc0-3706affde240" class="numbered-list" start="1"><li><code><strong>Token.sol</strong></code><strong>:</strong> an abstract token contract for the ERC20 token (functions are not implemented)</li></ol><ol type="1" id="8b167ca8-730c-49be-9792-402c61154009" class="numbered-list" start="2"><li><code><strong>Math.sol</strong></code><strong>: </strong>a math library allows the calculation of logarithmic and exponential functions</li></ol><ol type="1" id="ec1608a7-fdea-4358-abed-7be4c57540b4" class="numbered-list" start="3"><li><code><mark class="highlight-pink_background"><strong>Proxy.sol</strong></mark></code><strong>: </strong>a proxy standard contract indicates that a contract will be provided, it also defines storage requirements for proxy.</li></ol><p id="68154331-a2e8-4456-be8e-b136e01f8122" class="">However, the imported <code><mark class="highlight-pink_background">Proxy.sol</mark></code> has not been used/inherited in the <code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code>. </p><p id="c480c5fe-6b35-465a-9e29-d83ce3e258f0" class=""><code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code> is used for truffle compilations.</p><p id="764a76f9-5ac0-4abd-9e73-9220ff61ddb7" class=""><code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code> imported 2 Solidity files:<div class="indented"><ol type="1" id="961e45ae-4c2d-4925-bfc4-8fcdbb6b676a" class="numbered-list" start="1"><li><code><mark class="highlight-pink_background"><strong>GnosisStandardToken.sol</strong></mark></code><strong>:</strong>  a standard token contract implemented by the Gnosis team. </li></ol><ol type="1" id="b2afb47f-5156-4248-bfa0-df4fc82cc640" class="numbered-list" start="2"><li><code><mark class="highlight-pink_background"><strong>EtherToken.sol</strong></mark></code><code><strong>:</strong></code><strong> </strong>a token contract that allows exchanging with Ether 1:1</li></ol></div></p><p id="a91d9a74-7b47-4d5f-8ed7-63d4eceeb006" class="">However, the imported <code><mark class="highlight-pink_background">EtherToken.sol</mark></code><mark class="highlight-gray_background"> has</mark> not been used/inherited in the <code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code><mark class="highlight-gray_background">.</mark></p><p id="503f1fc0-e835-46c2-859a-a8a7592f4fe9" class="">Smart contract implementation should be succinct and sufficient. To keep the best practice, any unnecessary functions/imports should be eliminated.</p></details></li></ul><ul id="275f8267-9910-4f6c-8b49-e7d2f2be0e62" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9db16e32-a485-4536-acb2-3ab8a3376dc7" class="">N/A</p></details></li></ul><ul id="23831c1a-1559-4a6f-89ca-d848b690b3e5" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f91ec954-5312-4710-966e-3bd25e330d04" class="">Remove these unused imports.</p></details></li></ul><ul id="64846e51-37ef-4828-b2b9-cb45fef6a5dc" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="52b99235-5430-48a9-af3f-52866f49771f" class="">Acknowledged by the Gnosis team.</p></details></li></ul></li></ol></div><h3 id="9b4f24a0-12d9-4f75-91ec-829ceb4704d5" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="ec661bf7-026e-40af-ac2b-2955c4285393" class="numbered-list" start="1"><li><strong>State variable visibility unspecified</strong><table id="a2c84924-6da4-4ca9-96ad-b23e8ecc6afc" class="simple-table"><tbody><tr id="8a45796f-801b-4313-9e91-bb8333e5e7ae"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="4de9479a-47c1-4418-abed-2d1efa5d52bf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px"><mark class="highlight-gray_background">@gnosis.pm/util-contracts/contracts/GnosisStandardToken.sol:</mark><a href="https://github.com/gnosis/util-contracts/blob/1373734c128ebaaf67af93cb531a63439895e15a/contracts/GnosisStandardToken.sol#L13-L15"> L13-L15</a>;</td></tr><tr id="56ef3984-334a-4cba-a2f0-ab86d3b5aa9a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="04732161-23dc-4b42-8af7-1b45552be96c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7a6cbe63-9dfd-49a8-a7fd-9b28617242d7" class="">Some variables in contract <code>StandardTokenData.sol</code> do not have specified visibilities. Labeling the visibility explicitly makes it easier to catch incorrect assumptions about who can access the variable.</p><p id="b41c802e-94da-42fb-a1b9-1a6029370c8c" class=""> <code>TokenGNO.sol</code>  is the ERC20 implementation of the GNO token and it inherits contract <code>GnosisStandardToken.sol</code>. There are three variables that existed in <code>GnosisStandardToken.sol</code>:</p><pre id="0d9fcfca-3e12-40a8-ad19-43eab6b67f45" class="code"><code>contract StandardTokenData {
-    /*
-     *  Storage
-     */
-    mapping(address =&gt; uint) balances;
-    mapping(address =&gt; mapping(address =&gt; uint)) allowances;
-    uint totalTokens;
-}</code></pre><p id="7b194a10-26f1-4e35-b9ae-fb8baf1d2aa3" class="">The above pre-defined standard token data are accessed and can be modified in the derived contracts. Thus, the visibilities can be specifically marked as <mark class="highlight-gray_background">internal </mark>for better code readability and understanding.</p></details></li></ul><ul id="c0d80377-ec60-456e-afeb-d1efe58d5745" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="607b0903-5050-4dd3-b2c5-95b6d93d19f9" class="">N/A</p></details></li></ul><ul id="d3b0c9d9-9dd4-4648-a8c9-fe3b0c9c4060" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="47398eb4-870d-46fc-b15b-9c0d343f4b34" class="">Adding <mark class="highlight-gray_background">internal</mark> for better readability, use below as an example</p><pre id="6d890ce1-2f72-4c37-84c1-2745734aa6a7" class="code"><code>mapping(address =&gt; uint) internal balances;
-mapping(address =&gt; mapping(address =&gt; uint)) internal allowances;
-unit internal totalTokens;</code></pre></details></li></ul><ul id="83a05ffd-16df-4ca5-b590-75a69ce6abee" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="6628141c-5f14-49a5-95b4-2daf42888e5f" class="">Acknowledged by the Gnosis team.</p></details></li></ul></li></ol></div></div><h2 id="0bdeef63-a919-4d2a-b767-db0f998eca7a" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="aa3f43fa-0c9b-414c-9117-d887d1f3b257" class="">The GNO token v2.0.0 has no significant privileged roles. Only when at deployment, the contract deployer will receive the pre-defined total supply of GNO token, which is a standard operation in most token contract deployments:</p><pre id="91ef10c7-4955-46d7-9726-736008a5503d" class="code"><code>// from TokenGNO.sol
-constructor(uint amount) public {
-	totalTokens = amount;
-	balances[msg.sender] = amount;
-}</code></pre></div><h2 id="d7370fcb-f235-471d-b3de-b85c4a093ad2" class=""><details open=""><summary>Off-Chain OpSec </summary></details></h2><div class="indented"><p id="c74eaa4b-c577-4e5c-aa0c-ee348c33aab3" class="">N/A</p></div><h2 id="32ea103a-59e4-4d42-9010-81b6defd8760" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="62f261a7-dab4-4427-a011-0f129c77386d" class="simple-table"><thead class="simple-table-header"><tr id="3d8efc72-6077-49fe-b8ce-fe4f24b78f50"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="02934ef8-45c3-4bce-aed2-6b76b6867a65"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="9d4879f3-be24-4f54-97e5-b7ad82e74b18"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="f605b917-bcff-4447-8976-db37764297ec"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="e083508b-b515-4892-b042-6a04420d27d0"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="743f1522-f8db-45e3-acdf-64dbfdff636c" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="1782380f-2943-495f-aa15-7b3bf3a7e96f" class="simple-table"><thead class="simple-table-header"><tr id="90747177-b07a-405b-b410-9389689a3121"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:521px"><strong>Description</strong></th></tr></thead><tbody><tr id="1781d4e8-3bdc-4b58-a4cf-88cb7b46baee"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:521px">The issue is not acknowledged and not resolved.</td></tr><tr id="5490a07c-5957-4284-8490-954dcc42a8c8"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been partially resolved</td></tr><tr id="b8d5295a-74a3-42a9-8fd8-ffead8715abe"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:521px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="2db1c6eb-434b-427a-8726-45a1a6d1aca8"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been sufficiently resolved</td></tr></tbody></table></div><h2 id="7b68a910-c373-46b7-8412-44032dcb28a8" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="44bec4d1-7315-4cfa-bcd1-0e41ed1886b6" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="71623b14-37e4-407d-b69f-b7f35d22511b" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div><p id="a50c5528-35da-46a7-b44a-49a7eecaa251" class="">
-</p></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="../../images/logo.svg" /><title>GNO Token v2.0.0 Audit Report</title><style>
+  /* cspell:disable-file */
+  /* webkit printing magic: print all background colors */
+  html {
+    -webkit-print-color-adjust: exact;
+  }
+  details {
+      pointer-events: none;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  @media only screen {
+    body {
+      margin: 2em auto;
+      max-width: 900px;
+      color: rgb(55, 53, 47);
+    }
+  }
+  
+  body {
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  
+  a,
+  a.visited {
+    color: inherit;
+    text-decoration: underline;
+  }
+  
+  .pdf-relative-link-path {
+    font-size: 80%;
+    color: #444;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.75em;
+  }
+  
+  h1 {
+    font-size: 1.875rem;
+    margin-top: 1.875rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  
+  .source {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1.5em;
+    word-break: break-all;
+  }
+  
+  .callout {
+    border-radius: 3px;
+    padding: 1rem;
+  }
+  
+  figure {
+    margin: 1.25em 0;
+    page-break-inside: avoid;
+  }
+  
+  figcaption {
+    opacity: 0.5;
+    font-size: 85%;
+    margin-top: 0.5em;
+  }
+  
+  mark {
+    background-color: transparent;
+  }
+  
+  .indented {
+    padding-left: 1.5em;
+  }
+  
+  hr {
+    background: transparent;
+    display: block;
+    width: 100%;
+    height: 1px;
+    visibility: visible;
+    border: none;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  @media only print {
+    img {
+      max-height: 100vh;
+      object-fit: contain;
+    }
+  }
+  
+  @page {
+    margin: 1in;
+  }
+  
+  .collection-content {
+    font-size: 0.875rem;
+  }
+  
+  .column-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    padding: 0 1em;
+  }
+  
+  .column:first-child {
+    padding-left: 0;
+  }
+  
+  .column:last-child {
+    padding-right: 0;
+  }
+  
+  .table_of_contents-item {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    padding: 0.125rem;
+  }
+  
+  .table_of_contents-indent-1 {
+    margin-left: 1.5rem;
+  }
+  
+  .table_of_contents-indent-2 {
+    margin-left: 3rem;
+  }
+  
+  .table_of_contents-indent-3 {
+    margin-left: 4.5rem;
+  }
+  
+  .table_of_contents-link {
+    text-decoration: none;
+    opacity: 0.7;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid rgba(55, 53, 47, 0.09);
+    border-collapse: collapse;
+  }
+  
+  table {
+    border-left: none;
+    border-right: none;
+  }
+  
+  th,
+  td {
+    font-weight: normal;
+    padding: 0.25em 0.5em;
+    line-height: 1.5;
+    min-height: 1.5em;
+    text-align: left;
+  }
+  
+  th {
+    color: rgba(55, 53, 47, 0.6);
+  }
+  
+  ol,
+  ul {
+    margin: 0;
+    margin-block-start: 0.6em;
+    margin-block-end: 0.6em;
+  }
+  
+  li > ol:first-child,
+  li > ul:first-child {
+    margin-block-start: 0.6em;
+  }
+  
+  ul > li {
+    list-style: disc;
+  }
+  
+  ul.to-do-list {
+    text-indent: -1.7em;
+  }
+  
+  ul.to-do-list > li {
+    list-style: none;
+  }
+  
+  .to-do-children-checked {
+    text-decoration: line-through;
+    opacity: 0.375;
+  }
+  
+  ul.toggle > li {
+    list-style: none;
+  }
+  
+  ul {
+    padding-inline-start: 1.7em;
+  }
+  
+  ul > li {
+    padding-left: 0.1em;
+  }
+  
+  ol {
+    padding-inline-start: 1.6em;
+  }
+  
+  ol > li {
+    padding-left: 0.2em;
+  }
+  
+  .mono ol {
+    padding-inline-start: 2em;
+  }
+  
+  .mono ol > li {
+    text-indent: -0.4em;
+  }
+  
+  .toggle {
+    padding-inline-start: 0em;
+    list-style-type: none;
+  }
+  
+  /* Indent toggle children */
+  .toggle > li > details {
+    padding-left: 1.7em;
+  }
+  
+  .toggle > li > details > summary {
+    margin-left: -1.1em;
+  }
+  
+  .selected-value {
+    display: inline-block;
+    padding: 0 0.5em;
+    background: rgba(206, 205, 202, 0.5);
+    border-radius: 3px;
+    margin-right: 0.5em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    white-space: nowrap;
+  }
+  
+  .collection-title {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  
+  .simple-table {
+    margin-top: 1em;
+    font-size: 0.875rem;
+    empty-cells: show;
+  }
+  .simple-table td {
+    height: 29px;
+    min-width: 120px;
+  }
+  
+  .simple-table th {
+    height: 29px;
+    min-width: 120px;
+  }
+  
+  .simple-table-header-color {
+    background: rgb(247, 246, 243);
+    color: black;
+  }
+  .simple-table-header {
+    font-weight: 500;
+  }
+  
+  time {
+    opacity: 0.5;
+  }
+  
+  .icon {
+    display: inline-block;
+    max-width: 1.2em;
+    max-height: 1.2em;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    margin-right: 0.5em;
+  }
+  
+  img.icon {
+    border-radius: 3px;
+  }
+  
+  .user-icon {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+  }
+  
+  .user-icon-inner {
+    font-size: 0.8em;
+  }
+  
+  .text-icon {
+    border: 1px solid #000;
+    text-align: center;
+  }
+  
+  .page-cover-image {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    max-height: 30vh;
+  }
+  
+  .page-header-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .page-header-icon-with-cover {
+    margin-top: -0.72em;
+    margin-left: 0.07em;
+  }
+  
+  .page-header-icon img {
+    border-radius: 3px;
+  }
+  
+  .link-to-page {
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+    font-weight: 500;
+  }
+  
+  p > .user {
+    opacity: 0.5;
+  }
+  
+  td > .user,
+  td > time {
+    white-space: nowrap;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-right: 0.6em;
+    vertical-align: middle;
+  }
+  
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .image {
+    border: none;
+    margin: 1.5em 0;
+    padding: 0;
+    border-radius: 0;
+    text-align: center;
+  }
+  
+  .code,
+  code {
+    background: rgba(135, 131, 120, 0.15);
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 85%;
+    tab-size: 2;
+       overflow-x: hidden;
+       overflow-y: auto;
+  }
+  
+  code {
+    color: #eb5757;
+  }
+  
+  .code {
+    padding: 1.5em 1em;
+  }
+  
+  .code-wrap {
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  
+  .code > code {
+    background: none;
+    padding: 0;
+    font-size: 100%;
+    color: inherit;
+  }
+  
+  blockquote {
+    font-size: 1.25em;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 3px solid rgb(55, 53, 47);
+  }
+  
+  .bookmark {
+    text-decoration: none;
+    max-height: 8em;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+  }
+  
+  .bookmark-title {
+    font-size: 0.85em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.75em;
+    white-space: nowrap;
+  }
+  
+  .bookmark-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookmark-info {
+    flex: 4 1 180px;
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .bookmark-image {
+    width: 33%;
+    flex: 1 1 180px;
+    display: block;
+    position: relative;
+    object-fit: cover;
+    border-radius: 1px;
+  }
+  
+  .bookmark-description {
+    color: rgba(55, 53, 47, 0.6);
+    font-size: 0.75em;
+    overflow: hidden;
+    max-height: 4.5em;
+    word-break: break-word;
+  }
+  
+  .bookmark-href {
+    font-size: 0.75em;
+    margin-top: 0.25em;
+  }
+  
+  .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+  .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+  .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+  .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+  .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+  .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+  .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+  .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+  .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+  .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+  .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+  .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+  .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+  .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+  .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+  .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+  .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+  .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+  .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+  .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+  .highlight-default {
+    color: rgba(55, 53, 47, 1);
+  }
+  .highlight-gray {
+    color: rgba(120, 119, 116, 1);
+    fill: rgba(120, 119, 116, 1);
+  }
+  .highlight-brown {
+    color: rgba(159, 107, 83, 1);
+    fill: rgba(159, 107, 83, 1);
+  }
+  .highlight-orange {
+    color: rgba(217, 115, 13, 1);
+    fill: rgba(217, 115, 13, 1);
+  }
+  .highlight-yellow {
+    color: rgba(203, 145, 47, 1);
+    fill: rgba(203, 145, 47, 1);
+  }
+  .highlight-teal {
+    color: rgba(68, 131, 97, 1);
+    fill: rgba(68, 131, 97, 1);
+  }
+  .highlight-blue {
+    color: rgba(51, 126, 169, 1);
+    fill: rgba(51, 126, 169, 1);
+  }
+  .highlight-purple {
+    color: rgba(144, 101, 176, 1);
+    fill: rgba(144, 101, 176, 1);
+  }
+  .highlight-pink {
+    color: rgba(193, 76, 138, 1);
+    fill: rgba(193, 76, 138, 1);
+  }
+  .highlight-red {
+    color: rgba(212, 76, 71, 1);
+    fill: rgba(212, 76, 71, 1);
+  }
+  .highlight-gray_background {
+    background: rgba(241, 241, 239, 1);
+  }
+  .highlight-brown_background {
+    background: rgba(244, 238, 238, 1);
+  }
+  .highlight-orange_background {
+    background: rgba(251, 236, 221, 1);
+  }
+  .highlight-yellow_background {
+    background: rgba(251, 243, 219, 1);
+  }
+  .highlight-teal_background {
+    background: rgba(237, 243, 236, 1);
+  }
+  .highlight-blue_background {
+    background: rgba(231, 243, 248, 1);
+  }
+  .highlight-purple_background {
+    background: rgba(244, 240, 247, 0.8);
+  }
+  .highlight-pink_background {
+    background: rgba(249, 238, 243, 0.8);
+  }
+  .highlight-red_background {
+    background: rgba(253, 235, 236, 1);
+  }
+  .block-color-default {
+    color: inherit;
+    fill: inherit;
+  }
+  .block-color-gray {
+    color: rgba(120, 119, 116, 1);
+    fill: rgba(120, 119, 116, 1);
+  }
+  .block-color-brown {
+    color: rgba(159, 107, 83, 1);
+    fill: rgba(159, 107, 83, 1);
+  }
+  .block-color-orange {
+    color: rgba(217, 115, 13, 1);
+    fill: rgba(217, 115, 13, 1);
+  }
+  .block-color-yellow {
+    color: rgba(203, 145, 47, 1);
+    fill: rgba(203, 145, 47, 1);
+  }
+  .block-color-teal {
+    color: rgba(68, 131, 97, 1);
+    fill: rgba(68, 131, 97, 1);
+  }
+  .block-color-blue {
+    color: rgba(51, 126, 169, 1);
+    fill: rgba(51, 126, 169, 1);
+  }
+  .block-color-purple {
+    color: rgba(144, 101, 176, 1);
+    fill: rgba(144, 101, 176, 1);
+  }
+  .block-color-pink {
+    color: rgba(193, 76, 138, 1);
+    fill: rgba(193, 76, 138, 1);
+  }
+  .block-color-red {
+    color: rgba(212, 76, 71, 1);
+    fill: rgba(212, 76, 71, 1);
+  }
+  .block-color-gray_background {
+    background: rgba(241, 241, 239, 1);
+  }
+  .block-color-brown_background {
+    background: rgba(244, 238, 238, 1);
+  }
+  .block-color-orange_background {
+    background: rgba(251, 236, 221, 1);
+  }
+  .block-color-yellow_background {
+    background: rgba(251, 243, 219, 1);
+  }
+  .block-color-teal_background {
+    background: rgba(237, 243, 236, 1);
+  }
+  .block-color-blue_background {
+    background: rgba(231, 243, 248, 1);
+  }
+  .block-color-purple_background {
+    background: rgba(244, 240, 247, 0.8);
+  }
+  .block-color-pink_background {
+    background: rgba(249, 238, 243, 0.8);
+  }
+  .block-color-red_background {
+    background: rgba(253, 235, 236, 1);
+  }
+  .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+  .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+  .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+  .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+  .select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+  .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+  .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+  .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+  .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+  .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+  
+  .checkbox {
+    display: inline-flex;
+    vertical-align: text-bottom;
+    width: 16;
+    height: 16;
+    background-size: 16px;
+    margin-left: 2px;
+    margin-right: 5px;
+  }
+  
+  .checkbox-on {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+  }
+  
+  .checkbox-off {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+  }
+    
+  </style></head><body><article id="f599c806-6f1d-4368-9fc2-d7c835617012" class="page sans"><header><h1 class="page-title">GNO Token v2.0.0 Audit Report</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><blockquote id="95725112-c491-42a1-ad71-1e792bebe417" class=""><mark class="highlight-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.</mark><p id="68323add-326c-4e10-aced-df94f6e32806" class=""><mark class="highlight-gray">April 22, 2022</mark></p><p id="df476350-7867-4bac-a044-9059710b2645" class=""><mark class="highlight-gray">by </mark><mark class="highlight-gray"><strong>Verilog Solutions</strong></mark></p></blockquote><figure id="39c251d3-9a28-4002-8ed5-eca4a05455e9" class="image"><a href="images/Untitled.png"><img style="width:1920px" src="images/Untitled.png"/></a></figure><p id="d2bcb506-8d3c-465c-85ab-d627b458872a" class="">This report presents our engineering engagement with the Gnosis team on the GNO Token v2.0.0, an ERC20 standard token contract used in various GNO ecosystem products.</p><table id="f212ac47-07f4-4817-8def-7d6f7fb980c6" class="simple-table"><tbody><tr id="7cead1c0-defe-47e5-8401-fafee47dfa00"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:375px">GNO Token v2.0.0</td></tr><tr id="af38017e-ed7f-4b7c-b46d-23ee265fe5d0"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:375px"><a href="https://github.com/gnosis/gno-token">https://github.com/gnosis/gno-token</a></td></tr><tr id="9dcd0d9d-e63b-4819-aceb-141977f976e2"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:375px"><a href="https://github.com/gnosis/gno-token/tree/1cc6023ecd6494dd4e37591c4864bb487f1b0373"><strong>1cc6023ecd6494dd4e37591c4864bb487f1b0373</strong></a></td></tr><tr id="3c8d5d87-bc65-4584-a950-d70419823605"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:375px">Solidity</td></tr><tr id="c7119535-48ce-4053-9788-7947c76e6156"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:375px">Gnosis Chain, Ethereum</td></tr></tbody></table><h2 id="e6e9ab12-a0c2-44ab-966c-e64a46d25085" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="cb6f91c9-132c-4d5b-866d-c66ee341c6e1" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="bd14023b-9254-4497-b0c4-998324421b9e" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="f140da82-ebe2-449d-b322-2b953245e759" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="4a4f0aa8-484d-46cb-bda9-daa05adc8f79" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e6e9ab12-a0c2-44ab-966c-e64a46d25085">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f140da82-ebe2-449d-b322-2b953245e759">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#64ed8622-25ff-45d4-87ec-1cf0d8f38119">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#944cb9f8-f643-4e1c-be7b-d6dd00795946">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2d222db5-b9c4-4988-bc9b-5c9ec884d114"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0bdeef63-a919-4d2a-b767-db0f998eca7a">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d7370fcb-f235-471d-b3de-b85c4a093ad2">Off-Chain OpSec </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#32ea103a-59e4-4d42-9010-81b6defd8760">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#743f1522-f8db-45e3-acdf-64dbfdff636c">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7b68a910-c373-46b7-8412-44032dcb28a8">Disclaimer</a></div></nav></div><h2 id="64ed8622-25ff-45d4-87ec-1cf0d8f38119" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="60a26745-538a-4e64-8370-f2d469282c2e" class=""><details open=""><summary>Service Stages</summary></details></h3><div class="indented"><p id="ee58a22f-06cf-4d1f-ab13-c717e3263f20" class="">Our review focused on the <a href="https://github.com/gnosis/gno-token/tree/v2.0.0"><strong>v2.0.0</strong></a><a href="https://github.com/gnosis/gno-token/tree/v2.0.0"> branch</a>, specifically, commit hash <a href="https://github.com/gnosis/gno-token/tree/1cc6023ecd6494dd4e37591c4864bb487f1b0373"><strong>1cc6023ecd6494dd4e37591c4864bb487f1b0373</strong></a>.</p><p id="8cb368cf-b638-4cd3-9909-165086fe8eaa" class="">Below is the summary of the GNO token v2.0.0 audit:</p><ol type="1" id="42f8ed2e-b14f-4eb5-9ca6-0dea9171e21c" class="numbered-list" start="1"><li><strong>Smart Contract Auditing Service</strong><ul id="0bd8ea9c-3d6f-4e32-9583-8d10bba04d9a" class="bulleted-list"><li style="list-style-type:disc">Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions</strong></li></ul></li></ol></div><h3 id="1807026d-521d-4685-ad8d-5eb2abd9b0c5" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="8aaf683b-9a57-4d05-a9e1-808b1a70a666" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="f83e2a5f-9ff3-46f3-9e63-357f31f2a902" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="015c185d-8c63-4b6a-a734-10b020fe33d9" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="6fa8ec68-b917-4a6f-97c8-b46442c96b3b" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="428f042b-24b5-4650-8037-732be3a4b12e" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="41fa23bd-3ea4-406f-b5c0-b6ab2539813c" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="4c21af7c-d31f-4f15-992f-27fac352719d" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="2db5b0ef-db20-4418-90a5-dcf16390293d" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="9012c962-2bfd-4fc0-b433-5de2b853f30d" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul></div><h3 id="b0a06d6c-bd47-40e7-a124-d9fc83c80524" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><p id="a33828f7-47bd-4c68-9f56-e7926dd38801" class="">Our auditing for GNO Token v2.0.0 covered the following components</p><table id="e51339cf-e2ea-42e8-b5b2-6351a820dccb" class="simple-table"><thead class="simple-table-header"><tr id="e7270a41-eb63-458e-8532-cb406a9bcecb"><th id="tY`p" class="simple-table-header-color simple-table-header" style="width:575px">File Name</th></tr></thead><tbody><tr id="68db6686-8691-450c-aa1d-52529935804e"><td id="tY`p" class="" style="width:575px">.\contracts\TokenGNO.sol</td></tr><tr id="b5a9129d-9b8e-4174-962c-357945948466"><td id="tY`p" class="" style="width:575px">.\contracts\GnoDevDependencies.sol</td></tr><tr id="5ff009f7-b9b1-4ff1-8c37-f0d071b3f21c"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\EtherToken.sol</td></tr><tr id="34a23742-2de1-4905-8554-6aef949a2de7"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\GnosisStandard.sol</td></tr><tr id="fe619783-ce89-4d7e-aab6-8659dca1e796"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\HumanFriendlyToken.sol</td></tr><tr id="0cb49c5e-c41b-462d-a84a-d2102645c5fa"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Math.sol</td></tr><tr id="fd4c219f-0a67-4860-8c0c-416feb59a992"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Migrations.sol</td></tr><tr id="e466974e-3838-4d3e-b1aa-329978b1bdee"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Proxy.sol</td></tr><tr id="c360f7a6-a41c-475c-bf08-44bb7ac4656c"><td id="tY`p" class="" style="width:575px">.\@gnosis.pm\util-contracts\contracts\Token.sol</td></tr></tbody></table></div></div><h2 id="944cb9f8-f643-4e1c-be7b-d6dd00795946" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="c501c35f-b2a2-4d97-af1a-60aa74692195" class="">GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.</p><p id="d37524d9-59bf-4819-bd39-3c4d3ca1cd7f" class="">
+  </p><p id="bf8a856b-eb51-4590-8f5b-f9cb79b5a001" class=""><strong>Cited from Ethereum Foundation </strong><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a>:</p><p id="3edae7ff-a66b-4bc2-92d5-9c41c38def65" class="">The token should have the following <strong>methods</strong>:</p><pre id="8838513b-2758-4e67-83cc-fcf226fd623f" class="code"><code>// view functions
+  function name() public view returns (string)
+  function symbol() public view returns (string)
+  function decimals() public view returns (uint8)
+  function totalSupply() public view returns (uint256)
+  function balanceOf(address) public view returns (uint256)
+  
+  // interaction functions
+  function transfer(address, uint256) public returns (bool)
+  function transferFrom(address, address, uint256) public returns (bool)
+  function approve(address, uint256) public returns (bool)
+  function allowance(address, address) public view returns (uint256)</code></pre></div><p id="76543c92-ff6a-4ffc-994d-220f4f2b271a" class=""><div class="indented"><p id="ad2e9e61-aaca-4861-8376-25af05afd561" class="">The token should have the following <strong>events</strong>:</p><pre id="2566515d-c494-415b-bd72-8fff59da0535" class="code"><code>event Transfer(address indexed _from, address indexed _to, uint256 _value)
+  event Approval(address indexed _owner, address indexed _spender, uint256 _value)</code></pre><p id="0b545ae9-5d39-45be-91ce-04f6312af625" class="">
+  </p><p id="64c92332-1107-48a0-ac42-509616948857" class="">The<strong> GNO token v2.0.0 ERC-20</strong> implementation provides the following functionalities:</p><ul id="d6d43c53-5bed-4fbb-88fa-343ce9a2813c" class="bulleted-list"><li style="list-style-type:disc">transfer tokens from one account to another</li></ul><ul id="64c3a599-7e50-45e8-8b23-4ad8b8048b2d" class="bulleted-list"><li style="list-style-type:disc">retrieve the current token balance of an account</li></ul><ul id="56587fc7-39d4-484c-a0b0-26debb89aa1b" class="bulleted-list"><li style="list-style-type:disc">retrieve the total supply of the token available on the network</li></ul><ul id="fb4deb7d-1bfe-4ba9-b401-8df6a16c3cc7" class="bulleted-list"><li style="list-style-type:disc">approve whether and amount of token from an account can be spent by a third-party account</li></ul></div></p><h2 id="2d222db5-b9c4-4988-bc9b-5c9ec884d114" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="62efa7a6-d5e9-450e-993e-4a01ea51cb16" class="simple-table"><tbody><tr id="0e6ab4c5-2771-475c-b07b-b0b826e355cc"><td id="G&gt;ax" class="" style="width:120px"><strong>Severity</strong></td><td id="T&lt;wm" class="">          <strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class="">      <strong>Resolved</strong></td></tr><tr id="65ee6812-8ff6-4b77-8b2f-9d22aa64458f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">             0</td><td id="@mfj" class="">              0</td><td id="|V?N" class="">             0</td></tr><tr id="5afcfc94-86b6-4b69-b6ff-9c90a9554b9e"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">             0</td><td id="@mfj" class="">              0</td><td id="|V?N" class="">             0</td></tr><tr id="40172e04-107e-43dd-9e5b-8e79c3f9337e"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">             1</td><td id="@mfj" class="">              1</td><td id="|V?N" class="">             0</td></tr><tr id="5700c4b7-4dfe-4c26-a743-525eb903b609"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">             1</td><td id="@mfj" class="">              1</td><td id="|V?N" class="">             0</td></tr></tbody></table><h3 id="29135fc1-8921-469b-9832-2b721ef8be80" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="6f2fa207-4f70-41b5-81b8-47f5dda0f402" class="">none ; )</p></div><h3 id="9402cf72-8a74-490e-a749-d049bd178f3f" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><p id="0380a1ec-493e-4e46-ba1d-e382928ba3ae" class="">none ; )</p></div><h3 id="3da002b2-c5ef-4084-96df-e288a11ae8a4" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="7ad94ebb-3281-4db2-988a-02d78b94a413" class="numbered-list" start="1"><li><strong>Unused components</strong><table id="ddf70e53-6e69-48b5-9e3a-208b2b0cc49e" class="simple-table"><tbody><tr id="a56ac860-7608-4f88-b66a-5b1392606519"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="13b745e5-3918-42e5-bdd3-7be082dead30"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px"><mark class="highlight-gray_background">@gnosis.pm/util-contracts/contracts/GnosisStandardToken.sol:</mark> <a href="https://github.com/gnosis/util-contracts/blob/1373734c128ebaaf67af93cb531a63439895e15a/contracts/GnosisStandardToken.sol#L4">L4</a> ;
+  <mark class="highlight-gray_background">GnoDevDependencies.sol:</mark><a href="https://github.com/gnosis/gno-token/blob/156f60f48cbfb27283eb27e6851ecb09749afa99/contracts/GnoDevDependencies.sol#L12"> L12</a>;</td></tr><tr id="21d198f5-4ace-4101-8015-242e33154177"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="f115525b-d31d-43ba-9b10-0a07e772888f" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="2cdbdc4f-9c70-479b-89cb-edf3ea68ed8a" class=""><code>Proxy.sol</code><strong> </strong>has not been used in the <code>GnosisStandardToken.sol</code> and <code>EtherToken.sol</code> has not been used in the <code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code><mark class="highlight-gray_background">.</mark></p><p id="d4affe62-ecf2-44a1-a04d-569a8b831773" class=""><code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code> is a standard token contract implemented by the Gnosis team. <code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code> imported 3 solidity files:</p><ol type="1" id="ae6db234-f265-4008-bcc0-3706affde240" class="numbered-list" start="1"><li><code><strong>Token.sol</strong></code><strong>:</strong> an abstract token contract for the ERC20 token (functions are not implemented)</li></ol><ol type="1" id="8b167ca8-730c-49be-9792-402c61154009" class="numbered-list" start="2"><li><code><strong>Math.sol</strong></code><strong>: </strong>a math library allows the calculation of logarithmic and exponential functions</li></ol><ol type="1" id="ec1608a7-fdea-4358-abed-7be4c57540b4" class="numbered-list" start="3"><li><code><mark class="highlight-pink_background"><strong>Proxy.sol</strong></mark></code><strong>: </strong>a proxy standard contract indicates that a contract will be provided, it also defines storage requirements for proxy.</li></ol><p id="68154331-a2e8-4456-be8e-b136e01f8122" class="">However, the imported <code><mark class="highlight-pink_background">Proxy.sol</mark></code> has not been used/inherited in the <code><mark class="highlight-gray_background">GnosisStandardToken.sol</mark></code>. </p><p id="c480c5fe-6b35-465a-9e29-d83ce3e258f0" class=""><code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code> is used for truffle compilations.</p><p id="764a76f9-5ac0-4abd-9e73-9220ff61ddb7" class=""><code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code> imported 2 Solidity files:<div class="indented"><ol type="1" id="961e45ae-4c2d-4925-bfc4-8fcdbb6b676a" class="numbered-list" start="1"><li><code><mark class="highlight-pink_background"><strong>GnosisStandardToken.sol</strong></mark></code><strong>:</strong>  a standard token contract implemented by the Gnosis team. </li></ol><ol type="1" id="b2afb47f-5156-4248-bfa0-df4fc82cc640" class="numbered-list" start="2"><li><code><mark class="highlight-pink_background"><strong>EtherToken.sol</strong></mark></code><code><strong>:</strong></code><strong> </strong>a token contract that allows exchanging with Ether 1:1</li></ol></div></p><p id="a91d9a74-7b47-4d5f-8ed7-63d4eceeb006" class="">However, the imported <code><mark class="highlight-pink_background">EtherToken.sol</mark></code><mark class="highlight-gray_background"> has</mark> not been used/inherited in the <code><mark class="highlight-gray_background">GnoDevDependencies.sol</mark></code><mark class="highlight-gray_background">.</mark></p><p id="503f1fc0-e835-46c2-859a-a8a7592f4fe9" class="">Smart contract implementation should be succinct and sufficient. To keep the best practice, any unnecessary functions/imports should be eliminated.</p></details></li></ul><ul id="275f8267-9910-4f6c-8b49-e7d2f2be0e62" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9db16e32-a485-4536-acb2-3ab8a3376dc7" class="">N/A</p></details></li></ul><ul id="23831c1a-1559-4a6f-89ca-d848b690b3e5" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f91ec954-5312-4710-966e-3bd25e330d04" class="">Remove these unused imports.</p></details></li></ul><ul id="64846e51-37ef-4828-b2b9-cb45fef6a5dc" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="52b99235-5430-48a9-af3f-52866f49771f" class="">Acknowledged by the Gnosis team.</p></details></li></ul></li></ol></div><h3 id="9b4f24a0-12d9-4f75-91ec-829ceb4704d5" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="ec661bf7-026e-40af-ac2b-2955c4285393" class="numbered-list" start="1"><li><strong>State variable visibility unspecified</strong><table id="a2c84924-6da4-4ca9-96ad-b23e8ecc6afc" class="simple-table"><tbody><tr id="8a45796f-801b-4313-9e91-bb8333e5e7ae"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="4de9479a-47c1-4418-abed-2d1efa5d52bf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px"><mark class="highlight-gray_background">@gnosis.pm/util-contracts/contracts/GnosisStandardToken.sol:</mark><a href="https://github.com/gnosis/util-contracts/blob/1373734c128ebaaf67af93cb531a63439895e15a/contracts/GnosisStandardToken.sol#L13-L15"> L13-L15</a>;</td></tr><tr id="56ef3984-334a-4cba-a2f0-ab86d3b5aa9a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong></td></tr></tbody></table><ul id="04732161-23dc-4b42-8af7-1b45552be96c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7a6cbe63-9dfd-49a8-a7fd-9b28617242d7" class="">Some variables in contract <code>StandardTokenData.sol</code> do not have specified visibilities. Labeling the visibility explicitly makes it easier to catch incorrect assumptions about who can access the variable.</p><p id="b41c802e-94da-42fb-a1b9-1a6029370c8c" class=""> <code>TokenGNO.sol</code>  is the ERC20 implementation of the GNO token and it inherits contract <code>GnosisStandardToken.sol</code>. There are three variables that existed in <code>GnosisStandardToken.sol</code>:</p><pre id="0d9fcfca-3e12-40a8-ad19-43eab6b67f45" class="code"><code>contract StandardTokenData {
+      /*
+       *  Storage
+       */
+      mapping(address =&gt; uint) balances;
+      mapping(address =&gt; mapping(address =&gt; uint)) allowances;
+      uint totalTokens;
+  }</code></pre><p id="7b194a10-26f1-4e35-b9ae-fb8baf1d2aa3" class="">The above pre-defined standard token data are accessed and can be modified in the derived contracts. Thus, the visibilities can be specifically marked as <mark class="highlight-gray_background">internal </mark>for better code readability and understanding.</p></details></li></ul><ul id="c0d80377-ec60-456e-afeb-d1efe58d5745" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="607b0903-5050-4dd3-b2c5-95b6d93d19f9" class="">N/A</p></details></li></ul><ul id="d3b0c9d9-9dd4-4648-a8c9-fe3b0c9c4060" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="47398eb4-870d-46fc-b15b-9c0d343f4b34" class="">Adding <mark class="highlight-gray_background">internal</mark> for better readability, use below as an example</p><pre id="6d890ce1-2f72-4c37-84c1-2745734aa6a7" class="code"><code>mapping(address =&gt; uint) internal balances;
+  mapping(address =&gt; mapping(address =&gt; uint)) internal allowances;
+  unit internal totalTokens;</code></pre></details></li></ul><ul id="83a05ffd-16df-4ca5-b590-75a69ce6abee" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="6628141c-5f14-49a5-95b4-2daf42888e5f" class="">Acknowledged by the Gnosis team.</p></details></li></ul></li></ol></div></div><h2 id="0bdeef63-a919-4d2a-b767-db0f998eca7a" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="aa3f43fa-0c9b-414c-9117-d887d1f3b257" class="">The GNO token v2.0.0 has no significant privileged roles. Only when at deployment, the contract deployer will receive the pre-defined total supply of GNO token, which is a standard operation in most token contract deployments:</p><pre id="91ef10c7-4955-46d7-9726-736008a5503d" class="code"><code>// from TokenGNO.sol
+  constructor(uint amount) public {
+    totalTokens = amount;
+    balances[msg.sender] = amount;
+  }</code></pre></div><h2 id="d7370fcb-f235-471d-b3de-b85c4a093ad2" class=""><details open=""><summary>Off-Chain OpSec </summary></details></h2><div class="indented"><p id="c74eaa4b-c577-4e5c-aa0c-ee348c33aab3" class="">N/A</p></div><h2 id="32ea103a-59e4-4d42-9010-81b6defd8760" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="62f261a7-dab4-4427-a011-0f129c77386d" class="simple-table"><thead class="simple-table-header"><tr id="3d8efc72-6077-49fe-b8ce-fe4f24b78f50"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="02934ef8-45c3-4bce-aed2-6b76b6867a65"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="9d4879f3-be24-4f54-97e5-b7ad82e74b18"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="f605b917-bcff-4447-8976-db37764297ec"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="e083508b-b515-4892-b042-6a04420d27d0"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="743f1522-f8db-45e3-acdf-64dbfdff636c" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="1782380f-2943-495f-aa15-7b3bf3a7e96f" class="simple-table"><thead class="simple-table-header"><tr id="90747177-b07a-405b-b410-9389689a3121"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:521px"><strong>Description</strong></th></tr></thead><tbody><tr id="1781d4e8-3bdc-4b58-a4cf-88cb7b46baee"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:521px">The issue is not acknowledged and not resolved.</td></tr><tr id="5490a07c-5957-4284-8490-954dcc42a8c8"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been partially resolved</td></tr><tr id="b8d5295a-74a3-42a9-8fd8-ffead8715abe"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:521px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="2db1c6eb-434b-427a-8726-45a1a6d1aca8"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:521px">The issue has been sufficiently resolved</td></tr></tbody></table></div><h2 id="7b68a910-c373-46b7-8412-44032dcb28a8" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="44bec4d1-7315-4cfa-bcd1-0e41ed1886b6" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="71623b14-37e4-407d-b69f-b7f35d22511b" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div><p id="a50c5528-35da-46a7-b44a-49a7eecaa251" class="">
+  </p></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
