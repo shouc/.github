@@ -1,0 +1,763 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="../../images/logo.svg" /><title>BendDAO Blue-chip NFT Liquidity Audit Report</title><style>
+  /* cspell:disable-file */
+  /* webkit printing magic: print all background colors */
+  html {
+    -webkit-print-color-adjust: exact;
+  }
+  details {
+    pointer-events: none;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  @media only screen {
+    body {
+      margin: 2em auto;
+      max-width: 900px;
+      color: rgb(55, 53, 47);
+    }
+  }
+  
+  body {
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  
+  a,
+  a.visited {
+    color: inherit;
+    text-decoration: underline;
+  }
+  
+  .pdf-relative-link-path {
+    font-size: 80%;
+    color: #444;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.75em;
+  }
+  
+  h1 {
+    font-size: 1.875rem;
+    margin-top: 1.875rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  
+  .source {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1.5em;
+    word-break: break-all;
+  }
+  
+  .callout {
+    border-radius: 3px;
+    padding: 1rem;
+  }
+  
+  figure {
+    margin: 1.25em 0;
+    page-break-inside: avoid;
+  }
+  
+  figcaption {
+    opacity: 0.5;
+    font-size: 85%;
+    margin-top: 0.5em;
+  }
+  
+  mark {
+    background-color: transparent;
+  }
+  
+  .indented {
+    padding-left: 1.5em;
+  }
+  
+  hr {
+    background: transparent;
+    display: block;
+    width: 100%;
+    height: 1px;
+    visibility: visible;
+    border: none;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  @media only print {
+    img {
+      max-height: 100vh;
+      object-fit: contain;
+    }
+  }
+  
+  @page {
+    margin: 1in;
+  }
+  
+  .collection-content {
+    font-size: 0.875rem;
+  }
+  
+  .column-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    padding: 0 1em;
+  }
+  
+  .column:first-child {
+    padding-left: 0;
+  }
+  
+  .column:last-child {
+    padding-right: 0;
+  }
+  
+  .table_of_contents-item {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    padding: 0.125rem;
+  }
+  
+  .table_of_contents-indent-1 {
+    margin-left: 1.5rem;
+  }
+  
+  .table_of_contents-indent-2 {
+    margin-left: 3rem;
+  }
+  
+  .table_of_contents-indent-3 {
+    margin-left: 4.5rem;
+  }
+  
+  .table_of_contents-link {
+    text-decoration: none;
+    opacity: 0.7;
+    border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+  }
+  
+  table,
+  th,
+  td {
+    border: 1px solid rgba(55, 53, 47, 0.09);
+    border-collapse: collapse;
+  }
+  
+  table {
+    border-left: none;
+    border-right: none;
+  }
+  
+  th,
+  td {
+    font-weight: normal;
+    padding: 0.25em 0.5em;
+    line-height: 1.5;
+    min-height: 1.5em;
+    text-align: left;
+  }
+  
+  th {
+    color: rgba(55, 53, 47, 0.6);
+  }
+  
+  ol,
+  ul {
+    margin: 0;
+    margin-block-start: 0.6em;
+    margin-block-end: 0.6em;
+  }
+  
+  li > ol:first-child,
+  li > ul:first-child {
+    margin-block-start: 0.6em;
+  }
+  
+  ul > li {
+    list-style: disc;
+  }
+  
+  ul.to-do-list {
+    text-indent: -1.7em;
+  }
+  
+  ul.to-do-list > li {
+    list-style: none;
+  }
+  
+  .to-do-children-checked {
+    text-decoration: line-through;
+    opacity: 0.375;
+  }
+  
+  ul.toggle > li {
+    list-style: none;
+  }
+  
+  ul {
+    padding-inline-start: 1.7em;
+  }
+  
+  ul > li {
+    padding-left: 0.1em;
+  }
+  
+  ol {
+    padding-inline-start: 1.6em;
+  }
+  
+  ol > li {
+    padding-left: 0.2em;
+  }
+  
+  .mono ol {
+    padding-inline-start: 2em;
+  }
+  
+  .mono ol > li {
+    text-indent: -0.4em;
+  }
+  
+  .toggle {
+    padding-inline-start: 0em;
+    list-style-type: none;
+  }
+  
+  /* Indent toggle children */
+  .toggle > li > details {
+    padding-left: 1.7em;
+  }
+  
+  .toggle > li > details > summary {
+    margin-left: -1.1em;
+  }
+  
+  .selected-value {
+    display: inline-block;
+    padding: 0 0.5em;
+    background: rgba(206, 205, 202, 0.5);
+    border-radius: 3px;
+    margin-right: 0.5em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    white-space: nowrap;
+  }
+  
+  .collection-title {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  
+  .simple-table {
+    margin-top: 1em;
+    font-size: 0.875rem;
+    empty-cells: show;
+  }
+  .simple-table td {
+    height: 29px;
+    min-width: 120px;
+  }
+  
+  .simple-table th {
+    height: 29px;
+    min-width: 120px;
+  }
+  
+  .simple-table-header-color {
+    background: rgb(247, 246, 243);
+    color: black;
+  }
+  .simple-table-header {
+    font-weight: 500;
+  }
+  
+  time {
+    opacity: 0.5;
+  }
+  
+  .icon {
+    display: inline-block;
+    max-width: 1.2em;
+    max-height: 1.2em;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    margin-right: 0.5em;
+  }
+  
+  img.icon {
+    border-radius: 3px;
+  }
+  
+  .user-icon {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+  }
+  
+  .user-icon-inner {
+    font-size: 0.8em;
+  }
+  
+  .text-icon {
+    border: 1px solid #000;
+    text-align: center;
+  }
+  
+  .page-cover-image {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    max-height: 30vh;
+  }
+  
+  .page-header-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .page-header-icon-with-cover {
+    margin-top: -0.72em;
+    margin-left: 0.07em;
+  }
+  
+  .page-header-icon img {
+    border-radius: 3px;
+  }
+  
+  .link-to-page {
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+    font-weight: 500;
+  }
+  
+  p > .user {
+    opacity: 0.5;
+  }
+  
+  td > .user,
+  td > time {
+    white-space: nowrap;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-right: 0.6em;
+    vertical-align: middle;
+  }
+  
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .image {
+    border: none;
+    margin: 1.5em 0;
+    padding: 0;
+    border-radius: 0;
+    text-align: center;
+  }
+  
+  .code,
+  code {
+    background: rgba(135, 131, 120, 0.15);
+    border-radius: 3px;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 85%;
+    tab-size: 2;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  code {
+    color: #eb5757;
+  }
+  
+  .code {
+    padding: 1.5em 1em;
+  }
+  
+  .code-wrap {
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  
+  .code > code {
+    background: none;
+    padding: 0;
+    font-size: 100%;
+    color: inherit;
+  }
+  
+  blockquote {
+    font-size: 1.25em;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 3px solid rgb(55, 53, 47);
+  }
+  
+  .bookmark {
+    text-decoration: none;
+    max-height: 8em;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+  }
+  
+  .bookmark-title {
+    font-size: 0.85em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.75em;
+    white-space: nowrap;
+  }
+  
+  .bookmark-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookmark-info {
+    flex: 4 1 180px;
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .bookmark-image {
+    width: 33%;
+    flex: 1 1 180px;
+    display: block;
+    position: relative;
+    object-fit: cover;
+    border-radius: 1px;
+  }
+  
+  .bookmark-description {
+    color: rgba(55, 53, 47, 0.6);
+    font-size: 0.75em;
+    overflow: hidden;
+    max-height: 4.5em;
+    word-break: break-word;
+  }
+  
+  .bookmark-href {
+    font-size: 0.75em;
+    margin-top: 0.25em;
+  }
+  
+  .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+  .code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+  .serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+  .mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+  .pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+  .pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+  .pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+  .pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+  .pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+  .pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+  .pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+  .pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+  .pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+  .pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+  .pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+  .pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+  .pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+  .pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+  .pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+  .pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+  .highlight-default {
+    color: rgba(55, 53, 47, 1);
+  }
+  .highlight-gray {
+    color: rgba(120, 119, 116, 1);
+    fill: rgba(120, 119, 116, 1);
+  }
+  .highlight-brown {
+    color: rgba(159, 107, 83, 1);
+    fill: rgba(159, 107, 83, 1);
+  }
+  .highlight-orange {
+    color: rgba(217, 115, 13, 1);
+    fill: rgba(217, 115, 13, 1);
+  }
+  .highlight-yellow {
+    color: rgba(203, 145, 47, 1);
+    fill: rgba(203, 145, 47, 1);
+  }
+  .highlight-teal {
+    color: rgba(68, 131, 97, 1);
+    fill: rgba(68, 131, 97, 1);
+  }
+  .highlight-blue {
+    color: rgba(51, 126, 169, 1);
+    fill: rgba(51, 126, 169, 1);
+  }
+  .highlight-purple {
+    color: rgba(144, 101, 176, 1);
+    fill: rgba(144, 101, 176, 1);
+  }
+  .highlight-pink {
+    color: rgba(193, 76, 138, 1);
+    fill: rgba(193, 76, 138, 1);
+  }
+  .highlight-red {
+    color: rgba(212, 76, 71, 1);
+    fill: rgba(212, 76, 71, 1);
+  }
+  .highlight-gray_background {
+    background: rgba(241, 241, 239, 1);
+  }
+  .highlight-brown_background {
+    background: rgba(244, 238, 238, 1);
+  }
+  .highlight-orange_background {
+    background: rgba(251, 236, 221, 1);
+  }
+  .highlight-yellow_background {
+    background: rgba(251, 243, 219, 1);
+  }
+  .highlight-teal_background {
+    background: rgba(237, 243, 236, 1);
+  }
+  .highlight-blue_background {
+    background: rgba(231, 243, 248, 1);
+  }
+  .highlight-purple_background {
+    background: rgba(244, 240, 247, 0.8);
+  }
+  .highlight-pink_background {
+    background: rgba(249, 238, 243, 0.8);
+  }
+  .highlight-red_background {
+    background: rgba(253, 235, 236, 1);
+  }
+  .block-color-default {
+    color: inherit;
+    fill: inherit;
+  }
+  .block-color-gray {
+    color: rgba(120, 119, 116, 1);
+    fill: rgba(120, 119, 116, 1);
+  }
+  .block-color-brown {
+    color: rgba(159, 107, 83, 1);
+    fill: rgba(159, 107, 83, 1);
+  }
+  .block-color-orange {
+    color: rgba(217, 115, 13, 1);
+    fill: rgba(217, 115, 13, 1);
+  }
+  .block-color-yellow {
+    color: rgba(203, 145, 47, 1);
+    fill: rgba(203, 145, 47, 1);
+  }
+  .block-color-teal {
+    color: rgba(68, 131, 97, 1);
+    fill: rgba(68, 131, 97, 1);
+  }
+  .block-color-blue {
+    color: rgba(51, 126, 169, 1);
+    fill: rgba(51, 126, 169, 1);
+  }
+  .block-color-purple {
+    color: rgba(144, 101, 176, 1);
+    fill: rgba(144, 101, 176, 1);
+  }
+  .block-color-pink {
+    color: rgba(193, 76, 138, 1);
+    fill: rgba(193, 76, 138, 1);
+  }
+  .block-color-red {
+    color: rgba(212, 76, 71, 1);
+    fill: rgba(212, 76, 71, 1);
+  }
+  .block-color-gray_background {
+    background: rgba(241, 241, 239, 1);
+  }
+  .block-color-brown_background {
+    background: rgba(244, 238, 238, 1);
+  }
+  .block-color-orange_background {
+    background: rgba(251, 236, 221, 1);
+  }
+  .block-color-yellow_background {
+    background: rgba(251, 243, 219, 1);
+  }
+  .block-color-teal_background {
+    background: rgba(237, 243, 236, 1);
+  }
+  .block-color-blue_background {
+    background: rgba(231, 243, 248, 1);
+  }
+  .block-color-purple_background {
+    background: rgba(244, 240, 247, 0.8);
+  }
+  .block-color-pink_background {
+    background: rgba(249, 238, 243, 0.8);
+  }
+  .block-color-red_background {
+    background: rgba(253, 235, 236, 1);
+  }
+  .select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+  .select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+  .select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+  .select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+  .select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+  .select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+  .select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+  .select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+  .select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+  .select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+  
+  .checkbox {
+    display: inline-flex;
+    vertical-align: text-bottom;
+    width: 16;
+    height: 16;
+    background-size: 16px;
+    margin-left: 2px;
+    margin-right: 5px;
+  }
+  
+  .checkbox-on {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+  }
+  
+  .checkbox-off {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+  }
+    
+  </style></head><body><article id="18cda4fe-d25b-4dd9-8eaf-817d9aa7977a" class="page sans"><header><h1 class="page-title">BendDAO Blue-chip NFT Liquidity Audit Report</h1></header><div class="page-body"><blockquote id="e6ae2495-de96-40ef-8ac8-e1ac0de31991" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="aef3b33a-01b3-46a5-8ac2-ae64b7582c69" class="">Aug 3, 2022</p><p id="aef92a23-cb45-4a52-b4ad-acd58fe12a3b" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="d7cb3181-72e1-4a3f-830a-760e86b39b07" class="image"><a href="images/Untitled.png"><img style="width:1920px" src="images/Untitled.png"/></a></figure><p id="a1e0df8e-3663-424b-bb1a-ab1b55b5e444" class="">This report presents our engineering engagement with the BendDAO team on their NFT Trading Platform – BendDAO Liquidity.</p><table id="177f680d-e68a-4f02-a146-9e7cea91a2dd" class="simple-table"><tbody><tr id="b4245e21-7c43-4e59-ad30-8f28e51bcff2"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:508px">BendDAO Liquidity</td></tr><tr id="bcb87de0-af01-4785-80c3-863727c4dce6"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:508px"><a href="https://github.com/BendDAO/bend-exchange-protocol">https://github.com/BendDAO/bend-exchange-protocol</a></td></tr><tr id="7f296f64-c474-421a-b422-116eb8e1bd3c"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:508px"><a href="https://github.com/BendDAO/bend-exchange-protocol/tree/f6457d8d51b17d5fb32fd0abce5426099d8f9e8e">f6457d8d51b17d5fb32fd0abce5426099d8f9e8e</a></td></tr><tr id="dd717c11-51ac-4264-baab-982448f89fe9"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:508px">Solidity</td></tr><tr id="a2016a5d-982f-47ed-9917-9584474b800d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:508px">Ethereum</td></tr></tbody></table><h2 id="0a8c3cdd-c9e8-43ef-a39e-9ae6db84da69" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="fdd6c8bd-c00c-4d2b-8aee-b51b019a4292" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standard for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="7b84bb98-7d86-4448-b180-f91abcbbfd2d" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory service on security needs, including on-chain and off-chain components.</p></div><h2 id="de90fe47-c0f3-4a07-a682-da51811bcac7" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="ba6c3a7a-bf8c-4e9f-8bfb-3a6649c2e96b" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0a8c3cdd-c9e8-43ef-a39e-9ae6db84da69">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#de90fe47-c0f3-4a07-a682-da51811bcac7">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c6ac0f82-b3f0-4846-9227-2f22ab3d2e89">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f9492369-7ff4-40a9-ac15-bb35f8feabd4">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b9e5e55d-810c-4386-b566-77b8af87bd7b"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fee2cb6f-6b70-457e-9258-16c739f759df">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3f64cda9-d2cb-44ef-b5df-9c7ff1234ea6">Off-Chain OpSec </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2e0161fb-5551-406a-9686-cbeabd706135">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#59786954-ab4f-470e-9869-5b5d0f5be82e">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#714f3fbf-2490-40ec-b2c3-87e56d5851c8">Disclaimer</a></div></nav></div><h2 id="c6ac0f82-b3f0-4846-9227-2f22ab3d2e89" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="e29e9503-306c-45bb-a8a7-7306dc558641" class=""><details open=""><summary>Service Stages </summary></details></h3><h3 id="b332e00e-55f2-4636-9963-bb4ea2e8cc61" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="765400fe-3a1a-436d-a6cb-55d04414b273" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="21a9fcbe-dd8e-4047-acbc-7b8a482f2698" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="9231acce-ec2f-412c-b33c-abaad69f6e48" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="ebd3f9e3-fd64-4dd7-a3f1-ff2b82ac13a6" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="537c4fee-b7b8-43e5-9bc6-f0ad2bf57841" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="95fd3ee5-6ccc-4ca7-88a4-c4f3a596cb5d" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="54dce4cd-9efb-472d-90e9-1bcc0108c66c" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="4484da96-ceb2-4f32-913c-f7e86be09883" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="87b7f8d3-eb63-4918-badf-619122842bc4" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="d8202e5b-941d-475d-b215-35586e6f94c4" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="cd1090c0-7dd4-4f79-ada2-9c82d5b1453f" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="81d58480-e88a-4210-840f-591e916ea855" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="7373a1cf-5188-4d64-ade7-db3112517459" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><table id="3d29565d-ab5b-47df-affb-968cc9de3849" class="simple-table"><thead class="simple-table-header"><tr id="11b6189c-5b54-4414-8e2a-7c0c75d95f59"><th id="@Y@&gt;" class="simple-table-header-color simple-table-header" style="width:621px">File</th></tr></thead><tbody><tr id="2f21f3b5-5961-42a1-b9d8-11c2608cc6bc"><td id="@Y@&gt;" class="" style="width:621px">contracts/BendExchange.sol</td></tr><tr id="16dff48c-ae02-46d9-9559-67cb69eac065"><td id="@Y@&gt;" class="" style="width:621px">contracts/CurrencyManager.sol</td></tr><tr id="6b97ec96-c095-4b31-aef3-774d4a5b1509"><td id="@Y@&gt;" class="" style="width:621px">contracts/ExecutionManager.sol</td></tr><tr id="45e5571d-ca79-4017-a5bd-b5b99909ae3d"><td id="@Y@&gt;" class="" style="width:621px">contracts/InterceptorManager.sol</td></tr><tr id="5a433549-e485-491f-9ec0-6ace28dac009"><td id="@Y@&gt;" class="" style="width:621px">contracts/RoyaltyFeeManager.sol</td></tr><tr id="5d20c207-17db-4bfd-b2a9-b350e4c7bd70"><td id="@Y@&gt;" class="" style="width:621px">contracts/TransferManager.sol</td></tr><tr id="daaadb77-9ce6-405b-8800-4c0ea5b92048"><td id="@Y@&gt;" class="" style="width:621px">contracts/authorizationManager/AuthenticatedProxy.sol</td></tr><tr id="d6764b6b-ba23-4544-a1ab-547fc30ba771"><td id="@Y@&gt;" class="" style="width:621px">contracts/authorizationManager/AuthorizationManager.sol</td></tr><tr id="10620a37-d5b4-45fd-913b-dac67357b337"><td id="@Y@&gt;" class="" style="width:621px">contracts/executionStrategies/StrategyAnyItemFromCollectionForFixedPrice.sol</td></tr><tr id="4bee41cb-b8a4-46ac-b283-9417b9267a6a"><td id="@Y@&gt;" class="" style="width:621px">contracts/executionStrategies/StrategyAnyItemInASetForFixedPrice.sol</td></tr><tr id="821c3f5c-96a3-41c3-b169-ddb91553c802"><td id="@Y@&gt;" class="" style="width:621px">contracts/executionStrategies/StrategyDutchAuction.sol</td></tr><tr id="25fc4cbb-b8c5-4309-97b6-1beaab8050f8"><td id="@Y@&gt;" class="" style="width:621px">contracts/executionStrategies/StrategyPrivateSale.sol</td></tr><tr id="c57e73d9-b5e5-4c7a-87ff-9d69065142a1"><td id="@Y@&gt;" class="" style="width:621px">contracts/executionStrategies/StrategyStandardSaleForFixedPrice.sol</td></tr><tr id="2102b6df-0c13-4422-a0b0-abf3eede6acf"><td id="@Y@&gt;" class="" style="width:621px">contracts/interceptors/interfaces/*.sol</td></tr><tr id="941272be-4479-4c27-9d1e-3ae46880dbc5"><td id="@Y@&gt;" class="" style="width:621px">contracts/interceptors/RedeemNFT.sol</td></tr><tr id="26b50f1f-0a6b-4db2-a8fc-f418a86370de"><td id="@Y@&gt;" class="" style="width:621px">contracts/interfaces/*.sol</td></tr><tr id="6fce001e-8a76-4df7-9c7b-ebb60c67530e"><td id="@Y@&gt;" class="" style="width:621px">contracts/libraries/OrderTypes.sol</td></tr><tr id="da9d4c93-cffd-4f94-9534-5e90e296b064"><td id="@Y@&gt;" class="" style="width:621px">contracts/libraries/SafeProxy.sol</td></tr><tr id="342446d1-c53d-496f-afec-42cffeacb3d4"><td id="@Y@&gt;" class="" style="width:621px">contracts/royaltyFeeHelpers/RoyaltyFeeRegistry.sol</td></tr><tr id="38f1e3c1-e3c5-4502-a7c7-b95a33541a2c"><td id="@Y@&gt;" class="" style="width:621px">contracts/royaltyFeeHelpers/RoyaltyFeeSetter.sol</td></tr><tr id="52383890-147c-40ae-a6d3-30567aa10c4d"><td id="@Y@&gt;" class="" style="width:621px">contracts/transfers/TransferERC721.sol</td></tr><tr id="67eba885-d1f1-42c9-b4fb-42a11831cbf2"><td id="@Y@&gt;" class="" style="width:621px">contracts/transfers/TransferERC1155.sol</td></tr><tr id="a639487e-1e15-4331-9d2c-167c2e98b588"><td id="@Y@&gt;" class="" style="width:621px">contracts/transfers/TransferNonCompliantERC721.sol</td></tr></tbody></table></div></div><h2 id="f9492369-7ff4-40a9-ac15-bb35f8feabd4" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="ff516842-785c-47e4-8a7b-9b79ebcbf6f8" class="">Blue-chip NFT Liquidity is a new feature added to BendDAO, which allows leveraged bidding in BendDAO NFT auctions.</p><figure id="56f87031-c623-4e64-a846-2d248c2bad38" class="image"><a href="images/Untitled.jpeg"><img style="width:2244px" src="images/Untitled.jpeg"/></a><figcaption>BendDAO Liquidity System Architecture</figcaption></figure><p id="85c7c4ae-610c-49d3-99ec-d2be0e18524c" class="">Users within the NFT exchange have been categorized as either taker or maker, and actions are either ask or bid, thus there are 4 different combinations of actions (quoted from <a href="https://docs.benddao.xyz/developers/exchange-protocol/protocol-overview">BendDAO Liquidity Developer Docs</a>):</p><ol type="1" id="6c751313-fce7-4f82-87e5-779f7f186357" class="numbered-list" start="1"><li><strong>MakerBid</strong> - a passive order that exists <strong>off-chain</strong> where the user wishes to acquire an NFT using a specific ERC-20 token.</li></ol><ol type="1" id="eeda9728-387a-40be-8cf8-f4f73620cb92" class="numbered-list" start="2"><li><strong>MakerAsk</strong> - a passive order that exists <strong>off-chain</strong> where the user wishes to sell an NFT for a specific ERC-20 token.</li></ol><ol type="1" id="0823ed5a-525e-4fdc-ab02-862f7e951ab5" class="numbered-list" start="3"><li><strong>TakerBid </strong>-<strong> </strong>an order that is executed <strong>on-chain</strong> that matches the <strong>MakerAsk</strong>, <em>e.g.</em>, the taker accepts the offer from the maker and buys the NFT for the ERC-20 token specified.</li></ol><ol type="1" id="1e691f0a-414a-48eb-bf2e-425d2b7927c4" class="numbered-list" start="4"><li><strong>TakerAsk - </strong>an order that is executed <strong>on-chain</strong> that matches the <strong>MakerBid</strong>, <em>e.g.</em>, the taker accepts the offer from the maker and sells the NFT for the ERC-20 token specified.</li></ol><p id="ca2a34a7-f642-4959-8daf-6a86604ab144" class="">
+  </p><p id="d9bf9085-1b29-49f6-bd77-97ce4d5468db" class="">The BendDAO Liquidity consists of the following main logic blocks:</p><h3 id="c45b685d-e5d1-4de0-b65d-fd7a7b2cd408" class="">BendExchange.sol</h3><blockquote id="c889f385-966e-45b4-b908-5be14ede25d7" class="">the core contract of the BendDAO Liquidity. </blockquote><p id="3d9e3403-700a-424f-8959-be1e3e9a181f" class="">It contains the main logic of the exchange. There are the following functions:</p><p id="b5954028-d2db-430b-9149-1f0163b3d400" class=""><code>constructor()</code>: setting up the system, calculating the domain separator, storing and setting the contract address of <code>transferManager</code>, <code>currencyManager</code>, <code>executionManager</code>, <code>royaltyFeeManager</code>, <code>interceptorManager</code>, <code>WETH</code>, and <code>protocolFeeRecipient</code>. </p><p id="7debea0e-bdbb-4fdc-84d1-b29c73bd0394" class=""><code>cancelAllOrdersForSender()</code>: cancel all pending orders for the message sender. </p><p id="dac2824a-65c4-43cd-b8f2-2474d5a01c27" class=""><code>cancelMultipleMakerOrders()</code>: cancel an array of maker orders.</p><p id="bc510ec4-602d-44a0-8d5e-205d3043043d" class=""><code>matchAskWithTakerBidUsingETHAndWETH()</code>: match ask with a taker bid order using ETH and WETH.</p><p id="5bf00e41-7670-4109-8455-75da148a8d44" class=""><code>matchAskWithTakerBid()</code>: match a maker ask with a match taker bid order.</p><p id="7d44b8e8-7a8d-4aed-870a-1ba53670bbb1" class=""><code>matchBidWithTakerAsk()</code>: match a maker bid with a match taker ask order.</p><p id="e953d46e-a4cb-41a3-aad6-d2e39c8f58fd" class=""><code>updateCurrencyManager()</code>: update currency manager contract address.</p><p id="92b14cd4-12b9-4c78-a436-7c4bae3e8b03" class=""><code>updateExecutionManager()</code>: update execution manager contract address.</p><p id="0c34c6a1-52a1-4071-920d-5c3bd96d70a6" class=""><code>updateProtocolFeeRecipient()</code>: update protocol fee and recipient.</p><p id="354bad11-14f0-4e4c-a8a6-bbf717b2e780" class=""><code>updateRoyaltyFeeManager()</code>: update royalty fee manager contract address.</p><p id="5b5d84a3-dad9-40e5-82e7-0b9a8b5bdfd2" class=""><code>updateTransferManager()</code>: update transfer manager contract address.</p><p id="20038880-c3f6-46de-bbbe-de8acfe6a946" class=""><code>updateAuthorizationManager()</code>: update authorization manager contract address.</p><p id="d1897199-901d-47f3-bd70-1e6ff0435f7f" class=""><code>updateInterceptorManager()</code>: update interceptor manager contract address.</p><p id="f1d1e89f-cddc-48ab-997c-55e741e92128" class=""><code>isUserOrderNonceExecutedOrCancelled()</code>: check whether user order bounce is executed or cancelled.</p><h3 id="365f93e7-744f-4669-804f-a551ece398c5" class="">CurrencyManager.sol</h3><blockquote id="37eff15d-a05a-40c7-b853-703fa9cf548e" class="">adding/removing currencies for trading on BendDAO Liquidity.</blockquote><p id="2ab773ce-759d-4a5a-8cd1-d4e537d25056" class=""><code>addCurrency()</code>: add a token address to the whitelist. </p><p id="0a93b6ae-317f-40e6-9372-3e2942adb7d7" class=""><code>removeCurrency()</code>: remove a token address from the whitelist.</p><h3 id="d4f4e1e9-35e3-4680-9e11-b387467646bb" class="">ExecutionManager.sol</h3><blockquote id="6d0acb51-3672-4a2e-bd67-f39990359c04" class="">adding/removing execution strategies for trading on the BendDAO Liquidity.</blockquote><p id="2f32ea74-e636-4a40-b229-330cf422579b" class=""><code>addStrategy()</code>: add an execution strategy to the whitelist strategy.</p><p id="5e970e99-bde5-4705-9a5d-dcded04c33a8" class=""><code>removeStrategy()</code>: remove an execution strategy from the whitelist strategy.</p><h3 id="743b13ed-5687-40f1-8d13-29ca6f5573f0" class="">InterceptorManager.sol</h3><blockquote id="e14b0ab4-26a6-4e98-b1c4-f5843dbeb461" class="">adding/removing interceptor manager for trading on the BendDAO Liquidity.</blockquote><p id="b2ee6d3f-82f2-45a5-9514-cb6c83f56534" class=""><code>addCollectionInterceptor()</code>: add collection interceptor to the whitelist interceptor.</p><p id="c8373476-8d8b-4d33-b32c-7763ae50210b" class=""><code>removeCollectionInterceptor()</code>: remove collection interceptor from the whitelist interceptor.</p><h3 id="c7b2c7aa-1a47-4882-8cb0-22531d3bbdc8" class="">RoyaltyFeeManager.sol</h3><blockquote id="dabbe620-5fd0-4643-987c-a006798fc691" class="">handling the logic to check and transfer royalty fees if there are any.</blockquote><p id="c358ff6e-195a-42de-9be2-df92b04863ea" class=""><code>constructor()</code>: set the royalty fee registry address.</p><p id="a23bd9fb-c8b3-43bd-9d95-6984fdffe3af" class=""><code>calculateRoyaltyFeeAndGetRecipient()</code>: check if there is royalty info in the system, calculate the royalty fee, and get the recipient.</p><h3 id="9336b3e6-54e9-4d11-9994-922100fceff7" class="">TransferManager.sol</h3><blockquote id="bb3ea62a-088e-42cf-bc4a-00df4801a085" class="">selects the NFT transfer based on a collection address.</blockquote><p id="1feedc68-5fc2-4cbf-a105-f8177841bd69" class=""><code>constructor()</code>:  set the <code>TRANSFER_ERC721</code> and <code>TRANSFER_ERC1155</code> contract address.</p><p id="7bcf637f-9f99-480d-b24a-1a7c20ec6d76" class=""><code>addCollectionTransfer()</code>: add a transfer for a collection.</p><p id="7499288a-7fa8-4a6a-8d8d-84b724b11224" class=""><code>removeCollectionTransfer()</code>: remove a transfer for a collection. </p></div><h2 id="b9e5e55d-810c-4386-b566-77b8af87bd7b" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="af8e4f29-a95e-485f-81c2-565c13c7c522" class="simple-table"><tbody><tr id="7983e1fc-b7e9-48b5-96e6-c3b30b39c945"><td id="G&gt;ax" class="" style="width:120px"><strong>Severity</strong></td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="1d2ad977-f942-407c-bf82-abfb314a0241"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="d8e5cbd3-618c-4b8b-92f1-273d6fe1934c"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">1</td></tr><tr id="54b0e151-4d22-48a6-bf69-c0d102390b8c"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">5</td><td id="@mfj" class="">5</td><td id="|V?N" class="">4</td></tr><tr id="4e1b15aa-f52f-4cdd-be7d-770345eb6438"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">2</td></tr></tbody></table><h3 id="9dffb546-acde-4c61-a1c9-0e82be5d9e42" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="bdced3a1-8734-4698-a85d-1171e0062bbc" class="">none ; )</p></div><h3 id="955818da-d31f-4784-bd8e-c898ff9452a4" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="f2493b75-e27b-42a5-b6fa-94f33ef20108" class="numbered-list" start="1"><li><strong>Risk of reuse of signatures across forks due to lack of chain identifier (ID) validation.</strong><table id="d285ebee-7690-41a4-851b-276fd7f9fe15" class="simple-table"><tbody><tr id="8c8a1cf9-e74e-4dc3-8cbd-95675d5e2a31"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="eb698e2b-115c-4041-8bc3-96671cb7be91"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol</td></tr><tr id="2910154c-6d0b-4965-93f0-82fa04adf372"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/6e5892eb3dcd9d9dfc100693267deb4cc6b82621">6e5892eb3dcd9d9dfc100693267deb4cc6b82621</a></td></tr></tbody></table><ul id="0e016ec6-fb6f-4f3c-b020-87eea6130209" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="37a5268d-c60a-4c6c-ad8b-6a5cb8ddaa34" class=""><strong>BendExchange.sol</strong> includes the EIP-712 standard into the smart contract to allow typed structured data hashing and signing. The domain separator is a crucial part of the EIP-712 standard, as it is designed to prevent the signature collision between different DApps. It usually includes a DApp’s unique information such as the DApp&#x27;s name and the contract address, <em>etc</em>. In the event of a chain hard fork, the current smart contract design in BendExchange.sol does not include the <code>chainID</code>, as the result, the user’s signatures might be used for the replay attacks on different chains.</p><p id="b21dcfeb-9c29-4432-af7f-ccf8e2281a8f" class="">Current smart contract hardcodes <code>DOMAIN_SEPERATOR</code> in the constructor:</p><pre id="429d0a53-6f54-46a4-b66a-0810fb5b9d9b" class="code"><code>constructor(
+    address _interceptorManager,  address _transferManager,
+    address _currencyManager,
+    address _executionManager,
+    address _royaltyFeeManager,
+    address _WETH,
+    address _protocolFeeRecipient
+  ) {
+    // Calculate the domain separator
+    DOMAIN_SEPARATOR = keccak256(
+      abi.encode(
+        0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f, 
+        // keccak256(&quot;EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)&quot;)
+        0xba0c660933e3f2279319fe2b72a6f829a2438d726bbe835523453fc0414c6020, 
+        // keccak256(&quot;BendExchange&quot;)
+        0xc89efdaa54c0f20c7adf612882df0950f5a951637e0307cdcb4c672f298b8bc6, 
+        // keccak256(bytes(&quot;1&quot;)) for versionId = 1
+        block.chainid,
+        address(this)
+      )
+    );
+    transferManager = ITransferManager(_transferManager);
+    currencyManager = ICurrencyManager(_currencyManager);
+    executionManager = IExecutionManager(_executionManager);
+    royaltyFeeManager = IRoyaltyFeeManager(_royaltyFeeManager);
+    interceptorManager = IInterceptorManager(_interceptorManager);
+    WETH = _WETH;
+  protocolFeeRecipient = _protocolFeeRecipient;
+  }</code></pre><p id="297cbeff-50ec-45cc-9784-ba77b3ac8a18" class="">Due to the above design, <code>DOMAIN_SEPERATOR</code> is immutable after deployment.  <code>_validateOrders()</code> function below is designed for checking the signature:</p><pre id="89710199-4fd6-460d-94f6-180e0c2cc778" class="code"><code>// Verify the validity of the signature
+  require(
+    SignatureChecker.isValidSignatureNow(
+      makerOrder.maker,
+      ECDSA.toTypedDataHash(DOMAIN_SEPARATOR, makerOrderHash),
+      abi.encodePacked(makerOrder.r, makerOrder.s, makerOrder.v)
+    ),
+    &quot;Signature: invalid&quot;
+  );</code></pre><p id="03dc582c-49ed-4195-9eab-f82922e3ff36" class="">However, the above verification cannot detect the changing of the <code>chainID</code> after a hard fork. </p></details></li></ul><ul id="1880e8e0-e8fe-4807-b2e2-f336c8c2f5cf" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ul id="e6666b61-821b-4b37-9444-113e2bb552a9" class="bulleted-list"><li style="list-style-type:disc"><strong>BendExchange.sol</strong> exists on Chain 1. </li></ul><ul id="eb89f649-2d61-48ba-828c-aeea3a065692" class="bulleted-list"><li style="list-style-type:disc">Later, a hard fork happens on Chain 1, and there are Chain 1 and Chain 12 now.</li></ul><ul id="bf5c367b-7370-42d6-8c8b-1d56fde0e09f" class="bulleted-list"><li style="list-style-type:disc">The <code>block.chainid</code> in <code>DOMAIN_SEPARATOR</code> is set to 1 when the contract is deployed. So, the <code>DOMAIN_SEPARATOR</code> will be the same on Chain 1 and Chain 12.</li></ul><ul id="57d817d7-0bcf-4705-ba8a-d73efe4a90a9" class="bulleted-list"><li style="list-style-type:disc">Alice signs a message on Chain 1. And it can be replayed on both Chain 1 and Chain 12</li></ul></details></li></ul><ul id="19a97791-750b-444e-9438-20b1a3186243" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ea18ec92-f503-4231-8bc9-58e1c0971efa" class="">Check and update chain id if it has been changed when constructing a new hash. </p><p id="947a8b3a-ae12-4252-aa3a-ff09e0ed2205" class="">Example: <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/8b778fa20d6d76340c5fac1ed66c80273f05b95a/contracts/utils/cryptography/draft-EIP712.sol#L70">Openzeppelin EIP712 library</a> </p></details></li></ul><ul id="42920697-2ae7-44c1-983f-34f109bb701a" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a9d51711-9195-4ec6-b480-4c8017c20c55" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/6e5892eb3dcd9d9dfc100693267deb4cc6b82621">6e5892eb3dcd9d9dfc100693267deb4cc6b82621</a>.  When constructing a new hash, the chain id is checked and updated if it has been changed.</p></details></li></ul></li></ol></div><h3 id="3d6362c0-f5a9-41f2-838a-3c9161f78a9d" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="ce81edc1-877d-445e-8485-8ffe1e65e33e" class="numbered-list" start="1"><li><strong>Unintended Side Effect</strong><table id="d1aa45b7-41c8-4cb7-95e3-690a2e826ab3" class="simple-table"><tbody><tr id="28c2e9a7-c305-471b-9c58-7386586f6a3c"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="662a694e-0145-4d3d-9917-2e24bd104608"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol#L179;</td></tr><tr id="868f1d89-6c88-45ea-8ec6-dfc1ca791c93"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/a3dc493e15b0014c181b88da56269cfb01c4743b">a3dc493e15b0014c181b88da56269cfb01c4743b</a>. </td></tr></tbody></table><ul id="8e470f0f-5514-4734-ac58-0faa258f27f0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="96b66a41-285e-4727-a2f2-f83ffd2b0afd" class="">The <code>matchAskWithTakerBidUsingETHAndWETH()</code> function converts all exceeding ETH (<code>msg.value</code>) to WETH (wrapped native token). This is an unintended side-effect to <code>matchAskWithTakerBidUsingETHAndWETH()</code> use case and may confuse users.</p></details></li></ul><ul id="cabe2b8b-f745-4818-a883-581892df5717" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ul id="01a9f545-ed79-4bc0-bef7-3063279e3c30" class="bulleted-list"><li style="list-style-type:disc">An NFT is listed for 10 ETH. Alice has 16 ETH in her account. </li></ul><ul id="31818704-589c-4a7f-a23e-5db1c6b4c92f" class="bulleted-list"><li style="list-style-type:disc">Alice calls the <code>matchAskWithTakerBidUsingETHAndWETH()</code> and accidentally set <code>msg.value</code> to 16 ETH instead of 10 ETH.</li></ul><ul id="d7c4f0c1-eea7-424f-8285-d9b327093f6e" class="bulleted-list"><li style="list-style-type:disc">After the successful execution of the order, Alice has 6 WETH instead of 6 ETH in her account besides the NFT.</li></ul></details></li></ul><ul id="57f163a1-7985-4edb-9557-136a4e8cc01f" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ca4399ab-0bda-4c0a-81d5-aa7582af9b15" class="">Add a check on <code>msg.value</code>. The <code>msg.value</code> should be less or equal to the bidding price.</p></details></li></ul><ul id="3d4c96bf-d228-4db5-a9d6-dbed3c8d25b5" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="f46daa26-d86c-4bfd-a303-d4e012ef78a0" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/a3dc493e15b0014c181b88da56269cfb01c4743b">a3dc493e15b0014c181b88da56269cfb01c4743b</a>.  A <code>require</code> statement has been added to make sure <code>msg.value</code> is less or equal to the bidding price.</p></details></li></ul></li></ol><ol type="1" id="88785b61-f03c-4c9b-86e7-b9fce677943a" class="numbered-list" start="2"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="815a32c7-bc87-4408-a5ff-ba9bb19de256" class="simple-table"><tbody><tr id="0d573ba9-abd0-4ca7-b975-b578998d65af"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="09e253f6-6b55-4bf3-83fc-d63eeb48d79e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol;</td></tr><tr id="a2636893-0f55-42e7-b9cb-327c93d5df7e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</td></tr></tbody></table><ul id="bb9c6aa7-5aaa-4bc1-bc1f-2e5de343af6a" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="437918a3-20f9-4576-a8e7-4a8e5f51ec7c" class="">The currency manager cannot reject accepting WETH as the bidding currency. Even if WETH is banned in the currency manager, the attacker can bypass the restriction by setting the <code>currency</code> field as <code>address(0)</code> which stands for the native token like ETH in BendDAO Liquidity.</p><pre id="47780c77-5984-4e6d-8cb0-510a14422929" class="code"><code>function _validateOrders(
+    OrderTypes.MakerOrder calldata makerOrder,
+    bytes32 makerOrderHash,
+    OrderTypes.TakerOrder calldata takerOrder
+  ) internal view {
+    // skip unrelated lines
+    // Verify whether the currency is whitelisted, address(0) means native ETH
+    if (makerOrder.currency != address(0)) {
+      require(currencyManager.isCurrencyWhitelisted(makerOrder.currency), &quot;Currency: not whitelisted&quot;);
+    }
+    // skip unrelated lines
+  }</code></pre><p id="bc6722bb-1d31-414e-9415-390b1a9f8ae8" class="">When validating currency, it only checks if the currency is <code>address(0)</code> or not. When an attacker set the currency to <code>address(0)</code>, the attacker executes order through function <code>matchAskWithTakerBidUsingETHAndWETH()</code>. In this function, it simply converts the user&#x27;s ETH to WETH and executes the order, and converts WETH to ETH for the order maker in the final step. It still interacts with the WETH contract.</p><p id="341908b5-81b6-4acd-95bf-56a811e95364" class="">The current code in BendExchange.sol and CurrencyManager.sol cannot prevent the protocol’s interaction with WETH contract. When vulnerabilities are found in the WETH contract, BendDAO Liquidity is not able to refuse to interact with WETH by removing WETH from the whitelisted currencies or pausing the protocol. It can only rely on users themselves to cancel their orders.</p></details></li></ul><ul id="4dde7773-1f41-4bf7-86c1-a5e0c57742fd" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="0a8f933c-d9f6-4e34-9272-3e7b266651ff" class="">N/A</p></details></li></ul><ul id="070cbd1d-4477-4b0b-a31c-1dbe47d55f86" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="1e33a48a-1500-4f61-b2a6-3ab4dc629b01" class="">One approach to prevent this is to update the checking on the currency. If the BendDAO Liquidity protocol wants to ban WETH, it has to ban ETH as well.</p></details></li></ul><ul id="39971dac-17ad-4424-987a-4f1cce5c39f6" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="76281f59-5fb4-49fe-9c52-108d9f264228" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>. The currency manager checks ETH as well.</p></details></li></ul></li></ol><ol type="1" id="1ca00c9c-dfe1-47a8-91b4-690d7b4ccce4" class="numbered-list" start="3"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="8be4ebb3-bf0a-46a8-a073-48528a602de7" class="simple-table"><tbody><tr id="6f3ece6b-03ab-4ce9-adff-bc0362baf1c7"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="bc120f2d-4854-4c1d-bb2a-8db842aee7d2"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol#L605;</td></tr><tr id="e19369a8-52e7-48bc-9594-52f51980a586"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/1bfc92af416238541c6f22786ac77abfe0b22290">1bfc92af416238541c6f22786ac77abfe0b22290</a>.</td></tr></tbody></table><ul id="8a5272d8-1efb-4546-ac03-d027374b1b7f" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="3e7d13d5-0d91-4d58-945d-e460e8b7b52e" class="">The order interceptor validation logic is misplaced, and thus overly restricts the user’s input. The check <code>makerOrder.isOrderAsk</code> is placed in <code>require()</code>. Therefore, if the non-asker side enters <code>interceptor</code> by mistake, the transaction will be reverted.</p><pre id="c0c9c876-7f58-4478-8e94-d137bcd0ed9b" class="code"><code>if (makerOrder.interceptor != address(0)) {
+    require(
+      makerOrder.isOrderAsk &amp;&amp; interceptorManager.isInterceptorWhitelisted(makerOrder.interceptor),
+      &quot;Interceptor: maker interceptor not whitelisted&quot;
+    );
+  }
+  if (takerOrder.interceptor != address(0)) {
+    require(
+      takerOrder.isOrderAsk &amp;&amp; interceptorManager.isInterceptorWhitelisted(takerOrder.interceptor),
+      &quot;Interceptor: taker interceptor not whitelisted&quot;
+    );
+  }</code></pre><p id="8b3b6128-8321-445c-82a7-2388187b3c14" class="">Interceptor shall only be checked on the ask order side. When the user makes a bid order with an interceptor, due to the current strict requirements, the transaction will revert when the order is executed on-chain.  </p></details></li></ul><ul id="0cb9e214-885d-442b-bf25-c6918db5a418" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="03082198-29f7-4238-bed2-6b599565ca30" class="">N/A</p></details></li></ul><ul id="e4dce38e-9f92-4bd2-822b-69c117eedeb5" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3cce03a3-7fd2-4a5c-9384-7a33e6fb819e" class="">We recommend only validating interceptors for the ask order.</p><p id="483832bd-493d-45fc-b55a-5cc99ad913c5" class="">Move the <code>isOrderAsk</code> check to the <code>if</code> statement. Check if the order is “ask” then validate the interceptor.</p><pre id="1a98d9f8-e281-47d8-bffa-c7b9a0d07b26" class="code"><code>if (makerOrder.isOrderAsk &amp;&amp; makerOrder.interceptor != address(0)) {
+    require(
+      interceptorManager.isInterceptorWhitelisted(makerOrder.interceptor),
+      &quot;Interceptor: maker interceptor not whitelisted&quot;
+    );
+  }
+  if (takerOrder.isOrderAsk &amp;&amp; takerOrder.interceptor != address(0)) {
+    require(
+      interceptorManager.isInterceptorWhitelisted(takerOrder.interceptor),
+      &quot;Interceptor: taker interceptor not whitelisted&quot;
+    );
+  }</code></pre></details></li></ul><ul id="e7cdbcd2-c90c-47be-a648-6a986c0217e8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="fb8e781a-0d58-414b-92da-aaacd91017c5" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/1bfc92af416238541c6f22786ac77abfe0b22290">1bfc92af416238541c6f22786ac77abfe0b22290</a>.</p></details></li></ul></li></ol><ol type="1" id="4299f10a-364b-4612-a3cc-e9341f8df9b0" class="numbered-list" start="4"><li><strong>Orders can only be safely invalidated via on-chain operations</strong><table id="6ed37f1e-76db-46b7-b650-e50323ce2def" class="simple-table"><tbody><tr id="4cf860b0-c1c2-455a-abbf-7b602aa8894f"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="1a1e09b2-5ca9-4eda-a708-037c05790666"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol;</td></tr><tr id="da064c4f-aa61-423e-8242-db75c0c9597c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="a70b22ad-e7d9-4619-98e7-8d27dc2768c1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="790ae1bc-949c-4682-9273-d7cad0a189f7" class="">The nonce of an order is set off-chain and it can be any number. Orders can only be safely canceled or replaced via on-chain canceling.</p><p id="5fd0367f-fa32-4508-b587-03694a0533e9" class="">When a user signs an order off-chain and then signs new order with the same nonce to replace or cancel the previous order, it might fail because there is no guarantee that the new order must override the previous order. It all depends on which order the taker fills first.</p><p id="fcea08e8-9313-46d4-ab41-f1a4cfa540f5" class="">To safely invalidate an order, the on-chain operation is a must. Users can either invalidate an order by calling the function <code>cancelAllOrdersForSender()</code> or <code>cancelMultipleMakerOrders()</code> or just execute the order themselves.</p></details></li></ul><ul id="f8f6a387-b597-48eb-9286-d3777b16246d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="809ba6fe-dc62-45b1-8a9c-4b9d30f34ba2" class="">N/A</p></details></li></ul><ul id="c37272ff-12dc-40f1-9bdb-82418950944d" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="5fca4bac-040c-47cf-b905-f526a2764d06" class="">inform users only on-chain executions can safely cancel or replace an order.</p></details></li></ul><ul id="f6a818fd-661c-4cd5-af8b-f5bb92c4c200" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="fdab6ff6-d372-4066-bbe1-70049e484675" class="">Acknowledged. </p><p id="8c4f4f56-2256-4d6d-865f-4ae822159334" class=""><strong>Reply from BendDAO team: </strong>Users can adjust their orders and must cancel them before re-listing  on the front end</p></details></li></ul></li></ol><ol type="1" id="8215f2d5-3bd8-4ae1-bfd7-a30791afde0a" class="numbered-list" start="5"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="be4a0cb2-4976-4442-a1a3-60104c06ac19" class="simple-table"><tbody><tr id="61dc35f2-b909-4a0c-a311-ec6fdfd07042"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><strong><mark class="highlight-teal">Low</mark></strong></td></tr><tr id="e2a8c128-f12e-4cdd-ace4-df17711e0b35"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">interceptors/RedeemNFT.sol#L49;</td></tr><tr id="c0a985ca-b963-4f75-83cd-b1284879f5cd"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</td></tr></tbody></table><ul id="df0ba29f-5dae-41e3-aa25-cc37a18e52b8" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="237e8117-f982-4fd0-99c1-c4860c5d8520" class="">The repaid token balance of the user proxy should be greater or equal to the sum of total debt and bid fine. The strict requirement for balance to be greater than the sum of total debt and bid fine could result in an unnecessary revert.</p><p id="d9b28e40-aa5e-4596-8b0e-2758a7d86089" class="">According to the code and business logic, the user who bids for an NFT on auction in Bend lend pool just needs to have enough tokens to pay for debt and bid fine. However, the code strictly requires the token balance to be greater than the debt and fine. Users with the repaid token balance equal to debt and fine will fail on bidding the NFT.</p><pre id="e371af17-28ef-425e-bb3d-2628c1df683a" class="code"><code>require(
+    vars.totalDebt + vars.bidFine &lt; IERC20(vars.tokenRepaid).balanceOf(address(this)),
+    &quot;Interceptor: insufficent to repay debt&quot;
+  );</code></pre></details></li></ul><ul id="7ef4533e-fd60-4a8d-b833-beee3d31017a" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="56fffb52-7788-49f2-8dd1-293cc9078add" class="">N/A</p></details></li></ul><ul id="5e114916-4e52-46f1-9e26-62b025da5d80" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="6ed9936a-3794-4520-915b-fc50ed96c0d0" class="">Change <code>&lt;</code> to <code>&lt;=</code></p><pre id="a5a3b54c-4757-4be7-8399-a0228aa494d3" class="code"><code>require(
+    vars.totalDebt + vars.bidFine &lt;= IERC20(vars.tokenRepaid).balanceOf(address(this)),
+    &quot;Interceptor: insufficent to repay debt&quot;
+  );</code></pre></details></li></ul><ul id="42002906-b464-4ff1-9548-2282ec9cf670" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="1d4d69c9-c4e2-4125-9632-d57ffc547d28" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</p></details></li></ul></li></ol></div><h3 id="7345e09e-629c-4516-a2c6-4fe2ac534254" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="127037e6-dc1e-4ba8-a9c9-199a8757274b" class="numbered-list" start="1"><li><strong>Missing comments</strong><table id="567cf362-0382-4356-9a33-30c26e823da0" class="simple-table"><tbody><tr id="00c8bfbf-c5dc-4370-b734-d5ed470d9f24"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="5e5518b5-81b9-42c0-be6d-e3c7f87bf0bd"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol#L118;</td></tr><tr id="ad9517d8-13d3-4964-9d7d-c3f033e8ae23"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</td></tr></tbody></table><ul id="6bdf35dd-d9ef-4d4b-8cb9-68438691ab25" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="d3fbe13d-53dd-4916-93ad-288d11a93f6c" class="">Some comments for function parameters are missing. The constructor of BendExchange.sol has the following comments:</p><pre id="78eac8ae-f6d3-4d63-83eb-c93200a4a744" class="code"><code>/**
+   * @notice Constructor
+   * @param _currencyManager currency manager address
+   * @param _executionManager execution manager address
+   * @param _royaltyFeeManager royalty fee manager address
+   * @param _WETH wrapped ether address (for other chains, use wrapped native asset)
+   * @param _protocolFeeRecipient protocol fee recipient
+  */</code></pre><p id="d44281d3-a263-4cbe-b31c-82fe07fbc7eb" class="">While the argument list of the constructor is as follows:</p><pre id="f1c7f903-2b3a-49d0-93c0-a0fc9789c1a7" class="code"><code>address _interceptorManager,
+  address _transferManager,
+  address _currencyManager,
+  address _executionManager,
+  address _royaltyFeeManager,
+  address _WETH,
+  address _protocolFeeRecipient</code></pre><p id="3ffd10d6-f65d-4d52-8202-c024885bd9bf" class="">Comments for <code>_interceptorManager</code> and <code>_transferManager</code> are missing.</p></details></li></ul><ul id="c88340af-d7fb-4114-a5c7-db5f275e1947" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="2d6b4975-ad54-4f31-aabc-a226bc320501" class="">N/A</p></details></li></ul><ul id="987be917-f702-4b0e-908c-bcba8034aa6f" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="b616e109-0a88-49a0-bb71-dbb70512ebb7" class="">Add comments for parameters <code>_interceptorManager</code> and <code>_transferManager</code>.</p></details></li></ul><ul id="84aaef65-cb10-42e6-aa81-d054d4a504bf" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="ba648048-016b-4c9b-bbe7-ff6ce3e6a3a1" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>. </p></details></li></ul></li></ol><ol type="1" id="8ae5f0bd-8e88-4f02-9d30-68eb34b185ef" class="numbered-list" start="2"><li><strong>Inconsistent comments</strong><table id="3ba1ff4a-ebd9-40c8-8629-4409652cecad" class="simple-table"><tbody><tr id="8922fd78-247a-4e2a-9154-e0219e9a2f85"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="a01df674-4c85-458a-a022-bdf96bbfeb01"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">BendExchange.sol#L248;</td></tr><tr id="9414e9b8-b2d1-406c-8b51-96e01ddb3405"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</td></tr></tbody></table><ul id="06ff3897-44ca-43ef-b38b-1b8f50687df1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7f24ea70-8a4f-47c2-aacb-14ddd211b023" class="">There is an error in the comments.</p><pre id="3e8cb2ec-5180-41de-b565-9517e44a40a2" class="code"><code>@notice Match a takerBid with a matchAsk</code></pre><p id="2fcaea33-9d9a-4a11-83ac-580e283da34c" class="">should be replaced by</p><pre id="f4399848-e28e-418b-b61b-86f1f6da87e3" class="code"><code>@notice Match a takerBid with a makerAsk</code></pre></details></li></ul><ul id="40e9eb01-5924-469e-b2df-12b265cafd34" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="185bc7c0-cc91-4bec-acfb-466eb4f79732" class="">N/A</p></details></li></ul><ul id="00571451-51ba-43f9-87bb-e03a5273e423" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="b76da413-a2fe-4e02-8289-75a79d4c078d" class="">Change <code>matchAsk</code> to <code>makerAsk</code>.</p></details></li></ul><ul id="ca0bcd88-55c3-4b57-a821-9f598acd0279" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="df8716b5-fd8f-4c0a-a41d-5ea3c7150c7e" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</p><p id="33550ba4-5549-4599-ba24-f2c602e7467a" class="">Resolved in commit <a href="https://github.com/BendDAO/bend-exchange-protocol/commit/aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e">aae6c9744a4ff2d7bc3e68314d17e91e830b9f1e</a>.</p></details></li></ul></li></ol></div></div><h2 id="fee2cb6f-6b70-457e-9258-16c739f759df" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><h3 id="8b25098f-1f4e-4d17-a07c-31039815decc" class=""><details open=""><summary>BendDAO Liquidity</summary></details></h3><div class="indented"><ul id="9111c94f-2a5b-4a52-828e-1a2bda7e252b" class="bulleted-list"><li style="list-style-type:disc">The owner of <code>BendExchange.sol</code> is able to first set and then update the contract addresses of all the manager contracts.</li></ul></div><h3 id="e15f3b49-b97f-4f77-991f-cfce2f653c99" class=""><details open=""><summary>Manager contracts</summary></details></h3><div class="indented"><ul id="be67c0fe-c28e-406c-9c14-a8a8202ab457" class="bulleted-list"><li style="list-style-type:disc">The owner of the <code>AuthorizationManager.sol</code> is able to set the <code>revoked</code> variable to true. If this variable is set to true, only owners of registered proxies will be able to use most of its functionalities.</li></ul><ul id="7508c83c-8651-44fc-af0b-b3ccf3ca1475" class="bulleted-list"><li style="list-style-type:disc">The owner of the contracts <code>RoyalteeFeeSetter.sol</code> and <code>RoyaltyFeeRegistry.sol</code> can update the NFT collection’s royalty information regardless of changes made by NFT collection owners via the <code>RoyalteeFeeSetter.sol</code>.</li></ul><ul id="3d31b8f9-acd3-4b32-975d-72a86691ae5d" class="bulleted-list"><li style="list-style-type:disc">The owner of the <code>CurrencyManager.sol</code> contract can add and remove currencies for trading on BendDAO Liquidity.</li></ul><ul id="49b0433b-7948-4a2a-be88-66ea674d0b36" class="bulleted-list"><li style="list-style-type:disc">The owner of the <code>ExecutionManager.sol</code> contract is able to add and remove execution strategies for trading on the BendDAO Liquidity.</li></ul><ul id="3d5d3d05-7682-41b3-8c50-f232a6a2d637" class="bulleted-list"><li style="list-style-type:disc">The owner of the <code>TransferManager.sol</code> contract can add specific transfer rules for collection addresses that could be ERC721, ERC1155, and non-compliant ERC721 tokens.</li></ul><ul id="ca7dbdf0-63ea-41ad-b642-adecccbcf4c4" class="bulleted-list"><li style="list-style-type:disc">The owner of the <code>InterceptorManager.sol</code> contract is able to add and remove the interceptor for trading NFT locked in the bend lend pool.</li></ul></div></div><h2 id="3f64cda9-d2cb-44ef-b5df-9c7ff1234ea6" class=""><details open=""><summary>Off-Chain OpSec </summary></details></h2><div class="indented"><p id="7c49c2ec-4866-4117-b547-0bfc196ef0e6" class="">BendDAO Liquidity protocol’s off-chain components are found in the system that allows users to execute trades for NFTs. The system includes both on-chain and off-chain interactions that make trades possible. Off-chain orders also called maker orders are passive orders which can be executed when a taker order matches it. Since taker orders trigger the execution of the trade on-chain, network gas fees are never paid by maker orders.</p><p id="6fd9d2c6-aec3-4b33-aef2-730fba840f08" class="">Off-chain orders are EIP-712 signatures that are stored off-chain. EIP-712 signatures aim to improve the usability of off-chain messages for use on-chain by encoding data along with its structure. This scheme provides key benefits for users such as better readability for users in the message they sign. An example of what a user could be shown when signing an EIP-712 message is shown below:</p><figure id="26ebbba9-b273-4eb2-8ba6-8612080838d5" class="image"><a href="images/Untitled%201.png"><img style="width:336px" src="images/Untitled%201.png"/></a><figcaption>An example of EIP-712 signatures.</figcaption></figure></div><h2 id="2e0161fb-5551-406a-9686-cbeabd706135" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="d4c648fb-582b-458b-b7c7-22f6d37d7928" class="simple-table"><thead class="simple-table-header"><tr id="405c690d-bdc5-45ca-ac56-625d46229e8a"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="ab2f0870-f33d-41cb-9011-54eb7d7f6fb4"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="1eb7ea87-8186-4971-a9b6-8a3eb8fd66e3"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="667edc73-851d-44d4-9668-57af24bc425a"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the client&#x27;s decisions.</td></tr><tr id="6bc9bee9-90d4-4b82-af10-b47fd7e37962"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decisions.</td></tr></tbody></table></div><h2 id="59786954-ab4f-470e-9869-5b5d0f5be82e" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="6957d2d0-6f96-43c9-a547-43ff615799cf" class="simple-table"><thead class="simple-table-header"><tr id="36e0860d-9603-489c-b7c8-592ab06e95d8"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="c0718465-161a-42e0-a347-44cd5b35cd41"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="2babe820-3cc6-42ae-8ae3-baac5f61f3df"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="75ebed9b-898b-4c51-beab-db1952eb8e8c"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="1465976f-9a57-4a0d-ba61-01c4a7a6e9d4"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="714f3fbf-2490-40ec-b2c3-87e56d5851c8" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="7d68fce1-2ce5-495c-99b8-993eede7ee14" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="babdda2e-38a2-48c1-a23a-074fd56b8423" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
