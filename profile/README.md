@@ -102,6 +102,13 @@ TGT Protocol is one of the first lending protocols and margin trading platforms 
 | --------------- | -------------------------------------------- | ----------- |
 | TGT Protocol    | [TGT Audit Report](https://www.verilog.solutions/audits/tgt_finance) |February 24, 2022|
 
+### :briefcase: Hashgraph Name Protocol
+hashgraph.name is a distributed, open, and extensible naming system built on the Hedera Hashgraph.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Hashgraph Name Protocol | [Hashgraph Name Protocol Audit Report](https://www.verilog.solutions/audits/hashgraph_name_protocol/) |February 24, 2022|
+
 ---
 ## :round_pushpin: Severity Categories Standards
 | smart contract risk categorites
