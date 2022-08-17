@@ -107,7 +107,7 @@ hashgraph.name is a distributed, open, and extensible naming system built on the
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Hashgraph Name Protocol | [Hashgraph Name Protocol Audit Report](https://www.verilog.solutions/audits/hashgraph_name_protocol/) |February 24, 2022|
+| Hashgraph Name Protocol | [Hashgraph Name Protocol Audit Report](https://www.verilog.solutions/audits/hashgraph_name_protocol/) |August 11, 2022|
 
 ---
 ## :round_pushpin: Severity Categories Standards
