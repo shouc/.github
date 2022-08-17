@@ -1,0 +1,688 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="../../images/logo.svg" /><title>Hashgraph Name Protocol Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="005f97ef-225e-46ff-ab1c-4f86e401d7bc" class="page sans"><header><h1 class="page-title">Hashgraph Name Protocol Audit Report</h1></header><div class="page-body"><blockquote id="a3248ef5-5e44-486b-bbe3-4b1bc55bdc25" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="342b7f00-2b64-44db-910d-d559865fc755" class="">August 11, 2022</p><p id="984ebe38-480d-422f-a960-b3bfc4b5b54b" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="a94681d6-e01d-4be7-84e8-5d5b2011a31c" class="image"><a href="images/Hedera_Name_Service_Audit_Report.png"><img style="width:1920px" src="images/Hedera_Name_Service_Audit_Report.png"/></a></figure><p id="a9f0f55c-4c36-46fb-8721-c4374ce8996e" class="">This report presents our engineering engagement with the PieFi dev team on their name service protocol based on Hedera – the Hashgraph Name Protocol.</p><table id="0c9ffe11-a36b-474d-ad32-6563a3665e77" class="simple-table"><tbody><tr id="f9707955-8765-4a17-a3f2-092809f82888"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:522px">Hashgraph Name Protocol</td></tr><tr id="0ffbbd9b-abb3-458d-8632-50a2d906f278"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:522px"><a href="https://github.com/pieFi-platform/hashgraph-name-protocol">https://github.com/pieFi-platform/hashgraph-name-protocol</a></td></tr><tr id="0fbf3a0e-86b2-4ea4-96c0-6658618377b0"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:522px">e938ca0236ba53f3284ab2a135bbb7437a1af443</td></tr><tr id="c1730648-4866-48d8-afeb-e2c87803525c"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:522px">Solidity</td></tr><tr id="05581082-e4eb-4c8b-bc73-c224ed2f9257"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:522px">Hedera</td></tr></tbody></table><h2 id="7088589d-cd28-45c0-9577-cb5a0be6a95a" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="bfe3d747-6e38-4bb1-ad71-388cb1ba6e93" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="1ac4f485-d60b-41d0-9f33-d52e3ba5a23b" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="05d6d1e8-1c35-4089-9da3-c5ab7fe8e119" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="b79179fa-bd94-44ad-8f71-3b383aa2694f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7088589d-cd28-45c0-9577-cb5a0be6a95a">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#05d6d1e8-1c35-4089-9da3-c5ab7fe8e119">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#64a52fbc-159d-4dcb-b598-759fa139d330">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7fac49aa-23a8-4f11-a135-8e11035d6acd">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#64a3bf94-78fe-4b4f-8c16-2af02c6a5db2">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#73443cce-714f-444d-933e-afdbb33ff118"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d93e0b94-a152-437f-905c-abc463d696ee">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#44406f54-9aa7-4bee-8ac8-2bad5cf8ecc4">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#095e3ec4-86b6-486f-b508-7cde86e2534f">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#71b9998e-9174-464b-a6e5-79a6e5376100">Disclaimer</a></div></nav></div><h2 id="64a52fbc-159d-4dcb-b598-759fa139d330" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="86eb8c5b-9bbd-46e2-b721-8d85ed603cd0" class=""><details open=""><summary>Service Stages </summary></details></h3><h3 id="d33e35c8-ffd0-46bf-bac9-4fd617407c47" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="5a918a39-6697-48bc-a203-009af0362181" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="62cca128-a857-4f77-bb5c-fc7dcf4ee947" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="c0880279-156f-4724-a876-7c2c87eca4c2" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="bf99ade4-70ca-42ed-b45e-546ad1de45ec" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="a16da793-8af6-4fa7-910b-3df7779077ac" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="e6e65c4c-2e69-4647-b68f-cce17662b953" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="abd95a54-9d40-43b3-945b-a5635399d622" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="88b2b2ad-1aac-4ba7-9868-3da7dc9fabcc" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="244c4f9e-6c89-4f73-9297-03bff8b6073e" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="e2bdf69d-71bb-4292-9581-b8731d00852d" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="b309e1b7-ffe9-4dd4-aca6-9b8a1770e3a9" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="d6f88a4e-575d-45c5-8bdb-31cfb6836ba4" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="5951f23e-245b-4f31-bdc6-52490b5a81fc" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><figure id="a639e0be-3284-4411-ae7c-684a0000113a" class="image"><a href="images/Untitled.png"><img style="width:288px" src="images/Untitled.png"/></a></figure></div></div><h2 id="7fac49aa-23a8-4f11-a135-8e11035d6acd" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="640d02ac-aba4-4586-a9bf-bb5ca538d1fd" class=""><a href="http://hashgraph.name/">hashgraph.name</a> is a distributed, open, and extensible naming system built on the Hedera Hashgraph.</p><figure id="d423fab4-8765-4e07-bab7-672d902a6bb4" class="image"><a href="images/Pifi-Architecture.jpg"><img style="width:3100px" src="images/Pifi-Architecture.jpg"/></a><figcaption><strong><em>Hashgraph Name Protocol Architecture</em></strong></figcaption></figure></div><h2 id="64a3bf94-78fe-4b4f-8c16-2af02c6a5db2" class=""><details open=""><summary>Use Case Scenario</summary></details></h2><div class="indented"><p id="84366c6b-f572-4ef6-8a89-488793e18be8" class="">Hashgraph Name is an extension of yourself in web3 and around the Hedera ecosystem. Similar to Ethereum’s naming service, you can set your Hashgraph Name as the reverse record for your Hedera wallet address. It ties human-readable names like ‘baird.hbar’ to machine-readable identifiers such as Hedera wallet addresses, other cryptocurrency addresses, content hashes, and metadata.</p></div><h2 id="73443cce-714f-444d-933e-afdbb33ff118" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="ed0163e7-0e69-427c-81fc-bd7489e67125" class="simple-table"><tbody><tr id="7242b42f-1a2a-484f-93ce-43ab0aa5819f"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="aefd3391-5a2b-456a-9bdd-dbefe11825e9"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">1</td></tr><tr id="28e5f5af-1474-45b3-9546-363a4ddef94a"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">1</td></tr><tr id="2325dccb-877f-420d-bc1e-bc8628374854"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">5</td><td id="@mfj" class="">5</td><td id="|V?N" class="">3</td></tr><tr id="a847401a-a201-4cfa-aa9e-25648f89d39b"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">4</td><td id="@mfj" class="">4</td><td id="|V?N" class="">2</td></tr></tbody></table><h3 id="54dbbcde-79a9-47bb-aa2c-e56a2c9b5ada" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><ol type="1" id="ec80b1c4-3e85-4b2f-97e3-348bdc3d100d" class="numbered-list" start="1"><li><strong>Function </strong><code><strong>extendExpiry</strong></code><strong> in SLDNode.sol can be called by any person.</strong><table id="f30e232c-84c0-4093-b901-23195a51e210" class="simple-table"><tbody><tr id="28280ab6-6abb-462b-a7aa-9faea487bde8"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="74dce2ba-0104-453a-9348-f359cd6417ab"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol#L100;</td></tr><tr id="f8b0c124-9c78-4ead-ba16-66d9b38fe67f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved </strong>in <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/7cd9d48906129942436d9c05e939d89bd59dc0df">commit 7cd9d48906129942436d9c05e939d89bd59dc0df</a>.</td></tr></tbody></table><ul id="366c7a59-9f17-4e07-b2dc-f5559dd6c69c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="484178cf-69d1-4cdf-9d2f-78b81dac6c04" class="">This is the function used to extend the expiration date of a sub-domain. The function now can be called by anyone. Ideally, the function can only be called by the top-domain owner.</p></details></li></ul><ul id="0e18b6ea-bd34-4b25-8d9a-f24d494a47ca" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="87cb362d-4326-4e33-aedb-d8fcc7184f43" class="">The attacker can call the function arbitrarily to make the sub-level domain chaos. </p></details></li></ul><ul id="5c8f6f16-ec90-4346-b540-52f911238b11" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="0a554fac-08cd-481e-944f-37929ced9cc9" class="">The function should be protected by the <code>onlyTLDOwner</code> modifier.</p></details></li></ul><ul id="58bfedb8-50ad-4c6b-9aa7-aed88bce2d0e" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d51a1e1b-0e44-413a-9b00-b39df9cb8aa4" class=""><strong>Resolved </strong>in <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/7cd9d48906129942436d9c05e939d89bd59dc0df">commit 7cd9d48906129942436d9c05e939d89bd59dc0df</a>.</p></details></li></ul></li></ol></div><h3 id="5188c7cf-2d46-44a1-8677-d5046f9b747c" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="b9729213-aaba-4f86-97c2-267eddaa8889" class="numbered-list" start="1"><li><strong>The same SLD hash might be added twice.</strong><table id="495eea8f-0dbd-4446-8f7b-4e75d92d8803" class="simple-table"><tbody><tr id="958de30a-c208-4f51-a9b6-80574130e8d6"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><mark class="highlight-orange"><strong>Medium</strong></mark></td></tr><tr id="57bd7acc-3d04-4ed1-9f44-38fecc0c9d33"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">TLDNode.sol#L78;</td></tr><tr id="fca085f6-266b-4e52-83d8-b4d160cb5962"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>.</td></tr></tbody></table><ul id="7c29f9f4-7cd9-4429-b8b8-b9fd0d7ddfa4" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="c5e542c7-8c88-4587-b657-ac3fd7db2d78" class="">TLD node might add the same SLD hash record more than one time. </p><p id="e43b4d27-a4b6-4730-a965-19930791ccaa" class="">When the top-level domain (TLD) node adds a new second-level domain (SLD) hash record, it first checks if the SLD node is full or not. If it’s full, a new SLD node contract will be created. In this case, when an SLD hash record is being added to the newly created SLD node contract, we have to first check if the SLD hash record to be added has already been there in the old smart contract before adding it to the new one. Since the new SLD node contract does not have SLD hash records of the previous SLD nodes, the same SLD hash record may be added to the newly created SLD node again.</p><p id="97953d39-1e90-4bf1-b207-f6127dc44eda" class="">The same issue may also occur when updating the SLD nodes (<em>i.e.</em>, registering the expired SLD) for the reason that there might be multiple SLD records with the same SLD hash.</p></details></li></ul><ul id="275b482c-e05d-4b43-a347-a10b22d01843" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="0bda8566-7426-4ac2-90d6-3286b4d644a2" class="numbered-list" start="1"><li>The SLD hash &quot;Alice&quot; exists on the current SLD node;</li></ol><ol type="1" id="ee20dcc5-eb04-4991-9bcf-4d53714384cc" class="numbered-list" start="2"><li>The current SLD node is already full;</li></ol><ol type="1" id="bd3dd7cf-6761-476b-8e0a-9f801a4c5e3f" class="numbered-list" start="3"><li>Alice is able to add the same SLD hash &quot;Alice&quot; to the newly created SLD node;</li></ol><ol type="1" id="5be21165-188f-4d5f-ae3f-1a9322a88506" class="numbered-list" start="4"><li>Now, TLD node exists two same &quot;Alice&quot; hash and each can have different settings and subdomains;</li></ol><ol type="1" id="7440b1da-8ff9-4bcf-99aa-f3960afe3e33" class="numbered-list" start="5"><li>The process can be repeated.</li></ol></details></li></ul><ul id="e85d4728-b48c-4742-b3d1-bfeaecdbd8ac" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="8781ec37-31a7-4f5b-81f5-d4700cf619ee" class="">Please change the code and check if the SLD hash exists first before adding a new record to the existing SLD node or creating any new SLD node.</p></details></li></ul><ul id="9d2ab9b7-a450-4847-802a-722ab382d89d" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="8a3ea083-4b0e-4244-8491-29c0a4cb0bd7" class=""><strong>Acknowledged</strong>. </p><p id="38240742-bb5a-4dee-9778-8da44406bb11" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="b2fb045f-a581-4e54-bcce-d8c868518adf" class="">“<em>This is a known issue. Hedera is different than other chains in that there are restrictions that limit scalability. The name service is designed to scale with large numbers of SLDNodes, so it is not possible for the TLDNode to search all SLDNodes within the gas limit. As this is a known issue, calls to the TLDNode::registerSLD() function will be restricted to only our backend. Our backend will check for SLD existence before registering a new SLD.”</em></blockquote></details></li></ul></li></ol><ol type="1" id="5797b07d-6ddc-4f9a-8d4b-a0893363c6f5" class="numbered-list" start="2"><li><strong><code>SubdomainNode.addSubdomain()</code></strong><strong> has logic flaws.</strong><table id="92cfbb70-6e40-4bac-b8df-a90561c71fba" class="simple-table"><tbody><tr id="a29c1020-c7c1-467e-a50b-1778c98b8cf8"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><mark class="highlight-orange"><strong>Medium</strong></mark></td></tr><tr id="0ea966aa-1196-460b-a461-911d1b69bac2"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SubdomainNode.sol#L67;</td></tr><tr id="4c3523fa-167b-49a7-a602-924e79ef85bd"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="d71230ad-6b98-45fe-9522-5322adf232e1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7ad58ec1-199e-4005-bfba-178fc8dc64fc" class=""><code>SubdomainNode.addSubdomain()</code> has a few logic flaws. Some parameters are not used when the subdomain hash already exists and the information of the subdomain cannot be updated if the length of the subdomain hash array reaches the max record limit.</p><p id="f0daabfb-8ac0-4d47-b4ea-fd58c772a9de" class="">The function <code>SubdomainNode.addSubdomain()</code> code is as follows:</p><pre id="730cc506-4db1-4702-b1a3-3beda8dc5443" class="code"><code>function addSubdomain(bytes32 _subdomainHash, string memory _name, address _owner) external onlySLDNode returns(int32) {
+  require(subdomainHashes.length &lt; maxRecords, &quot;This contract is full, no more records can be added.&quot;);
+  if(records[_subdomainHash].owner == address(0)) {
+      subdomainHashes.push(_subdomainHash);
+      names.push(_name);
+      records[_subdomainHash].name = _name;
+  }
+  records[_subdomainHash].owner = _owner;
+  return HederaResponseCodes.SUCCESS;
+}
+</code></pre><ol type="1" id="1fe988f8-fcbd-4105-8656-52416459eebc" class="numbered-list" start="1"><li>If the <code>_subdomainHash</code> exists in the <code>records</code> mapping, the parameter <code>_name</code> is never used. The subdomain’s name cannot be updated after being created.</li></ol><ol type="1" id="da637e8a-dd7b-47dc-8957-122a3572fe82" class="numbered-list" start="2"><li>The function will revert when the subdomain hash length reaches the max record limit. The information like <code>owner</code> of the existing subdomain cannot be updated.</li></ol></details></li></ul><ul id="817b1586-7ccb-4c50-ba39-d7895c2bf926" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="bf9f73f2-60d1-4e52-97f6-fe625a1be3ae" class="numbered-list" start="1"><li>The subdomain hash length reaches the max record limit.</li></ol><ol type="1" id="4ecd6c3e-d264-429d-9b5c-4ab3f5658619" class="numbered-list" start="2"><li>Alice cannot update the subdomain’s owner because the function reverts.</li></ol></details></li></ul><ul id="32f513a7-fc6d-45ab-a708-5727298bcf41" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><ol type="1" id="8947cb89-75b5-42d4-ac55-3e7a0f67872b" class="numbered-list" start="1"><li>Please consider checking if the length of <code>subdomainHashes</code> array exceeds the max record limit or not only when adding a new subdomain.</li></ol><ol type="1" id="dd694714-7c0a-449f-88e2-f6490b3fbd26" class="numbered-list" start="2"><li>Please double-check and confirm that the <code>name</code> does not need to be updated.</li></ol></details></li></ul><ul id="b1c282f9-fa1b-4bd3-a8af-47cbb6bfb2da" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="8db86776-99aa-4e66-917a-338b5c38cc1c" class="">The 1st issue is that the <code>_name </code>argument is unused in a specific case. </p><p id="41381190-c0bc-49ea-b3bc-f06ccdae7feb" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="89ea2897-1da5-48a4-bb91-2155df62cbd4" class="">“<em>This is intentional. The subdomain contract was designed to be as lean as possible. The </em><em><code>_name</code></em><em> parameter here is the text form of the </em><em><code>_subdomainHash</code></em><em>. If the subdomain already exists, then there is no reason to update the name.”</em></blockquote><p id="49324d35-088a-4c0a-9065-c8bd865d03ef" class="">The 2nd issue is that there were flaws in the logic of the function. Those flaws have been resolved in <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">commit b3a22e085eac735371064a14e95e972ba721d078</a>.</p></details></li></ul></li></ol></div><h3 id="a2150153-496e-4ca5-b80a-cd5ebb34ce44" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="82b600b8-556e-4127-b847-814ddc9d6032" class="numbered-list" start="1"><li><strong>The second-level domain can only have limited subdomains.</strong><table id="06ec083e-1ed9-4e6c-87bc-ab15c52bb8cd" class="simple-table"><tbody><tr id="71d0b8cf-c1ff-4cba-847a-63a1cfa60825"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="1d639af1-3829-49f2-aff3-c9849ba953d0"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol#L125;</td></tr><tr id="dd1a26bd-4ec8-4cd8-80e0-2d39c144920a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>.</td></tr></tbody></table><ul id="312fd918-853a-4b45-ace8-2dba1952c4f4" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="b6ac78d7-94cc-4c5d-a179-97efa2d0b519" class=""><code>SLDNode.addSubdomain()</code> will revert if the corresponding subdomain node reaches the max record limit.</p><p id="6b724a37-607e-4541-b169-69271b23a715" class="">According to the contract code, every second-level domain will only have one subdomain node to maintain the subdomain record. No more subdomain can be added to the second level domain if the amount of subdomains maintained by the subdomain node reaches the max record limit.</p></details></li></ul><ul id="66a72eb1-9955-4059-9802-c3cacefa0104" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="4d961ab7-fa8d-4332-9f36-d21e73ef63cd" class="">N/A</p></details></li></ul><ul id="16309caf-2d3d-4950-9d5c-42def9bcf3e6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="9b6d7eda-0a94-4396-8798-6bccadcd74e8" class="">Create a new subdomain node for a second-level domain when a single subdomain node reaches the max record limit.</p></details></li></ul><ul id="ce69f357-4485-495d-93f0-ca3fb380c735" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="aaf2661c-54d9-408e-92fb-fee753c97f9e" class=""><strong>Acknowledged</strong>. </p><p id="ab27ba34-49a3-49cf-acac-04ba6a7fa939" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="9c987f9b-c137-44bc-8fc2-4b924cea720c" class="">“<em>This is intentional. In our testing, we found that the Subdomain.sol contract can store more than 2000 subdomains before the contract runs out of space. We find this is an acceptable limitation.”</em></blockquote></details></li></ul></li></ol><ol type="1" id="e266ed79-b2cb-4794-a2da-95788847e035" class="numbered-list" start="2"><li><strong>Domain expiry date extension does not check if the SLD hash exists.</strong><table id="c6999611-3c8c-4bc0-8925-b571b73f3fb0" class="simple-table"><tbody><tr id="e94a2e6c-81cc-4301-a203-e7c17db20779"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="9f9080b9-5f34-4d69-a9e2-c8f547122e0c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol#L90;</td></tr><tr id="4bfec885-b43a-4258-bebe-43f9d9d3b5ce"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="90a1299f-1020-470e-9754-f8c1f3a7bb12" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="0f8e366a-1133-4c35-9273-c547e5c4da39" class="">SLD hash existence is not checked when extending the expiry date.</p><p id="03909c2b-b9f7-42ca-9e7d-f74374308e80" class=""><code>SLDNode.extendExpiry()</code> does not check if the SLD hash record exists or not. SLD hash record that does not exist will have an expiry date after calling this function. </p></details></li></ul><ul id="a0957ded-3ac2-48f1-9372-221a2d0ddcf0" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="fe1b1d06-a539-4a4d-87ce-9b31b7972e17" class="">N/A</p></details></li></ul><ul id="26912104-f4cd-4c1d-a021-bad7b05dafaf" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="9c1af0ed-ebcd-4ca0-82e8-a606a90ad832" class="">Check if the SLD hash record exists before extending the expiry date.</p></details></li></ul><ul id="b2d03c42-3cf3-4a2f-a22a-f27e54fe5f83" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="2d0a86a4-2018-42f7-9998-e80d564d2110" class=""><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>. </p></details></li></ul></li></ol><ol type="1" id="121d3c09-398f-4fe6-8a9b-a2f3e71bb64a" class="numbered-list" start="2"><li><strong>Using </strong><strong><code>selfdestruct</code></strong><strong> is not recommended. </strong><table id="0a2b08e5-c69e-4fe2-a78c-de28bc24a714" class="simple-table"><tbody><tr id="3b1020d7-afbe-4110-bbdb-c316ea43b2d7"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="ef2cbcf6-b242-4ae5-93ed-3470005c0cfa"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">HNS protocol</td></tr><tr id="413dd4ed-7849-4642-a883-25a422856cd4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="d4d6d88c-20c2-4c31-8e06-5d80636ddc80" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="272eaea1-785b-4f6a-8033-5ad514026490" class="">The function <code>selfdestruct</code> is used in multiple contracts. Consider removing the self-destruct functionality unless it is absolutely required</p><p id="7f7a2f99-9b48-4fa2-bec2-56ae86a9ae7a" class="">Using <code>selfdestruct</code> makes the contract a suspicious metamorphic contract and places users under contract re-init risks. Consider removing the self-destruct functionality unless it is absolutely required. If there is a valid use case, it is recommended to implement a multi-sig scheme so that multiple parties must approve the self-destruct action.</p></details></li></ul><ul id="9547aadd-8003-4c1a-99b7-5b6433d91b8e" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="11ec4aac-c281-420e-a793-ff94bc640248" class="">The contract is self-destructed and re-initialized as a new contract. In this case, users lose all the data and values stored on the original contract.</p></details></li></ul><ul id="44f5bc4a-6891-4772-b82b-f32458f3b3a9" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="63670676-0ec2-488e-a9d1-dc09026e47f4" class="">Implement a multi-sig scheme so that multiple parties must approve the self-destruct action.</p></details></li></ul><ul id="86200dde-7c96-4811-a355-0d251769fbb2" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="67421430-67ed-416c-baa0-49e7194a3005" class=""><strong>Resolved </strong>in commits <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a> and <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/743971fae48b905e18435f6370890a584387efea">743971fae48b905e18435f6370890a584387efea</a>. The self-destruct function is removed and the major contracts are now pausable. </p><p id="84dd97fa-f0e7-4174-8c0c-e843e8b6ab1f" class="">PieFi team implemented this feature so that in the event of an emergency they will be able to pause the contracts and prevent any state changes. Meanwhile, read operations will still be possible. </p></details></li></ul></li></ol><ol type="1" id="ee879c59-1db5-4c57-bfdb-6a0e6579f70b" class="numbered-list" start="3"><li><strong>No function to update the </strong><code><strong>SubDomainNode.maxRecords</strong></code><table id="e8cf8705-109b-43dc-a8a7-9bb3e4704fa5" class="simple-table"><tbody><tr id="2f286229-439a-42cc-8361-7fc0461ee7aa"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="182e38fb-9b3f-46b9-8add-ec355f449b2c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SubdomainNode.sol#L11;</td></tr><tr id="13b0221f-8880-444b-a6e4-75e1e088d12c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>.</td></tr></tbody></table><ul id="99fe33bd-f654-4193-a9f3-f3365c7abcf4" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7c92d021-74ce-4cb9-aa7c-3ec23442a5ef" class="">There is no function that can be used to update the variable <code><strong>SubDomainNode.maxRecords</strong></code><strong>.</strong></p></details></li></ul><ul id="c51fe936-175c-4921-b879-80434e86ea5c" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="acfa6d24-f062-4b2c-b850-3838bcbf9081" class="">N/A</p></details></li></ul><ul id="d2c5cc00-a505-490e-8c6e-7796ad2dc040" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="c32093ed-81ec-4227-b646-0a77704b95b9" class="">Mark the variable as <code>immutable</code> or add a function to update the variable’s value.</p></details></li></ul><ul id="c3ca4b3b-e972-4600-a3e9-2783975c8913" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="ab3594a7-e918-498f-b3cb-80aadc11df3c" class=""><strong>Acknowledged</strong>. </p><p id="efe0c7fc-8e30-4c77-8a7d-1d5ac5ab465b" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="05e0ef3a-dc36-4380-b381-de1cd49d0cc7" class="">“<em>This is intentional. In our testing, we found that the Subdomain.sol contract can store more than 2000 subdomains before the contract runs out of space. We find this is an acceptable limitation.”</em></blockquote></details></li></ul></li></ol><ol type="1" id="3388f2ce-4bf3-4a34-b8b1-1aea5748f2d4" class="numbered-list" start="4"><li><strong>Lack of event emission for critical operations.</strong><table id="59c687e2-3c09-4d03-9074-05ce32a3ed36" class="simple-table"><tbody><tr id="9fb88e6c-3858-40d5-8039-e82e2b4950a5"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="4abfb698-a56e-44f8-ad92-d0b869f91e4d"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">Hashgraph Name Protocol</td></tr><tr id="9fa446fb-1cf8-4737-b23c-a74bd8ac08ff"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="ef66c5e2-fb41-4ace-a1a7-6558f2c6fd15" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="74eac872-5bd9-40bb-bb09-36228c895802" class="">Many of the HNS contract functions related to critical operations do not emit necessary events. Events are vital aids in monitoring contracts and detecting suspicious behaviors. Operations that perform critical operations should trigger events so that users and off-chain monitoring tools can account for important state changes.</p></details></li></ul><ul id="c580a996-5229-4603-9981-e25233853e5b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="3faa6606-fba1-4e08-8135-4800b0758e18" class="">N/A</p></details></li></ul><ul id="96295721-c5f9-4c23-9ca6-6a2ab13140cd" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="aa38440d-e3c8-4b9f-b99f-92a5598fbe9a" class="">Please consider emitting events in functions that perform critical operations.</p></details></li></ul><ul id="8303df8a-80d1-423f-b1ab-cb49d294fc14" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="0d229193-1fa2-44ef-90a9-956dd6e12dab" class=""><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>. </p><p id="39486813-419c-4c50-beeb-1c5055d4862d" class="">In this commit,<code>SetSLDInfo</code>, <code>ExtendExpiry</code>, <code>UpdateSLD</code>, <code>AddSubdomain</code> ,<code>SetSubdomainInfo</code>, <code>AddSubdomain</code>, <code>TokenTransfer</code> seven events are added.</p></details></li></ul></li></ol></div><h3 id="d73f3f89-d4f0-4301-86e9-04b8b65dbf44" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="45b406ae-cf4e-45b2-ae73-2258b1dcf3cd" class="numbered-list" start="1"><li><strong>No view function to fetch array length</strong><table id="f1a822c9-50a3-4dda-817a-4b6c3b74affe" class="simple-table"><tbody><tr id="68d83614-273b-4fb1-88b4-6e3aaa1cb4f4"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="2cf09b68-8a25-4211-afa0-6aed9ef86569"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol#L10; 
+SubdomainNode.sol#L8, L9;</td></tr><tr id="6dfd8abc-19aa-4fbc-acdd-60e12bdcfd1e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>.</td></tr></tbody></table><ul id="e06eb675-6949-4d08-8524-814a211f6f56" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a4f40be4-557b-4769-beb9-8ca41b1d1cad" class="">There is no view function to fetch the length of array <code>SLDNode.serials</code>, <code>SubdomainNode.subdomainHashes</code>, <code>SubdomainNode.name</code>.</p></details></li></ul><ul id="8bfce7cc-8c63-46e4-bf72-36a8e39d45fc" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9cb8af2d-6f3a-4a4e-902a-69ae3a63301f" class="">N/A</p></details></li></ul><ul id="be491898-4143-4154-86eb-f2e7a09f795a" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ab881496-1918-485a-911c-9dda09e6c96b" class="">Add a <code>view</code> function to fetch the length of arrays.</p></details></li></ul><ul id="66f3c3bb-6f81-46a4-ac9c-825aebb83c4b" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="98e5bbe7-1e47-459a-8014-93b6b546c0d9" class=""><strong>Acknowledged</strong>. </p><p id="9bd5fd13-eb79-4eb2-8e0c-3019d1f0c1d6" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="e866a34a-4b2d-4ad8-abe5-11aeb88bed03" class="">“<em>We don’t have a use case to be able to query for the array lengths.”</em></blockquote></details></li></ul></li></ol><ol type="1" id="f803fadc-7f16-4329-b250-6b1bdeaa7b54" class="numbered-list" start="2"><li><strong>Add view function to get array item by index</strong><table id="2537eec9-906f-4f8d-a86d-cc417ba17283" class="simple-table"><tbody><tr id="84d5a9b2-9a82-4a09-ae47-1693cdb936cf"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3b51b265-388d-4f47-8d12-a6c50ba70619"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol;
+TLDNode.sol;
+SubdomainNode.sol;</td></tr><tr id="6d7cc344-4d00-4cdb-b33a-55650e296fe6"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>.</td></tr></tbody></table><ul id="d45b7774-37da-4265-9e08-0cefa8ed6dc0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="ac53b5e6-c387-4cc5-8010-ccba755c9d16" class="">A <code>view</code> function can be added to fetch array items by index. </p></details></li></ul><ul id="e79d011e-40ed-44b2-85a9-a17ae3719529" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="a4e0a371-55e3-4acc-9d53-9b90ccd8fbde" class="">N/A</p></details></li></ul><ul id="15e8d984-a4ff-411d-bd1a-1ad82f13734c" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="74251f18-a6b3-44eb-a856-1810d0186b4d" class="">Add view functions to get array items by index.</p></details></li></ul><ul id="8a5530a9-3b31-4007-bfbd-87bcaa469c7c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="17316e7f-f016-43a3-8d8b-fdc1ad564647" class=""><strong>Acknowledged</strong>. </p><p id="196089cf-ad60-42a3-814d-9431efc8402b" class=""><strong>Reply from PieFi team: </strong></p><blockquote id="543b1a69-691a-44ce-a570-48858805408a" class="">“<em>We don’t have a use case to fetch individual items in the arrays. They are mostly used for tracking purposes. We do, however, want to be able to fetch the entire array in the event we want to view all data in the Node.”</em></blockquote></details></li></ul></li></ol><ol type="1" id="99392c60-af70-4869-b10d-9cfadaf4c695" class="numbered-list" start="3"><li><strong>Add view functions to retrieve valid SLD nodes</strong><table id="a0f5b899-7475-4d2c-b278-06303ef05ff0" class="simple-table"><tbody><tr id="7f8ac608-667b-43e0-aa85-7b67b16e5aed"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3f2e0e26-dcde-41ab-8489-c2732c674d3a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol;
+TLDNode.sol;</td></tr><tr id="fdd5681a-2ce5-47f3-bbf3-f99e7d2bc783"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="ef3a1891-d6b7-45f4-a308-055b389eb664" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f4185388-9ab8-44b9-adf7-1837c78f3346" class="">SLD nodes contract still exists in array in TLD node contract after self-destructed. A view function to view all the nodes that are self-destructed can be added. </p></details></li></ul><ul id="3bca9f06-e2ec-470c-8bf8-0996920c659c" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="9416c355-3e54-431f-a7e6-88c72adcc6bc" class="">N/A</p></details></li></ul><ul id="7bd4cb9b-ed78-4efd-88b4-390f07df726d" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="e92d173a-9355-47f7-aa36-bc23b25d7d14" class="">A <code>view</code> function to view all the nodes that are self-destructed can be added. </p></details></li></ul><ul id="8b1c31d2-4c27-45e0-9654-27f94c2a59ac" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a70971f1-26e3-460a-ae4e-48c54532f5c8" class=""><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.  </p></details></li></ul></li></ol><ol type="1" id="a8543987-cead-4903-a90f-4d60d98b2552" class="numbered-list" start="4"><li><strong>Access control on external view functions </strong><table id="0d3c5106-3bf1-4e69-8d32-0c73223118e3" class="simple-table"><tbody><tr id="27c716a2-2481-4c95-9800-e9411d31fd97"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="0e8676f0-ff9e-492c-bf9f-88c33b51c155"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">SLDNode.sol#L50, L54;</td></tr><tr id="2944dd43-e94f-42a4-af97-78b57dfd3f99"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>.</td></tr></tbody></table><ul id="e2d0dd2c-1ffc-4db7-ab48-935f3405f31f" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f209106b-efbb-4691-97d0-0563dd91c7fe" class="">The <code>view</code> functions <code>SLDNode.getMaxRecords()</code> and <code>SLDNode.getNumRecords()</code> will revert if called by non-TLD owner. Access control on public view functions is unnecessary since everything on the blockchain is public and can be accessed by everyone.</p></details></li></ul><ul id="34e168bf-0be5-4b88-a321-56019d73de7d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="4a684e7b-34d3-46f5-bb20-13b0ec574cad" class="">N/A</p></details></li></ul><ul id="1d91dbd2-0797-498e-bdbd-86875aaec151" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="9797cfdc-d9bb-4ba2-aadd-2b2e3231aff7" class="">Suggest removing the access control if it is unnecessary.</p></details></li></ul><ul id="97d9c89a-ed03-4c4b-88d0-9affd70821d9" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="555684d3-6934-4238-86a0-85d91ec334d8" class=""><strong>Resolved</strong> in commit <a href="https://github.com/pieFi-platform/hashgraph-name-protocol/commit/b3a22e085eac735371064a14e95e972ba721d078">b3a22e085eac735371064a14e95e972ba721d078</a>. </p></details></li></ul></li></ol></div></div><h2 id="d93e0b94-a152-437f-905c-abc463d696ee" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><ul id="49716842-defb-4c30-9926-478c1397aa5d" class="bulleted-list"><li style="list-style-type:disc">Owner of TLD node manager<p id="27c43641-5c48-439b-9de1-46418511f881" class="">The owner of <strong>TLDManager.sol</strong> is the deployer of this contract. The ownership cannot be renounced or transferred to others. The owner can:</p><ul id="a25a177e-dcfa-4f70-8a61-ed759dc8f349" class="bulleted-list"><li style="list-style-type:circle">Register new TLD nodes or override any registered TLD nodes;</li></ul><ul id="48af02ce-fca9-49e9-a870-da653f4c8f36" class="bulleted-list"><li style="list-style-type:circle">Self-destruct <strong>TLDManager.sol</strong>.</li></ul></li></ul><ul id="60e5b70e-ca40-4a98-833c-f5b58cd96251" class="bulleted-list"><li style="list-style-type:disc">Owner of TLD node<p id="8ba118da-8044-405c-8f54-9d385cd472dd" class="">The owner of <strong>TLDNode.sol</strong> is the deployer of this contract. The ownership cannot be renounced or transferred to others. The owner can:</p><ul id="a4bf8b9d-4eb1-407c-8ad5-619f9033347a" class="bulleted-list"><li style="list-style-type:circle">Register new SLD node records;</li></ul><ul id="eebc378f-caf0-4c6d-82fd-6bf681a8a940" class="bulleted-list"><li style="list-style-type:circle">Register expired SLD node records;</li></ul><ul id="6f26dea0-bcb3-48ea-b5bb-7753ac9addc8" class="bulleted-list"><li style="list-style-type:circle">Extend the expiry date of an SLD record;</li></ul><ul id="ff4c274e-611a-400c-9e85-b7cbe2cca409" class="bulleted-list"><li style="list-style-type:circle">Add subdomain;</li></ul><ul id="529c38b4-30d5-4370-8e22-6482a9214af8" class="bulleted-list"><li style="list-style-type:circle">Set subdomain info;</li></ul><ul id="f83a9441-c1c1-4e53-8013-193ad958cdf5" class="bulleted-list"><li style="list-style-type:circle">Self-destruct <strong>TLDNode.sol</strong>;</li></ul><ul id="9c056679-972a-433c-b42d-84d0f9d9dc39" class="bulleted-list"><li style="list-style-type:circle">Self-destruct <strong>SLDNode.sol</strong>;</li></ul><ul id="fcddc73d-9f8d-4f8d-b09a-5a0f236e65cd" class="bulleted-list"><li style="list-style-type:circle">Self-destruct <strong>SubdomainNode.sol</strong>.</li></ul></li></ul></div><h2 id="44406f54-9aa7-4bee-8ac8-2bad5cf8ecc4" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="cbb54279-ffef-4a4f-b984-5de2e5d73d2f" class="simple-table"><thead class="simple-table-header"><tr id="334fcc04-e62c-44c0-98d3-a33b1badb1e0"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="c470f1c6-ae01-44c9-bcb8-664e08687e5f"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="3589c235-f3c9-4896-a864-15c1ab49019b"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="c07cf514-ea35-4f1d-a205-99edfa9fd98b"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the client&#x27;s decisions.</td></tr><tr id="37168772-d4c0-444b-b802-0ac5de11c06a"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="095e3ec4-86b6-486f-b508-7cde86e2534f" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="0b7e2cc9-c173-4133-b2a6-2321106d74ac" class="simple-table"><thead class="simple-table-header"><tr id="b364f25c-7771-42ab-99c2-b260dfe3b334"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="3e8c48e9-4900-41a9-8c3e-6d1e2a3abea9"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="e26fccc6-53a6-469f-b534-d456a40f8b48"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="2c9fea50-0b2f-4a4b-a8ea-86022de01532"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="7a66617d-72bf-4637-a7ea-be5ddb743f17"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="71b9998e-9174-464b-a6e5-79a6e5376100" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="e824bc9e-7dfc-4c5f-b07a-8c84e4a25ee1" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="9824b7aa-f321-4e43-b7ae-4097bfc71019" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
