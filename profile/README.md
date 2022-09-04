@@ -109,6 +109,20 @@ hashgraph.name is a distributed, open, and extensible naming system built on the
 | --------------- | -------------------------------------------- | ----------- |
 | Hashgraph Name Protocol | [Hashgraph Name Protocol Audit Report](https://www.verilog.solutions/audits/hashgraph_name_protocol/) |August 11, 2022|
 
+### :briefcase: Kolor
+Kolor’s protocol is a metaverse project that includes tokens, NFTs, and a marketplace system.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Kolor Protocol | [Kolor Protocol Audit Report](https://www.verilog.solutions/audits/kolor/) |August 19, 2022|
+
+### :briefcase: Celo Contracts Audit
+Implement OdisPayments.sol.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Celo Contracts Audit PR#9740 | [Celo Contracts Audit PR#9740 Audit Report](https://www.verilog.solutions/audits/celo_pr_9740/) |August 29, 2022|
+
 ---
 ## :round_pushpin: Severity Categories Standards
 | smart contract risk categorites

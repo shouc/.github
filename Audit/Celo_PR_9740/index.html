@@ -1,0 +1,678 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="https://www.verilog.solutions/verilog.svg" /><title>Celo Contracts Audit - PR#9740</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+details * {
+      pointer-events: auto;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9a11abd6-b7b1-485b-aab0-c5c6cb6b4453" class="page sans"><header><h1 class="page-title">Celo Contracts Audit - PR#9740</h1><table class="properties"><tbody></tbody></table></header><div class="page-body"><blockquote id="9cef2984-8152-4265-9262-64bfc198899f" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="c6b9ca5a-d2ca-429a-821f-2de515823755" class="">Aug 29, 2022</p><p id="99c61977-feda-4080-9f54-daaefd003eb9" class="">by <strong>Verilog Solutions</strong></p></blockquote><p id="2ebd95ff-fc7e-41fc-b954-83eab3f52868" class="">This report presents our engineering engagement with the Celo dev team on the Celo contracts audit for <a href="https://github.com/celo-org/celo-monorepo/pull/9740">PR#9740</a>.</p><table id="e91eaa8b-0960-4307-b74c-0890ae2fd295" class="simple-table"><tbody><tr id="98192f0a-7fef-4ab5-a17b-bd78abbe1e3d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:504px">Celo Contracts Audit - PR#9740</td></tr><tr id="624374c2-03be-4492-9ac7-a24cb71c78d6"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:504px"><a href="https://github.com/celo-org/celo-monorepo">https://github.com/celo-org/celo-monorepo</a></td></tr><tr id="939733d9-f802-422c-8604-f853032e2dfe"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit</th><td id="h@it" class="" style="width:504px"><a href="https://github.com/celo-org/celo-monorepo/pull/9740">PR#9740</a> up to commit <a href="https://github.com/celo-org/celo-monorepo/commit/1452cccf55a506454f6fec72d268b78121c027cd">1452ccc</a></td></tr><tr id="c19d61bf-ff40-436c-997c-2f9da65f099e"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:504px">Solidity</td></tr><tr id="4a1fc623-0eda-4fdd-8f14-e0d0d4e8139c"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:504px">Celo</td></tr></tbody></table><h2 id="71992eb3-efea-44a7-b1f7-e6ced0b1a4b1" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="fb1720e8-918b-4b67-9034-75f143eb5f32" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="28063adc-4915-49a4-a0f5-b80b3ce8bad8" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="ff716d34-7134-479b-ad24-455b411a5cbb" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="0c1de877-4a92-4e4e-b9e6-bfddcdf88f57" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#71992eb3-efea-44a7-b1f7-e6ced0b1a4b1">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ff716d34-7134-479b-ad24-455b411a5cbb">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4a81b43c-f024-458f-a0fc-a76570444423">Audit Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#53e6f679-d4f5-4070-a115-e7bdf4c845ea"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#31e7de7b-2142-4887-90c7-7a23b90b75bc">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8d64c59b-a360-4a86-adce-68aba41782b8">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e62f11a0-9ec4-425d-a6f4-f6da68847013">Disclaimer</a></div></nav></div><h2 id="4a81b43c-f024-458f-a0fc-a76570444423" class=""><details open=""><summary>Audit Scope</summary></details></h2><div class="indented"><table id="f82b2bf1-5ed5-4442-b12c-7310e7b88647" class="simple-table"><thead class="simple-table-header"><tr id="f931d6ff-7ee0-4951-be74-4315846b257e"><th id="}ML}" class="simple-table-header-color simple-table-header" style="width:478px">File</th></tr></thead><tbody><tr id="59e413c7-7781-4535-8de9-cf78a0c14c90"><td id="}ML}" class="" style="width:478px">packages/protocol/contracts/identity/interfaces/IOdisPayments.sol</td></tr><tr id="971b6259-9cee-40a7-876e-12fe26a91077"><td id="}ML}" class="" style="width:478px">packages/protocol/contracts/identity/OdisPayments.sol</td></tr><tr id="bcfb1e43-a6bf-48ec-957a-81170c49ee5b"><td id="}ML}" class="" style="width:478px">packages/protocol/contracts/identity/proxies/OdisPaymentsProxy.sol</td></tr></tbody></table></div><h2 id="53e6f679-d4f5-4070-a115-e7bdf4c845ea" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="124ab9ce-62d6-4852-8055-10845a04f0fd" class="simple-table"><tbody><tr id="52fc2097-5d28-48bb-bd91-b1f608f7fc07"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="fcc57660-6596-4177-81ec-2ac7828d19d6"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="3630845e-8268-4af9-bb8e-13494704099b"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">0</td></tr><tr id="45decde3-0a6c-4fd8-a3cd-0f901871a834"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="0b0c962a-a159-4456-837c-e49ea4bc403d"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">0</td></tr></tbody></table><h3 id="07d0daac-6117-4c9b-9c78-585fecde1d5a" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="0e183afd-4fb4-4de2-89e2-0018ce2f44a8" class="">None ; )</p></div><h3 id="ca48bdd1-5394-4635-a7bf-b21bde4aaf89" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="bb690aa1-299e-4f64-8080-c56548051b00" class="numbered-list" start="1"><li><strong>Locked funds</strong><table id="5245ce8f-aa36-4c58-abeb-9325b25ca46b" class="simple-table"><tbody><tr id="774a17c1-3958-4bb7-87a9-56c3b07ee6a0"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><mark class="highlight-orange"><strong>Medium</strong></mark></td></tr><tr id="8e6270aa-3219-4dd7-8732-8481c758d395"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">packages/protocol/contracts/identity/OdisPayments.sol#L63;</td></tr><tr id="268734f3-57d3-4851-a607-89d0d038268b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Commit</th><td id="y}lo" class="" style="width:528px"><a href="https://github.com/celo-org/celo-monorepo/pull/9740">PR #9740</a>;</td></tr><tr id="01ff3a0e-4dc9-4b3a-a9ff-45847d354bbf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="e884287d-eecb-4150-b87b-a5fc9bd5d7b1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a046e2dc-4a04-4c95-a926-45b72fac0a73" class="">Function <code>OdisPayments.payInCUSD()</code> allows users to transfer tokens to the contract but there are no other functions to withdraw them out of the contract. This causes tokens to get locked in the contract. </p><p id="1e9e1f82-5570-41a8-9485-a12a04904661" class="">The function <code>OdisPayments.payInCUSD()</code> let users send <code>cUSD</code> to the contract to pay for ODIS quota. Anyone can call this function to transfer <code>cUSD</code> to this contract and the mapping that tracks each address paid amount will be updated. However, there is no function in this contract that allows people to retrieve the tokens that are sent to the contract. <code>cUSD</code> will be locked in the contract.</p></details></li></ul><ul id="3ba2b270-30fa-4f78-9c0b-6e3d5077b742" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="bc84b903-8a43-4f26-ab96-2913853eae71" class="numbered-list" start="1"><li>Alice calls the <code>payInCUSD()</code> function to pay for her ODIS quota;</li></ol><ol type="1" id="bdcfd3ae-7c9b-480e-82ce-6a06e7af2daf" class="numbered-list" start="2"><li>She sends 3 <code>cUSD</code> to the contract;</li></ol><ol type="1" id="295d9e91-19c5-4345-97c0-7fb779ef2a93" class="numbered-list" start="3"><li>Now, no one is able to retrieve those tokens.</li></ol></details></li></ul><ul id="c383a757-7d29-4f35-a692-34f63b59edfa" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="e6d621fe-d6a4-47fd-a2e1-b42dabc0b092" class="">Add a function that can retrieve tokens.</p></details></li></ul><ul id="7fd01fe9-258e-4a84-851f-d96e0c336f1b" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="12785680-b3b9-4542-8785-ad24e773f1aa" class=""><strong>Acknowledged.</strong></p><p id="bbeacb85-6d99-4e16-863a-9505079b783c" class="">Response from the ODIS team: </p><blockquote id="ab2cca7b-d8cb-40e4-bdb9-1b04d55f4960" class="">“<em>The goal of this contract is to track all-time payments made from anyone, which will then be used to calculate quota by the ODIS service off-chain. We may upgrade the contract in the future to allow for transferring funds elsewhere, but for our purposes now, we want to essentially not allow any funds to flow out.”</em></blockquote></details></li></ul></li></ol></div><h3 id="64562c17-7826-4445-9969-7f6a9cc085c6" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><p id="7b68720c-c24e-468b-b90a-f2adc31fd946" class="">None ; )</p></div><h3 id="bd3335d4-3481-4baf-9b17-834c7616d0e1" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="160141b0-6f03-475d-8594-81e9b492dcba" class="numbered-list" start="1"><li><strong>Magic Numbers</strong><table id="5f73cb6c-d95d-49c3-9d18-cd9d77866265" class="simple-table"><tbody><tr id="ae7f818c-58bd-4a27-9e10-60b68b667243"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="e1f26a03-072b-45f3-b6d1-e297f4d5aa1a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">packages/protocol/contracts/identity/OdisPayments.sol#L46;</td></tr><tr id="94d90928-007c-4b5b-963f-343e0299a7c8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Commit</th><td id="y}lo" class="" style="width:528px"><a href="https://github.com/celo-org/celo-monorepo/pull/9740">PR #9740</a>;</td></tr><tr id="14d524a3-7e0d-4111-a175-9e5445a6f23a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="bbb7379a-a090-4864-953f-be7f77de6aa6" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f8785be4-7bc0-4e72-9d73-f5d9a82e5797" class="">Function <code>getVersionNumber()</code> returns some magic numbers. Those magic numbers can be replaced by constants for better understanding.</p></details></li></ul><ul id="be7c5c26-7aae-4b2a-8a29-f083fc4060cb" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="c382f9d6-4fd2-4ca0-b7d5-5563ef169f94" class="">N/A.</p></details></li></ul><ul id="a04c20a7-0443-4ecb-81e8-00b65b924626" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="98410296-01d0-4817-a91b-bff13a653e10" class="">Define those magic numbers using the <code>constant</code> keyword.</p></details></li></ul><ul id="18af92ea-e5fa-40b8-a151-7e25f37dba67" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a6242f40-d433-488d-a78d-6c53c0efa510" class=""><strong>Acknowledged.</strong></p><p id="24003021-3cc9-4d27-a323-756cb9d1eb24" class="">Response from the ODIS team: </p><blockquote id="45d6eed3-bd04-423c-a332-343989a9c858" class="">“<em>Yes, this function is just for querying the current version of the contract, following the format of the other Celo Core Contracts (described a bit </em><em><a href="https://docs.celo.org/community/release-process/smart-contracts">here</a></em><em> [</em><em><a href="https://docs.celo.org/community/release-process/smart-contracts">https://docs.celo.org/community/release-process/smart-contracts</a></em><em>]). When we want to release a new version of the contract, we will update the fixed numbers returned. The Celo Core Contracts generally follow the proxy upgrade pattern (as is the case here), so for this function (and any other changes), we would need to deploy a new version of the logic contract and use the Celo governance process to point the Proxy contract -&gt; this new logic contract. (Celo Governance owns the Celo core contracts, as would be the case for this contract as well after the release).</em>”</blockquote></details></li></ul></li></ol></div></div><h2 id="31e7de7b-2142-4887-90c7-7a23b90b75bc" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="62fe114f-9f88-43dc-a848-715d6ba40c50" class="simple-table"><thead class="simple-table-header"><tr id="60b7012e-e87c-4589-a29b-8526b3d7c18a"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="3b065787-6722-4422-b3dd-a1275ad1451d"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="19822521-4337-472b-b455-e70b276983dd"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="b179ca86-2e83-4575-98a8-dbbb75fbd8c4"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="e697f472-e29b-45c1-b4cd-e02c8e6c8945"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="8d64c59b-a360-4a86-adce-68aba41782b8" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="2ea99763-8817-4f35-b285-e9fd573c793b" class="simple-table"><thead class="simple-table-header"><tr id="831143c0-8ab8-4e27-b1af-f8d9711add9f"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="7cb80b21-42a7-4f15-ab60-c2056522b141"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="57dcf816-e19c-47bf-9279-cff583a16fa8"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="8d48b340-1bed-4204-975b-050e311427e0"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="036ee452-1eb6-4ec7-ad4e-4e0406ef6b6a"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="e62f11a0-9ec4-425d-a6f4-f6da68847013" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="58c110af-495a-4f2e-8acd-6ab05cc67615" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit is detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="15beb95d-92b8-46c6-9cc2-993c74d631cc" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, &quot;third parties&quot;) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p><p id="855c360a-dd3b-407b-a628-094ec18a01cf" class="">
+</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
