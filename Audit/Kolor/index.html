@@ -1,0 +1,721 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="https://www.verilog.solutions/verilog.svg" /><title>Kolor Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+details *{
+    pointer-events: auto;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="187251e7-fdf2-49b3-ab16-15cbd1ec1e86" class="page sans"><header><h1 class="page-title">Kolor Audit Report</h1></header><div class="page-body"><blockquote id="b5c4ffec-3173-4dd2-8711-03884d88a40f" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="1bb23a31-9960-42d5-aec4-c7f791f36559" class="">August 19, 2022</p><p id="fa8cb349-c90e-4462-91e3-2af290f90977" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="c033e2a2-2480-48bb-a6ae-303f7240a993" class="image"><a href="images/Untitled.png"><img style="width:1920px" src="images/Untitled.png"/></a></figure><p id="8618193c-2926-4dcb-a774-60e7f5295c4a" class="">This report presents our engineering engagement with the Kolor dev team on their metaverse Web3 application  – Kolor’s dApp.</p><table id="189fd3fe-5da3-4066-9b0f-712c3ab3f690" class="simple-table"><tbody><tr id="bf4bbdbf-b537-4bef-ba09-6d55328380bf"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:524px">Kolor</td></tr><tr id="61f20a47-3511-45b9-b907-f5df90593397"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:524px"><a href="https://github.com/yieniggu/kolor-contracts">https://github.com/yieniggu/kolor-contracts</a></td></tr><tr id="f5ffa2b1-d281-45a8-a626-f719bc8f85cc"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:524px">496ac663b37df81b3ea590d72f381d845768ed24</td></tr><tr id="d3cedf78-ac5d-482d-b289-81a54a1df56d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:524px">Solidity</td></tr><tr id="a71d21af-ea65-41cf-968b-085bc2a9c258"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:524px">Celo</td></tr></tbody></table><h2 id="2f1570b5-8396-4f41-afc4-e56f6b2a5b02" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="7c477d86-9108-4771-8474-4947863307d7" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="e05d66cf-b03a-4515-aef1-1a8b64a8c596" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="bae70e42-b129-4e33-91bf-682e068d6279" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="7bca3480-32ad-4ca6-beb9-691c93437bb6" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2f1570b5-8396-4f41-afc4-e56f6b2a5b02">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bae70e42-b129-4e33-91bf-682e068d6279">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0b66144a-0923-456a-857d-70489ff551d3">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#efa94df1-e946-4163-a994-9a9700c3d74d">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#61f30d96-0eca-4379-b8da-4174df7ae62b">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8c7970f0-45d0-4beb-a64a-16bcadb29436"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1ac7b265-5c4b-482f-9e6d-52e50cfb54b9">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e310980f-3af8-4631-adff-2f7edd25f955">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1bffc413-4865-41a7-b106-099a75239ba6">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#58e66cd4-e3ba-4dee-884a-bc13865c5403">Disclaimer</a></div></nav></div><h2 id="0b66144a-0923-456a-857d-70489ff551d3" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="7b9a0556-be96-4078-b066-80075edbade9" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><ol type="1" id="7d86a6bc-0875-4e5b-af3d-bb4cbd2d56f5" class="numbered-list" start="1"><li>Architecture Consultancy Service<ul id="ee757a6f-4b11-47e3-80dd-38ffbbdb0656" class="bulleted-list"><li style="list-style-type:disc">Protocol Security &amp; Design Discussion Meeting<ul id="2bf20f0d-53df-4522-b88e-a0dcb8d18b59" class="bulleted-list"><li style="list-style-type:circle">As a part of the audit service, the Verilog Solutions team worked closely with the Kolor development team to discuss potential vulnerability and smart contract development best practices in a timely fashion. Verilog Solutions team was very appreciative of establishing an efficient and effective communication channel with the Kolor team, as new findings were exchanged promptly and fixes were deployed quickly, during the preliminary report stage.</li></ul></li></ul></li></ol><ol type="1" id="2a84738c-6fa9-49fa-bb75-2d6ba3f06c8c" class="numbered-list" start="2"><li>Smart Contract Auditing Service<ul id="bd1fc197-dfd0-48b8-b73c-0429ceca8b13" class="bulleted-list"><li style="list-style-type:disc">The Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions.</strong></li></ul></li></ol></div><h3 id="151794f5-e7a1-4af5-990f-71dec88a07da" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="6f2b440e-ef35-437d-93e5-f1cee0743667" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="69cbe584-b602-41d1-b158-6dbd9257fd85" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="c297a2b2-87de-4f2e-b3b5-b37b8ed2ad29" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="63e4ff4c-a94e-406f-9823-1fc38dc4dab5" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="e947e891-f262-4d8c-bb6d-010039967c78" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="4f40d237-d39e-421c-a041-7e962df31738" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="5464883b-5936-41fa-b797-ea75c9425b11" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="a585ae94-4227-430b-883c-043e39397eba" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="81c00e93-fe40-42bb-94ad-2708b4b100df" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="e491d918-3450-4fcf-a332-54c755a968be" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="0d8cf309-c0f6-480f-a8e4-d83a062ab1a8" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="ce8f11aa-4991-4263-9154-129c8750e59d" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="c72620d2-e529-40b7-9290-308e8f5be34f" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><table id="4491fb8d-b37d-4fa5-84d4-091f54b6e888" class="simple-table"><thead class="simple-table-header"><tr id="782aa406-3774-4982-b59d-8a49566edfe6"><th id="iK]Q" class="simple-table-header-color simple-table-header" style="width:614px">files</th></tr></thead><tbody><tr id="a8b67b9e-3b4a-482a-8a3a-c1110d4a9539"><td id="iK]Q" class="" style="width:614px"><a href="https://github.com/yieniggu/kolor-contracts/blob/main/contracts/IKolorLandNFT.sol">IKolorLandNFT.sol</a></td></tr><tr id="17b37f63-38dd-485e-9816-cfc11635fba7"><td id="iK]Q" class="" style="width:614px"><a href="https://github.com/yieniggu/kolor-contracts/blob/main/contracts/KolorLandNFT.sol">KolorLandNFT.sol</a></td></tr><tr id="a2d88619-a6b0-4828-84b0-f7b13fde0c1f"><td id="iK]Q" class="" style="width:614px"><a href="https://github.com/yieniggu/kolor-contracts/blob/main/contracts/KolorLandToken.sol">KolorLandToken</a></td></tr><tr id="435099da-4cd1-45ef-9943-4832c6b77498"><td id="iK]Q" class="" style="width:614px"><a href="https://github.com/yieniggu/kolor-contracts/blob/main/contracts/KolorMarketplace.sol">KolorMarketplace.sol</a></td></tr></tbody></table></div></div><h2 id="efa94df1-e946-4163-a994-9a9700c3d74d" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="d95804d0-3754-49b9-8278-e977b8ee25a7" class="">Kolor’s protocol is a metaverse project that includes tokens, NFTs, and a marketplace system. Regular users receive land tokens that represent investments in land NFTs minted and customized by the Kolor team with species and geospatial points. On the other hand, companies are able to add value to those NFTs by offsetting emissions on them. All the interactions happen on Kolor’s platform.</p><figure id="7cf61784-4361-4718-acd8-f168d99010ae" class="image"><a href="images/Untitled.jpeg"><img style="width:1858px" src="images/Untitled.jpeg"/></a></figure><p id="8b384677-c3fe-48b5-8a54-8e1cdcde1a8d" class=""><mark class="highlight-gray">Kolor’s dApp System Architecture</mark></p><p id="7de31884-32be-45d4-8cf9-38e77e2b4db0" class="">
+</p><p id="97f23479-bf24-4264-9529-009135cd6cc9" class="">Kolor’s dApp consists of three smart contracts with the following main logic blocks:</p><h3 id="a69e34a1-f745-4e43-8139-09766ee06589" class=""><strong>KolorLandNFT.sol</strong></h3><blockquote id="50a270c7-6879-4259-bf5f-2133810bec78" class="">contains the main logic of minting NFTs and transferring them to the marketplace. </blockquote><p id="e1f33e4e-ae73-46f2-84e6-3c506d8f26c1" class="">This contract has the following main functions:</p><p id="ce0baed6-d3b2-4c1c-9a38-bfadcce6b42c" class=""><code><strong>safeMint()</strong></code><strong>:</strong> It mints NFT and updates relevant information about it.</p><p id="f035a2e6-05f3-4ded-af39-b8f736c7ab10" class=""><code><strong>updateLandState()</strong></code><strong>:</strong> It updates the land NFT state.</p><p id="bdedd64f-5e0a-44e5-9512-ed2b2c28e6d1" class=""><code><strong>addBuyer()</strong></code><strong>: </strong>Kolor<strong> </strong>marketplace can add a new buyer to the land NFT.</p><p id="06cd2573-3114-4f9d-9155-01ff3a1263a4" class=""><code><strong>safeTransferToMarketplace()</strong></code><strong>:</strong> It transfers the NFT to the marketplace and marks it as published for buyers to offset emissions.</p><p id="9dd52c6c-bee7-401f-882f-f436a07d9887" class=""><code><strong>setSpecies()</strong></code><strong>: </strong>If the species haven’t been set, it sets all species of a certain land NFT.</p><p id="1328c2d6-53e8-4cfc-94fc-42a6c1dbbfef" class=""><code><strong>addSpecies()</strong></code><strong>: </strong>It adds species to the input land NFT.</p><p id="823bea91-3211-4420-b427-5d7041bd6f4f" class=""><code><strong>updateSpecies()</strong></code><strong>: </strong>It<strong> </strong>updates the species info of the input land NFT.</p><p id="1aba5b5a-fa79-4883-a5b3-e7226c328e36" class=""><code><strong>setPoints()</strong></code><strong>: </strong>If the points haven’t been set, sets geospatial points of the input land NFT.</p><p id="c3124f6e-9626-4462-8f3b-3dd62d8371e8" class=""><code><strong>addPoint()</strong></code><strong>: </strong>It<strong> </strong>adds the geospatial point to the input land NFT.</p><p id="f62db9e3-943a-48d4-8921-d50102e461f7" class=""><code><strong>updatePoint()</strong></code><strong>:</strong> It updates geospatial point info of the input land NFT.</p><p id="fd321667-a0a7-4baa-88d5-958baa43dc3b" class=""><code><strong>offsetEmissions()</strong></code><strong>: </strong>Kolor<strong> </strong>marketplace can call this function to update the sold TCO2 of land NFT.</p><h3 id="8efaf73e-7a2d-46ad-9964-d3081c5345c1" class=""><strong>KolorLandToken.sol</strong></h3><blockquote id="4a7e730f-59fa-41a9-bdfb-3750979febeb" class="">contains the logic for minting tokens and adding investments. </blockquote><p id="862bfa94-ed57-40bd-af10-01f44bb169c7" class="">It contains the main logic of minting land tokens and using them to add investments to land NFTs, 1 land token is associated with 1 square meter of the NFT. This contract has the following main functions:</p><p id="d136ba0e-b60d-4cae-ab44-128e7df29d93" class=""><code><strong>setLandTokenInfo()</strong></code><strong>: </strong>It sets land token info.</p><p id="9ef6b71c-78b8-4aff-83ac-049f1e181e4a" class=""><code><strong>addNewTokens()</strong></code><strong>:</strong> It mints land tokens.</p><p id="144a7159-81bd-493e-b2b7-29d99fa11c6e" class=""><code><strong>newInvestment()</strong></code><strong>: </strong>It<strong> </strong>updates the number of holders, sets approval for dev or another operator, and updates balances and investments.</p><p id="d6732420-483e-4512-8d34-acb46dc252ed" class=""><code><strong>safeTransferFrom()</strong></code><strong>: </strong>It<strong> </strong>transfers tokens from one user to another.</p><h3 id="2834aadd-0d84-4571-a092-11977cb25f6c" class=""><strong>KolorMarketplace.sol</strong></h3><blockquote id="4dfc0491-a3f4-4298-a0fc-ff295d8c5716" class="">contains the logic for offsetting emissions on the minted NFTs. </blockquote><p id="89133c39-fb80-44b4-ac48-0d9bd89bffe3" class="">Once the NFT is transferred to the marketplace, this contract contains the logic for offsetting emissions on them. This contract has the following main functions:</p><p id="87ee4440-5a31-4c43-832d-20876def71c4" class=""><code><strong>removeLand()</strong></code><strong>:</strong> It updates the state of input land to paused.</p><p id="c975e36c-0ba5-42ee-b0ff-a3820a3f7d0d" class=""><code><strong>offset emissions()</strong></code><strong>: </strong>If land NFT is published and has enough TCO2 to offset, it adds buyers to the land and creates information about the offset.</p><p id="423d5c6f-5ceb-498b-91d6-85945250e33c" class=""><code><strong>addOffsetsEmissionsOfBuyer()</strong></code><strong>:</strong>  It updates registry emissions per buyer.</p><p id="e36ccb77-4f31-4664-a66a-272248720c69" class=""><code><strong>addOffsetsEmmisionsOfLand()</strong></code><strong>:</strong>  It updates registry emissions per land.</p></div><h2 id="61f30d96-0eca-4379-b8da-4174df7ae62b" class=""><details open=""><summary>Use Case Scenario</summary></details></h2><div class="indented"><p id="c621ddb6-1b87-4b67-a072-d302a69d8388" class="">The Kolor’s dApp is a metaverse platform that allows users to invest in NFTs that represent different lands in the real world. Each land is defined by the species and geospatial points that shape them. Once the land is created, it will start emitting carbon dioxide which can be offset as long as the land has been transferred to the marketplace. Value and excitement are added once big companies offset emissions on the land.</p></div><h2 id="8c7970f0-45d0-4beb-a64a-16bcadb29436" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="84daec4e-00e8-4278-956a-2ca178db6b6a" class="simple-table"><tbody><tr id="793a966c-a5ad-4cc4-8b9a-547abeb180d5"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="b11facae-d0a3-4898-99df-309121d8b64f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">0</td><td id="|V?N" class="">1</td></tr><tr id="cd8968be-8101-4d31-bbab-13fe708aa43f"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">9</td><td id="@mfj" class="">2</td><td id="|V?N" class="">7</td></tr><tr id="9b0e4e2b-f398-43ab-9706-ddadaabd5519"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">1</td><td id="|V?N" class="">1</td></tr><tr id="46ed4a9e-43bf-468e-9e9a-8e767fcfd60e"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">11</td><td id="@mfj" class="">8</td><td id="|V?N" class="">3</td></tr></tbody></table><h3 id="1cd0c7bf-0020-41a0-81c1-2e7ccd99a5a5" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><ol type="1" id="4022f575-55d4-402b-86c3-835007fb4e0a" class="numbered-list" start="1"><li><strong>Addresses issue</strong><table id="b551bed9-d564-4129-b7fb-1c8780bce036" class="simple-table"><tbody><tr id="4d137a9e-3027-4a9a-a938-40b7380c19a4"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="5a34a3c2-4f74-41c5-87c9-1563e9c27dee"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandNFT.sol#L120, L127;</td></tr><tr id="420094c3-d724-4dcb-88b0-6f81a346959b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>;</td></tr></tbody></table><ul id="3ce9217b-1be5-4a64-8f64-250920127572" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="538c1496-ee82-4cc0-b297-1ade2d6c7da4" class="">Mappings in <code>safeMint()</code> function don’t get updated with the correct address. This causes several critical functions to not work properly. There are two important address type variables passed into function <code>KolorLandNFT.safeMint()</code>, which are <code>to</code> and <code>landOwner</code>. All land NFTs are minted to the <code>to</code> address, which is an address controlled by the Kolor team. The function only records and updates the NFT owner (<em>i.e.</em>, <code>landOwner</code>) in the internal mappings <code>mintedNFTSInfo</code>, <code>ownedLand</code>, <code>_totalLandOwned</code>. However, the address <code>to</code> is used when updating some of those mappings where <code>landOwner</code> should be used. Setting this incorrectly causes <code>ownedLands</code> and <code>_totalLandsOwned</code> to update the wrong address. This affects functions like <code>totalLandOwnedOf()</code>, <code>landOfOwnerByIndex()</code>, <code>updateLandOwner()</code>, <em>etc</em>.</p></details></li></ul><ul id="4c96064f-e336-4ac2-b1a8-fc19765a5e35" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="e2df9c45-17eb-4783-931f-7e6b43b91ce6" class="numbered-list" start="1"><li>Kolor team mints NFT and set Alice as the <code>landOwner</code>;</li></ol><ol type="1" id="7f6355bd-2d27-4c6b-a1ad-4e5305bf3671" class="numbered-list" start="2"><li>Since mapping are not correctly updated, <code>landOwner</code> mappings get assigned to Kolor team;</li></ol><ol type="1" id="db8210b2-333d-465b-b72a-d55118539185" class="numbered-list" start="3"><li>Several functions cannot work correctly because of the wrong information in the mapping.</li></ol></details></li></ul><ul id="07657637-4f3f-4b25-b7dc-74ef6120894f" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="6fa0d393-b457-4c9f-88e0-0be39868157f" class="">Update mappings using correct addresses. Consider the following lines:</p><pre id="8a3ebfe0-2027-4960-8ab2-baef089b1e11" class="code"><code>// set the tokenId to current landowner collection index
+ownedLands[to][_landsOwned] = currentTokenId;</code></pre><pre id="ba2f7927-c592-43b3-b052-9d9f82389af4" class="code"><code>// increase total lands owned by address
+_totalLandOwned[to]++;</code></pre><p id="ab8c8c14-c9db-417d-ac69-0ec02f580211" class="">Change them to this:</p><pre id="267659fa-f13b-45ed-8cca-be646ae79feb" class="code"><code>// set the tokenId to current landowner collection index
+ownedLands[landOwner][_landsOwned] = currentTokenId;</code></pre><pre id="2691728f-42a3-4716-9c9c-c55c74c45f7e" class="code"><code>// increase total lands owned by address
+_totalLandOwned[landOwner]++;</code></pre></details></li></ul><ul id="bbb8d63c-7ab7-48a1-8566-a99d917e3b33" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="a332b943-cdb6-4b9c-9698-c83cb01adff3" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>. </p><p id="23f031d7-5f9f-4afc-acdc-50608f494341" class=""><code>landOwner</code> now has been used to update the mappings.</p></details></li></ul></li></ol></div><h3 id="4bd4b187-803e-41e8-8ae8-aab33ceb84dd" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="2a406bdb-6942-4cf8-a97b-9df06ae7b458" class="numbered-list" start="1"><li><strong>Inconsistency in business logic and actual implementation</strong><table id="5c18db2a-a655-4a3e-839b-23fddb9de9c1" class="simple-table"><tbody><tr id="59c142c9-48a3-4baf-b459-a6079613952e"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="982d035a-7a4a-4515-8947-3aab59136fb9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L54;                                                             KolorLandNFT.sol#L187;</td></tr><tr id="00cad683-cd2d-4b04-9b6d-717c42373eff"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="7879eee7-3bf3-4f80-b04a-9cbc5c9bdcc0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="6c5f5a28-00bf-46ed-93cc-fb021bf18486" class="">Functions <code>removeLand()</code> and <code>updateLandState()</code> remove NFTs from the marketplace by changing the published state. However, there’s no logic to returning the emissions offset to buyers or tokens to investors and returning NFT to the sender. These functions update the state of the land token. So, it does not allow any more buyers to offset emissions on the land NFTs. Nevertheless, if a buyer had already offset emissions, they would lose all the TCO2 since there’s no logic to return the already offset emissions. Additionally, there’s no restriction for investors to add investments but they should get their tokens back when the state of the NFT is changed. Buyers and investors cannot recover their emissions and tokens respectively when the state is switched, which prevents them from using those emissions and tokens on other NFTs.</p></details></li></ul><ul id="8d8f971d-a212-4438-aff0-954fe37fbdd5" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="a89af8a5-ecca-4eb1-9c22-d4c586ab7813" class="">Buyer offsets emissions on land NFT that is already in the marketplace and the user already has investment on it, and then the NFT is removed from it by updating its state. Now, the buyer is not able to recover those emissions and the user is not able to recover tokens unless the state is once again changed to published. </p></details></li></ul><ul id="03993714-d4f4-42ff-b373-78cc508ce659" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="bc41af08-7056-408b-939b-9310a9190c57" class="">Add logic to return the emissions to buyers and tokens to investors when the land NFT is removed from the marketplace and returned to the initial sender.</p></details></li></ul><ul id="8a0fa077-7044-4d87-b974-6204fac24f0c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="b9c8e082-866c-43e0-8d81-b7d52023f09c" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p><p id="05c4b6ea-ddba-479a-88db-cf9d4d2aa532" class="">Land NFT is now transferred back to the <code>owner</code> when calling the <code>removeLand()</code> function.</p></details></li></ul></li></ol><ol type="1" id="de032a9c-9bd1-4444-a053-cc55c437fd7f" class="numbered-list" start="2"><li><strong>Inconsistency in the function name and actual implementation</strong><table id="53cf0b79-b073-4867-8cf3-9d669d1c4af2" class="simple-table"><tbody><tr id="adaa68c0-08bd-4430-9f34-a6aed089c3e5"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="006c9e1a-812a-42e4-adb0-25b7b68f61c1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandNFT.sol#L282;</td></tr><tr id="0c9a04b4-c4af-4a73-a87d-618efdb23c69"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="2384ac70-0202-44d1-b199-946d5c36f6d9" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="ac2d6050-9639-43f5-ba2b-3103cd2807a4" class="">The require statement in function <code>landOfOwnerByIndex()</code> uses the  <code>balanceOf()</code> the <code>landOwner</code> instead of <code>totalLandOwnedOf()</code>. The false require statement in <code>landOfOwnerByIndex</code> can cause unexpected reverts. Function <code>balanceOf()</code> is inherited from <code>ERC721.sol</code> and therefore returns the count of NFT minted by a certain address. Nevertheless, when creating an NFT one can assign a different <code>landOwner</code>, so<code>balanceOf()</code> would not be really counting the number of lands owned by a certain address which is what function <code>landOfOwnerByIndex()</code> tries to return for an input index. Not checking with the correct function in the <code>require</code> statement of function <code>landOfOwnerByIndex()</code> can cause a revert.</p></details></li></ul><ul id="7ceef831-3a98-4624-8346-b867a437f55d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="35c241e7-339a-4040-aa2a-a549081b2147" class="">Kolor team mints an NFT and updates the <code>landOwner</code> to Alice, then Alice is the owner of one NFT but calling <code>landOfOwnerByIndex()</code> will cause a revert since the NFT wasn’t minted to her.</p></details></li></ul><ul id="1300cc75-9fa1-4166-b6ee-eea72f8f80d2" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="36f9dff4-cbe3-405d-9245-06cc2160c73c" class="">Change <code>balanceOf()</code> to <code>totalLandOwnedOf()</code> in the <code>require</code> statement in function <code>landOfOwnerByIndex()</code>. Also update <code>_totalLandOwned</code> mapping when calling <code>updateLandOwner()</code>.</p></details></li></ul><ul id="ccfb3f3a-7dfa-45a2-b9dc-311a8e40dcd9" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="438b788e-3cc5-485f-8c80-e4380ba23650" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p><p id="dd68aa83-08b1-4baa-9c31-2515256f0977" class="">Mapping <code>_totalLandOwned</code> now gets updated when calling <code>updateLandOwner()</code>. Additionally, <code>require</code> statement for function <code>landOfOwnerByIndex()</code> has been fixed.</p></details></li></ul></li></ol><ol type="1" id="a446be45-6de9-498f-9bd7-38e8dc94273a" class="numbered-list" start="3"><li><strong>Excessive access control</strong><table id="a9df4b65-c55c-49dc-a23b-6a676b71fa28" class="simple-table"><tbody><tr id="a5191790-25a5-44bc-88a8-04466ff9f744"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="e212f5f7-ec69-428e-ae65-21b363272e2d"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">Global</td></tr><tr id="6f29a2d7-f212-4bcb-ae29-4dac48354ac4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="9eb79f5a-67f0-4faa-ba32-6a0506ed29e5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="531a31bf-1398-44df-9777-063f0f20c8d5" class="">The protocol has access control risks. Since the project team address has the ability to control almost all the functionality, a key leakage would have devastating effects. Most of the functions use the <code>onlyAuthorized()</code> modifier which means only the account address authorized can get access to the functionality. Since this is set to true for the sender in the <code>constructor()</code>, the authorization relies solely on one account in the beginning. A private key leakage from the authorized address will result in the loss of both control and access to the protocol.</p></details></li></ul><ul id="03d0f075-787f-4c0c-8fc9-1a8409ebb8d8" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="eed77dc6-6646-403a-8e38-4e8d1e85f595" class="">If the team holds the key and the key got leaked, an attacker can transfer ownership of the contracts, authorize their address and unauthorize the team’s address. This will lead to the team not having access and control over the protocol anymore.</p></details></li></ul><ul id="9fadd876-a7e1-488a-9237-39826d3533c4" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="1a03788a-48a3-4c2c-87e1-b458f7cd514f" class="">Implement an extra admin layer to the protocol following something similar to a hot and cold wallet admin system. </p><ul id="4c098ec4-d7a3-4acb-a6db-86d8344cb5df" class="bulleted-list"><li style="list-style-type:disc"><strong>Access control</strong><p id="b0ad55da-d988-4229-a71c-168d3576cd82" class="">Most functions for the three contracts come with the <code>onlyAuthorized()</code> modifier that only allows authorized addresses to execute functions. This is set to true on the deployment of the contract for the sender of the transaction, however, other addresses can get authorized by calling the <code>authorize()</code> function on any of the three contracts. The <code>authorize()</code> function can only be called by the owner of the respective contract.</p><p id="b3a600ef-bb6a-4070-912f-1513028765cb" class="">Since the access control for the protocol relies very heavily on only one address, we recommend the use of an extra admin layer, so that in case the private key of the admin address gets leaked, the funds will not get drained. In this case, a cold wallet will be the admin storing the protected keys and will allow the hot wallet to perform all the functionality.</p></li></ul><ul id="47852ae4-2a51-4b71-80a5-c998b9d9af9b" class="bulleted-list"><li style="list-style-type:disc"><strong>OpSec on the usage of hot and cold wallet</strong><p id="c2acb57e-0da0-4cd0-96a5-4e092ad86b69" class="">The two-layer admin system would consist of a cold wallet, of which keys will be used really infrequently, preferably only in the case of an attack, and a hot wallet that will be the one that performs all the logic of the protocol and which keys will be used very often. The cold wallet will be able to set and revoke the hot wallet in charge of executing the functionality of the project.</p><p id="5936ea86-1a57-4975-bc59-984f6e364357" class="">The use of this system allows for extra security throughout the entire protocol since the hot wallet is making many transactions, and it becomes really exposed to possible attacks. Therefore, having this extra layer prevents from losing control over the protocol if the keys of the hot wallet get compromised or hacked.</p></li></ul></details></li></ul><ul id="7572ea86-0323-44bf-a5b1-9b97d02261e3" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="23d3106c-e561-494f-b7b1-ba2bb3147b70" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p><p id="14e8cf7c-97ae-4b8d-8281-d6d2964235f7" class=""><code>owner</code> will authorize an account to perform all the functionality of the protocol. If the key gets leaked, <code>owner</code> will unauthorize that account and authorize a different account.</p></details></li></ul></li></ol><ol type="1" id="9a8cfb6b-95a1-4e35-9923-c96a7de1e3a0" class="numbered-list" start="4"><li><strong>Incorrect payable modifier</strong><table id="89941a8a-8478-4add-912b-c6aa4164a4c9" class="simple-table"><tbody><tr id="2a9f9c95-f1ad-4b8a-baae-a25581d2f68f"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="64b2294f-3cc7-4501-abbd-126194b4c148"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L65, L231;</td></tr><tr id="99a94793-0680-45f3-b1b7-a570b62e9740"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="c76ce622-6989-49c3-b9fc-1c36acbb32e0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="88f6f6c7-2852-4c16-b800-49c246e6caf7" class="">Function <code>offsetEmissions()</code> is <code>payable</code>, therefore the contract is able to receive CELO through that function and there’s no way to withdraw it. The <code>payable</code> functions in solidity are able to receive the native currency of the blockchain when being called. However, for this contract, this is not necessary since all the functionality lies in updating variables and mappings. Also, since there’s no withdraw function in the contract, there’s no way to recover sent tokens through that function. So, mistakenly sending tokens through this function will get them locked in the contract forever.</p></details></li></ul><ul id="5d846d28-7e55-4025-a9b3-ade4d5756b7d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="78076854-7241-4de8-baab-42963c338421" class="">If mistakenly send CELO through that function, those tokens will be locked forever.</p></details></li></ul><ul id="6349c562-0094-4a57-ae9d-12165a480133" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f98ea0f0-2813-432c-a1b0-c3d19a93a86b" class="">Remove the <code>payable</code> keyword and the <code>getBalance()</code> function.</p></details></li></ul><ul id="230b9cd8-d2d1-47ce-9ceb-0e7ee557a779" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="f57d464f-e3c3-444f-8975-af754bedcce5" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p><p id="22e0201a-8889-4715-9bfa-6733943934ae" class="">The <code>payable</code> keyword has been removed.</p></details></li></ul></li></ol><ol type="1" id="9809919d-842c-4c48-b171-1849f882b886" class="numbered-list" start="5"><li><strong>LandToken info can be initialized twice</strong><table id="758ffa20-399c-4f03-8d56-374dbd1e4943" class="simple-table"><tbody><tr id="de1b16e4-a964-47e4-aa28-50d9d4c1d8a5"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="03780719-5da0-472c-964e-82b78594aaa3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L90;</td></tr><tr id="aaac0835-8f06-4e4a-8343-ca9c967fe79e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="41d03792-1bbf-423c-834a-89c1106425d5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="0192dce3-f87c-4761-b01e-317510594cf8" class=""><code>KolorLandToken.setLandTokenInfo()</code> initializes info for land tokens. However, this function does not check whether the land token has been set before and thus the land token info can be initialized again. Function <code>KolorLandToken.setLandTokenInfo()</code> sets the land token’s initial amount, sold amount, and creation date. By setting the initial amount, the amount will be added to the land token’s current amount and available amount. And the sold amount will be reset to 0. However, these are critical info that will be updated by other functions like <code>KolorLandToken.NewInvestment()</code>. By being able to set the land token info again, that critical Investment info for this land token can be reset or overwritten. </p></details></li></ul><ul id="43abce75-ffd1-488a-9b41-104655c7290e" class="toggle"><li><details open=""><summary> <strong>Exploit Scenario</strong></summary><ol type="1" id="9871866a-1bdb-4f94-b5b7-a2407f73cc5b" class="numbered-list" start="1"><li>Authorized account Alice set initial land info for land token <code>123</code> by calling function <code>KolorLandToken.setLandTokenInfo()</code>;</li></ol><ol type="1" id="38ea01aa-0031-4e62-a4d1-a2b51b98b3fc" class="numbered-list" start="2"><li>Alice adds a new investment for investor Bob on land token <code>123</code> by calling the function <code>KolorLandToken.NewInvestment()</code>;</li></ol><ol type="1" id="82f62073-dee6-423c-ba51-2d9a28b51c92" class="numbered-list" start="3"><li>Alice called the function <code>KolorLandToken.setLandTokenInfo()</code> to reset the investment amount and sold amount on the land token.</li></ol></details></li></ul><ul id="696b87a9-1fea-40fe-996f-890a288eb3c6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="49121713-616f-493d-b34a-a4760d596d78" class="">Check if the land token info initialized in <code>KolorLandToken.setLandTokenInfo()</code>.</p><pre id="b82954a4-bc8c-441e-8138-a6e6528529ea" class="code"><code>function setLandTokenInfo(uint256 tokenId, uint256 initialAmount) external onlyAuthorized {
+    require(exists(tokenId), &quot;KolorLandToken: land must exists!&quot;);
+		require(landTokensInfo[tokenId].initialAmount == 0, &quot;KolorLandToken: land token has initialized!&quot;);
+
+    landTokensInfo[tokenId].initialAmount = initialAmount;
+    landTokensInfo[tokenId].sold = 0;
+    landTokensInfo[tokenId].creationDate = block.timestamp;
+
+    addNewTokens(tokenId, initialAmount);
+}</code></pre></details></li></ul><ul id="abefea18-c36a-4d88-9976-1c2f6ea559ac" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="4847b51a-e525-457a-8b3c-b15689329284" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p><p id="f9d2e75b-eef1-4e00-8cd9-6774d4606e37" class="">Require statement has been added to prevent this.</p></details></li></ul></li></ol><ol type="1" id="0218d977-3a44-46d0-bae4-367e7bb19050" class="numbered-list" start="6"><li><strong>Authorization issue</strong><table id="67141c88-a880-4c64-ad9b-210ff150d285" class="simple-table"><tbody><tr id="7d449a4c-ea91-4e47-a350-edebeaad9389"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="350a8c94-2e0b-4867-800f-73af6d9654e7"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L103;</td></tr><tr id="8c043d2c-a8ba-4562-bedd-033951c783b9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="417cb713-43a3-47a0-86b3-a168f03261d0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="492bf32e-0cb2-4284-b21e-ef8440fd3cef" class="">Function <code>KolorLandToken.addNewTokens()</code> calls function <code>KolorLandToken.mint()</code> to mint new tokens. The function call may fail because <code>KolorLandToken.mint()</code> function requires only an authorized caller. When function <code>KolorLandToken.addNewTokens()</code> calls the function <code>KolorLandToken.mint()</code>, the caller of function <code>KolorLandToken.mint()</code> is the contract itself, <code>address(this)</code>. Function <code>KolorLandToken.mint()</code> requires the caller to be an authorized user only. The function call may revert if the contract itself is not added to the authorized address list.</p></details></li></ul><ul id="71bb0c7d-708d-4eae-8b85-8ae028cdde1b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="bf70ba18-4bd9-4de4-9c55-15ede72b2979" class="">Contract <code>KolorLandToken.sol</code> hasn’t been authorized and authorized user calls <code>addNewTokens()</code>, transaction will revert because the internal call is done from <code>KolorLandToken.sol</code> which isn’t authorized.</p></details></li></ul><ul id="174999cf-0b15-4b46-87f2-ffda9e0cd6e6" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="4e0664be-4581-42f9-bc4f-3402009b36b6" class="">In the contract design, we recommend marking the function <code>KolorLandToken.mint()</code> be private or internal if it will only be called inside function <code>KolorLandToken.addNewTokens()</code>.</p></details></li></ul><ul id="d4614680-4497-4c26-8cc7-bb517ff6dd33" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="8a8124ea-1749-4fe5-a387-b6441f0e6b05" class=""><strong>Acknowledged.</strong></p><p id="f8d1036e-78d8-4cee-b3a9-0b0137d1f1c2" class="">Kolor team will call the <code>authorize()</code> function on the contract to authorize the contract address.</p></details></li></ul></li></ol><ol type="1" id="5edb3437-56a9-4646-9603-d7f478031e56" class="numbered-list" start="7"><li><strong>Land NFT token id should start from a non-zero value</strong><table id="c6e67508-d5ef-42c9-b71f-a4ebdfb4877a" class="simple-table"><tbody><tr id="d08ac229-20e8-45b2-bd92-a92e5ba60c84"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="fcf2e3d0-9cdb-4ad4-a048-4b8d01055060"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandNFT.sol#L287;</td></tr><tr id="3fe7f51d-5166-4d96-8a44-72f59f2e78b2"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="de4cf5d1-3833-48f8-8c48-612828b4d47b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a7b53961-b96a-46d0-8fe7-6eabbc0aaf01" class="">The default value 0 is the return result when accessing mapping <code>KolorLandNFT.ownedLands</code>. Its default return is 0 when the mapping is not set. To avoid confusion between token id 0 and empty value, the land NFT token id should increment from a non-zero value. The mapping <code>KolorLandNFT.ownedLands</code> returns the land NFT token id given owner and the owner’s land NFT index. As the mapping’s default return is zero when a value or mapping does not exist, we might confuse it with the return of the actual NFT token id.</p></details></li></ul><ul id="512cf2a1-981f-4dec-ad9a-abe510c4d434" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="318d8080-079a-43eb-b8d9-fc878e22ecf4" class="numbered-list" start="1"><li>Alice has an NFT, token id is 0, index 7;</li></ol><ol type="1" id="2684f62b-a918-4858-b11e-65dfb400d89c" class="numbered-list" start="2"><li>Bob does not own any land NFT;</li></ol><ol type="1" id="d2665809-771e-499f-910b-8c36d5d2c6ab" class="numbered-list" start="3"><li>The mapping <code>KolorLandNFT.ownedLands</code> return 0 when querying with Bob’s address;</li></ol><ol type="1" id="f7e8e9a9-7583-4ad8-944f-bdfc6a7d26df" class="numbered-list" start="4"><li>The system will assume Bob owned the token id 0 NFT.</li></ol></details></li></ul><ul id="4637ffd8-78d0-4724-83b0-0d47530c2b8c" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="69215014-c5b8-47f8-9f7a-1f7a927f79fb" class="">Start Land NFT’s token id from 0.</p></details></li></ul><ul id="2526a1fc-31d6-4bae-b19f-b304fcc00f10" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="83239720-cc64-4637-9c29-49c14f9e5b5d" class=""><strong>Acknowledged.</strong></p><p id="7baff4e2-bf04-40c6-bbe3-84a91d8783b6" class="">Kolor team decided to leave this part as it was. </p></details></li></ul></li></ol><ol type="1" id="9084efa6-1acd-4d04-b0c3-eb94cd31948a" class="numbered-list" start="8"><li><strong>Missing updates for land owner-related mapping</strong><table id="f5d7670c-ca89-41c6-b0b8-41772f5c453d" class="simple-table"><tbody><tr id="254175a2-1ee8-4bc6-a555-f5dcedd0b9fb"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="8a971bdc-3bf0-47df-9370-7a0d1d1e9014"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandNFT.sol#L197;</td></tr><tr id="5bab3d45-27a5-44e5-b1e9-5dc4c147a539"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>;</td></tr></tbody></table><ul id="1678a443-f647-44ef-99d1-1f7e4a4d6b9c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="66d9bca3-46b0-4fe5-86e8-d9ae69791c65" class=""><code>KolorLandNFT.ownedLands</code> is not updated when updating land owners. </p><p id="96c6c14a-0c56-4dde-9258-2b4649dd6a0b" class="">Function <code>KolorLandNFT.updateLandOwner()</code> is used to update a land’s owner. Mapping <code>KolorLandNFT.ownedLands</code> which records all lands owned by a person is not updated when the function updates the land owner. The mapping <code>KolorLandNFT.ownedLands</code> is also used in function <code>KolorLandNFT.landOfOwnerByIndex()</code>.  Given the land owner and the index of the land owner’s land, it will return the corresponding land token Index. If the mapping <code>KolorLandNFT.ownedLands</code> is not updated correctly, then false results might be returned when we query the function. Land may have been transferred to others but the function still returns the land’s previous owner.</p></details></li></ul><ul id="4f8bc828-db69-4fb9-89e5-138a5e260b21" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="855c6144-6e44-46a7-b76f-24ffeca044d4" class="numbered-list" start="1"><li>Alice has one land NFT with token id 678 and the index is 100 in mapping <code>ownedLands</code>;</li></ol><ol type="1" id="bdb66cec-2094-4050-8edc-59718490927a" class="numbered-list" start="2"><li>The land owner has been updated to Bob;</li></ol><ol type="1" id="cd32226c-46b2-4b5f-8abe-e8947817c27a" class="numbered-list" start="3"><li>When searching the land index in Alice’s owned lands, it still returns land NFT 678.</li></ol></details></li></ul><ul id="b88f78e0-08b5-4ca9-9fad-f42548507392" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="db6ab053-4061-42c8-800a-ed78c7cbf403" class="">Update <code>ownedLands</code> mapping when calling <code>updateLandOwner()</code> function.</p><p id="613dbfa0-1430-4047-92d9-cbc37e5268c1" class="">When updating the land owner with the given token id and new land owner:</p><ol type="1" id="6a3ae5a5-2178-43ce-9193-1d89eed7b43b" class="numbered-list" start="1"><li>Update the <code>mintedNFTInfo</code> and Iterate through the current land owner’s lands to get the correct land id <code>IdOfLandNeedsUpdated</code>;</li></ol><ol type="1" id="5ea7eb36-9ee6-4945-b622-eed44926c220" class="numbered-list" start="2"><li>Update the old owner’s <code>ownedLands</code>:<ol type="a" id="22964a6a-eebc-4cda-8d6f-f21854f9a616" class="numbered-list" start="1"><li>Get the last token index of the current owner by using <code>_totalLandOwned[oldOwner]</code> and then get the token id with the index:<pre id="e9a55a0d-9e52-44e9-a85c-7eac02e01a1c" class="code"><code>uint256 lastTokenIndex = _totalLandOwned[currentOwner] - 1; // need to check 
+uint256 tokenId = ownedLands[oldOwner][lastTokenIndex];</code></pre></li></ol><ol type="a" id="79031f52-3074-44ed-84d9-4a1766feeabb" class="numbered-list" start="2"><li>Move the last land NFT token to the position where the land needs to be removed and update the <code>_totalLandOwned[currentOwner]</code>:<pre id="90bc28ae-f660-49ab-b88c-77229ccada2c" class="code"><code>ownedLands[currentOwner][IdOfLandNeedsRemove] = tokenId;
+ownedLands[currentOwner][lastTokenIndex] = 0; // assume 0 represent empty / not exist. see the finding Medium 7
+_totalLandOwned[currentOwner]--;</code></pre></li></ol></li></ol><ol type="1" id="b8cc0786-0a10-43f8-a64c-7b7eb8aac379" class="numbered-list" start="3"><li>Update the new owner’s <code>ownedLands</code>:<ol type="a" id="b3cdc295-f784-4faf-8639-bbbfa5cd391c" class="numbered-list" start="1"><li>Append the land NFT to the new owner and update the <code>_totalLandOwned[oldOwner]</code>:<pre id="d6faad95-67e9-4f5b-ba37-f52bc49fa6c0" class="code"><code>uint256 newTokenIndexOfNewOwner = _totalLandOwned[newOwner];
+ownedLands[newOwner][newTokenIndexOfNewOwner] = IdOfLandNeedsUpdated;
+_totalLandOwned[newOwner]++;</code></pre></li></ol></li></ol></details></li></ul><ul id="21ebffc9-3c5f-4478-ac79-4712cabd21b5" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="89d596f6-ea0b-4353-a04e-9ee719f2b713" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>.</p><p id="edc2f892-ddd9-4adf-9353-0f21bf984c95" class="">The <code>updateLandOwner()</code> function was removed. Kolor team acknowledges that this results in not being able to change the land owner after minting the NFT anymore.</p></details></li></ul></li></ol><ol type="1" id="493cce1a-0f13-42c6-bfeb-ac7c98197493" class="numbered-list" start="9"><li><strong>Should check before adding new buyers</strong><table id="d84db10d-f79f-4471-ac9b-f49f6e10236d" class="simple-table"><tbody><tr id="3698f6e9-d294-4234-a98b-f79ccea95137"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="1ff93cdb-e350-4a90-a6bd-a4c0dbbdf2ea"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandNFT.sol#L214;</td></tr><tr id="06857122-01f0-45f1-88fc-2a839f511492"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>;</td></tr></tbody></table><ul id="f6c3345f-6fcf-4d8f-8d1c-58c8c9a1609a" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="14991846-b11f-4670-981c-fbe555b442c1" class="">Function <code>addBuyer()</code> doesn’t check whether the buyer has already been added or not. The missing check for this might cause <code>totalBuyers[tokenId]</code> to be bigger than it should be as it is incremented even if a buyer already exists:</p><pre id="a9a2a77c-a972-4b00-8a6f-21bc197141e7" class="code"><code>function addBuyer(uint256 tokenId, address newBuyer) public override onlyMarketplace notBurned(tokenId){
+    buyers[tokenId][newBuyer] = true;
+    totalBuyers[tokenId]++;		
+}</code></pre><p id="5d3dc5a6-f752-4346-881f-2e1db7e3ff9e" class="">Function <code>addBuyer()</code> adds input address to mapping <code>totalBuyers</code> that counts the number of addresses that have offset emissions on certain land. However, this function doesn’t check whether the input address has already been added or not. This can result in counting the same address multiple times.</p></details></li></ul><ul id="9ad2ea18-fbe3-4520-b97e-e972dd7a3faf" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="dd44d2af-c5a6-4ec0-b587-6ffe608c8679" class="numbered-list" start="1"><li>Kolor team adds a buyer to offset emission on a land NFT;</li></ol><ol type="1" id="251372a9-6f23-49db-b048-6dd1e0b99ef9" class="numbered-list" start="2"><li>Kolor team adds the same buyer to offset emissions on that same NFT;</li></ol><ol type="1" id="b82fba6f-f528-4529-8f20-108c300f734b" class="numbered-list" start="3"><li>Mapping <code>totalBuyers</code> buyer is 2 instead of 1.</li></ol></details></li></ul><ul id="1426cd66-d6c1-4c70-99e6-29cebdda9d2f" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3bd54e3b-5106-4e3a-bd9b-8e8257095ce4" class="">Change it to this:</p><pre id="2a244c6a-8132-411f-aafd-7738f50422b4" class="code"><code>function addBuyer(uint256 tokenId, address newBuyer) public override onlyMarketplace notBurned(tokenId){
+    if(!buyers[tokenId][newBuyer]) {
+		    buyers[tokenId][newBuyer] = true;
+        totalBuyers[tokenId]++;
+    }
+}</code></pre></details></li></ul><ul id="445cdb79-589b-4330-a215-3a437c449304" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="2b963d1b-c420-4a73-9f8a-72d10c103937" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>.</p><p id="a935f139-6e96-4cf7-b23f-b2bc39a2611f" class="">Fixed as suggested.</p></details></li></ul></li></ol></div><h3 id="513b2a4b-6dde-4715-a561-6f2e1368e23f" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="76c0ea0b-eb24-4bdb-82ca-9c3e55929de2" class="numbered-list" start="1"><li><strong>Lack of updates</strong><table id="589ea457-3e3c-41ce-8195-e8d5fd6c2cff" class="simple-table"><tbody><tr id="0a4cbe42-f6fe-4890-a10e-f49f25a8ff85"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="da696ee7-4701-435c-b6bd-d3d4dc237ac5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L199; </td></tr><tr id="6f0ef03f-66e4-4fac-99f7-8031a33eb4a3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>;</td></tr></tbody></table><ul id="805bed85-f6e6-42b5-a45b-4c1ec8ba3266" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="4c1221ce-d135-4dc6-b879-31e1ac2a4ba4" class="">Function <code>safetransferFrom()</code> doesn’t update mapping variables <code>totalInvestmentsByAddress</code>, <code>totalInvestmentsByLand</code>, and <code>totalInvestments</code> when called directly by users.</p></details></li></ul><ul id="c9e0db72-41e6-4965-a4b9-964cdfb3b021" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="dee695eb-affb-49c5-8403-6f4d1072a4d3" class="numbered-list" start="1"><li>Alice gets investment for a land NFT;</li></ol><ol type="1" id="51aab2ef-0189-4cc1-91c6-3e3847db1ee7" class="numbered-list" start="2"><li>Alice calls the <code>safeTransferFrom()</code> to send part of the tokens that represent the investment to Bob;</li></ol><ol type="1" id="107a2900-1f6e-4ffc-8a72-d1fae436a10f" class="numbered-list" start="3"><li>Since mappings weren’t updated, functions that depend on those mappings will not consider the new investment. For example, calling <code>totalInvestmentsOfLand()</code> will not consider Bob’s investment.</li></ol></details></li></ul><ul id="20f5f59d-05d3-446f-87db-ce84c2cc5d59" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="4f29f618-2e64-438b-9a71-bbfc9006fbbb" class="">Update mapping variables in <code>safetransferFrom()</code> function.</p></details></li></ul><ul id="6d7788b3-cbe5-4838-afa8-bae31d016263" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="19315163-384a-486a-bafb-882f70175b41" class=""><strong>Acknowledged.</strong></p><p id="69cebf2b-77a4-4030-a53f-0c597b895876" class="">Kolor team expects users not to call the <code>safeTransferFrom()</code>. If they call it, they will consider only the initial investment. No view function for mapping <code>KolorLandNFT.landIndex</code>.</p></details></li></ul></li></ol><ol type="1" id="775d4602-5622-49f8-92a9-7b7a8d765755" class="numbered-list" start="2"><li><strong>Mapping visibility</strong><table id="41396320-a4b5-44b4-9713-a23b25ba4c5f" class="simple-table"><tbody><tr id="03f85c91-45d5-4cf6-a63c-750b065b4f2c"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="3439387f-11fa-4db8-be83-62ff4b968761"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L199; </td></tr><tr id="6799a6dc-e5a1-4580-8a9b-ae8e4301d0c7"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>;</td></tr></tbody></table><ul id="2574ca49-0cda-44c9-865e-9fb3224fe851" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="90e8deb4-4f9e-4a34-9713-74a5e2bff145" class="">Mapping <code>landIndex</code> gets updated only at <code>KolorLandNFT.safeMint()</code> and it doesn’t have public getter functions. This makes it difficult to get values directly from it.</p></details></li></ul><ul id="101c7140-b678-485c-bf29-40094c3bcab0" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="a8f5f02f-e9a5-43ae-8da8-125c211eecca" class="">N/A.</p></details></li></ul><ul id="6d4d054c-c10a-453b-a5b7-09f10a3b6eba" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="1416c4e5-8e39-43f5-bc18-8fdc765051cd" class="">Change the mapping’s visibility from <code>private</code> to <code>public</code> or create a public getter function for the mapping.</p></details></li></ul><ul id="cae3c911-3e37-4205-bd2b-d30cd15c4754" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="8c6736f4-f5b6-431d-8d25-d20a6bc5ae73" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/7c091960656518c20169e3493ec476f44938e93b">7c091960656518c20169e3493ec476f44938e93b</a>.</p><p id="3e4b0c13-b55e-4ad2-8e18-3f77aaee8563" class="">A getter function was added.</p></details></li></ul></li></ol></div><h3 id="a7b562d9-48b1-4f9b-8e6b-f7597bd2f4c8" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="97f07061-2863-4209-aecf-7bc579954a6b" class="numbered-list" start="1"><li><strong>Incorrect function visibility</strong><table id="977e3695-730c-4762-b5e3-91a9c5d79b81" class="simple-table"><tbody><tr id="f7054670-c1d2-4887-905f-ad272ab61740"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="f8d9c014-3de8-4033-a12d-2e610151f61f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L239;</td></tr><tr id="ac5961bf-8427-4664-a651-5d3203bb8014"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="9632c87c-fbfc-4e1b-8072-f217054f7470" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="b2e102d2-9c4c-4c5e-925a-14e849db01d2" class="">Function <code>onERC721Received()</code> visibility can be restricted to pure since it is only returning the selector of the function. This allows for gas optimization. </p></details></li></ul><ul id="ecd239c9-7f1f-4499-baef-4be14698cd9c" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="5dc21ebc-6be8-41f7-938f-3467b2f5fb0a" class="">N/A.</p></details></li></ul><ul id="2fdc8c91-a731-40ea-bbe5-52298c1bc56d" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="f78ab146-36ea-4174-9758-87163eca1e0a" class="">Change visibility of the function to pure.</p></details></li></ul><ul id="e67a8a55-c908-4cdc-9949-afbfb6d2ecd8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d0df9dcb-9e5b-4bce-a057-5bada9c97d65" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="fae157fc-8315-488d-b23f-4572d51d6e75" class="numbered-list" start="2"><li><strong>Unused functions</strong><table id="abc89898-53af-4ff7-b1a4-7e85c1714e3d" class="simple-table"><tbody><tr id="9bb7a614-13a0-4bba-9b15-8312057a0e1d"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="51926870-0ea0-4c3f-8d0c-4620922a74a9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#24;                                                            KolorLandNFT.sol#L167; </td></tr><tr id="b5b5b26b-54d9-44d7-ae78-4e265ffa1a48"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="ec44de6e-9f3d-4870-8b5a-f17b671800e1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="49c7cf81-4b49-4549-834f-17fdf12f08c9" class="">Internal function <code>isLandOwner()</code> in <code>KolorLandNFT.sol</code> is never used. Private mapping <code>lockStartTime</code> is defined but never used.</p></details></li></ul><ul id="010763f1-a436-4ca1-946f-9d9bd991e4e7" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="494888de-3440-40c4-be93-6daaa1885aa2" class="">N/A.</p></details></li></ul><ul id="d3c2c545-47b0-4f65-b6d7-2085c1342715" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="c8fff5ae-d7c0-4a8a-bd0e-5f910c9a6b8a" class="">Remove that function or change visibility.</p></details></li></ul><ul id="9eb53054-cb32-4136-a9d5-0baf6e653855" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="10f86301-d997-44e6-b658-9642e377842d" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p></details></li></ul></li></ol><ol type="1" id="39592a63-81c0-4b4a-844f-4ad503537133" class="numbered-list" start="3"><li><strong>Functions with the same names</strong><table id="24e5eddc-3679-4403-a8ac-49904034478b" class="simple-table"><tbody><tr id="a1a36659-03af-4bef-be2d-efc634adc64a"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="e1338c58-014e-42d7-a984-d1bbe961c215"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L158, L162, L169, L188, L208, L220;                                                             </td></tr><tr id="c618b974-1f70-4fc1-8973-470c9056f782"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="7d252720-f50f-465c-9ad3-a87a859cc39a" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="aeb466b1-3fa2-4803-b03e-e54cf138ceb0" class="">There are functions with the same but with different parameters. It’s good practice to have explicit and explanatory names for each function. Additionally, having the same name for two functions that have the same number of parameters can be confusing to other developers. </p></details></li></ul><ul id="b97bb0b5-9865-443a-9c3b-cf26267342ad" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="1ec72966-f992-458a-a6e4-f494cd447904" class="">N/A.</p></details></li></ul><ul id="75293cd9-6a4c-4413-95a6-728ad9fcba77" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="d3ef4b33-f0a0-4373-9667-7e4992d9aaaf" class="">Change the names of functions so that names are different.</p></details></li></ul><ul id="632ae759-e9ca-4cb6-8847-3b16d5b7068c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d178eb8b-7cd9-40e3-a6ce-773ca60ed7f9" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p></details></li></ul></li></ol><ol type="1" id="751a9d57-262b-454d-9954-548f6cc18db5" class="numbered-list" start="4"><li><strong>Missing comments</strong><table id="f7331bba-5ffd-4242-aa1c-4e903fd7c2b9" class="simple-table"><tbody><tr id="9c75fc40-774c-40de-ab85-222a85907a93"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="47bf2642-cec8-424a-92d3-18062b6b02a0"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L103, L125;                                                                   KolorLandNFT.sol#L447;</td></tr><tr id="9395f0c4-11a0-4ef2-a90f-a7eb6ae6f1fc"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="6cd98d6a-93cb-4e8e-adab-02e7eb82c72e" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="94cfb3d1-f74b-429c-b8ff-1f1f917d2a56" class="">There are no comments in some functions. The use of natspec is recommended for writing comments and it is important for crucial functions so that other developers can easily understand the use of these functions and how to interact with them.</p></details></li></ul><ul id="ad9c5efb-a1ee-48ed-8e06-e9bc2b5ee32b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="851a9d82-b1af-4155-9bd9-1b2e0d3b34f1" class="">N/A.</p></details></li></ul><ul id="3b242050-ee21-414a-8397-00015cc95462" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="01b4909c-24c5-48ed-95e8-802a90741323" class="">Add comments to the functions specified in the source.</p></details></li></ul><ul id="ea275c65-208d-444f-8753-0ac2f12716bd" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="83b3e335-e05a-4535-a78a-29d78042fd84" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="9297f537-203c-4634-9668-e77a26fdafe1" class="numbered-list" start="5"><li><strong>Unused parameters</strong><table id="b8ab55ec-14d3-4553-a3ba-1fe431fc3151" class="simple-table"><tbody><tr id="a7fdffd6-d400-4a33-a527-51d9f8cad7d6"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="45351f3b-36e7-48a8-830a-bcd0e56b44e3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L239;</td></tr><tr id="2ab6f8d9-36d7-4f50-aa3a-f0cfbe8b2bc3"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="265bd862-4130-465f-83ad-6e2a01036f1a" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="e9c3e6e4-4f91-4858-89e1-3888f75cef78" class="">Input parameters <code>address operator</code>, <code>address from</code>, <code>uint256 tokenId</code> and <code>bytes calldata data</code> are not used on function <code>onERC721Received()</code>.</p></details></li></ul><ul id="90c6a220-492e-46ab-93ba-c50cdb2b0bd7" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="167d2351-54b0-49d0-b492-956d2cde5f2e" class="">N/A.</p></details></li></ul><ul id="9dd03b86-953f-40f7-8c65-6cc3b9375257" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3f48f6ca-ce0e-4282-9aea-769a2ecb5c75" class="">Comment unused parameters.</p></details></li></ul><ul id="118f2799-316b-471b-8171-93e032d4e604" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="7be84738-ff7a-4110-bda7-8a27265aacfa" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="e37724d3-2dd1-412a-9d02-25367af99b31" class="numbered-list" start="6"><li><strong>Naming issue</strong><table id="4979e7a8-0321-470f-a2f0-493da07812a2" class="simple-table"><tbody><tr id="3576de70-2059-4fe8-afa8-9b371a2a2602"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="ced99261-6ea8-437e-b442-8d15f28be3d5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L85, L97;                                                                                                      KolorLandToken.sol#L94, L107, L119, L131;</td></tr><tr id="ae5118ee-6204-43ba-a033-9c6924553fd9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="ab15a4e7-d7fb-4cfc-8709-3573de7f6e01" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="ac9437ff-0bf8-44fb-ab89-941a9bcbc6cf" class="">Typo in comment for require statements and in developer comment.</p><pre id="7225789d-3ecc-4394-ae4b-aa9244e2f3a9" class="code"><code>require(erc721.ownerOf(tokenId) != address(0), &quot;Token doesn&#x27;t exists!&quot;);</code></pre><pre id="04dd62f0-02ec-4e5d-9fce-aab343eb397c" class="code"><code>/** @dev Adds a new offset structure to a account to represent</code></pre></details></li></ul><ul id="f17e66dc-3add-4854-b618-498c20f1e6af" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="f121afab-1f69-4e72-997c-5268b6aade8b" class="">N/A.</p></details></li></ul><ul id="92abcb81-cb17-4d76-ab3f-90a633f53744" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="bed1fc27-08fc-4ea3-91dc-72be0252c788" class="">Change the word “exists” to “exist” and “a account” to “an account”.</p></details></li></ul><ul id="aa8c8303-3ac5-4376-a978-6d9a8cb717b6" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d97ffc51-5c94-4b51-ac26-a208e4abb890" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="097b5a80-5371-439d-9c0e-5027778ad54e" class="numbered-list" start="7"><li><strong>Floating solidity pragma version</strong><table id="c17a8e54-c02d-4463-bf19-63ba07f305ad" class="simple-table"><tbody><tr id="f2073486-e2d5-485e-9d11-75ac50f46af0"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="f96c509b-c7e6-4cc3-b741-b622471e4036"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">Global</td></tr><tr id="a6dfb749-392c-4d00-afad-0e7c6133328f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="1b4bea2e-3530-4d32-895e-98d8fa5363e5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="29e0c362-9611-4fa9-9418-27ff8055d852" class="">Current smart contracts use <code>^0.8.0</code>. And compilers within versions<code>≥ 0.8.0</code> and <code>&lt;0.9.0</code> can be used to compile those contracts. Therefore, the contract may be deployed with a newer or latest compiler version which generally has higher risks of undiscovered bugs. It is a good practice to fix the solidity pragma version if the contract is not designed as a package or library that will be used by other projects or developers</p></details></li></ul><ul id="140fbae9-87e9-455c-b3ed-55f502832830" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="4e1d93d4-5b35-4d70-84ba-e6173cf22785" class="">N/A.</p></details></li></ul><ul id="626ae93a-982a-49a5-afed-a685e5703dcf" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="74beacd1-a8db-4231-89b1-2160168965a3" class="">Use the fixed solidity pragma version.</p></details></li></ul><ul id="a45b7b1c-e7ff-4c8f-a263-2f4070797965" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="715542ce-141e-4058-a05c-2470393bc46c" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="926dbb78-d1de-40af-be14-5afb266b6edd" class="numbered-list" start="8"><li><strong>Update condition in require statement</strong><table id="d0e9c076-c2c0-4030-9f15-d355b73f6327" class="simple-table"><tbody><tr id="67f6957b-c4a7-483d-a70a-4cef6c35dc7b"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="cc82e319-08bb-451c-9cff-2e66505f3f23"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L133;</td></tr><tr id="2e016743-9c5c-42a5-90ec-ca838158dac1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>;</td></tr></tbody></table><ul id="67419957-c2bc-4076-8a12-f6fb809c7a9f" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="6a58930c-700c-4f88-87fa-4096b8576456" class="">Update the <code>require</code> condition to receive proper revert messages. In the following require statement, the transaction will not revert with the desired message “KolorLandToken: exceeds max amount” when <code>availableTokensOf(tokenId)</code> is smaller than the <code>amount</code>. It will only revert with the subtraction underflow error message. </p><pre id="dd35b870-1c5d-4822-9486-f0e5cb4ab0e6" class="code"><code>require(availableTokensOf(tokenId) - amount &gt;= 0,
+    &quot;KolorLandToken: exceeds max amount&quot;
+);</code></pre></details></li></ul><ul id="c2bef017-3543-4d0f-a73c-8adc77bb136f" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="b367fcd8-4d5e-410c-8d0c-5f073c2069b9" class="">N/A.</p></details></li></ul><ul id="89086f34-dbba-45df-9b71-aac917486674" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="4cd14578-dd7b-400a-8a1f-1b002c67bb6c" class="">Change the require statement to:</p><pre id="0ef51a74-e3ee-4ae3-9b60-6b8cb54f9a7c" class="code"><code>require(availableTokensOf(tokenId) &gt;= amount,
+    &quot;KolorLandToken: exceeds max amount&quot;
+);</code></pre></details></li></ul><ul id="d3d76ff2-b0e4-4b1d-bf46-4f8a72e23658" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="3267116a-49ba-4962-86b8-498b97f67c17" class=""><strong>Resolved</strong> in commit <a href="https://github.com/yieniggu/kolor-contracts/commit/4ce7e209dcdb3842b545aa14585359a727479abf">4ce7e209dcdb3842b545aa14585359a727479abf</a>.</p></details></li></ul></li></ol><ol type="1" id="ace7ba87-dfc4-4876-a906-a5ad65f0a39f" class="numbered-list" start="9"><li><strong>Follow check-effects-interactions</strong><table id="e7313f94-662e-4806-87ba-b0355dedf366" class="simple-table"><tbody><tr id="8fe20185-6335-4ec4-93af-283e86ee037b"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3743b1ae-52f6-42a3-908a-af6a4b4b8af8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L125;</td></tr><tr id="f70a722b-3245-43df-b946-76e6c32c210b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="fe5a32ca-d0be-4ea8-8225-17e169f32bc8" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="72e41c82-2be2-4934-9246-5afc5bab5df3" class="">Check check-effects-interactions pattern for functions like function with external function calls, such as <code>KolorLandToken.newInvestment()</code> to reduce the attacking surface. Check states first, then apply changes to related states and call the external function in the final step. In this way, attacking surfaces for the external function is reduced. For normal external functions without before-call hooks, there is no surface for them to reenter the function because there is no attacking interface after the external function call.</p></details></li></ul><ul id="e5003018-b63c-4584-90e1-1db7a9218b78" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="ab3d9481-2c18-4c85-b83f-e18af8e52887" class="">N/A.</p></details></li></ul><ul id="42352980-25f3-4db5-9205-97d3e20deb25" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="c86d9866-0c95-41f6-bbb3-c3dcbbb57c48" class="">Follow check-effects-interactions practices.</p></details></li></ul><ul id="16df756f-7d24-40bf-ac75-0f6c1b6fd78c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="70e9a69e-4cb2-4e3c-9c7c-385e78c675d6" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="c5b34f2a-0da1-417b-8677-94f4718083ac" class="numbered-list" start="10"><li><strong>Incorrect comment/missing event</strong><table id="53284477-7ec2-4860-8e89-a5844977d2b9" class="simple-table"><tbody><tr id="45040bcb-aed1-4db1-bbea-15da17b38fa9"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="cf4c79a8-eb95-4336-a767-70baf2de9cfe"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorLandToken.sol#L383, L392;</td></tr><tr id="26ac5fd6-3abe-42a5-8e8d-f7c2396e539e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged.</strong></td></tr></tbody></table><ul id="e03b6f81-ea31-4650-ab02-d15946b2e210" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="cae844fc-24b7-42c3-8e77-0ac797690e38" class="">Function comment says that an event is emitted when calling <code>setApprovalForAll()</code>, but there are no events emitted in the contract and specifically in this function.</p><pre id="438dea05-4b5c-4945-9def-d4ba9e69ec8f" class="code"><code>* @dev Approve `operator` to operate on all of `owner` tokens
+*
+* Emits a {ApprovalForAll} event.
+*/
+function setApprovalForAll(
+    address owner,
+    address operator,
+    bool approved
+) internal virtual {
+    require(owner != operator, &quot;ERC1155: setting approval status for self&quot;);
+    operatorApprovals[owner][operator] = approved;
+    //emit ApprovalForAll(owner, operator, approved);
+}</code></pre></details></li></ul><ul id="efa0d2a2-ed0b-40ad-a961-6b80cff86506" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="57a14ae1-3a86-422a-9fb9-b7d1e05fb0b7" class="">N/A.</p></details></li></ul><ul id="c22a808b-d6a2-4ef4-9ba7-b68937e16b97" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="00ccffb9-5da6-447e-9dd3-6e2249a02de1" class="">Event emission is recommended as it can help monitor the function related to critical operations.</p></details></li></ul><ul id="61a40de6-a019-4ea2-ac11-adb48c5418cf" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="b4c5d00d-6e62-4f41-af59-fcee88c1f1b0" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="18865668-3e69-4ccb-9a7a-a7ac661cf7e3" class="numbered-list" start="11"><li><strong>Redundant code</strong><table id="aecaa05d-8a0d-4472-9de7-06455190c9e7" class="simple-table"><tbody><tr id="99e72c51-2585-4f05-82f1-d80a547dbdc6"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="9d3c594b-b71a-4e29-8dc3-7b8cb392b466"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Source</strong></th><td id="y}lo" class="" style="width:528px">KolorMarketplace.sol#L70, L71;</td></tr><tr id="d0792fd4-0d17-4947-b53b-19090af9dfcf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged</strong>;</td></tr></tbody></table><ul id="6e29549b-e91f-4907-9bcc-fb992e36b8f2" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="5c5cc411-8468-4131-8ff2-941942a66fc8" class="">Contract  <code>KolorLandNFT.sol</code>, interface <code>IKolorLandNFT</code>, and <code>IERC721</code> are used to make calls at the same time. This is unnecessary since the contract has already all the functionality and all the calls could be made by directly importing it. Even better would be if the interface had access to all the functionality and this was the one getting used to making the calls.</p><pre id="c4b6a916-d7f0-44ad-999b-6bb3d1ada931" class="code"><code>IKolorLandNFT ilandInterface = IKolorLandNFT(KolorLandNFTAddress);
+KolorLandNFT kolorLand = KolorLandNFT(KolorLandNFTAddress);
+IERC721 erc721 = IERC721(KolorLandNFTAddress);</code></pre></details></li></ul><ul id="c7cc9cf0-663b-422d-b9ea-d168a337b2e9" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="460853b9-40e4-4d31-9b5f-7cf9f8897b2c" class="">N/A.</p></details></li></ul><ul id="2a13369c-455d-400a-8925-50d35c7cd019" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="fcca437e-2062-410a-92a8-4ab3af89b1f4" class="">Make the interface <code>IKolorLandNFT</code> inherits <code>IERC721</code> and add other needed functions to interface <code>IKolorLandNFT</code>. In this way, only <code>IKolorLandNFT</code> is needed. No need to use all three of them.</p></details></li></ul><ul id="b174d0d4-d00a-47de-b2c1-e8f44bdc1001" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="0c9fefa7-6a72-4844-a967-c349d31e6555" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol></div></div><h2 id="1ac7b265-5c4b-482f-9e6d-52e50cfb54b9" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="b64d17f1-7abe-4758-b8a2-adba7d64a2ef" class="">The <code>owner</code> of the contracts is the deployer who can set and unset authorized addresses. Most functions for the three contracts come with the <code>onlyAuthorized()</code> modifier that only allows authorized addresses to execute functions. The main access control for each of the contracts is the following:</p><h3 id="54ff7b26-c4aa-471b-ba14-2c3887b8616b" class=""><details open=""><summary>KolorLandNFT.sol</summary></details></h3><div class="indented"><ul id="d81fa2cc-a8e1-4a63-9b68-964393e70fa0" class="bulleted-list"><li style="list-style-type:disc">Allows to mint NFTs and customize them with the species and geospatial points.</li></ul><ul id="164fe12c-95c9-47cb-9dd5-d9a8bce57755" class="bulleted-list"><li style="list-style-type:disc">Allows to transfer the NFTs to the marketplace.</li></ul></div><h3 id="e38eab71-d77c-49c5-8854-b150b772bbc1" class=""><details open=""><summary>KolorLandToken.sol</summary></details></h3><div class="indented"><ul id="af2cfdc2-901b-4bbc-8471-5f0817df9a62" class="bulleted-list"><li style="list-style-type:disc">Allows to mint tokens that are associated one to one with the size of the land NFT.</li></ul><ul id="2bef8586-ea81-4715-aaf9-b66f0c4c70c3" class="bulleted-list"><li style="list-style-type:disc">Allows to add investments by setting users with balances for the respective tokens.</li></ul></div><h3 id="b88b5b93-a663-4b97-9d66-b02735fb09a0" class=""><details open=""><summary>KolorMarketplace.sol</summary></details></h3><div class="indented"><ul id="56899d1f-15fd-4f9d-bcf3-c8907da78dfe" class="bulleted-list"><li style="list-style-type:disc">Allows to offset emissions on land NFTs once they’re transferred to the marketplace.</li></ul><ul id="699d42e8-575f-4b7c-8a18-8f928777e8e9" class="bulleted-list"><li style="list-style-type:disc">Allows to set the state of the NFT to removed.</li></ul></div></div><h2 id="e310980f-3af8-4631-adff-2f7edd25f955" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="cd98ac08-4627-4337-9beb-c396a8a3a8af" class="simple-table"><thead class="simple-table-header"><tr id="dfb8e942-8504-40dd-a730-c432c2b52678"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="50260419-cb72-4b71-925f-ce5bf2d46524"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="9e4bcc35-cae2-4010-a3a5-604f88a0b518"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="eab7ab94-83ed-43a6-9f1a-56b7d7e44163"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="35e79a8d-9205-4440-a40d-9f509c1cc4ad"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="1bffc413-4865-41a7-b106-099a75239ba6" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="76c077e3-d61f-40a1-9b4f-3541ff3bc62c" class="simple-table"><thead class="simple-table-header"><tr id="8022c628-1c2e-4bf9-9a5c-442fd98e904f"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="0285c0a4-7048-4cac-96da-19fa14d46be9"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="f48193d9-b808-438e-b888-835d0d89715b"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="49456ada-1221-4ee7-9fc1-2b26a37f9608"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="b1602308-5af0-43b3-8722-08449ae884e4"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="58e66cd4-e3ba-4dee-884a-bc13865c5403" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="4bcc56fc-9976-478a-93f6-38daf463b423" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="4810e742-3010-44fa-aa2c-9cfc1af98880" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
