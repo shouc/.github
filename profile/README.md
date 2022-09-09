@@ -117,7 +117,7 @@ Kolor’s protocol is a metaverse project that includes tokens, NFTs, and a mark
 | Kolor Protocol | [Kolor Protocol Audit Report](https://www.verilog.solutions/audits/kolor/) |August 19, 2022|
 
 ### :briefcase: Celo Contracts Audit
-Implement OdisPayments.sol.
+This report presents our engineering engagement with the Celo dev team on the Celo contracts audit for Pull Request #9740. In this pull request review, the Celo team implemented 'OdisPayments.sol', which stores the balance to be used for ODIS quota calculation.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
