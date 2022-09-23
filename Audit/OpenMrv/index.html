@@ -1,0 +1,707 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="https://www.verilog.solutions/verilog.svg" /><title>OpenMRV Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+details * {
+      pointer-events: auto;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cae57428-cf08-47e5-bced-b8efa9a05f7e" class="page sans"><header><h1 class="page-title">OpenMRV Audit Report</h1></header><div class="page-body"><blockquote id="785a7a12-ee24-4d33-8b7e-14e2a7ef4f30" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="0f39ae31-eb60-4da1-bbfd-78350310157e" class="">September 16, 2022</p><p id="ffaeca6e-5075-425e-b1a1-63f9490cc341" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="0f12ae35-2730-48f2-910c-bfe1e01a0fbf" class="image"><a href="images/MRV_Audit_Report.png"><img style="width:1920px" src="images/MRV_Audit_Report.png"/></a></figure><p id="bd92ca41-0884-4719-af68-efdcb2bc87bb" class="">This report presents our engineering engagement with the OpenMRV dev team on their hashing system on the Celo network.</p><table id="d36b071b-14c4-4dab-9ee3-0e2b568963b7" class="simple-table"><tbody><tr id="a20a9a3b-6197-4298-aef4-55efd104856d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:474px">OpenMRV</td></tr><tr id="9c733f5f-abd5-47d7-952e-b4ad823638bf"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:474px"><a href="https://github.com/MRV-Studio/openmrv-contract">https://github.com/MRV-Studio/openmrv-contract</a>
+<a href="https://github.com/MRV-Studio/openmrv-server">https://github.com/MRV-Studio/openmrv-server</a></td></tr><tr id="d8c0761b-554c-41b2-b80b-3460a8e010c9"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:474px">openmrv-contract: <a href="https://github.com/MRV-Studio/openmrv-contract/tree/0238e4a97f2687b847a6e445f428c9b7ca958d8b">0238e4a</a>;
+openmrv-server: <a href="https://github.com/MRV-Studio/openmrv-server/tree/cf60350381d5c98918a3d18ee90139680e5e492f">cf60350</a>;</td></tr><tr id="4c175bc4-c9cd-47b8-8d00-89c24d65befb"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:474px">Solidity</td></tr><tr id="ffbfdec6-6c26-47ed-860b-94144ea747cd"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:474px">Celo</td></tr></tbody></table><h2 id="e6fe064c-2a88-48dc-a675-e73c0de1e2fb" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="3c2c6c5a-eaa2-42fb-ac7b-65b8266c9a03" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="45d51922-75f6-4714-9184-a3cf914ef654" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="d68147df-6896-4d15-b658-01a36a75951d" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="b55874a1-d555-496c-9c3f-2dc940bf4c49" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e6fe064c-2a88-48dc-a675-e73c0de1e2fb">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d68147df-6896-4d15-b658-01a36a75951d">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#22f53d2b-d0f1-4328-bded-66a893109889">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f9a99ea5-d637-4a04-9ff7-7aba2d87188b">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#be2dc6ec-c75a-4e8f-8d1e-b10cce00eaf7">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#17034692-9ee3-4c9b-928b-276862795fe6"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2f76e226-97e8-449a-9a3d-96b68aebd9e0">Off-Chain OpSec </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#24a71143-c075-4f47-b408-38ca5ac154ec">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d3fed506-5a55-4316-a329-ab681ca18fcd">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b6ae21a4-1b69-4866-83b9-b864c29bc5f6">Disclaimer</a></div></nav></div><h2 id="22f53d2b-d0f1-4328-bded-66a893109889" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="d1168b69-1b0e-445a-97cf-c06ab67a3c44" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><ol type="1" id="37cfa70e-c858-4f3c-ae2c-e76e8ca52828" class="numbered-list" start="1"><li>Architecture Consultancy Service<ul id="3b555ad7-8576-4ff6-87a9-a200bd5c10c5" class="bulleted-list"><li style="list-style-type:disc">Protocol Security &amp; Design Discussion Meeting<ul id="854c812e-ce1f-409e-ab42-662beea183fb" class="bulleted-list"><li style="list-style-type:circle">As a part of the audit service, the Verilog Solutions team worked closely with the OpenMRV development team to discuss potential vulnerability and smart contract development best practices in a timely fashion. Verilog Solutions team is very appreciative of establishing an efficient and effective communication channel with the OpenMRV team, as new findings were exchanged promptly and fixes were deployed quickly, during the preliminary report stage.</li></ul></li></ul></li></ol><ol type="1" id="c430f59b-2549-4d10-a842-45d8e0879dbc" class="numbered-list" start="2"><li>Smart Contract Auditing Service<ul id="5ddb04d7-4828-445d-8194-3671d1af1958" class="bulleted-list"><li style="list-style-type:disc">The Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions.</strong></li></ul></li></ol></div><h3 id="0e664ffd-6470-420e-85ad-4ef440e1cdcf" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="7f87babc-aa2b-482d-823b-d9fa16e9c50e" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="d4956495-8f5f-4088-a158-76e6f2bf4802" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="7fb6947d-8c5a-46fe-a359-7e6de126b78f" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="81684918-ae44-4358-bf79-396316156c78" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="0e71d39c-3c74-4910-bbee-adc937eb057f" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="bc4f5bb7-3f71-4284-90ff-fb5db4b7e8f3" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="7ebb7756-637a-43ab-b9e7-72a18fe7dc17" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="806dce06-0cef-4524-9bad-992fdc6dc985" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="185af064-bf31-4e3d-a091-7fa6a9bc357a" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="e43d1313-1ce8-4fc5-8c58-35bbce0e1dc8" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="1683a0eb-b860-4443-8267-ff24fa158c0e" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="da0e478f-ec6f-458d-b80c-132a8a71df90" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="2c4c1a15-8fa9-416a-8e9b-8d5290012856" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><table id="ddd1f900-7a7b-4a04-8610-ee49e029ebe0" class="simple-table"><tbody><tr id="2d61bb1f-4119-48db-af36-52eab2fdffd9"><td id="THyx" class="block-color-gray_background" style="width:473px"><strong>File</strong></td></tr><tr id="c8b2a22d-38ea-4cb1-9b84-f6dea1103be2"><td id="THyx" class="" style="width:473px">openmrv-server/src/controller/*.ts</td></tr><tr id="9943762c-c8c8-43c4-9b85-93c15d15a50d"><td id="THyx" class="" style="width:473px">openmrv-server/src/exception/*.ts</td></tr><tr id="37ab8bcf-1ec2-43a0-8b74-ac216155624d"><td id="THyx" class="" style="width:473px">openmrv-server/src/interface/*.ts</td></tr><tr id="2cd87fcb-0b01-431d-9b77-e1a88217e8ff"><td id="THyx" class="" style="width:473px">openmrv-server/src/middleware/*.ts</td></tr><tr id="34d4f076-81c9-4d63-99fb-dbcefd213fb3"><td id="THyx" class="" style="width:473px">openmrv-server/src/model/*.ts</td></tr><tr id="2307b330-9a30-413d-b632-122022e06b0e"><td id="THyx" class="" style="width:473px">openmrv-server/src/service/*.ts</td></tr><tr id="c7806a29-351a-4d7d-8e3e-c9396142a1b9"><td id="THyx" class="" style="width:473px">openmrv-server/src/test/*.ts</td></tr><tr id="73d3d47e-d66a-4fa1-86b3-a976d1a49808"><td id="THyx" class="" style="width:473px">openmrv-server/src/util/*.ts</td></tr><tr id="7f86f98d-3656-41be-8b90-d396c4dd51fc"><td id="THyx" class="" style="width:473px">openmrv-server/src/http-app.ts</td></tr><tr id="70a6240b-d824-4f22-bb69-8cf5648f7b32"><td id="THyx" class="" style="width:473px">openmrv-server/src/mongo.ts</td></tr><tr id="61c6992a-df84-4571-b35f-e6124609322c"><td id="THyx" class="" style="width:473px">openmrv-server/src/server.ts</td></tr><tr id="1bc97a0a-1819-489a-bea6-0f1347e85537"><td id="THyx" class="" style="width:473px">openmrv-contract/contracts/GeodataAnchor.sol</td></tr></tbody></table></div></div><h2 id="f9a99ea5-d637-4a04-9ff7-7aba2d87188b" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="c173dafb-ec9e-4e54-ae62-b94a531287f3" class="">OpenMRV is a protocol that allows to store the summarized hashes produced by the provider’s input measurement data on the CELO network. The main components of this protocol and their uses are the following:</p><ul id="9bd125ad-6339-42a5-a0c2-6da1fc394490" class="bulleted-list"><li style="list-style-type:disc">openmrv-server is a provider data ingestion layer with authentication and authorization for provider users.</li></ul><ul id="50a0e411-143e-4b19-84a8-180a0b305d9b" class="bulleted-list"><li style="list-style-type:disc">openmrv-server acts as an adapter layer, normalizing and hashing posted inbound data from providers, storing in MongoDB Atlas time series collection, and returning the hash of measurement data.</li></ul><ul id="cb433313-ca1b-4b22-8a71-15defffc0bff" class="bulleted-list"><li style="list-style-type:disc">openmrv-anchor runs independently as a daemon to create a summary hash (anchor) of above hashes, stores it in MongoDB Atlas, and on the CELO contract.</li></ul><ul id="4f9ef682-e00d-4b06-a7cd-5a09828965fc" class="bulleted-list"><li style="list-style-type:disc">openmrv-validator runs independently as a daemon to validate the anchoring process above, and record results of validation, reporting any exceptions.</li></ul><ul id="8bda185c-4d17-4099-ae58-65f2f7d38ca0" class="bulleted-list"><li style="list-style-type:disc">openmrv-query will expose data to consumers, integrated with Ocean protocol.</li></ul><figure id="d7e54767-3c95-4428-bc91-9bcf00adc5ed" class="image"><a href="images/Untitled.png"><img style="width:1259px" src="images/Untitled.png"/></a></figure><p id="630388eb-9591-4222-8bef-1982d5d72f62" class=""><mark class="highlight-gray">OpenMRV System Architecture</mark></p><p id="0605bc20-86ca-4bbe-97ce-eb09774f683a" class="">
+</p><p id="5520c09b-0f2d-45d5-8f6f-292ad9e97e3a" class="">The OpenMRV protocol is integrated by off-chain (openmrv-server) and on-chain (openmrv-contract) components. The server is able to call the on-chain contract to store the anchors (summarized hashes) on the CELO network. A more detailed description of these two elements can be found below:</p><h3 id="43b96edf-5ce9-4c48-8a00-e3887a31b868" class=""><a href="https://github.com/MRV-Studio/openmrv-server">openmrv server</a></h3><blockquote id="a0b73e2a-1188-4238-952a-f2d13b7d06b3" class="">contains the logic for the off-chain components.</blockquote><p id="5824710a-3e85-4449-8fab-ec5e90bd2e42" class="">This component mainly has the following functionality:</p><ul id="efc29495-083b-45b4-901c-8fc921c5a983" class="bulleted-list"><li style="list-style-type:disc">Allow provider users to authenticate and authorize their measurement data to be used.</li></ul><ul id="efe063f0-9b1c-4897-a250-f8241c1e8a92" class="bulleted-list"><li style="list-style-type:disc">Store the time series collection in MongoDB Atlas.</li></ul><ul id="04ee4d14-784e-432b-8a6c-bb7773a920a2" class="bulleted-list"><li style="list-style-type:disc">Create a summary hash (anchor) from the <code>geots</code> hashes (contain information about the time series, metadata, measurements, <em>etc</em>).</li></ul><ul id="7c03dea3-bdfb-4866-9df7-5d61bebd340a" class="bulleted-list"><li style="list-style-type:disc">Add the anchor to the CELO contract.</li></ul><ul id="5b255e67-ea0e-48f0-9ca8-1dd572cd379a" class="bulleted-list"><li style="list-style-type:disc">Validate that the anchor meets certain criteria.</li></ul><blockquote id="1f215e4f-c1e4-465a-af29-913a7363828d" class="">contains the logic for the on-chain components.</blockquote><h3 id="52df5c18-7f6d-4af9-bd2b-d12b6702da1d" class=""><a href="https://github.com/MRV-Studio/openmrv-contract">openmrv contract</a></h3><p id="72d8a624-2aef-40f5-826d-5fd2dd22e97c" class="">This component mainly has the following functionality:</p><ul id="12b6a632-8b93-452b-ae8a-adb0a1e0d1bf" class="bulleted-list"><li style="list-style-type:disc">Add summarized data hashes to the contract on the CELO network.</li></ul><ul id="cb9982e8-1145-4485-bd5b-81220b8527f2" class="bulleted-list"><li style="list-style-type:disc">Get summarized data hashes that have already been added to the contract.</li></ul></div><h2 id="be2dc6ec-c75a-4e8f-8d1e-b10cce00eaf7" class=""><details open=""><summary>Use Case Scenario</summary></details></h2><div class="indented"><p id="5dfbfe81-05ca-4d41-8ace-6c3b7752192c" class="">OpenMRV is a hashing system that allows summarizing measurement data for subsequent analysis and analytics. This protocol is integrated by both on-chain and off-chain logic, it stores the original information in MongoDB Atlas and the summarized data hashes in the smart contract deployed on the CELO network.</p></div><h2 id="17034692-9ee3-4c9b-928b-276862795fe6" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="27e32c00-32d3-4535-a2ce-874f4e8e3e27" class="simple-table"><tbody><tr id="5208c4fa-db17-4843-98f6-99f1a34028bc"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="211aaf13-23d6-4d60-a6fc-5d2d2c22b58a"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="687207fa-2b13-4909-89ec-33247aa9ce5f"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="9d79822a-3bf4-4fb8-81a0-9e610719c07f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">1</td></tr><tr id="177d27c0-d061-4c77-97e3-8550e7977d4e"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">2</td></tr></tbody></table><h3 id="c70d36fe-18c6-4e9e-accb-ea44b53eecf7" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><p id="9e25f64e-df4d-44d6-b6eb-89d6095a5b63" class="">None ; )</p></div><h3 id="95c49ba8-fb5f-4819-a418-edc6900c18c0" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><p id="392e7559-20dc-466a-ac31-232f0c1c0931" class="">None ; )</p></div><h3 id="7736fbda-4c54-49e3-9c3a-6021e57e0970" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="de44af72-f043-4f42-ac00-e07231b00e2a" class="numbered-list" start="1"><li><strong>Should add non-zero check for </strong><strong><code>_hash</code></strong><table id="5b66e1ad-846f-4e65-8b1b-ab070e08e25e" class="simple-table"><tbody><tr id="16c0a3bd-5e03-41a1-9041-c87c68f0c15b"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="5e9fe50d-0474-47bb-959a-00b03b0e72b9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">GeodataAnchor.sol#L25;</td></tr><tr id="52094c99-9d54-46bd-913f-567fa037734e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px"><a href="https://github.com/MRV-Studio/openmrv-contract/tree/0238e4a97f2687b847a6e445f428c9b7ca958d8b">0238e4a</a>;</td></tr><tr id="53fbed90-3153-4962-afd8-c2c9f2b6e589"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>;</td></tr></tbody></table><ul id="ccc9f4fb-37c7-4b43-83c0-72af6f9a5f93" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="024f95c6-ba3b-4851-b409-dd9fe8421056" class="">The function <code>addAnchor()</code> does not check if the <code>_hash</code> is empty. Non-zero check should be added for it.</p></details></li></ul><ul id="3916d8a6-6f26-429e-aeca-81c92a0e6432" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="6e50509e-3281-4493-b999-49b20a585f0b" class="">N/A</p></details></li></ul><ul id="9e9c8f5f-0d28-4154-b9c2-3169ed34ca0c" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="adabf4d9-6aa4-4e79-833d-097f8ee0075b" class="">add the following require statement.</p><pre id="c79cd19d-3c26-4890-803f-1e3921d65061" class="code"><code>require(_hash != 0, &quot;Empty hash&quot;);</code></pre></details></li></ul><ul id="2667f357-9840-4040-99fd-a58bb068edb8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="ce7df727-1c32-41f7-8bc3-d1a8d815bc6b" class=""><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>.</p></details></li></ul></li></ol></div><h3 id="c8a55c23-54be-4b79-b708-ade2e7019369" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="fdf828a5-3e0c-45a6-a5cd-bcd5377ac8ca" class="numbered-list" start="1"><li><strong><code>memory</code></strong><strong> can be used in </strong><code><strong>getAnchor()</strong></code><table id="62c8a5f9-b2f8-4972-9b8c-fabf7dfd3652" class="simple-table"><tbody><tr id="5c32a31e-85eb-414c-a45f-6b0db6d7ba55"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="eca12122-2bec-4007-bb40-fd2ee2eb9120"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">GeodataAnchor.sol#L15;</td></tr><tr id="dd962cdb-9076-426c-9e78-ba91efe7c8fb"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px"><a href="https://github.com/MRV-Studio/openmrv-contract/tree/0238e4a97f2687b847a6e445f428c9b7ca958d8b">0238e4a</a>;</td></tr><tr id="227d2817-058f-4bc0-b43c-89f014b8d8e4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>;</td></tr></tbody></table><ul id="4469f61c-a900-489b-9380-d873ba219d29" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="d177d6a2-2474-47b5-8762-dd76621920df" class=""><code>memory</code> can be used in <code>getAnchor()</code> to fectch struct from the mapping<strong>.</strong></p><p id="54031bf5-ba98-4acc-b517-0e724dd30028" class=""><code>getAnchor()</code> is a view function which does not make changes to the storage of the contract. So Anchor struct can be fetched with <code>memory</code> keyword instead of <code>storage</code>.</p><pre id="27648fd6-780d-4843-8ef1-f43ec3308065" class="code"><code>function getAnchor(string memory _id) public view returns (bytes32) {
+        Anchor storage anchor = anchors[_id];
+        if (anchor.hash == 0) {
+            revert(&quot;Anchor not found&quot;);
+        }
+
+        return anchor.hash;
+    }</code></pre></details></li></ul><ul id="64415aa8-3f7c-4f12-bf1a-0f96e6f94ae2" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="5b1a2745-d6cc-4727-9c78-a9412f493da4" class="">N/A</p></details></li></ul><ul id="cb84f14b-a339-4a59-9b29-05c363dc24ce" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><pre id="a08d6f31-7865-4427-97d5-d1e4266a1aca" class="code"><code>function getAnchor(string memory _id) public view returns (bytes32) {
+        Anchor memory anchor = anchors[_id];
+        if (anchor.hash == 0) {
+            revert(&quot;Anchor not found&quot;);
+        }
+
+        return anchor.hash;
+    }</code></pre></details></li></ul><ul id="a98a9967-2b93-41ee-ba00-4e41de3119f1" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="226e7ab6-7177-4262-82c9-411acacb77bd" class=""><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>.</p></details></li></ul></li></ol><ol type="1" id="19612435-0b03-4d5d-ac58-295405b44ed7" class="numbered-list" start="2"><li><strong>No need to create two instances of Anchor struct in </strong><strong><code>addAnchor()</code></strong><table id="d3df38bd-7b91-4be3-9c52-666dbe155be3" class="simple-table"><tbody><tr id="4da303d4-1fe1-4d06-b85b-9f0c529e8137"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="b04fb9a2-fc47-4a7d-ad64-6e5a0135f9f0"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">GeodataAnchor.sol#L25;</td></tr><tr id="2bc3ae93-95ee-481c-ada8-6025d8293235"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px"><a href="https://github.com/MRV-Studio/openmrv-contract/tree/0238e4a97f2687b847a6e445f428c9b7ca958d8b">0238e4a</a>;</td></tr><tr id="56c1f58b-f6f7-4264-8104-b92df670857f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>.</td></tr></tbody></table><ul id="95d70b35-a1b9-4a8d-8ce9-5b147187d2fe" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7b038f32-695c-4dd5-9e7e-c30fc09a6bef" class="">The <code>addAnchor()</code> function creates two instance of Anchor struct, which can be optimized.</p><pre id="85135654-58ee-43ee-a04e-fcd7e21dd6c2" class="code"><code>function addAnchor(string memory _id, bytes32 _hash) public onlyOwner {
+        // see if anchor already exists
+        Anchor storage anchor = anchors[_id];
+        require(anchor.hash == 0, &quot;Anchor id already exists&quot;);
+
+        Anchor memory newAnchor = Anchor(_hash);
+        anchors[_id] = newAnchor;
+    }</code></pre></details></li></ul><ul id="cb53b41f-f807-42fb-bba6-4f42307e3a03" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="a4bbeb89-4b08-4c74-857d-818f0ceea7be" class="">N/A</p></details></li></ul><ul id="10b25c1b-89c2-4717-8d6a-dfdb3ce20f49" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><pre id="338394a9-a73a-4770-9bbe-a5a1f7347f63" class="code"><code>function addAnchor(string memory _id, bytes32 _hash) public onlyOwner {
+        Anchor memory anchor = anchors[_id];
+        require(anchor.hash == 0, &quot;Anchor id already exists&quot;);
+				require(_hash != 0, &quot;Empty hash&quot;);
+
+        anchor.hash = _hash;
+        anchors[_id] = anchor;
+    }</code></pre></details></li></ul><ul id="1d1de66b-bd5e-4679-9968-f5b5e71e4dd6" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="5ed98fa0-9bb4-47ad-9025-eb334d1be7d3" class=""><strong>Resolved </strong>in commit <a href="https://github.com/MRV-Studio/openmrv-contract/commit/785ce9fb350103bf4aee11deaa5914c4c97ff809">785ce9f</a>.</p></details></li></ul></li></ol></div></div><h2 id="2f76e226-97e8-449a-9a3d-96b68aebd9e0" class=""><details open=""><summary>Off-Chain OpSec </summary></details></h2><div class="indented"><p id="85e312f6-2d91-480c-9223-c4f4a7ebecd1" class="">OpenMRV protocol off-chain components are found in the <a href="https://github.com/MRV-Studio/openmrv-server">openmrv-server</a> that allows provider users to store their measurement data in the MongoDB Atlas. This off-chain component interacts with the contract on-chain by adding the summarized hashes to the CELO network. There are five main folders that integrate this part, the functionality of each of them is described below:</p><h3 id="d10bb825-5ca6-4877-9474-39aec119c7a8" class="">Controller</h3><blockquote id="ff37cab3-d06c-4d0e-b8d7-661ae8bb49d8" class="">contains logic for creating and handling authorization and authentication.</blockquote><ul id="618c8de1-0c1a-4d86-8176-fb4376cb670e" class="bulleted-list"><li style="list-style-type:disc">Allows creating the anchor, validator, and authorization services.</li></ul><ul id="95738509-18b6-437d-882b-e096befebf25" class="bulleted-list"><li style="list-style-type:disc">Allows provider users to register and authenticate.</li></ul><ul id="4dc2d760-8669-4582-87ab-2c362a64b3a7" class="bulleted-list"><li style="list-style-type:disc">Allows to register, disable, and delete users.</li></ul><ul id="8dc1f322-b36f-4503-a0d9-f67f11142492" class="bulleted-list"><li style="list-style-type:disc">Allows getting users and measurements.</li></ul><h3 id="63f041b5-d737-444c-a268-560ab0be867c" class="">Exception</h3><blockquote id="5cc41412-36f9-4dc9-a73b-41bfdef294b7" class="">contains logic for extending exceptions.</blockquote><ul id="254e790f-3657-44b4-b3dc-6d8b86545af0" class="bulleted-list"><li style="list-style-type:disc">Extends HTTP exceptions to show more information.</li></ul><ul id="99d34086-cd6c-4195-99cb-108735c93f8f" class="bulleted-list"><li style="list-style-type:disc">Extends errors to show more information.</li></ul><h3 id="c8ef6c4d-5b20-4191-9355-9f83b7558dac" class="">Middleware</h3><blockquote id="804938b6-a716-4f51-a0ff-3cfae244ddf1" class="">contains logic for checking access roles.</blockquote><ul id="bc530a5a-9df7-4db3-9c17-d212052179f5" class="bulleted-list"><li style="list-style-type:disc">Checks for provider role, super role, and validator role.</li></ul><ul id="46fb7ca8-12e3-4b88-ba07-90ad425f3788" class="bulleted-list"><li style="list-style-type:disc">Checks for valid tokens and user roles.</li></ul><ul id="451ceb88-9dba-4618-aca9-81541022c175" class="bulleted-list"><li style="list-style-type:disc">Checks for valid tokens and enabled users.</li></ul><h3 id="a5d0fb4b-cf68-404a-8759-a9b903181631" class="">Model</h3><blockquote id="3794f484-cc25-4c6b-bc0f-469d84294373" class="">contains logic for defining objects with a mongoose schema.</blockquote><ul id="b6d5662d-075c-41e0-aba0-f4074df6dbed" class="bulleted-list"><li style="list-style-type:disc">Defines mongoose schema for the anchor.</li></ul><ul id="9f1c8080-51b9-40f4-b97a-734b2d9d605a" class="bulleted-list"><li style="list-style-type:disc">Defines mongoose schema with detailed information about the measurements and metadata.</li></ul><ul id="fbd0c082-7b5f-4c27-82ca-bb3383ab937d" class="bulleted-list"><li style="list-style-type:disc">Defines mongoose schema for <code>geots</code> (comprises information about the time series, measurements, metadata, <em>etc.</em>).</li></ul><ul id="ced956bb-7045-4a57-8800-ef8b4144929c" class="bulleted-list"><li style="list-style-type:disc">Defines mongoose schema for the provider and user role.</li></ul><h3 id="5551256b-817c-44b7-96db-558e058225e5" class="">Service</h3><blockquote id="a5dee624-1e06-45c7-a1e1-b8efec7f1877" class="">contains logic for the functionality of the services.</blockquote><ul id="77e33f64-df6a-4466-ba5d-76808bc466d1" class="bulleted-list"><li style="list-style-type:disc">Contains functionality to interact with the authorization service (register and disable users, create tokens, and add roles).</li></ul><ul id="e1caa6eb-c721-42f7-b0fd-ada44954541d" class="bulleted-list"><li style="list-style-type:disc">Contains logic for creating the <code>geots</code> hashes.</li></ul><ul id="408be8e7-8c2e-43fd-92c7-5cc971fc43cf" class="bulleted-list"><li style="list-style-type:disc">Creates a summary hash from the <code>geots</code> hashes.</li></ul><ul id="b2535af7-30d7-4e5b-8768-4f8b684a3817" class="bulleted-list"><li style="list-style-type:disc">Adds the anchor to the CELO contract.</li></ul><ul id="9048adc5-a0ad-4895-a23d-c8fc3f6da6a1" class="bulleted-list"><li style="list-style-type:disc">Validates criteria in the summary hashes.</li></ul></div><h2 id="24a71143-c075-4f47-b408-38ca5ac154ec" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="d8db40e3-c72c-4e02-89a7-11f0db8ac14a" class="simple-table"><thead class="simple-table-header"><tr id="8c0267fe-c550-4008-af62-d07fdc0aeae1"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="0f6b6331-3d8d-4702-a5e4-0f3588c3aa31"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="45c40d35-a237-47e4-bdb7-22498da1761f"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="e0dcd60d-42ef-48a2-895e-dba2dc794a9f"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="81f7a850-1741-403b-9276-958876e683fa"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="d3fed506-5a55-4316-a329-ab681ca18fcd" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="f9c6e8d0-c1d2-4698-821a-8b1dc6bfd11f" class="simple-table"><thead class="simple-table-header"><tr id="11543c06-7237-481f-82f6-8dcefd838c52"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="90da4fcc-0a1e-48dd-9382-6f0c90ab8e19"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="388255f2-8678-462b-b37c-12ac67b78ef6"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="4b0717d4-0e59-4d12-b42f-f12f80a56d1d"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="fea3e9b1-3ab4-4c63-b550-71cbb2f8d7d9"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="b6ae21a4-1b69-4866-83b9-b864c29bc5f6" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="2c7e9fa8-68c9-4a51-bf4a-df921df5cab3" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit is detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="62d609bd-9323-4075-8d18-7893233d71ae" class="">In addition, Verilog Solutions reports do not provide any indication of the technology proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>
