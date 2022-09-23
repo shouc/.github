@@ -1,0 +1,685 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="https://www.verilog.solutions/verilog.svg" /><title>Pangolin Hedera Contracts Audit Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+details * {
+      pointer-events: auto;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0c62a565-65f1-4e41-9ee1-b3e72aa70544" class="page sans"><header><h1 class="page-title">Pangolin Hedera Contracts Audit Report</h1></header><div class="page-body"><blockquote id="71810313-c435-41be-9822-75d90bd3a868" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="ef8ceddf-af1a-4cb4-9811-9342380098a4" class="">September 2, 2022</p><p id="87430605-62e1-4a06-a107-3e225a53bf8b" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="ea1de2cc-a5a3-4d53-8e09-14e285894585" class="image"><a href="images/Pangolin_Audit_Report.png"><img style="width:1920px" src="images/Pangolin_Audit_Report.png"/></a></figure><p id="5a6aaaa2-4007-4ff8-8d82-c74804e0a01a" class="">This report presents our engineering engagement with the Pangolin dev team on their hedera contracts deployed on the Hedera ecosystem.</p><table id="6e327de7-c359-4e22-892a-9ace707b2317" class="simple-table"><tbody><tr id="2a156559-01e6-4f75-8f7e-05d19b597c78"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:474px">Pangolin Hedera contracts</td></tr><tr id="6124a666-ee4d-4728-b0c0-1c131eb25712"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:474px"><a href="https://github.com/pangolindex/hedera-contracts/tree/b3a0dc2c51d72687a5c158517cd4e19899aaaa31">https://github.com/pangolindex/hedera-contracts/tree/b3a0dc2c51d72687a5c158517cd4e19899aaaa31</a></td></tr><tr id="63206110-9f66-4a4e-9c35-d9680c56ab0a"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:474px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31</td></tr><tr id="9e81e52f-726e-404a-97ae-3416dc45fcd2"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:474px">Solidity</td></tr><tr id="fa2c05e5-f53e-4b12-a76c-36c107b1cb4e"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:474px">Hedera</td></tr></tbody></table><h2 id="84590a42-a476-426d-9e5d-9634bddf52f7" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="5d00cd5d-056f-4df6-8497-63727730770c" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="36e948a6-e6d1-4e6f-a319-87f672de78cb" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="7bd3848a-17d0-46c8-9b7d-e75861fa5a98" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="d909ffd4-47ab-4b67-b5f0-5153809fa47a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#84590a42-a476-426d-9e5d-9634bddf52f7">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7bd3848a-17d0-46c8-9b7d-e75861fa5a98">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1e80ca11-ae4b-41af-8286-c86894994f8b">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8e1dedd2-e7c3-4ad2-8d18-4222f3bfeac5">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3f37f70d-5366-4605-ac47-ee436d07e0d5">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ee921110-bd87-4045-a912-dad1f46c4de2"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#da8116c5-a83e-4c01-b005-acc992ac604d">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ba8102e1-8824-4332-a139-8dbca9b6dffd">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b9e82f22-a2c0-41ed-b75a-2550f4c2f0b0">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#08864e21-3db2-48ef-ad4c-9e37d0497682">Disclaimer</a></div></nav></div><h2 id="1e80ca11-ae4b-41af-8286-c86894994f8b" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="9489ec77-6372-4e73-a4d9-28a37bafc8b3" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><ol type="1" id="1b40307b-12fd-4db4-8578-20bd47c161db" class="numbered-list" start="1"><li>Architecture Consultancy Service<ul id="e2fbe6ad-a4be-42ef-bbb5-7fa6779d6329" class="bulleted-list"><li style="list-style-type:disc">Protocol Security &amp; Design Discussion Meeting<ul id="dd8b10c9-130d-47ca-b7fc-012252c4e261" class="bulleted-list"><li style="list-style-type:circle">As a part of the audit service, the Verilog Solutions team worked closely with the Pangolin development team to discuss potential vulnerability and smart contract development best practices in a timely fashion. Verilog Solutions team is very appreciative of establishing an efficient and effective communication channel with the Pangolin team, as new findings were exchanged promptly and fixes were deployed quickly, during the preliminary report stage.</li></ul></li></ul></li></ol><ol type="1" id="0fe315e0-d078-4a23-9b77-bd9f05add034" class="numbered-list" start="2"><li>Smart Contract Auditing Service<ul id="97e91be6-0906-4d88-8f9f-70d277c8a30a" class="bulleted-list"><li style="list-style-type:disc">The Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions.</strong></li></ul></li></ol></div><h3 id="2a674237-2798-48b3-a3f2-3a02ab4e04c5" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="3e2358bb-b399-410d-b436-6cdfde150637" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="e5713f5d-7ea7-4d25-8d61-824e350f944a" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="270b7c9d-5cc2-403a-a4b5-d04bc801f22a" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="6a440905-04e0-4beb-969f-df78f11510db" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="4505bf82-2f5e-45dd-9dd0-a1c96e770a22" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="cde2702d-26bd-4f21-ae1d-a1f9be1ead56" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="54207685-3e4c-4524-a180-6b7fc07929db" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="c500dde6-e4ef-4829-bd09-3c10e4328899" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="1393c789-e876-40db-be56-1a9c3d2fe815" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="cc4cd646-596c-43af-93d0-2e4e2c6924b3" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="43d8cf22-bd13-40b5-b151-cd18b7ebb546" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="c6f97a99-119a-41cf-b67a-207f65bb57a4" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="9775966a-137b-4564-ade3-6ce1b69c0dc4" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><table id="0427dad3-71a6-4a94-a16c-bd2eed3e7596" class="simple-table"><thead class="simple-table-header"><tr id="93c04692-579d-4de6-8388-854498c5d05b"><th id="@Y@&gt;" class="simple-table-header-color simple-table-header" style="width:621px">File</th></tr></thead><tbody><tr id="8560c5b5-f25d-4337-ad40-29f80094c4c1"><td id="@Y@&gt;" class="" style="width:621px">contracts/TreasuryVester.sol</td></tr><tr id="1ce57255-276a-49b2-b5f9-a8ddfa076caa"><td id="@Y@&gt;" class="" style="width:621px">contracts/WHBAR.sol</td></tr><tr id="6be70e28-1507-4feb-9d4f-15f06fbc6989"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-periphery/PangolinRouter.sol</td></tr><tr id="22bfb80e-e1c7-442e-80f5-6f50bcf2521a"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-periphery/interfaces/IPangolinRouter.sol</td></tr><tr id="ef82de50-6b74-4136-9e29-c10eeff3d691"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-periphery/interfaces/IBridgeToken.sol</td></tr><tr id="41e2a183-51d7-48bb-8cf9-4d2f32aec368"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-periphery/libraries/PangolinLibrary.sol</td></tr><tr id="e68df75d-a17a-4627-9fdf-b035851a7441"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-periphery/libraries/UniswapV2OracleLibrary.sol</td></tr><tr id="529a99aa-64f3-4405-92fb-1e76cc871cf9"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-lib/libraries/AddressStringUtil.sol</td></tr><tr id="e0f3cf8b-4639-4065-8699-63ae9a2d1045"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-lib/libraries/Babylonian.sol</td></tr><tr id="86ed12d2-28d3-4ea2-8347-f5c2670b69c1"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-lib/libraries/FixedPoint.sol</td></tr><tr id="dd7ee283-410f-4e43-ae65-449103cea0dd"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-lib/libraries/FullMath.sol</td></tr><tr id="66f4bcbf-9e41-4645-a2e0-40e67d8fe8b7"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-lib/libraries/PairNamer.sol</td></tr><tr id="036fa768-3992-4163-8e50-171fad15a637"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/PangolinERC20.sol</td></tr><tr id="35018989-66b5-497f-8aae-f744fb1fa484"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/PangolinFactory.sol</td></tr><tr id="000579f3-c4a1-48f3-85bc-3228aa88da3b"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/PangolinPair.sol</td></tr><tr id="65dff3e9-b631-495b-9a88-38f224131f84"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/ContractSizeChecker.sol</td></tr><tr id="f9d0a1a4-16e1-4339-afc9-d22d2f32e224"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/LogicalBurn.sol</td></tr><tr id="53d4c91c-ab52-4d23-bda7-77c6785af10d"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/interfaces/IPangolinCallee.sol</td></tr><tr id="04e82af4-7abd-40ee-b8ce-d097fbacefed"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/interfaces/IPangolinERC20.sol</td></tr><tr id="e918253c-abe3-4aa7-bc69-a446b36d9570"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/interfaces/IPangolinFactory.sol</td></tr><tr id="18757e22-c68c-4498-b5c2-95911c6ee763"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/interfaces/IPangolinPair.sol</td></tr><tr id="a63665d8-d6f8-40d5-9cff-82cbf5d8b947"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/libraries/Math.sol</td></tr><tr id="493ebc73-1df6-43cc-814a-78acd995348b"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/libraries/SafeMath.sol</td></tr><tr id="580564eb-af7a-46bc-8385-24f26c6af43b"><td id="@Y@&gt;" class="" style="width:621px">contracts/pangolin-core/libraries/UQ112x112.sol</td></tr></tbody></table></div></div><h2 id="8e1dedd2-e7c3-4ad2-8d18-4222f3bfeac5" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="a564bd6c-f5d4-4393-a56a-5fdbb23628e5" class="">Pangolin Hedera contracts contain two parts. The AMM DEX contracts and a treasury vesting contract.  The AMM DEX contracts are on Uniswap V2 core contracts with support for Hedera native tokens. Because of some unique features/limitations of the Hedera smart contract service, some important changes and modifications are made to the contract code. The treasury vesting contract distributes Pangolin’s Hedera native token PNG based on a 30-month vesting plan.</p><figure id="bb9a8cc0-f551-4562-81e8-754a1daaec35" class="image"><a href="images/Untitled.jpeg"><img style="width:2274px" src="images/Untitled.jpeg"/></a></figure><p id="8d8e35c6-c17c-44c4-83b3-647612814852" class=""><mark class="highlight-gray">Pangolin Hedera System Architecture</mark></p><p id="e6ad9a4d-0a19-4e91-afb1-7c769096b431" class="">
+</p><p id="a9bc3dd6-e317-4971-b8bc-e246fbabd29d" class="">Pangolin Hedera mainly consists of the following three folders and contracts:</p><h3 id="3ad30373-153e-4eb4-97bb-8f44d086cce2" class="">pangolin-core</h3><blockquote id="6cdaf533-c3ae-4ef9-bd72-3b345055291f" class="">contains the logic of interacting with the DEX. </blockquote><p id="f97e2b45-d18a-4624-b901-501565bb6b53" class="">The main contracts of this folder are <code>PangolinFactory.sol</code> and <code>PangolinPair.sol</code>. They contain the logic to do the following:</p><ul id="29c63e1f-db1a-4844-b932-08e6cf64c333" class="bulleted-list"><li style="list-style-type:disc">Create a new pair of tokens in the exchange.</li></ul><ul id="3005997f-b639-4791-9446-50debfa6e930" class="bulleted-list"><li style="list-style-type:disc">Set the address that will receive the minting fees.</li></ul><ul id="963e307f-6674-4637-a5b7-ccc2108acc4e" class="bulleted-list"><li style="list-style-type:disc">Get the available reserves of a pair.</li></ul><ul id="159155f9-deab-46b3-a82a-3e13fa232718" class="bulleted-list"><li style="list-style-type:disc">Mint LP tokens.</li></ul><ul id="4bf3b6c3-5771-4a66-a519-9c6b6b61fc30" class="bulleted-list"><li style="list-style-type:disc">Burn LP tokens.</li></ul><ul id="685b5009-fd62-41f6-ae11-6a2773b5c4b0" class="bulleted-list"><li style="list-style-type:disc">Swap tokens in the DEX.</li></ul><h3 id="ac1f06f4-7ba4-4529-a0b5-82f7babea206" class="">pangolin-periphery</h3><blockquote id="2f8cb608-7c6a-4b3c-a8b7-f08c0503b82a" class="">contains the logic for users to interact with the core contracts. </blockquote><p id="590ffbf8-7377-4360-9221-1905a7058827" class="">The main contract of this folder is <code>PangolinRouter.sol</code> and contains the logic for users to do the following:</p><ul id="431bedb9-9d8a-4d0e-b704-a554ea948ffb" class="bulleted-list"><li style="list-style-type:disc">Add/remove liquidity from the specified pair.</li></ul><ul id="5e19f50b-a569-4420-a52b-25d579855284" class="bulleted-list"><li style="list-style-type:disc">Swap tokens from a pair.</li></ul><ul id="a5d669f8-3a71-4862-a290-3d4ff2991422" class="bulleted-list"><li style="list-style-type:disc">Query equivalent amount of another asset in a pair.</li></ul><h3 id="ac74673d-1103-4d49-b393-0e77d2a659ff" class="">pangolin-lib</h3><blockquote id="5352672c-0280-4177-bcd6-0a1f20f9615e" class="">contains some helper libraries.</blockquote><p id="241cbcbc-ee91-448e-afdb-eab08c68774c" class="">The main use of the contracts in this folder is to do the following:</p><ul id="e332c734-43c4-4a21-9ece-39cfbb0b79eb" class="bulleted-list"><li style="list-style-type:disc">Use helper math functions.</li></ul><ul id="48ea3c83-accf-4da8-9099-e8c14896d082" class="bulleted-list"><li style="list-style-type:disc">Use helper transfer functions.</li></ul><h3 id="b9501345-5641-4d1a-8940-bc29f8493302" class="">TreasuryVester<strong>.sol</strong></h3><blockquote id="1fa66e7c-6578-4d1a-8007-a6051f4f6fa2" class="">contains the logic of creating, minting, and distributing a Hedera native <code>PNG</code> token. </blockquote><p id="04a915c4-6d38-43cf-925a-05c4fc0bd9c7" class="">This contract has the following functionality:</p><ul id="f499626a-5a28-4d6d-a23d-ac7751663bb4" class="bulleted-list"><li style="list-style-type:disc">Assign the admin and define the <code>PNG</code> token using the Hedera Token Service on deployment.</li></ul><ul id="cb1c1947-394d-471d-8e16-88f4bf1cfd7f" class="bulleted-list"><li style="list-style-type:disc">Pause and unpause the contract.</li></ul><ul id="24bde674-3dcf-43ce-87aa-6e8b05b25d76" class="bulleted-list"><li style="list-style-type:disc">Set the recipients that will be receiving the tokens.</li></ul><ul id="e555ecd0-e46f-4b72-8ee9-73b47e7c4fcf" class="bulleted-list"><li style="list-style-type:disc">Distribute the tokens daily.</li></ul></div><h2 id="3f37f70d-5366-4605-ac47-ee436d07e0d5" class=""><details open=""><summary>Use Case Scenario</summary></details></h2><div class="indented"><p id="02db8de3-89dc-413f-93cb-624e48ea4fc4" class="">Pangolin Hedera is an AMM DEX on the Hedera ecosystem. Similar to Uniswap, Pangolin Hedera allows users to exchange cryptocurrencies and earn rewards by providing liquidity. It also allows users to receive a Hedera native PNG token if they are selected for an airdrop.</p></div><h2 id="ee921110-bd87-4045-a912-dad1f46c4de2" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="b70ce1bf-db23-4d0a-ba9d-036ac20fafaf" class="simple-table"><tbody><tr id="3557177d-a0d1-4965-8842-cad077b71efe"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="706f4307-79f1-4d05-990a-0d4e4b2454a7"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">2</td></tr><tr id="30f54591-0059-4537-8d94-2e845285ea7f"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">0</td></tr><tr id="38605325-091e-4d0f-b8d1-a8c5104dd196"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">0</td></tr><tr id="d8f1112a-d82a-4be7-8e75-3c68f7e20628"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">3</td><td id="@mfj" class="">3</td><td id="|V?N" class="">2</td></tr><tr id="889e8758-ac44-40d5-9d12-edf08669e8b1"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-purple"><strong>Undetermined</strong></mark></td><td id="T&lt;wm" class="">1</td><td id="@mfj" class="">1</td><td id="|V?N" class="">0</td></tr></tbody></table><h3 id="de35cb5c-0869-40b2-aa86-1cf8cac9a74b" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><ol type="1" id="8b043817-281a-45d5-88b4-fdb06d84bee0" class="numbered-list" start="1"><li><strong>Possible attacks due to some Hedera unique features/limitations</strong><table id="d3925522-a296-40d9-b488-7dc90263be7b" class="simple-table"><tbody><tr id="ce101000-b4f0-46e0-829c-fad1c12b56ca"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="6340862a-cc84-4e19-ac57-ffaada0c97ed"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">pangolin-core/*sol;
+pangolin-periphery/*.sol;</td></tr><tr id="e78e284b-ab5e-48d4-8c33-80df049e6e78"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="d1e89796-1da5-4d42-971a-cbe1659e2181"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong>;</td></tr></tbody></table><ul id="5359f449-9a2d-4490-8a01-71501307649c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="ae4a28f7-f5ae-4a24-a315-f979f3f00489" class="">There are some known unique features/limitations for smart contract services on Hedera EVM. Smart contracts that are designed without considering those features/limitations may not work properly and are subject to attacks like DoS attacks.</p><p id="160924c7-c0ff-44e7-984d-b36f9fddf51a" class="">The following are some of the known unique features/limitations on Hedera and possible issues that can occur when developing the Pangolin DEX contracts on Hedera.</p><ol type="1" id="2811c0c6-28fe-41b1-ba7f-09fc0af9d998" class="numbered-list" start="1"><li><strong>Smart contract state storage limits </strong><p id="4a033636-9549-4b45-9c0e-03025057e600" class="">On Hedera, there are limits on smart contract state storage. As of writing, the state storage limitation is 10MB.  New key-value pairs cannot be created once the contract reaches its limits. 
+Also, Hedera will soon adopt a rent mechanism, which requires rent payment for the usage of the state storage of smart contracts. Smart contracts will become “removed” without paying rent. </p><p id="8447c93b-c300-4af9-82f3-5eea5303bf0c" class="">Currently, Pangolin DEX contracts on hedera are based on Uniswap V2. LP token creations are permissionless and the pair addresses are stored in the PangolinFactory contract. LP tokens can be created with both Hedera native tokens (tokens created via Hedera token services) and normal ERC20 contract tokens. Attackers can execute DoS attacks on Pangolin DEX by massively creating LP token pairs via the PangolinFactory contract with low gas cost. New pair creations will not be possible once the PangolinFactory contract reaches its state storage limits. When the rent mechanism is adopted on Hedera, the PangolinFactory contract will be forced to pay the rents for the useless pairs created by the attacker otherwise it will become “removed” on Hedera.</p></li></ol><ol type="1" id="2fab9d34-b41c-402f-b985-b117a0432b36" class="numbered-list" start="2"><li><strong>Address zero cannot receive Hedera native tokens</strong><p id="45800b34-7d65-4f34-abca-1a260ba270af" class="">An account can not receive Hedera native tokens (tokens created by Hedera token service) without associating with the token. Address zero cannot associate with a token because no one controls this address.</p><p id="407956b3-23c1-4aba-9689-8b4f9d0d019b" class="">In AMM smart contracts, minimum liquidity needs to be locked. These LP tokens are normally minted to address zero on Ethereum. But on Hedera, Hedera native tokens cannot be sent to address zero. An alternative way could be locking these tokens into a contract.</p></li></ol><ol type="1" id="d6c34446-ce2b-4beb-9a5f-7f921b6df579" class="numbered-list" start="3"><li><strong>Limitations token associations per account before HIP-367 is accepted</strong><p id="424bc3ac-9ad2-46a4-932d-31e07dd50318" class="">There are limitations on the number of token IDs that can be associated with an account. The current limit is 1000. <a href="https://hips.hedera.com/hip/hip-367">HIP-367</a> proposed that the token IDs association per account should be unlimited. So before the HIP-367 is accepted, the limitation should still be considered.</p></li></ol><ol type="1" id="9ef1cd9c-21ef-4979-a979-ef6fb3786c4c" class="numbered-list" start="4"><li><strong>Hedera Contracts only support </strong><strong><code>pragma solidity &lt;=0.8.9</code></strong><p id="bcb3ddef-69ed-43b6-95f8-d5f535e38cd8" class="">As of the current development of <a href="https://github.com/hashgraph/hedera-services/tree/583534dc12a1bb04345e6710d2cb98da9158ed50">hedera-services</a>, Hedera contracts only support <code>pragma solidity &lt;=0.8.9</code>.  </p></li></ol></details></li></ul><ul id="d3505944-b592-4d95-91a5-f1e143687d6b" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="42906a46-df83-4623-b171-c98fc456df6b" class="numbered-list" start="1"><li>Mallory creates a massive amount of pairs through <code>PangolinFactory.createPair()</code>;</li></ol><ol type="1" id="32459d5c-667c-4cbf-950b-e255c6f2599b" class="numbered-list" start="2"><li><code>PangolinFactory</code> contract reaches its state storage limits;</li></ol><ol type="1" id="5f72beb6-37a1-40e5-8277-244dc624b8cb" class="numbered-list" start="3"><li>New pair contracts can no longer be created via the factory contracts.</li></ol></details></li></ul><ul id="4a2ba36a-8829-4ee7-91eb-51258922a7ac" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><ol type="1" id="166c2cd1-75c2-4608-a83f-a5c348595f00" class="numbered-list" start="1"><li>Optimize contracts. Reduce the usage of mappings and avoid storing unnecessary stuff on chain;</li></ol><ol type="1" id="ef8945c3-c2e6-42da-bd7c-c8f559eb07e6" class="numbered-list" start="2"><li>Make some critical storage write operations permission only to prevent DoS attack;</li></ol><ol type="1" id="a907693e-71b6-42cd-b828-71d037b2f797" class="numbered-list" start="3"><li>Use a contract to receive the Hedera native tokens that need to be burnt;</li></ol><ol type="1" id="9e1c67b2-dd98-485e-b7c1-58f495f89fad" class="numbered-list" start="4"><li>Do not associate more than 1000 token IDs to an account before HIP-367 is accepted;</li></ol><ol type="1" id="a2730449-1b57-4dc5-a677-533b07831c72" class="numbered-list" start="5"><li>Only use solidity with version <strong><code>pragma solidity &lt;=0.8.9</code></strong><strong>.</strong></li></ol></details></li></ul><ul id="ee07a866-0087-4eaf-b1b2-4ce66f35dcc5" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="667c9796-d123-4f23-8071-6f23d0cc4480" class=""><strong>Resolved</strong>. </p><p id="74b118cd-5321-4d16-be49-6a4419f20481" class="">As of commit <a href="https://github.com/pangolindex/hedera-contracts/tree/61b68efb003a8256c3a4bfd0fb4ad4afc220d803">61b68ef</a>, the following fixes are implemented. Current architecture design makes Pangolin DEX contracts still decentralized without being prone to Attacks due to the unique features/limitations on Hedera.</p><ol type="1" id="a6bec289-0b6a-42fe-b8e0-20b056469391" class="numbered-list" start="1"><li><strong>Fix on pangolin-core contracts</strong><ol type="a" id="5fa5929b-606f-48d3-a18e-710ffa47bf8d" class="numbered-list" start="1"><li>Pair token addresses are not stored in the Factory anymore. The pair address is computed when querying the <code>PangolinFactory.getPair()</code> function.<p id="8decf66b-de03-491f-945b-cf34dd2846cc" class="">The <code>extcodesize</code> is used to check if a pair exists. A middleman contract is added to handle the expected reverts when using the <code>extcodesize</code> and <code>address.size</code> with an empty address.</p></li></ol><ol type="a" id="123de46e-42f4-4c38-8f50-eea852a55f80" class="numbered-list" start="2"><li>A burn contract is created for every 1000 of the pair contract. A single burn contract will associate with 1000 pair tokes. Pairs contracts’ minimum liquidity is locked in the associated burn contracts.</li></ol><ol type="a" id="8f440c6e-cea9-441f-a3f5-951e10239e25" class="numbered-list" start="3"><li>Pair contracts can only be created with Hedera native tokens. The pair contract no longer inherits the ERC20 contract. Instead, a Hedera native token created by Hedera token service will be the LP token. In this way, no mappings are needed in the pair contract. (Note: The LP token decimals is 0 now rather than the default 18 anymore)</li></ol><ol type="a" id="99410546-ac9e-407b-8a25-663be5e09dd9" class="numbered-list" start="4"><li>The initial minimum liquidity is locked in a burn contract rather than address zero.</li></ol></li></ol><ol type="1" id="634dca3e-224a-40c8-b7c0-bf32ea37786d" class="numbered-list" start="2"><li><strong>Fix on</strong> <strong>pangolin-periphery contracts</strong><ol type="a" id="b063e5eb-9bc3-4bdb-8ebe-e704922470bc" class="numbered-list" start="1"><li>The modified WHBAR contract is used in the router contract. WHBAR contract is no longer an ERC20 token. Instead, a hedera native token created by Hedera token service is associated with the WHABR contract to get rid of mappings. When a user deposits Hbar, the WHBAR token is minted and transferred to the user. When a user withdraws Hbar, the WHBar token is burnt and the HBar is transferred back to the user. Based on the change of the WHABR contract, the router contract is changed accordingly. The <code>PangolinRouter.removeLiquidityWithPermit() </code>and <code>PangolinRouter.removeLiquidityAVAXWithPermitSupportingFeeOnTransferTokens()</code> are removed from the router contract.</li></ol></li></ol></details></li></ul></li></ol><ol type="1" id="0cc8302b-3e4d-49ee-8a10-af1ef239533d" class="numbered-list" start="2"><li><strong>The type of <code>INITIAL_SUPPLY</code> should be <code>uint64</code></strong><table id="da4a87f5-e098-4bad-b39c-0fca93fbcd97" class="simple-table"><tbody><tr id="8801deaa-1399-495e-b7ec-ad0c80a00b0a"><th id="okEA" class="block-color-red_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-red_background" style="width:528px"><mark class="highlight-red"><strong>High</strong></mark></td></tr><tr id="53b555da-0752-4a7d-843c-0efd6d00dfa5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">TreasuryVester.sol#L24;</td></tr><tr id="fc23421c-9534-4f65-8a5d-47608033841f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31；</td></tr><tr id="9f626ab1-0ca1-41e6-8596-c89acf7bb416"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved;</strong></td></tr></tbody></table><ul id="c3bfd37a-4fb2-4949-b8ef-d7ebfa38467c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="cc86d024-887b-4ffa-8e30-b4583db454d2" class="">The type of <code>INITIAL_SUPPLY</code> should be <code>uint64</code>. The value assigned to  <code>INITIAL_SUPPLY</code> will cause the overflow error with type <code>uint32</code>. The value assigned to <code>INITIAL_SUPPLY</code> is <code>11_500_000 * uint32(10)**8</code>, which is far bigger than the value type <code>uint32</code> can represent. According to the hedera token service document, <code>uint64</code> is used for token initial supply.  Thus, the type of <code>INITIAL_SUPPLY</code> should be <code>uint64</code>.</p></details></li></ul><ul id="7414ca3d-23dc-40e8-a243-46bf83013a01" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="cd68ff76-e8b7-4e42-9e7a-d2ba2812018a" class="">This will cause a revert when <code>INITIAL_SUPPLY</code> is used in contract functions.</p></details></li></ul><ul id="53c83aab-f64f-40dc-8d96-6fe848f4cd67" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="91ea0646-abbb-4560-b99c-095d557ce3c2" class="">Change the type of <code>INITIAL_SUPPLY</code> to <code>uint64</code>.</p></details></li></ul><ul id="edfc1d25-2604-4524-b0f2-526c6586e273" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="f7f1f7ea-179d-4b5c-9dc0-aad1cd98ed82" class=""><strong>Resolved </strong>in commit <a href="https://github.com/pangolindex/hedera-contracts/tree/8c6eee7c34daf5d4e2eb7a2801ec1fdbca74789e">8c6eee</a>, type of <code>INITIAL_SUPPLY</code> changed to uint64.</p></details></li></ul></li></ol></div><h3 id="c4640f67-87e0-4e77-a7e4-1a3c5c6894e1" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="a0efa3d2-6adc-43e3-9635-3abbaa2d3f96" class="numbered-list" start="1"><li><strong>Lack of two-step process for critical operations</strong><table id="d3534196-d817-4166-bbbf-34dc2b8e1dd8" class="simple-table"><tbody><tr id="39b9ef9e-7781-4625-9071-d1b2bfc6c2d1"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="0a67b40b-c331-4f9b-b548-750e6cc7e0f9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">contracts/pangolin-core/PangolinFactory.sol#L46;</td></tr><tr id="b765bad1-599e-487a-8380-b996c36478a4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="0e4086a1-6097-4f40-b31c-c3c6bceee2f4"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="d3ada9e2-42f3-4dbe-8ea5-9607d7a5caa7" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="65af5f30-a21d-4fdc-9e6d-dc7d90844634" class="">The <code>feeToSetter</code> variable can set the new <code>feeToSetter</code> and set <code>feeTo</code> address, an address that receives all the minting fees. <code>feeToSetter</code> can be changed immediately by calling the <code>setFeeToSetter</code> function. With the best practice of smart contract programming, the update of a privileged account should be separated into two steps. This is to avoid the situation where a wrong account is mistakenly set but no person is able to recover it.</p><pre id="8facfafd-5606-42a9-9c4a-2e9f2686d7cb" class="code"><code>function setFeeToSetter(address _feeToSetter) external override {
+    require(msg.sender == feeToSetter, &#x27;Pangolin: FORBIDDEN&#x27;);
+    feeToSetter = _feeToSetter;
+}</code></pre></details></li></ul><ul id="005ee546-3df2-4bc8-add6-f01dc8770cc2" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="cc7fb0c7-0f75-4ecd-b03f-ff980259fec7" class="">The <code>feeToSetter</code> is accidentally set to the wrong address and cannot be set back.</p></details></li></ul><ul id="aec52463-059a-4f2d-a820-1e3ed3ae6227" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="a66612ef-1847-497f-8095-4f58c8eeeeec" class="">Use a two-step process for change of <code>feeToSetter</code>.</p><p id="0b9adaf1-83f2-462b-868f-11ce71c04cf2" class="">Please define another public variable storing pending <code>feeToSetter</code>, when we want to update the account of the fee setter, we first save the new address in the new variable. An extra confirmation function is then used to confirm the fee setter.</p></details></li></ul><ul id="2e20e71e-6225-48d3-9d0a-8a7338c4ac85" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="cfa5bd8a-e6bc-4bf1-b7ce-ad4a00d8a122" class=""><strong>Acknowledged.</strong></p><p id="20df0242-9b69-4724-86cb-3119d2004d35" class="">Pangolin decided to keep this part unchanged.</p></details></li></ul></li></ol></div><h3 id="2a7ad0aa-fe3c-43a6-9af4-147b08560438" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="c6fba838-2320-42d2-9cf2-d0a06f1fc722" class="numbered-list" start="1"><li><strong>Incorrect event emission for critical operations</strong><table id="0cb5ea3d-ec40-4236-8f97-658c1d9043ea" class="simple-table"><tbody><tr id="87c0aef4-04f2-494e-9b0a-7c8a8f7d1f8a"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="71c35ec6-7938-4e5d-9b65-a785fd772c8f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">TreasuryVester.sol#L171;</td></tr><tr id="e3350f20-0d3c-4d30-a2fa-59ca4d8b4dd1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="031cff4b-0de5-4ebe-87d0-ca579e747974"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Unresolved;</strong></td></tr></tbody></table><ul id="2c73813e-f783-4777-b899-6663b8366d11" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="5971d9a5-1bec-4629-88b0-a1c0c6492c9c" class="">The <code>TreasuryVester.TokenVested()</code> event emits the ideal token vested amount (<code>vestingAmount</code>), instead of the actual token vested amount (<code>actualVestingAmount</code>).  The <code>actualVestingAmount</code> is the sum of all recipient’s individual vesting amounts, which is calculated with recipients’ allocation in the <code>vestingAmount</code>. There might be some tiny differences between <code>vestingAmount</code> and <code>actualVestingAmount</code> because of the precision issues when doing multiplication and division in solidity. Only the <code>vestingAmount</code> is emitted through events.</p></details></li></ul><ul id="7e26562a-bedd-4ced-bab1-c604d4a1364d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="ffe11bf5-0022-46f2-b40a-e7b62216b997" class="">N/A.</p></details></li></ul><ul id="9d3ebe06-6243-4365-8cad-6baee35ffeee" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="26fa28a6-dd98-4d77-92a7-fde60ae35526" class="">Change <code>vestingAmount</code> in <code>TokenVested()</code> event to <code>actualVestingAmount</code>.</p></details></li></ul><ul id="9c76a656-0cd0-4bfe-a88d-86fa3ec65bdc" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="e47b6a60-5d96-43a6-8aa9-b95a28c0dd77" class=""><strong>Unresolved.</strong></p></details></li></ul></li></ol></div><h3 id="09e963de-4828-49da-9eae-813b47ebf9f3" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="91f6714b-ad8a-4ec8-9eba-13a3e12d1628" class="numbered-list" start="1"><li><strong>Inconsistent file name</strong><table id="b6f21c54-4fab-4deb-8fd8-c2f29bc1a76a" class="simple-table"><tbody><tr id="871383f4-dcc7-4310-84c7-825a9768832e"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="a21b0c28-fc47-48fe-86db-d8b536921c49"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">pangolin-periphery/libraries/UniswapV2OracleLibrary.sol;</td></tr><tr id="dd4fa665-2685-44c3-9985-eca97b4a54de"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="ff6d205b-1942-47cb-980f-69e330aaba70"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="bd9a8dad-3073-4812-a065-51e1579cb202" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7afb66f6-e5ed-4954-b54a-96af9f249e4c" class="">The file name of <code>UniswapV2OracleLibrary.sol</code> should be <code>PangolinOracleLibrary.sol</code>.</p></details></li></ul><ul id="9148c6ae-c28e-457a-aa2b-f7772f36766a" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="befbd6fc-ac24-455e-aa3d-5036c48f0889" class="">N/A.</p></details></li></ul><ul id="27d808ad-0b3e-4b4a-ad48-489696817aa7" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="11e98aac-644c-40db-80b5-ab54425ce3cc" class="">Change file name of <code>UniswapV2OracleLibrary.sol</code> to <code>PangolinOracleLibrary.sol</code>.</p></details></li></ul><ul id="5eb5498d-84e9-4ccd-9c19-56508aac4250" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="7338e5c7-4c02-40a3-9c51-b999a07285fe" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="1f74df3f-a047-4094-83d6-4af74f1190d0" class="numbered-list" start="2"><li><strong>Inconsistent function/variable name</strong><table id="9f25c81e-fe3f-4345-921f-21a2958768fa" class="simple-table"><tbody><tr id="9b82d76c-41f1-4dc0-90d8-db315dac43d2"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="b1b0d81e-a6ba-4717-bdce-af8d0b026eea"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">*Global;</td></tr><tr id="0d0b6526-43ee-4246-a1c6-de1e74ba7808"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="60f2b198-ff04-4863-9799-787b68fcf320"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="88578a7f-11ee-46a0-b731-bf75d9702827" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="7d72caff-ddc3-4aaf-a831-98f736805670" class="">A lot of contracts function/variable names still contain or use <code>avax</code> rather than <code>hbar</code>.</p></details></li></ul><ul id="cfb2b376-f91a-4bac-9bf7-b196d1da67b5" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="d55b4443-0f93-41e9-af44-b87518a7cfc5" class="">N/A.</p></details></li></ul><ul id="2a8c1227-5409-4da6-9fe8-dfe9588a1fe2" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="3c99d5c6-a857-4862-a6d6-2e568c6d17a6" class="">Change <code>avax</code> to <code>hbar</code>.</p></details></li></ul><ul id="45e2a545-1123-430f-9ec4-fced6521292e" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="9efe7d54-5994-4694-b0e7-ff089cb969b4" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="5de68470-0de2-4f1e-92b3-c4bb234df157" class="numbered-list" start="3"><li><strong>Inconsistent comments and code</strong><table id="21dab402-88b6-4f57-90ba-7ba5560c4213" class="simple-table"><tbody><tr id="ede42950-ac75-4666-a39e-5f42f4b3158e"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="19a4c835-129f-46e4-83fd-b8811c8aeef5"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">TreasuryVester.sol#L23;</td></tr><tr id="3ed2aba2-7ae6-428a-b947-0a061994e5fc"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="1ec9f2c7-a03b-4d87-b0a3-df0e84eeac58"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-08_22-pangolin-hedera/commit/53d0377059745defd1fe3f66e29969197880410e">53d0377059745defd1fe3f66e29969197880410e</a>;</td></tr></tbody></table><ul id="369f5099-9063-4ccf-9da0-2e8ae3961361" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="f1e88d29-90b4-4e1f-8fba-ac1d39ab98bf" class="">The number mentioned in the comments does not match the number defined in the code.</p><pre id="0e163830-8220-4686-bd03-c3de19a62cf7" class="code"><code>uint32 private constant MAX_SUPPLY = 230_000_000 * uint32(10)**DECIMALS; // two-hundred-and-fourty- million
+uint32 private constant INITIAL_SUPPLY = 11_500_000 * uint32(10)**DECIMALS; // twelve million (airdrop supply)</code></pre></details></li></ul><ul id="745209e0-964e-4ffe-93ea-c5a93d1fdcb8" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="2d30f234-1807-4f6f-b1a4-48570a109c23" class="">N/A.</p></details></li></ul><ul id="947b4374-9e27-4888-9899-44857c3e80e7" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="8069f103-542c-47e9-9043-95d424116ec4" class="">Please double-check and verify the number.</p></details></li></ul><ul id="cc3017c3-300f-4312-8912-471ad305f60e" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="e174a4c6-b9e0-44e7-a887-28aa060476e2" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-08_22-pangolin-hedera/commit/53d0377059745defd1fe3f66e29969197880410e">53d0377059745defd1fe3f66e29969197880410e</a>.</p><p id="87078223-ed80-403e-9aea-80dde90aa5e9" class="">Comments are updated.</p></details></li></ul></li></ol></div><h3 id="889e1459-d75b-4fb5-bfa7-c5427010ff29" class=""><details open=""><summary><mark class="highlight-purple"><strong>Undetermined</strong></mark></summary></details></h3><div class="indented"><ol type="1" id="72b94c9e-8c75-41c6-b89c-2a7185c995f1" class="numbered-list" start="1"><li><strong>Token vesting rules and issues</strong><table id="2d641c56-18f0-4cdd-9f1e-64fdb74c310d" class="simple-table"><tbody><tr id="7f6b9f47-75ea-42b0-a74b-de9229922110"><th id="okEA" class="block-color-purple_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-purple_background" style="width:528px"><strong>Undetermined</strong></td></tr><tr id="fc812b16-dab7-4f27-9517-41cfc1791483"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">TreasuryVester.sol#L41;</td></tr><tr id="5bd44b40-7bb9-45db-95b9-e504e7e6eaa1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">b3a0dc2c51d72687a5c158517cd4e19899aaaa31;</td></tr><tr id="05a77a86-f65c-4ce3-8f6f-19c5e77b1d2a"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="6255d811-421a-433e-86cc-03c35f756209" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="1fa41e34-c457-466e-93cd-f0f9b9e05cf1" class="">The specification of the airdrop is unknown. Vesting schedule will be delayed if not distributed daily by calling function <code>TreasuryVester.distribute()</code>.
+The ideal token distribution is that 218.5m tokens are distributed continuously for 30 months. To satisfy this, <code>TreasuryVester.distribute()</code> has to be called daily. If <code>TreasuryVester.distribute()</code> is not called daily, users cannot collect the past uncollected rewards together. Thus, token distribution will be delayed and cannot be finished in 30 months.
+The graph shows the ideal token distribution schedule from month 1 to month 30.</p><figure id="94424f0a-a392-4987-b3bb-4ba5f74e9e8d" class="image"><a href="images/Untitled.png"><img style="width:380px" src="images/Untitled.png"/></a><figcaption>PNG token vesting schedule</figcaption></figure></details></li></ul><ul id="b7a22029-8421-43f6-8c73-308d1acd71cc" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="ef190b26-2002-4210-afde-79d5464fa2af" class="numbered-list" start="1"><li>Token vesting is initially scheduled for 30 months;</li></ol><ol type="1" id="e1d87024-1b57-4c04-9471-f613747d04ed" class="numbered-list" start="2"><li><code>distribute()</code> is not called for 15 days in total;</li></ol><ol type="1" id="4844f12e-2c52-40cd-b728-69303ab0709e" class="numbered-list" start="3"><li>The vesting schedule is delayed for 15 days.</li></ol></details></li></ul><ul id="a49f40ca-af58-4844-8714-0abddf165b60" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ed2dd339-562b-42a4-9ee5-08dfaa877a0a" class="">To be able to distribute tokens within 30 months, The contract should allow users to collect missed vestings if the <code>TreasuryVester.distribute()</code> is not called daily.</p></details></li></ul><ul id="1b588103-84a5-4d75-ba14-08471c17b56f" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="4a49b880-ddb7-44ba-b48c-4c3a2c7070ee" class=""><strong>Acknowledged.</strong></p><p id="6238eabc-cb64-4cc8-a219-37ed3e94814c" class="">Some delays in the token vesting schedule are accepted and tolerated by the Pangolin team.</p></details></li></ul></li></ol></div></div><h2 id="da8116c5-a83e-4c01-b005-acc992ac604d" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="2ec8ccf4-9550-4d83-a03c-730190a6234e" class="">The privileged roles and access control for the contracts are the following:</p><h3 id="6e755dff-0d7b-4645-b9a1-3c20a9c42495" class=""><details open=""><summary>PangolinFactory.sol</summary></details></h3><div class="indented"><ul id="20f29a71-fdfe-4ffd-997b-aaac1969ba68" class="bulleted-list"><li style="list-style-type:disc"><code>feeToSetter</code>: Allows to set the <code>feeToSetter</code> and <code>feeTo</code> address.</li></ul><ul id="5d8394ae-9b92-44d6-adda-90ea0021fe75" class="bulleted-list"><li style="list-style-type:disc"><code>feeTo</code>: It’s the address that receives the minting fee.</li></ul></div><h3 id="9067d928-d177-45bf-abc4-34ba8ac29d33" class=""><details open=""><summary>TreasuryVester.sol</summary></details></h3><div class="indented"><p id="0ba59883-de15-46e3-8b05-573eececb42b" class="">The deployer of the contract can assign the <code>DEFAULT_ADMIN_ROLE</code> address. This address has control over the following functionality:</p><ul id="6537e25f-89d1-4b10-9735-43ea10ecb255" class="bulleted-list"><li style="list-style-type:disc">Pause the contract.</li></ul><ul id="3025e06b-3bc4-4450-860c-35128bd43d8a" class="bulleted-list"><li style="list-style-type:disc">Unpause the contract.</li></ul><ul id="d8253997-5e18-4b74-b292-9da214c2b01e" class="bulleted-list"><li style="list-style-type:disc">Transfer the <code>PNG</code> initial supply to the input address.</li></ul><ul id="53d3231c-d941-4108-9ae0-73b6fc46d805" class="bulleted-list"><li style="list-style-type:disc">Set recipients that will be receiving the token.</li></ul></div></div><h2 id="ba8102e1-8824-4332-a139-8dbca9b6dffd" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="0ac4bd75-0a87-4a6d-9698-d6d7701f4024" class="simple-table"><thead class="simple-table-header"><tr id="5dfcf6f6-3209-4487-97a4-98e1b60026e3"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="b86f7b24-37de-4a5d-bf2b-f0ce9f9a550c"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="3f551a21-0fcd-41d6-bd66-1dabab8ca3c1"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="5ae80b86-d06b-4204-bab5-7ab77dc27819"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="c284b959-15e2-4edb-812f-aefebfb5beca"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="b9e82f22-a2c0-41ed-b75a-2550f4c2f0b0" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="6fd213c7-5544-40a7-b132-3d1515b493b5" class="simple-table"><thead class="simple-table-header"><tr id="094c9623-0f89-4875-85a7-7cd1bf9d4e6d"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="ed471fda-380b-48b4-ab78-e58d5ac45410"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="b4f17df7-346a-4708-ab9b-a3e26ee7bd1a"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="d582544e-a667-46d4-9bb7-8175e73f3847"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="b8d6795d-38ed-4c71-bf6b-61d0828138a3"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="08864e21-3db2-48ef-ad4c-9e37d0497682" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="0f9152b6-804f-471a-8bdb-652afbfbcbfd" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="7b18af61-c86d-420c-8a66-f95db12176a5" class="">In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>

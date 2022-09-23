@@ -1,0 +1,713 @@
+<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="icon" href="https://www.verilog.solutions/verilog.svg" /><title>Spirals Audit Report </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+details {
+    pointer-events: none;
+}
+details * {
+      pointer-events: auto;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0f3df3d0-c65a-4e9e-b140-c742062b8128" class="page sans"><header><h1 class="page-title">Spirals Audit Report </h1></header><div class="page-body"><blockquote id="59705125-33e3-49e6-a103-fec20c6176ba" class="block-color-gray">Copyright © 2022 by Verilog Solutions. All rights reserved.<p id="95024ec6-4eb8-4bd3-a590-fe094298b7f7" class="">September 12, 2022</p><p id="5d4e0ce8-cb9a-40b1-8cbc-ff9aeffbaf7f" class="">by <strong>Verilog Solutions</strong></p></blockquote><figure id="07a148ce-b110-427f-86ad-e2d2844a69d2" class="image"><a href="images/Untitled.png"><img style="width:1920px" src="images/Untitled.png"/></a></figure><p id="318a7004-b1c2-40d3-8be5-4449c9c9a5a5" class="">This report presents our engineering engagement with the Spirals dev team on their vault contracts on the Celo network. In this audit, we focus on the impact vault contracts and the migration functions as Spirals team plans to migrate from the old staking contracts to the new impact vault contract.</p><table id="ff43d6d2-2f79-49a2-b752-151d2a85bf74" class="simple-table"><tbody><tr id="981b5009-6f8a-4d44-a03e-3797174d3b7d"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Project Name</th><td id="h@it" class="" style="width:474px">Spirals Protocol</td></tr><tr id="eaa0ae39-0f0e-4b4b-853d-f26c61a36948"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Repository Link</th><td id="h@it" class="" style="width:474px"><a href="https://github.com/spiralsprotocol/protocol">https://github.com/spiralsprotocol/protocol</a></td></tr><tr id="09a8b5e6-0102-4053-88d9-327b3d72292a"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Commit Hash</th><td id="h@it" class="" style="width:474px">First: ede0470;
+  Final: ee1c18c;</td></tr><tr id="869ace8e-db1c-456c-95cf-194e524304d9"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Language </th><td id="h@it" class="" style="width:474px">Solidity</td></tr><tr id="35051edc-bfd4-4668-8a11-d461e7e07fb5"><th id="Mp:c" class="block-color-default simple-table-header" style="width:186px">Chain</th><td id="h@it" class="" style="width:474px">Celo</td></tr></tbody></table><h2 id="88de037b-ed33-463e-91fa-521d20a7a8e5" class=""><details open=""><summary>About Verilog Solutions</summary></details></h2><div class="indented"><p id="cd35f87e-4c6f-48b5-ada9-cc3de1fa5f52" class="">Founded by a group of cryptography researchers and smart contract engineers in North America, Verilog Solutions elevates the security standards for Web3 ecosystems by being a full-stack Web3 security firm covering smart contract security, consensus security, and operational security for Web3 projects.</p><p id="e1803be6-0f77-4a43-a428-a796e2c6143e" class="">Verilog Solutions team works closely with major ecosystems and Web3 projects and applies a quality above quantity approach with a continuous security model. Verilog Solutions onboards the best and most innovative projects and provides the best-in-class advisory services on security needs, including on-chain and off-chain components.</p></div><h2 id="6716d0af-5d2f-4cf8-805c-fc4213217398" class=""><details open=""><summary>Table of Contents</summary></details></h2><div class="indented"><nav id="aefa80a6-0952-4ab9-8132-5c8c26e29e01" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#88de037b-ed33-463e-91fa-521d20a7a8e5">About Verilog Solutions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6716d0af-5d2f-4cf8-805c-fc4213217398">Table of Contents</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2709a5ad-c91b-418a-be07-609df8ef0d21">Service Scope</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#420f31de-56dc-4a90-9480-b60213146907">Project Summary</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0e69b997-5a77-4e11-90f0-d49a3663ec0c">Use Case Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f1695410-7275-4dbf-8752-743c7010fafe"><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0f2014bc-f877-49a4-8d0e-473b27cf03dc">Access Control Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f778849d-59ee-4dc2-b35e-e2c54db39037">Appendix I: Severity Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dbebbbf7-9d4d-4b85-a7e1-0d53f5515396">Appendix II: Status Categories</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d6827e31-9989-4511-9c73-090066cdbbba">Disclaimer</a></div></nav></div><h2 id="2709a5ad-c91b-418a-be07-609df8ef0d21" class=""><details open=""><summary>Service Scope</summary></details></h2><div class="indented"><h3 id="f1d6d266-481a-417b-84be-c2312c2fe53d" class=""><details open=""><summary>Service Stages </summary></details></h3><div class="indented"><ol type="1" id="cab11b38-9b0f-4d03-b046-1ed5d9682f03" class="numbered-list" start="1"><li>Architecture Consultancy Service<ul id="f9e58344-7d57-466c-8e3c-e1225e9d93ab" class="bulleted-list"><li style="list-style-type:disc">Protocol Security &amp; Design Discussion Meeting<ul id="651af3ec-f13b-4110-89f6-dd2565703e79" class="bulleted-list"><li style="list-style-type:circle">As a part of the audit service, the Verilog Solutions team worked closely with the Spirals development team to discuss potential vulnerability and smart contract development best practices in a timely fashion. Verilog Solutions team is very appreciative of establishing an efficient and effective communication channel with the Spirals team, as new findings were exchanged promptly and fixes were deployed quickly, during the preliminary report stage.</li></ul></li></ul></li></ol><ol type="1" id="6f5319b1-4047-4295-8f0b-b3c6b4453eb2" class="numbered-list" start="2"><li>Smart Contract Auditing Service<ul id="8f0e702a-d0c0-4f4d-a52d-f4c801ff1d08" class="bulleted-list"><li style="list-style-type:disc">The Verilog Solutions team analyzed the entire project using a detailed-oriented approach to capture the fundamental logic and suggested improvements to the existing code. Details can be found under <strong>Findings &amp; Improvement Suggestions.</strong></li></ul></li></ol></div><h3 id="fcbd10f5-ad4e-4db6-b7e3-be7a7a6a0dc4" class=""><details open=""><summary>Methodology</summary></details></h3><div class="indented"><ul id="f27949d4-8594-4159-b855-e3d909c946c8" class="bulleted-list"><li style="list-style-type:disc">Code Assessment<ul id="266f7566-4c30-4afc-abd5-5a48fd8f064f" class="bulleted-list"><li style="list-style-type:circle">We evaluate the overall quality of the code and comments as well as the architecture of the repository. </li></ul><ul id="290f923d-38eb-4fff-b3f8-ca08cd0ab9f2" class="bulleted-list"><li style="list-style-type:circle">We help the project dev team improve the overall quality of the repository by providing suggestions on refactorization to follow the best practice of Web3 software engineering. </li></ul></li></ul><ul id="c5f33818-d0fb-45ed-b27a-9fb5ced25fb1" class="bulleted-list"><li style="list-style-type:disc">Code Logic Analysis<ul id="e84c281f-d08a-4ef4-89b8-7dc117dc2fc2" class="bulleted-list"><li style="list-style-type:circle">We dive into the data structures and algorithms in the repository and provide suggestions to improve the data structures and algorithms for the lower time and space complexities.</li></ul><ul id="a86b9497-2dfb-4cb7-a9f9-a74a6feb4683" class="bulleted-list"><li style="list-style-type:circle">We analyze the hierarchy among multiple modules and the relations among the source code files in the repository and provide suggestions to improve the code architecture with better readability, reusability, and extensibility.     </li></ul></li></ul><ul id="e4439c5d-773c-4818-8374-7ef9b1df5ba2" class="bulleted-list"><li style="list-style-type:disc">Access Control Analysis<ul id="f2744f56-27aa-4eab-975a-b69a6d0a043a" class="bulleted-list"><li style="list-style-type:circle">We perform a comprehensive assessment of the special roles of the project, including their authorities and privileges.</li></ul><ul id="60449093-316f-4bb4-87be-5032733e70bc" class="bulleted-list"><li style="list-style-type:circle">We provide suggestions regarding the best practice of privilege role management according to the standard operating procedures (SOP). </li></ul></li></ul><ul id="a713f1dd-a7ab-45e1-b5c1-f395fab696c9" class="bulleted-list"><li style="list-style-type:disc">Off-Chain Components Analysis<ul id="1a030288-1a06-4b43-8647-e72b445cfe06" class="bulleted-list"><li style="list-style-type:circle">We analyze the off-chain modules that are interacting with the on-chain functionalities and provide suggestions according to the SOP.</li></ul><ul id="728b0654-8a28-4b9a-802c-0bfcc888e437" class="bulleted-list"><li style="list-style-type:circle">We conduct a comprehensive investigation for potential risks and hacks that may happen on the off-chain components and provide suggestions for patches.</li></ul></li></ul></div><h3 id="d7ef9b39-9a11-45c2-91c3-690411caf7d0" class=""><details open=""><summary>Audit Scope</summary></details></h3><div class="indented"><table id="9a6b2af3-92c1-4512-abcf-9d93e7daacf2" class="simple-table"><tbody><tr id="1d040824-e3c8-4a9c-9f47-eac10178109e"><td id="THyx" class="block-color-gray_background" style="width:651px"><strong>File</strong></td></tr><tr id="ade055c6-eb68-4bba-b113-fcc65e0ce046"><td id="THyx" class="" style="width:651px">src/vaults/ImpactVault.sol</td></tr><tr id="2783157e-3c3a-48bc-85bc-206cfa3c43ec"><td id="THyx" class="" style="width:651px">src/vaults/ImpactVaultManager.sol</td></tr><tr id="ea033439-e6f8-45fe-ace9-64b9f2ed10e0"><td id="THyx" class="" style="width:651px">src/vaults/SpiralsCeloImpactVault.sol</td></tr><tr id="526b77ad-1caa-45e0-8479-583f813bd5ad"><td id="THyx" class="" style="width:651px">src/vaults/SpiralsCUSDImpactVault.sol</td></tr><tr id="41eaf8ce-7fd4-4ca4-8e20-46644cb39918"><td id="THyx" class="" style="width:651px">src/vaults/SPRL.sol</td></tr><tr id="1dd29f30-1923-4fb1-bf33-22fa1e3e97dd"><td id="THyx" class="" style="width:651px">src/vaults/wmcUSD.sol</td></tr><tr id="fb4b1129-a991-4128-a8b0-1e472ceeb34f"><td id="THyx" class="" style="width:651px">src/staking/SpiralsStaking.sol</td></tr><tr id="819c253b-929b-415a-a6ea-cc4e16397687"><td id="THyx" class="" style="width:651px">src/staking/SpiralsStakingV2.sol</td></tr><tr id="5841f910-eb8a-419f-8a98-26a0ce1b281b"><td id="THyx" class="" style="width:651px">src/staking/migration/IMigrationToImpactVault.sol</td></tr><tr id="f1e9940a-a2b6-45f0-897a-413f82779a41"><td id="THyx" class="" style="width:651px">src/staking/migration/SpiralsCUSDVaultMigration.sol</td></tr><tr id="b53e6954-993e-4003-b9f9-e51e531a38eb"><td id="THyx" class="" style="width:651px">src/staking/migration/SpiralsStakingMigration.sol</td></tr></tbody></table></div></div><h2 id="420f31de-56dc-4a90-9480-b60213146907" class=""><details open=""><summary>Project Summary</summary></details></h2><div class="indented"><p id="e1765d99-8b77-40f1-aa0c-466819ba1960" class="">Spirals Protocol is a lightweight protocol that redirects block rewards to climate impact. We work directly with validators to support their climate impact journey.</p><p id="f7b0c00a-d9c1-450e-96cf-34714ffe1814" class="">With Spirals, block rewards aren&#x27;t used as profit. Instead, they are directed into a smart contract which is governed by all stakers and validators that contribute to the accumulation of block rewards. All stakeholders can collectively vote on which projects receive funding.</p><p id="087a45f7-7164-4719-bbdc-012fd10dd234" class="">The Spirals ecosystem has 5 key stakeholders:</p><ul id="a47031f8-64bf-41e5-aa94-81c6901f74e8" class="bulleted-list"><li style="list-style-type:disc"><strong>Celo holders</strong> can make a climate impact while earning yield</li></ul><ul id="c71b0eed-e5ef-419b-9cc1-c615419f4b67" class="bulleted-list"><li style="list-style-type:disc"><strong>Validators</strong> can effortlessly make a climate impact and attract more delegators</li></ul><ul id="b1ecac51-8967-4c9a-aa41-8e3c5248ad99" class="bulleted-list"><li style="list-style-type:disc"><strong>Climate Experts</strong> are elected to a committee and have the authority to add and remove climate projects eligible for support by the Spirals Community</li></ul><ul id="332cebcc-4889-4de4-9d06-e119b7a21eb8" class="bulleted-list"><li style="list-style-type:disc"><strong>Natural Asset Tokens</strong> (which are approved by experts) are purchased proportional to member preferences</li></ul><ul id="78329dfa-b6a1-4616-8e92-0fd8ffe9e3c7" class="bulleted-list"><li style="list-style-type:disc"><strong>Members</strong> hold $SPRL and can vote on funding allocation &amp; climate experts. You can become a member by earning $SPRL governance through staking, validating, or reviewing projects as a climate expert.</li></ul><figure id="c5a624c5-6c3e-4d0d-8d25-f40d99a57117" class="image"><a href="images/Spirals_V1_Smart_Contracts_-_Spirals_V1_Smart_Contracts.jpg"><img style="width:4607px" src="images/Spirals_V1_Smart_Contracts_-_Spirals_V1_Smart_Contracts.jpg"/></a></figure><p id="bdb87c13-f0f4-4d93-bdab-7777d33daafc" class=""><mark class="highlight-gray">Spirals V1 System Architecture</mark></p><p id="eaf45923-788b-46ca-a39e-d648466858af" class="">
+  </p><p id="9adfa403-e4f0-4b3a-ab8c-b80d95373f5c" class="">There are two main components that shape the protocol, namely the <code>ImpactVault</code> contracts which define the assets and the functionality of the staking process of that asset, and the <code>ImpactVaultManager.sol</code> which manages the contracts that will be considered for calculating the yield that will be directed towards the climate impact. Spirals V1 consists mainly of three contracts:</p><h3 id="64f9a519-a1f8-4606-b5a4-9ead33e37c65" class="">ImpactVaultManager.sol</h3><blockquote id="c041b160-56f7-4a85-9174-bcca17f86ed4" class="">contains the logic for managing the <code>ImpactVault</code> contracts.</blockquote><p id="c894cd15-b213-4b1e-afab-143ada13d0c1" class="">This contract mainly has the following functionality:</p><ul id="7c9b0554-37b3-41bd-9084-b1e8b7daa3f2" class="bulleted-list"><li style="list-style-type:disc">Register a new <code>ImpactVault</code>.</li></ul><ul id="64d691ff-a8e1-4728-8e17-e630a5bf8274" class="bulleted-list"><li style="list-style-type:disc">Remove a registered <code>ImpactVault</code>.</li></ul><ul id="36e26fe9-b5f0-45ab-b044-494af81d0055" class="bulleted-list"><li style="list-style-type:disc">Harvest users’ yields and mint same amount of the SPRL governance tokens to users.</li></ul><h3 id="a819698a-d1b5-4b48-b3e3-6d4b355069be" class="">SpiralsCeloImpactVault.sol</h3><blockquote id="550eb6c1-29e5-49e2-884e-b2d267bbd2b8" class="">contains the logic for staking <code>CELO</code>.</blockquote><p id="2f9cec7e-e515-4d00-aee1-c047ab5c8361" class="">This contract mainly has the following functionality:</p><ul id="f4388137-54c5-4ad9-bfd8-512c3ff31fbc" class="bulleted-list"><li style="list-style-type:disc">Set dependencies on the contract (registry and manager address).</li></ul><ul id="15855307-b9d6-4858-bf38-cba7f07c29d8" class="bulleted-list"><li style="list-style-type:disc">Deposit <code>CELO</code> into the <code>stCELO</code> manager contract.</li></ul><ul id="28778fd5-9a65-4f74-b7ab-b3f0a00531df" class="bulleted-list"><li style="list-style-type:disc">Withdraw from the <code>stCELO</code> manager contract.</li></ul><h3 id="0a35717a-e93c-4266-a356-0ca00a57e42a" class="">SpiralsCUSDImpactVault.sol</h3><blockquote id="2c46047b-d4d8-413b-ba4e-cb06baff351a" class="">contains the logic for staking <code>cUSD</code>.</blockquote><p id="470752c7-e695-44fc-81a0-44f7a01ab449" class="">This contract mainly has the following functionality:</p><ul id="4603da50-858f-4c4d-b8ce-2a475504de07" class="bulleted-list"><li style="list-style-type:disc">Set dependencies on the contract (Moola contract address).</li></ul><ul id="0b58b51d-4d69-40ef-9761-a77864476805" class="bulleted-list"><li style="list-style-type:disc">Deposit <code>cUSD</code> into the Moola lending pool and wrap <code>mcUSD</code> into <code>wmcUSD</code>.</li></ul><ul id="088c4273-bc01-42a0-a4dc-eb9eb3fe557f" class="bulleted-list"><li style="list-style-type:disc">Unwrap <code>wmcUSD</code> to <code>mcUSC</code>. Then withdraw <code>cUSD</code> from moola lending pool with<code>mcUSD</code>.</li></ul></div><h2 id="0e69b997-5a77-4e11-90f0-d49a3663ec0c" class=""><details open=""><summary>Use Case Scenario</summary></details></h2><div class="indented"><p id="c7b023c2-2fd0-46e8-9f8e-6429d4704293" class="">Spirals is a staking platform that allows redirecting rewards towards positive climate impact. When you stake in this platform, Spirals stakes on your behalf on Celo’s core smart contracts. Instead of staking yield, stakers receive proof of climate impact as well as SPRL governance tokens to vote on how funding should be allocated.</p></div><h2 id="f1695410-7275-4dbf-8752-743c7010fafe" class=""><details open=""><summary><strong><strong>Findings &amp; Improvement Suggestions</strong></strong></summary></details></h2><div class="indented"><table id="4a5130b2-5f71-4691-844b-cdd8363f8f4a" class="simple-table"><tbody><tr id="de3e1087-e8e8-4d41-9667-c64525bf3900"><td id="G&gt;ax" class="" style="width:120px">Severity</td><td id="T&lt;wm" class=""><strong>Total</strong></td><td id="@mfj" class=""><strong>Acknowledged</strong></td><td id="|V?N" class=""><strong>Resolved</strong></td></tr><tr id="98f3897e-0600-4c95-bea4-cb1c1686128f"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-red"><strong>High</strong></mark></td><td id="T&lt;wm" class="">0</td><td id="@mfj" class="">0</td><td id="|V?N" class="">0</td></tr><tr id="6ec6f044-3ec7-46b7-9dbf-c2b0bfa5161c"><td id="G&gt;ax" class="" style="width:120px"><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">2</td></tr><tr id="348f9414-7b6c-48d3-ae26-96dd4057c8c1"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-teal"><strong>Low</strong></mark></td><td id="T&lt;wm" class="">2</td><td id="@mfj" class="">2</td><td id="|V?N" class="">2</td></tr><tr id="7d7e0632-2a31-4a54-95d4-0ad1985f41d2"><td id="G&gt;ax" class="" style="width:120px"><mark class="highlight-blue"><strong>Informational</strong></mark></td><td id="T&lt;wm" class="">7</td><td id="@mfj" class="">7</td><td id="|V?N" class="">6</td></tr></tbody></table><h3 id="4c2065bb-bd80-46af-8ac1-b0bb00b1a160" class=""><details open=""><summary><mark class="highlight-red">High</mark></summary></details></h3><div class="indented"><div><p id="4d671d37-8a49-47eb-9383-3192ef5e73e1" class="">None ; )</p></div></div><h3 id="e5bcc36e-c8f4-4b38-9935-aea030c19fe0" class=""><details open=""><summary><mark class="highlight-orange">Medium</mark></summary></details></h3><div class="indented"><ol type="1" id="3e5b6274-2897-4acb-8140-b37e06669e55" class="numbered-list" start="1"><li><code><strong>activeVotes ≥ value</strong></code><table id="e4778bd7-4101-447a-b599-97a752cff27b" class="simple-table"><tbody><tr id="e7f60389-c729-448a-a7ee-068aad34a149"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px"><strong><mark class="highlight-orange">Medium</mark></strong></td></tr><tr id="0c755656-3c8e-4ee8-b563-f479e4ffdef2"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/staking/SpiralsStakingV2.sol#L93;</td></tr><tr id="1be43496-494d-44b4-9b19-c3ac4f41d235"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="d4607740-efea-41bc-b180-97f6748ce881"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/ee1c18c7e61ae6ef131b5a05cabd274649db4503">ee1c18c</a>;</td></tr></tbody></table><ul id="cfa1a981-0810-4fb0-88ef-f084649199b1" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a5d448e0-16f8-48fe-8a6b-c8c53ee22134" class="">The only requirements are <code>activeVotes + pendingVotes &gt;= _value</code>, so there are following combinations:</p><table id="9db6cedc-8bc5-4b50-a1b2-55cb734b20a9" class="simple-table"><tbody><tr id="50dcf948-74a0-4f05-a254-72b894b412d2"><td id="pTEg" class=""><code>activeVotes</code></td><td id="]B=?" class=""><code>pendingVotes</code></td></tr><tr id="8783abe5-de72-4436-8649-311298e3d51f"><td id="pTEg" class="">≥ <code>_value</code></td><td id="]B=?" class="">≥ <code>_value</code></td></tr><tr id="7782968b-ba4a-495e-966d-088dcde5d31e"><td id="pTEg" class="">≥ <code>_value</code></td><td id="]B=?" class="">≤ <code>_value</code></td></tr><tr id="a622214f-fa8f-4124-b997-c0196f2a9152"><td id="pTEg" class="">≤ <code>_value</code></td><td id="]B=?" class="">≥ <code>_value</code></td></tr><tr id="736b0421-338f-4731-8f2c-97d0c6e567b0"><td id="pTEg" class="">≤ <code>_value</code></td><td id="]B=?" class="">≤ <code>_value</code></td></tr></tbody></table><p id="24f29a11-d0f4-44f7-917b-ad2bef2bb6da" class="">In the <code>if-else</code> condition, when <code>activeVotes ≤ _value</code>, <code>pendingVotes</code> can be bigger or smaller or equal to <code>_value</code>.</p><pre id="cb3bb2a3-6564-443e-a4d4-61bdde709204" class="code"><code>if (activeVotes &gt;= _value) {
+      revokeActive(_value);
+  } else {
+      revokePending(_value);
+  }
+  
+  unlock(_value);</code></pre><p id="97bb6624-b761-4f7f-bf37-7400b2dec388" class="">So in the <code>else</code> condition, the revoke pending will fail when <code>pendingVotes &lt; value</code>.</p></details></li></ul><ul id="1a98bb84-2957-4749-8049-0dd8ec440e48" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="bacaa482-ee57-4f71-9d2b-6ead4a763eaf" class="numbered-list" start="1"><li>Alice has less <code>pendingVotes</code> and <code>activeVotes</code> than the value that she wants to unstake, but the condition <code>activeVotes + pendingVotes &gt;= _value</code> is still fulfilled.</li></ol><ol type="1" id="0ce89221-b4dc-4139-9513-58522f7475d9" class="numbered-list" start="2"><li>Alice calls the <code>unstake()</code> function since the property of the sum is fulfilled.</li></ol><ol type="1" id="6a12dbae-f21d-443a-bf4d-e55892647579" class="numbered-list" start="3"><li>The <code>revokePending()</code> function will fail. </li></ol></details></li></ul><ul id="14235042-445f-4bad-a0d0-6781143174ed" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="09c1ad34-db25-4198-a36b-eeaa9eef6f03" class="">Add check to guarantee that <code>pendingVotes &gt;= value</code> when  <code>activeVotes ≤ _value</code>, <em>i.e.</em>, contemplate this case in the else condition of the if statement.</p></details></li></ul><ul id="9b6a1c6f-0e19-4dab-ab9a-13c6c8cca08c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="7fb5b48e-cad7-4879-b8cc-66d4b91d992e" class=""><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/ee1c18c7e61ae6ef131b5a05cabd274649db4503">ee1c18c</a>;</p></details></li></ul></li></ol><ol type="1" id="c33b16bd-9e96-452b-94d9-35b71792842e" class="numbered-list" start="2"><li><strong>Yield cannot be locked in the SpiralsCUSDVaultMigration contract</strong><table id="175f061d-e36b-4eef-82f3-433260070467" class="simple-table"><tbody><tr id="a338c1ee-dbb2-4a4c-a21d-b430dc99c525"><th id="okEA" class="block-color-orange_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-orange_background" style="width:528px">Medium</td></tr><tr id="a427c39f-dc26-41ba-857c-9f09842ca090"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/staking/migration/SpiralsCUSDVaultMigration.sol;</td></tr><tr id="6d425a0d-ae79-45fd-a4c8-0035f6c2d94d"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px">Commit</th><td id="y}lo" class="" style="width:528px">d7debb4;</td></tr><tr id="db1d7df7-2908-48a8-8c36-17798805fb2c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/6dcce64b8564b0500a289005bc7ad7c5060234c3">6dcce64</a>;</td></tr></tbody></table><ul id="f36cc10e-b786-402d-a280-590ae44b200d" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="aa15c395-5dba-4990-b340-1e3959c62830" class="">The yields cannot be withdrawn from the current CUSD vault and the migration only migrates the principals for users to the new impact vault. A function should be added to the contract to withdraw the yields from the current contract.</p><p id="545b2741-88d9-4e78-946b-727139453b06" class="">The <code>SpiralsCUSDVaultMigration.sol</code> contract is a vault that supports yield-bearing tokens like <code>mcUSD</code>. User can only withdraw their principals back because of the fixed 1:1 asset and staked asset ratio. Their balance of vault token  (<code>SpiralsCUSDVaultMigration.balanceOf()</code>) will always be the principal amount.</p><p id="c0e89f79-1aaa-4de8-86a1-862f7417f2ca" class="">When doing the migration for the CUSD vault, the <code>SpiralsCUSDVaultMigration.transferAssetsToImpactVaultForAddress()</code> will withdraw CUSD from the Moola lending pool and deposit the CUSD into the new impact vault for users. However, only principals are deposited into the new impact vault for users because the migration amount for the user is read from the function <code>SpiralsCUSDVaultMigration.balanceOf()</code> directly. So after migration, the yields will still stay in the current CUSD vault and no one can touch it. A function should be added to deal with those yields left in the contract after migration.</p></details></li></ul><ul id="07b52107-d2ca-46bd-a60c-b7fe86a29174" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><ol type="1" id="0496f89b-d151-41a0-b325-f87670ce573d" class="numbered-list" start="1"><li>Owner executes migration.</li></ol><ol type="1" id="71b90b55-f1b0-4557-8956-ee154eb42634" class="numbered-list" start="2"><li>All users principles are withdrawn and deposited for them to the new impact vault.</li></ol><ol type="1" id="d4f60021-dbc7-467c-80f2-bc40a37ec88d" class="numbered-list" start="3"><li>There rest of the staked asset in vault (yield) will still be locked in the vault. </li></ol></details></li></ul><ul id="b7e719d7-5570-47fd-8475-537b7d7ac3e3" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="7edd59ce-d428-43a8-a359-d43259cb2e21" class="">Calculate the respective yield for each of the users that have staked and send that yield to the <code>ImpactVault</code> contract.</p></details></li></ul><ul id="28f58865-7bd9-4bf4-8871-ce98c1980242" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="44e8b2b9-960d-4328-8574-493c919c5b4f" class=""><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/6dcce64b8564b0500a289005bc7ad7c5060234c3">6dcce64</a>.</p><p id="e0ba6c86-6f71-4909-8274-cad94144ee8c" class="">Now the yield can be manual passed into the migration functions in both the <code>SpiralsCUSDVaultMigration.sol</code> and <code>SpiralsStakingMigration.sol</code> contracts to transfer it to the <code>ImpactVault</code>. As it is not easy to track the precise amount of yields each user earned, Spirals team decided to do an approximate calculation. The generated yields will be assigned to users proportionally to their share.</p></details></li></ul></li></ol></div><h3 id="5eb7c5ed-0eae-4189-8c77-923ff9ee1677" class=""><details open=""><summary><mark class="highlight-teal">Low</mark></summary></details></h3><div class="indented"><ol type="1" id="c1f44fee-307c-4466-85b5-ef4a2abbf8d0" class="numbered-list" start="1"><li><strong>Unused events</strong><table id="94bd1b52-e047-4ba5-b173-3f3efcc99851" class="simple-table"><tbody><tr id="a72c610c-546f-4204-a294-e4f21a495397"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="a2429954-6cea-49f8-9a2a-a236bb7167c8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/ImpactVaultManager.sol#L33, L34, L35;                                                    src/vaults/SpiralsCUSDImpactVault.sol#L24;</td></tr><tr id="0657317c-b8ba-4679-8767-b30b6e419a78"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="67aa14fd-64ae-4d6f-8154-31c3726d0543"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/ee1c18c7e61ae6ef131b5a05cabd274649db4503">ee1c18c</a>;</td></tr></tbody></table><ul id="81c70c8f-a007-4a4a-93eb-818fde03fec5" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="a561c34a-56c0-40c3-8eac-18ea226fd4e1" class="">Those specified events are defined but not used. </p></details></li></ul><ul id="080a6d62-af70-4862-9ccd-6f82a90a12ea" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="bb57de01-4d4c-4c0c-ab08-e1899c13473c" class="">N/A.</p></details></li></ul><ul id="012f8dc2-89fd-43aa-9045-b54ce138e8d8" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="09197ee3-af59-4a7d-9fc9-f0e12d05b5fe" class="">Use events when applicable. Operations that transfer value or perform critical operations should trigger events so that users and off-chain monitoring tools can account for important state changes.</p></details></li></ul><ul id="402f20fe-5d6b-4c43-ba90-bcf5c883bfdf" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="bcbc63d7-02a8-4e66-ad53-c7c0ae7101b5" class=""><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/ee1c18c7e61ae6ef131b5a05cabd274649db4503">ee1c18c</a>;</p></details></li></ul></li></ol><ol type="1" id="b673b262-6089-4b74-89d8-14b2048f2ff9" class="numbered-list" start="2"><li><strong>Incorrect event emission for critical operations</strong><table id="b9846ae6-5f4c-482d-abec-3ab9c9c080ef" class="simple-table"><tbody><tr id="69adb88b-6f25-429b-b73d-26e501f5d0f2"><th id="okEA" class="block-color-teal_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-teal_background" style="width:528px"><mark class="highlight-teal"><strong>Low</strong></mark></td></tr><tr id="5d6ebaef-0e56-4216-9963-10b3f6bdf4a7"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/ImpactVault.sol#L172;</td></tr><tr id="303d753b-f4dd-4cc0-bac7-3b8295027341"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="1b1e067f-549e-4c28-8061-6e3080564ef1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>;</td></tr></tbody></table><ul id="b8e4ad92-c45d-4868-8cf8-e66598a085f0" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="35a042a3-f6d9-4f5f-ab18-da8225416097" class="">Function <code>withdrawYieldAsset()</code> emits the same event as the <code>withdraw()</code> function. However, they perform different operations, namely <code>withdraw()</code> transfers the underlying staked asset to the receiver, and <code>withdrawYieldAsset()</code> transfers the yield asset. The <code>WithdrawYield</code> event is defined and should be used in the line specified.</p></details></li></ul><ul id="02fc0902-28e0-471c-a301-e91981fb71a6" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="ae5fc238-97a0-4124-8ab7-cd9ad990a434" class="">N/A.</p></details></li></ul><ul id="eebbc5cd-63b7-4908-b315-ba487706f268" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="8e2ef1b1-ad6d-4209-bbca-c2d51e8b45e7" class="">Emit <code>WithdrawYield</code> event instead of <code>Withdraw</code> when a user withdraws yield.</p></details></li></ul><ul id="61b0004b-cf16-4759-8c6a-8eb6aaade146" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="52068a59-5ae6-49fe-b5d8-ce647726fecc" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>.</p><p id="b7726ab0-7446-4e26-9507-8835f00848a3" class="">Event and function were renamed for more clarity.</p></details></li></ul></li></ol><p id="478ab64a-0605-4ef5-89a6-90a6352cb78e" class="">
+  </p></div><h3 id="93873cbb-5d02-41d3-b593-e9e55ae4e61a" class=""><details open=""><summary><mark class="highlight-blue">Informational</mark></summary></details></h3><div class="indented"><ol type="1" id="480c0345-b6e3-4879-a6c0-04fe5d82ad86" class="numbered-list" start="1"><li><strong>Floating solidity pragma version</strong><table id="d9e38f58-d80c-4f5a-bcd6-41147f18b322" class="simple-table"><tbody><tr id="f9dcaca6-5b7f-4114-b750-aa0c028af3dc"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="a294434b-d727-4b07-b8ca-194f4bed7d8d"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">Global;</td></tr><tr id="d31ac064-03a9-46f2-8c93-3d22a082855f"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="cbe76bda-6fe7-4767-b455-1198029d6609"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>;</td></tr></tbody></table><ul id="5c8527ad-4525-434c-adff-e62df45ef0ff" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="fbb8466a-19e0-4ad9-89f0-6a0554975272" class="">Current smart contracts use <code>^0.8.10</code>. And compilers within versions <code>≥ 0.8.10</code> and <code>&lt;0.9.0</code> can be used to compile those contracts. Therefore, the contract may be deployed with a newer or latest compiler version which generally has higher risks of undiscovered bugs. </p><p id="dcf04da3-654f-4fc6-b435-2338fb4aa2ae" class="">It is a good practice to fix the solidity pragma version if the contract is not designed as a package or library that will be used by other projects or developers. </p></details></li></ul><ul id="bffc86ae-55cb-4d97-8752-fa5441aaa45e" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="91db7c85-ec94-4fb5-bce2-9048f83905e3" class="">N/A.</p></details></li></ul><ul id="70fefd94-90cf-4dcd-8967-044b46ead24a" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="cfa639d0-80ba-4d7f-a2ea-1d0180477041" class="">Use the fixed solidity pragma version.</p></details></li></ul><ul id="ab90913a-613b-4a9e-8823-2d449f59ee27" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="eaa51f83-11e3-48d7-87bc-3904029851a1" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>.</p><p id="a502bede-9657-4379-8c75-4d08691a6295" class="">The solidity pragma version is now fixed to 0.8.11.</p></details></li></ul></li></ol><ol type="1" id="93e1884d-7976-4391-9fd5-1959a0837da5" class="numbered-list" start="2"><li><strong>Unused</strong> <strong>Custom error</strong><table id="16a2cc57-0f98-4bec-82cd-a5d39c63fd02" class="simple-table"><tbody><tr id="fb1bfb76-be92-445b-856d-c39ba52924dd"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="5af64f51-e7a8-4395-854c-57a54ca13308"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/ImpactVault.sol#L35;</td></tr><tr id="f2a706b6-2ddd-487f-bc7f-2546c6d1378b"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="9127be65-3718-41c1-b96e-010cd5c6cf8e"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>;</td></tr></tbody></table><ul id="c9aae355-768b-42f7-8d01-dc625d76db8b" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="53ff25d0-4808-4ddf-b24a-fad3c7ce29b9" class="">Custom error in line specified is defined but not used. </p><pre id="a0fb23a0-2abf-4e28-b4af-e0c7590014e9" class="code"><code>error WithdrawExceedsYield(uint256 requested, uint256 total);</code></pre></details></li></ul><ul id="2d21e223-0d70-440a-80a9-603c59f929b9" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="6200ed13-ccb3-40ea-8af0-7e6b461d478d" class="">N/A.</p></details></li></ul><ul id="577975bc-0550-48ea-991f-305239348e72" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="e8e6e983-f170-47c3-87e7-4c9101d6da8d" class="">Remove the unused custom error or use it when the withdraw exceeds the yield.</p></details></li></ul><ul id="bf948f1f-6648-4bd0-bfa9-d4cc02c25433" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d7829262-c0ce-4d98-b8ab-1650cf855a6e" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>.</p><p id="6655fb41-a91b-4c2f-af23-fd91fe4cb6a0" class="">The unused custom error was removed.</p></details></li></ul></li></ol><ol type="1" id="0b068e39-6e6a-455d-a429-ac2f16ab413f" class="numbered-list" start="3"><li><strong>Typos</strong><table id="6dcc1fcd-0bdf-4d9d-8533-dcf18ac64d11" class="simple-table"><tbody><tr id="a4c476c1-c2ad-42a5-aad3-515abd4d6a0a"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="3f2b0bb0-e6a3-4471-8d03-ea45a1411303"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/ImpactVault.sol#L136;</td></tr><tr id="a8a19413-3c84-4b24-bb1f-d19409051d1c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="40404a22-cb1d-41db-b298-f224dcd1d22c"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>;</td></tr></tbody></table><ul id="395bec3c-25b2-46aa-9653-7255b18696a6" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="fd731d0d-4c2b-44c0-87f9-b32fb27d7f28" class="">There’s a typo in line 136.</p><pre id="dfc736ac-cc63-4f0c-9c4a-d917376af322" class="code"><code>* @notice Withdraws underlying asset by converting equivlaent value in</code></pre></details></li></ul><ul id="31ba97a3-a334-48ba-a681-45ae5e882948" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="1f43114c-fb94-4811-8dc1-a846541800dc" class="">N/A.</p></details></li></ul><ul id="bb21c2e5-1f51-4740-a378-fd740a14f101" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="83fdfcb4-6355-4865-9a57-4fe7ac02505d" class="">Correct the line specified to the following:</p><pre id="e14bd57d-de88-41b4-bbb5-51eb5ee1edcf" class="code"><code>* @notice Withdraws underlying asset by converting equivalent value in</code></pre></details></li></ul><ul id="d0677859-1072-4189-a9f0-5f90395b476c" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="cea86cd2-cd5b-452e-9bd2-fc896549fa7e" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>.</p><p id="2d731f23-7970-4902-b011-1ad0a31f4408" class="">Typo was corrected.</p></details></li></ul></li></ol><ol type="1" id="a53759cc-a26f-459f-93f8-4b3a8eea8a71" class="numbered-list" start="4"><li><strong>Missing fields in event</strong><table id="d0115fae-1eed-4548-86ba-57ed6d39c52e" class="simple-table"><tbody><tr id="3f5ce339-1937-4cd5-a4c2-f05737fbafc6"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="423e193a-7972-4d58-80bb-cab872fcb5d8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/SpiralsCeloImpactVault.sol#L40;</td></tr><tr id="e018f1bd-5246-46e0-aab5-60a5e62777c6"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="35aa0f99-cd5f-4f8a-8b3e-006fd45e6c90"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>;</td></tr></tbody></table><ul id="3591b9ca-fc76-4f48-b297-33c822cf8c4c" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="b0b64898-b292-4754-9847-3cab11dba203" class="">Some important fields are missing in event <code>DependenciesUpdated</code>.</p><p id="4e349ef4-cc90-4c12-987d-d7986a33a838" class="">Event <code>DependenciesUpdated</code> contains the information of two variables:</p><pre id="5cd05f09-97db-4170-b374-da579a9f2fc8" class="code"><code>event DependenciesUpdated(
+      address indexed manager,
+      address indexed registry
+  );</code></pre><p id="9dfa21b4-e260-4196-a928-f4768ea2213d" class="">But function <code>setDependencies()</code> updates with the following three parameters:</p><pre id="36945705-9424-49d8-a28e-6d0157e66819" class="code"><code>function setDependencies(
+      address _stCeloTokenAddress,
+      address _stCeloManagerAddress,
+      address _celoRegistryAddress
+  )</code></pre><p id="6f3d2769-eccf-4b1f-a32d-0204c345a277" class="">The Celo registry address should also be included to the event field</p></details></li></ul><ul id="c0deb8f2-252e-4327-bc3c-e6a48352fb6e" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="03085d65-fa2e-410f-b6e2-2f8dec9dd529" class="">N/A.</p></details></li></ul><ul id="d5532c7f-1814-4c54-812b-0cd72cbe5f64" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="e739028a-e702-4739-841d-ce8d288e102e" class="">Add missing field to the <code>DependenciesUpdated</code> event.</p></details></li></ul><ul id="d8b3da0f-401c-4f13-a280-9eee9ae3aa71" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="d953cf0c-793c-4b6d-ab6a-9c027350aee6" class=""><strong>Resolved</strong> in commit <a href="https://github.com/Verilog-Solutions/audit-spirals/commit/c4e7185b36882808da85a15f4150e318590291c1">90291c1</a>.</p><p id="7e7e57cc-ceae-4d25-8036-743264bcccfa" class="">The missing variable was added to the event.</p></details></li></ul></li></ol><ol type="1" id="d0af5cf3-3bcd-4545-bbcd-8033b8fb64af" class="numbered-list" start="5"><li><code><strong>hasOutstandingWithdrawal()</strong></code><strong> should also check if the value is non-zero</strong><table id="6afe1bf7-a591-4978-bf6d-7cea05638c76" class="simple-table"><tbody><tr id="76f97ef5-a7b8-4a6b-981a-2281a4fe36ac"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="9c05538a-246a-4161-a268-82e53509ebaf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/vaults/SpiralsCeloImpactVault.sol#L209;</td></tr><tr id="1a87e526-6bae-4856-b71e-19cd4c3778b9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="d1bbcda0-6320-40ac-bd79-9fcaa0f7dde8"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/pull/32/commits/7d48c3c7291332c74b1056e80c669a4439937f7f">7d48c3c</a>;</td></tr></tbody></table><ul id="ac187f82-7d69-4af8-9df6-fccb597ede45" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="216d1b03-7a5e-4a21-9550-bfa9bcf07f99" class="">Function <code>_withdraw()</code> calls <code>hasOutstandingWithdrawal()</code> to check if the current user has an outstanding withdrawal. Besides from timestamp, the value should also be checked otherwise user who input zero value to withdraw will trigger withdraw lock automatically. </p><pre id="0ef6dc30-4b35-4e28-96f1-2608f236af82" class="code"><code>function hasOutstandingWithdrawal(address _address) public view returns (bool) {
+      return withdrawals[_address].timestamp != 0;
+  }</code></pre><p id="02af6979-2068-4ce4-87f8-a0f0c7c2be2e" class="">When users try to withdraw funds from Celo impact vault, <code>_withdraw()</code> will called. It updates users withdraw timestamp with an unlocking period when user has outstanding withdraw and the withdraw value withe the value passed in by user. </p><p id="103f26f1-8f25-47bb-8d82-d8d57f352c3d" class="">Whether the user qualifies the withdraw only depends on the timestamp in function <code>hasOutstandingWithdrawal()</code>. However, user might accidentally pass in a zero value and it will get user trapped in an unlocking waiting period and user can only withdraw zero value after that.</p></details></li></ul><ul id="f52dc705-c959-4081-80d6-b25cfe41cb73" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="e0e6c0b8-3f21-459d-bf95-17bd6809b87d" class="">N/A.</p></details></li></ul><ul id="ba915d8d-7453-4f82-abab-d76a273d3fa1" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="ebbdd056-8422-4341-9249-feef9531f033" class="">Also check if <code>withdrawInfo.value</code> is non-zero in <code>hasOutstandingWithdrawal()</code><strong> </strong>function to prevent users accidentally lock themselves for an unlocking period of time.</p></details></li></ul><ul id="a6d69b46-9b79-4400-9935-8777cef7783e" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="aaf9ff29-e97b-4f45-b8fb-8f3bf1727e95" class=""><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/pull/32/commits/7d48c3c7291332c74b1056e80c669a4439937f7f">7d48c3c</a>.</p><p id="cbfaa54f-bca1-44b8-aeb9-38e05bb4e1b8" class="">A non-zero value check is added to <code>_beforeWithdraw()</code>.</p></details></li></ul></li></ol><ol type="1" id="8cedfa94-661b-4fc6-bcf1-9b436ebeb1f6" class="numbered-list" start="6"><li><strong>Redundant indexed in events</strong><table id="73e29b7a-4ffb-4675-a28f-51da65d78095" class="simple-table"><tbody><tr id="1dbe4542-da32-4fec-afc4-68f417eb1d4c"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="0ed3af15-22da-4adf-a26c-881406caeecf"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">ImpactVaultManager.sol#L33, L34;                                  SpiralsCeloImpactVault.sol#L38, L39;                             SpiralsCUSDImpactVault#L24</td></tr><tr id="bad35a03-e5c4-4ead-a6ec-939119ace211"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">dc3d7e3;</td></tr><tr id="22e3bd1c-a949-4d33-bef8-db823a0c5cd1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Acknowledged;</strong></td></tr></tbody></table><ul id="f8927719-58e2-40d2-89c2-68c9a3beffd2" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="660dcfc1-7703-4c44-b26f-540fafb1cb62" class="">The parameter <code>amount</code> of the events is <code>indexed</code>. A numerical value usually should not be indexed as it won’t accelerate searching.</p><pre id="33887b0c-d7f0-48b3-9c87-854662154b63" class="code"><code>event Receive(address indexed sender, uint256 indexed amount);
+  event Claim(address indexed receiver, uint256 indexed amount);</code></pre></details></li></ul><ul id="8b5f1c29-9ae3-4d8e-88b6-5c55c72aee8d" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="aad3b12d-4c00-49b2-b41c-ce2544a47dec" class="">N/A.</p></details></li></ul><ul id="8f059248-3d36-44a3-a622-78a4c2264212" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="0342ca4d-dd76-47ab-b7b9-0bae6ac3c1d1" class="">Remove the <code>indexed</code> keyword from the numerical values in the events:</p><pre id="dca5ffa9-07ea-4bf2-985c-885ccdf1cd27" class="code"><code>event Receive(address indexed sender, uint256 amount);
+  event Claim(address indexed receiver, uint256 amount);</code></pre></details></li></ul><ul id="cfec5c77-8152-49b5-b8a0-a433e299f5e8" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="da960c5f-f88b-4fb0-9c31-626f59de65a7" class=""><strong>Acknowledged.</strong></p></details></li></ul></li></ol><ol type="1" id="6ba15051-906b-4a34-8b27-966f0eae29e8" class="numbered-list" start="7"><li><strong>Deposit only when the amount is not zero</strong><table id="2b6fc7e4-f3f9-459c-8e2e-9b954eb3c2f7" class="simple-table"><tbody><tr id="3929001b-598d-435c-ab9e-91e270a71cd0"><th id="okEA" class="block-color-blue_background simple-table-header" style="width:80px"><strong>Severity</strong></th><td id="y}lo" class="block-color-blue_background" style="width:528px"><mark class="highlight-blue"><strong>Informational</strong></mark></td></tr><tr id="297ccc95-4e8b-4de9-be38-0e9d5a7abbb9"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>File</strong></th><td id="y}lo" class="" style="width:528px">src/staking/migration/SpiralsStakingMigration.sol#L42;
+  src/staking/migration/SpiralsCUSDVaultMigration.sol#L39;</td></tr><tr id="16a70324-6d8f-4444-9bff-c455f45ab3e1"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Commit</strong></th><td id="y}lo" class="" style="width:528px">d7debb4;</td></tr><tr id="a77144fa-cd71-4745-85f0-c796930bf7ab"><th id="okEA" class="simple-table-header-color simple-table-header" style="width:80px"><strong>Status</strong></th><td id="y}lo" class="" style="width:528px"><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/6dcce64b8564b0500a289005bc7ad7c5060234c3">6dcce64</a>;</td></tr></tbody></table><ul id="8cae6f63-8aa6-4f4a-a312-76d06195b234" class="toggle"><li><details open=""><summary><strong>Description</strong></summary><p id="3bf6a62e-5e1b-4fad-9498-c4e987d0f0bf" class="">For function <code>transferAssetsToImpactVaultForAddress()</code>, a condition check can be added to make sure it only deposits into the new impact vault when the amount is not zero.</p></details></li></ul><ul id="1b01fced-25ff-4816-9da2-5f57f0003693" class="toggle"><li><details open=""><summary><strong>Exploit Scenario</strong></summary><p id="0c295fb8-3c52-462f-813d-44ce1bd3984f" class="">N/A.</p></details></li></ul><ul id="fc643c78-ef7a-4ab5-b922-dcf8dc0d202e" class="toggle"><li><details open=""><summary><strong>Recommendations</strong></summary><p id="1764ff40-bd43-4db6-9791-abbeba12ad5b" class="">Add the following checks:</p><pre id="0aa22faf-b580-416b-bae1-0ab2e5b5ba91" class="code"><code>function transferAssetsToImpactVaultForAddress(address _address, ImpactVault _vault) public onlyOwner whenPaused {
+      /// ...
+  
+      if(amount != 0) {
+          celoVault.depositCelo{value: amount}(_address);
+      }
+  
+      /// ...
+  }</code></pre><pre id="f4ff2a78-9d7a-42a3-afe3-d3e440795b96" class="code"><code>function transferAssetsToImpactVaultForAddress(address _address, ImpactVault _vault) public onlyOwner whenPaused {
+      /// ...
+  
+      if(cUSDAmount != 0) {
+          cUSDVault.deposit(cUSDAmount, _address);
+      }
+          
+      /// ...
+   }</code></pre></details></li></ul><ul id="a6c0df06-70ca-4da0-9909-26764b383391" class="toggle"><li><details open=""><summary><strong>Results</strong></summary><p id="8511abc3-8d57-4abf-a121-b427c8727beb" class=""><strong>Resolved</strong> in commit <a href="https://github.com/spiralsprotocol/protocol/commit/6dcce64b8564b0500a289005bc7ad7c5060234c3">6dcce64</a>.</p><p id="20c233d8-a4ae-410f-a464-08c709d72e73" class="">Require statement was added to check if the deposit amount is zero.</p></details></li></ul></li></ol></div></div><h2 id="0f2014bc-f877-49a4-8d0e-473b27cf03dc" class=""><details open=""><summary>Access Control Analysis</summary></details></h2><div class="indented"><p id="1a878781-3f6a-4869-9589-5921bb6323cd" class="">The workflow of the protocol consists of creating <code>ImpactVault</code> contracts that define the assets that can be staked and then registering them to the <code>ImpactVaultManager.sol</code> contract. This allows the <code>ImpactVaultManager.sol</code> contract to keep track of all the funds staked. The privileged roles and access control for this two-step process are the following:</p><h3 id="c6cd86cd-98c1-41c4-9f1d-c24e3b916e8e" class=""><details open=""><summary>ImpactVault contracts</summary></details></h3><div class="indented"><ul id="d855df21-f76c-4e1e-abf1-6d7e190b3771" class="bulleted-list"><li style="list-style-type:disc">The deployer of these contracts should define the principal asset, yield asset, and <code>ImpactVaultManager</code> address.</li></ul><ul id="22c3f5a1-f3e8-4ff5-afdd-aba99ba349b4" class="bulleted-list"><li style="list-style-type:disc">The <code>ImpactVaultManager.sol</code> contract can withdraw the yield accumulated by the asset.</li></ul></div><h3 id="ffa6189a-ee65-4c56-af7b-6a8022abd4d9" class=""><details open=""><summary>ImpactVaultManager.sol</summary></details></h3><div class="indented"><p id="618e8936-c8d6-4ed3-922c-d5607c2db354" class="">The deployer of the contract has control over the following functionality:</p><ul id="7f2b63d2-3531-4e50-903c-c34e5f6fd352" class="bulleted-list"><li style="list-style-type:disc">Set the governance token that will be associated with the yield generated by the <code>ImpactValut</code> contracts.</li></ul><ul id="623fe379-5c9d-45d1-98a3-ea8c0d778520" class="bulleted-list"><li style="list-style-type:disc">Register new <code>ImpactVault</code> contracts.</li></ul><ul id="809b9c03-8229-49c2-a651-238ccb98085d" class="bulleted-list"><li style="list-style-type:disc">Remove a registered <code>ImpactVault</code> contract.</li></ul></div></div><h2 id="f778849d-59ee-4dc2-b35e-e2c54db39037" class=""><details open=""><summary>Appendix I: Severity Categories</summary></details></h2><div class="indented"><table id="c091a166-b587-41f5-8a0f-8d16f55c80d9" class="simple-table"><thead class="simple-table-header"><tr id="b9890b6a-e2c5-466b-beb2-d71fb16fabdd"><th id="kXVg" class="simple-table-header-color simple-table-header"><strong>Severity</strong></th><th id="anJe" class="simple-table-header-color simple-table-header" style="width:536px"><strong>Description</strong></th></tr></thead><tbody><tr id="af94fd37-3346-41fb-b592-caad32c6ddc9"><td id="kXVg" class=""><strong><mark class="highlight-red">High</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are highly exploitable security vulnerabilities. It may cause direct loss of funds / permanent freezing of funds. All high severity issues should be resolved.</td></tr><tr id="65d88594-e83c-4d8d-b0a7-aa694f48c6e5"><td id="kXVg" class=""><strong><mark class="highlight-orange">Medium</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are only exploitable under some conditions or with some privileged access to the system. Users’ yields/rewards/information is at risk. All medium severity issues should be resolved unless there is a clear reason not to.</td></tr><tr id="065f823d-5959-476b-bc79-bf58e2077346"><td id="kXVg" class=""><strong><mark class="highlight-teal">Low</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that are low risk. Not fixing those issues will not result in the failure of the system. A fix on low severity issues is recommended but subject to the clients’ decisions.</td></tr><tr id="4a25d0eb-53ec-4c46-9823-243a970f17fe"><td id="kXVg" class=""><strong><mark class="highlight-blue">Informational</mark></strong></td><td id="anJe" class="" style="width:536px">Issues that pose no risk to the system and are related to the security best practices. Not fixing those issues will not result in the failure of the system. A fix on informational issues or adoption of those security best practices-related suggestions is recommended but subject to clients’ decision.</td></tr></tbody></table></div><h2 id="dbebbbf7-9d4d-4b85-a7e1-0d53f5515396" class=""><details open=""><summary>Appendix II: Status Categories</summary></details></h2><div class="indented"><table id="2ca40099-6744-4509-b07d-9bcb81d60a3a" class="simple-table"><thead class="simple-table-header"><tr id="65592973-54ec-45a8-81fe-18e4e2f96ff5"><th id="GLY]" class="simple-table-header-color simple-table-header"><strong>Status</strong></th><th id="f@^l" class="simple-table-header-color simple-table-header" style="width:518px"><strong>Description</strong></th></tr></thead><tbody><tr id="537a8a16-0b03-414e-a5cd-ab242813457b"><td id="GLY]" class=""><strong>Unresolved</strong></td><td id="f@^l" class="" style="width:518px">The issue is not acknowledged and not resolved.</td></tr><tr id="1d418a6e-eb74-4546-a5e6-02f15fd1057a"><td id="GLY]" class=""><strong>Partially Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been partially resolved.</td></tr><tr id="b643eea8-378c-43e3-bc74-97742a040afd"><td id="GLY]" class=""><strong>Acknowledged</strong></td><td id="f@^l" class="" style="width:518px">The Finding / Suggestion is acknowledged but not fixed / not implemented.</td></tr><tr id="b6f726e2-69e7-4684-aedb-b28a447214ca"><td id="GLY]" class=""><strong>Resolved</strong></td><td id="f@^l" class="" style="width:518px">The issue has been sufficiently resolved.</td></tr></tbody></table></div><h2 id="d6827e31-9989-4511-9c73-090066cdbbba" class=""><details open=""><summary>Disclaimer</summary></details></h2><div class="indented"><p id="9e5bba3a-f142-4dcf-9ed9-379088c49341" class="">Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.</p><p id="490c0e28-e745-4240-af65-5effe852c3c6" class="">InIn addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project.  Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (<em>i.e.</em>, “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.</p></div></div></article><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script><script>hljs.highlightAll();</script></body></html>

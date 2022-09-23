@@ -102,14 +102,14 @@ TGT Protocol is one of the first lending protocols and margin trading platforms 
 | --------------- | -------------------------------------------- | ----------- |
 | TGT Protocol    | [TGT Audit Report](https://www.verilog.solutions/audits/tgt_finance) |February 24, 2022|
 
-### :briefcase: Hashgraph Name Protocol
+### :briefcase: Hashgraph Name Protocol Audit
 hashgraph.name is a distributed, open, and extensible naming system built on the Hedera Hashgraph.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | Hashgraph Name Protocol | [Hashgraph Name Protocol Audit Report](https://www.verilog.solutions/audits/hashgraph_name_protocol/) |August 11, 2022|
 
-### :briefcase: Kolor
+### :briefcase: Kolor Audit
 Kolor’s protocol is a metaverse project that includes tokens, NFTs, and a marketplace system.
 
 | Title           | Audit Report Link                            | Date        |
@@ -123,6 +123,26 @@ This report presents our engineering engagement with the Celo dev team on the Ce
 | --------------- | -------------------------------------------- | ----------- |
 | Celo Contracts Audit PR#9740 | [Celo Contracts Audit PR#9740 Audit Report](https://www.verilog.solutions/audits/celo_pr_9740/) |August 29, 2022|
 
+### :briefcase: Pangolin Hedera Contracts Audit
+Pangolin Hedera contracts contain two parts. The AMM DEX contracts and a treasury vesting contract.  The AMM DEX contracts are on Uniswap V2 core contracts with support for Hedera native tokens. The treasury vesting contract distributes Pangolin’s Hedera native token PNG based on a 30-month vesting plan.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Pangolin Hedera Contracts | [Pangolin Hedera Contracts Audit Report](https://www.verilog.solutions/audits/pangolin_hedera_contracts/) |September 2, 2022|
+
+### :briefcase: Spirals Audit
+Spirals Protocol is a lightweight protocol that redirects block rewards to climate impact. 
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Spirals | [Spirals Audit Report](https://www.verilog.solutions/audits/spirals/) |September 12, 2022|
+
+### :briefcase: OpenMRV Audit
+OpenMRV is a protocol that allows to store the summarized hashes produced by the provider’s input measurement data on the CELO network. 
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| OpenMRV | [OpenMRV Audit Report](https://www.verilog.solutions/audits/openmrv/) |September 16, 2022|
 ---
 ## :round_pushpin: Severity Categories Standards
 | smart contract risk categorites
