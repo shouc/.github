@@ -21,63 +21,12 @@ Verilog Solutions team works closely with major ecosystems and Web3 projects and
 ## :file_folder: Audit
 | our engineering engagement with project teams
 
-### :briefcase: BendDAO Audit
-A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ETH liquidity to the lending pool to earn interest, while borrowers can borrow ETH from the lending pool using NFTs as collateral.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
-| Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | Augest 3, 2022|
-
-### :briefcase: STEPN Audit
-A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| STEPN           | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022|
-
-### :briefcase: Gnosis Audit
-GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| GNO Token V2.0.0| [GNO Token V2.0.0 Audit Report](https://www.verilog.solutions/audits/gno_token_v2/) | April 22, 2022|
-
 ### :briefcase: WOOFi Swap Audit
 Unlike popular Automated Market Making (AMM) or Proactive Market Making (PMM), WOOFi Swap’s Sythethetic Proactive Market Making (sPMM) is a brand new market-making algorithm that can successfully solve the slippage issue in Decentralized Exchange (DEX) by simulating order book structure in Centralized Exchange (CEX).
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | WOOFi Swap      | [WOOFi Swap Audit Report](https://www.verilog.solutions/audits/woofi_swap) | October 17, 2021 |
-
-### :briefcase: Vesta Finance Audit
-Vesta Finance is an Arbitrum-based lending protocol. Users can collateralize ETH and other supported assets to borrow $VST, which is Vesta Finance’s stablecoin. Vesta will support other collateral after the launch.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| Vesta Finance   | [Vesta Finance Audit Report](https://www.verilog.solutions/audits/vesta_finance) | January 30, 2022|
-
-### :briefcase: Ubeswap Audit
-A mobile-first DeFi exchange on the Celo network. Ubeswap provides decentralized exchange and automated market marker protocol for Celo assets. Ubeswap is recently adding new features including limit order.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| Ubeswap         | [Ubeswap Audit Report](https://www.verilog.solutions/audits/ubeswap)  | March 20, 2022 |
-
-### :briefcase: Cronus Finance Audit
-Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| Cronus Finance Protocol| [Cronus Finance Audit Report](https://www.verilog.solutions/audits/cronus_finance/) | June 15, 2022|
-
-### :briefcase: Untangle Protocol Audit
-Untangled Protocol is a decentralized lending and liquidity protocol for
-real-world asset collaterals.
-
-| Title           | Audit Report Link                            | Date        |
-| --------------- | -------------------------------------------- | ----------- |
-| Untangle Protocol| [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022|
 
 ### :briefcase: YuzuSwap Audit
 One of the first DEX projects for the Emerald paratime on the Oasis Network. YuzuSwap is an AMM DEX with innovative trading incentive designs, such as the trading pool share token (TPST).
@@ -86,6 +35,13 @@ One of the first DEX projects for the Emerald paratime on the Oasis Network. Yuz
 | --------------- | -------------------------------------------- | ----------- |
 | YuzuSwap DEX    | [YuzuSwap Audit Report](https://www.verilog.solutions/audits/yuzuswap) | January 4, 2022|
 | YuzuSwap Staking Contracts| [YuzuSwap Staking Contract Audit Report](https://www.verilog.solutions/audits/yuzuswap_staking_contracts) | March 30, 2022|
+
+### :briefcase: Vesta Finance Audit
+Vesta Finance is an Arbitrum-based lending protocol. Users can collateralize ETH and other supported assets to borrow $VST, which is Vesta Finance’s stablecoin. Vesta will support other collateral after the launch.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Vesta Finance   | [Vesta Finance Audit Report](https://www.verilog.solutions/audits/vesta_finance) | January 30, 2022|
 
 ### :briefcase: Fountain Protocol Audit
 Fountain Protocol is one of the first Lending protocols on the Emerald Paratime of Oasis Network.
@@ -101,6 +57,50 @@ TGT Protocol is one of the first lending protocols and margin trading platforms 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | TGT Protocol    | [TGT Audit Report](https://www.verilog.solutions/audits/tgt_finance) |February 24, 2022|
+
+### :briefcase: Ubeswap Audit
+A mobile-first DeFi exchange on the Celo network. Ubeswap provides decentralized exchange and automated market marker protocol for Celo assets. Ubeswap is recently adding new features including limit order.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Ubeswap         | [Ubeswap Audit Report](https://www.verilog.solutions/audits/ubeswap)  | March 20, 2022 |
+
+### :briefcase: Gnosis Audit
+GNO token is used in various GNO ecosystem products. GNO ecosystem includes various applications and infrastructure, such as Gnosis Auction, Gnosis Safe, and Gnosis Chain. Gnosis Beacon Chain is currently live and secured with GNO token, and the Gnosis Beacon Chain will merge with Gnosis Chain later.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| GNO Token V2.0.0| [GNO Token V2.0.0 Audit Report](https://www.verilog.solutions/audits/gno_token_v2/) | April 22, 2022|
+
+### :briefcase: BendDAO Audit
+A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ETH liquidity to the lending pool to earn interest, while borrowers can borrow ETH from the lending pool using NFTs as collateral.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
+| Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | Augest 3, 2022|
+
+### :briefcase: STEPN Audit
+A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| STEPN           | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022|
+
+### :briefcase: Untangle Protocol Audit
+Untangled Protocol is a decentralized lending and liquidity protocol for
+real-world asset collaterals.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Untangle Protocol| [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022|
+
+### :briefcase: Cronus Finance Audit
+Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Cronus Finance Protocol| [Cronus Finance Audit Report](https://www.verilog.solutions/audits/cronus_finance/) | June 15, 2022|
 
 ### :briefcase: Hashgraph Name Protocol Audit
 hashgraph.name is a distributed, open, and extensible naming system built on the Hedera Hashgraph.
