@@ -143,6 +143,29 @@ OpenMRV is a protocol that allows to store the summarized hashes produced by the
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | OpenMRV | [OpenMRV Audit Report](https://www.verilog.solutions/audits/openmrv/) |September 16, 2022|
+
+### :briefcase: Thallo Audit
+Thallo carbon credit bridge is a suite of smart contracts that enables the issuance (bridging), retirement, and unbridging of Voluntary Carbon Credits (VCCs) in the form of fungible ERC20s. 
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Thallo | [Thallo Audit Report](https://www.verilog.solutions/audits/thallo/) |October 7, 2022|
+
+### :briefcase: Mimic Finance Audit
+Mimic is a platform that allows users to deploy tailored infrastructure to automate DeFi operations in a trustless and non-custodial way. Some examples of these operations are treasury management, index rebalancing, fee distribution, liquidity provision, etc.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Mimic Finance | [Mimic Finance Audit Report](https://www.verilog.solutions/audits/mimicfi/) |October 27, 2022|
+
+### :briefcase: Pirex-GMX Audit
+Pirex is a product by Redacted which creates liquid wrappers that allow for auto-compounding and the tokenization of future yield/vote events. Pirex-GMX aims to integrate GMX into Pirex by providing users with a way to tokenize their GMX, GLP, and esGMX tokens.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Pirex-GMX | [Pirex-GMX Audit Report](https://www.verilog.solutions/audits/pirex_gmx/) |November 10, 2022|
+
+
 ---
 ## :round_pushpin: Severity Categories Standards
 | smart contract risk categorites
