@@ -163,7 +163,7 @@ Pirex is a product by Redacted which creates liquid wrappers that allow for auto
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Pirex-GMX | [Pirex-GMX Audit Report](https://www.verilog.solutions/audits/pirex_gmx/) |November 10, 2022|
+| Pirex-GMX | Pirex-GMX Audit Report Pending |November 10, 2022|
 
 
 ---
