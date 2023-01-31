@@ -79,6 +79,7 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 | --------------- | -------------------------------------------- | ----------- |
 | Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
 | Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | Augest 3, 2022|
+| Ape Staking | [Apecoin Staking Audit Report](https://www.verilog.solutions/audits/bend_apecoin_staking/) | Dec 15, 2022|
 
 ### :briefcase: STEPN Audit
 A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
@@ -138,7 +139,7 @@ Spirals Protocol is a lightweight protocol that redirects block rewards to clima
 | Spirals | [Spirals Audit Report](https://www.verilog.solutions/audits/spirals/) |September 12, 2022|
 
 ### :briefcase: OpenMRV Audit
-OpenMRV is a protocol that allows to store the summarized hashes produced by the provider’s input measurement data on the CELO network. 
+OpenMRV is a protocol that allows storing the summarized hashes produced by the provider’s input measurement data on the CELO network. 
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
@@ -158,17 +159,31 @@ Mimic is a platform that allows users to deploy tailored infrastructure to autom
 | --------------- | -------------------------------------------- | ----------- |
 | Mimic Finance | [Mimic Finance Audit Report](https://www.verilog.solutions/audits/mimicfi/) |October 27, 2022|
 
-### :briefcase: Pirex-GMX Audit
-Pirex is a product by Redacted which creates liquid wrappers that allow for auto-compounding and the tokenization of future yield/vote events. Pirex-GMX aims to integrate GMX into Pirex by providing users with a way to tokenize their GMX, GLP, and esGMX tokens.
+### :briefcase: Blue
+BlueFi is a project that allows a new form of liquidity that embeds compliance-related functionality into assets. This protocol implements ERC20 wrapper tokens called SAFE Tokens that can only be traded by wallets that are KYC/AML verified. SAFE tokens are a novel innovation in liquidity infrastructure that allows KYC checks to take place inside of tokens by restricting the transfer functions to only be executed if both parties in the transaction pass this check.
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Pirex-GMX | Pirex-GMX Audit Report Pending |November 10, 2022|
+| Blue | Blue Audit Report Pending | Nov 11, 2023|
+
+### :briefcase: Pirex-GMX Audit
+Pirex is a product by Redacted that creates liquid wrappers that allow for auto-compounding and the tokenization of future yield/vote events. Pirex-GMX aims to integrate GMX into Pirex by providing users with a way to tokenize their GMX, GLP, and esGMX tokens.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Pirex-GMX | Pirex-GMX Audit Report Pending |Jan 15, 2023|
+
+### :briefcase: Mircochain Audit
+One of the first DEX projects for the Fuel network, the modular & execution layer of Ethereum. Mircochain is an AMM DEX implemented in Sway Language.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Microchain | Microchain Audit Report Pending | Jan 30, 2023|
 
 
 ---
 ## :round_pushpin: Severity Categories Standards
-| smart contract risk categorites
+| smart contract risk categories
 
 | Severity      | Description |
 | ------------- | ----------- |
@@ -179,7 +194,7 @@ Pirex is a product by Redacted which creates liquid wrappers that allow for auto
 
 ---
 ## :triangular_flag_on_post: Status Categories
-| smart contract risk categorites
+| smart contract risk categories
 
 | Status        | Description |
 | ------------- | ----------- |
@@ -203,6 +218,6 @@ Pirex is a product by Redacted which creates liquid wrappers that allow for auto
 ---
 ## Disclaimer
 
-Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit is detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of security or functionality of the technology we agree to analyze.
+Verilog Solutions receives compensation from one or more clients for performing the smart contract and auditing analysis contained in these reports. The report created is solely for Clients and published with their consent. As such, the scope of our audit is limited to a review of code, and only the code we note as being within the scope of our audit is detailed in this report. It is important to note that the Solidity code itself presents unique and unquantifiable risks since the Solidity language itself remains under current development and is subject to unknown risks and flaws. Our sole goal is to help reduce the attack vectors and the high level of variance associated with utilizing new and consistently changing technologies. Thus, Verilog Solutions in no way claims any guarantee of the security or functionality of the technology we agree to analyze.
 
-In addition, Verilog Solutions reports do not provide any indication of the technologies proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project. Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.
+In addition, Verilog Solutions reports do not provide any indication of the technologies' proprietors, business, business model, or legal compliance. As such, reports do not provide investment advice and should not be used to make decisions about investment or involvement with any particular project. Verilog Solutions has the right to distribute the Report through other means, including via Verilog Solutions publications and other distributions. Verilog Solutions makes the reports available to parties other than the Clients (i.e., “third parties”) – on its website in hopes that it can help the blockchain ecosystem develop technical best practices in this rapidly evolving area of innovation.
