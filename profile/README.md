@@ -178,7 +178,7 @@ Pirex is a product by Redacted that creates liquid wrappers that allow for auto-
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Pirex-GMX | Pirex-GMX Audit Report Pending |Jan 15, 2023|
+| Pirex-GMX | [Pirex-GMX Audit Report](https://www.verilog.solutions/audits/pirex_gmx/) |Feb 03, 2023|
 
 ### :briefcase: Mircochain Audit
 One of the first DEX projects for the Fuel network, the modular & execution layer of Ethereum. Mircochain is an AMM DEX implemented in Sway Language.
