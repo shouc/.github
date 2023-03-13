@@ -80,6 +80,8 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 | Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
 | Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | Augest 3, 2022|
 | Ape Staking | [Apecoin Staking Audit Report](https://www.verilog.solutions/audits/bend_apecoin_staking/) | Dec 15, 2022|
+| Ape Vault | [Apecoin Vault Audit Report](https://www.verilog.solutions/audits/benddao_apecoin_vault/) | Feb 15, 2023|
+| NFT wrapper | [NFT wrapper Audit Report](https://www.verilog.solutions/audits/benddao_nft_wrapper/) | Feb 27, 2023|
 
 ### :briefcase: STEPN Audit
 A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
@@ -171,7 +173,7 @@ BlueFi is a project that allows a new form of liquidity that embeds compliance-r
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Blue | Blue Audit Report Pending | Nov 11, 2023|
+| Blue | [Blue Audit Report](https://www.verilog.solutions/audits/blue/) | Nov 11, 2023|
 
 ### :briefcase: Pirex-GMX Audit
 Pirex is a product by Redacted that creates liquid wrappers that allow for auto-compounding and the tokenization of future yield/vote events. Pirex-GMX aims to integrate GMX into Pirex by providing users with a way to tokenize their GMX, GLP, and esGMX tokens.
@@ -185,7 +187,16 @@ One of the first DEX projects for the Fuel network, the modular & execution laye
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Microchain | Microchain Audit Report Pending | Jan 30, 2023|
+| Microchain | [Microchain Audit Report](https://www.verilog.solutions/audits/microchain/) | Jan 30, 2023|
+
+### :briefcase: Mento Audit
+MultiCollateral-Mento or “McMint” is a generalization of the Mento system with the aim of allowing virtual pools between any mento stable asset and mento collateral asset to be traded under different pricing regimes.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Mento | [Mento Audit Report](https://www.verilog.solutions/audits/mento/) | Feb 09, 2023|
+
+
 
 
 ---
