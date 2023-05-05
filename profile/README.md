@@ -173,7 +173,7 @@ BlueFi is a project that allows a new form of liquidity that embeds compliance-r
 
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
-| Blue | [Blue Audit Report](https://www.verilog.solutions/audits/blue/) | Nov 11, 2023|
+| Blue | [Blue Audit Report](https://www.verilog.solutions/audits/blue/) | Nov 11, 2022|
 
 ### :briefcase: Pirex-GMX Audit
 Pirex is a product by Redacted that creates liquid wrappers that allow for auto-compounding and the tokenization of future yield/vote events. Pirex-GMX aims to integrate GMX into Pirex by providing users with a way to tokenize their GMX, GLP, and esGMX tokens.
@@ -196,8 +196,40 @@ MultiCollateral-Mento or “McMint” is a generalization of the Mento system wi
 | --------------- | -------------------------------------------- | ----------- |
 | Mento | [Mento Audit Report](https://www.verilog.solutions/audits/mento/) | Feb 09, 2023|
 
+### :briefcase: Younergy Audit
+Younergy Crypto is a protocol that scales solar-as-a-service with decentralized finance primitives embedded in decentralized energy systems. Younergy enables direct solar power funding while sharing revenue and minting the associated carbon credits to participants.
 
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Younergy | [Younergy Audit Report](https://www.verilog.solutions/audits/younergy/) | Mar 21, 2023|
 
+### :briefcase: Celo Monorepo PR Audit
+This report presents our engineering engagement with the Celo dev team on the [celo-monorepo](https://github.com/celo-org/celo-monorepo) repository for 11 PRs from #9798 to #10159.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Celo Monorepo PR Audit Audit | [Celo Monorepo PR Audit Report](https://www.verilog.solutions/audits/celo_monorepo_pr_9798_2_10159/) |Mar 09, 2023|
+
+### :briefcase: Celo staked-celo PR Audit
+This report presents our engineering engagement with the Celo dev team on the [staked-celo](https://github.com/celo-org/staked-celo) repository for 9 PRs from #72 to #120.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Celo staked-celo PR Audit | [Celo staked-celo PR Audit Report](https://www.verilog.solutions/audits/celo_liquid_staking_pr_72_2_120/) |Mar 27, 2023|
+
+### :briefcase: Y2K Finance Audit
+Y2K Finance is a suite of structured products designed for exotic peg derivatives, allowing market participants to robustly hedge or speculate on the risk of a particular pegged asset (or basket of pegged assets), deviating from their 'fair implied market value'.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Y2K Finance Audit | [Y2K Finance Audit Report](https://www.verilog.solutions/audits/y2k/) |Mar 17, 2023|
+
+### :briefcase: Poolshark Audit
+Poolshark Range pool is a concentrated liquidity pool supporting both fungible and non-fungible positions. Non-fungible positions use ERC20 as position tokens which can be transferred and traded.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Poolshark Audit | [Poolshark Audit Report](https://www.verilog.solutions/audits/poolshark/) |Apr 04, 2023|
 
 ---
 ## :round_pushpin: Severity Categories Standards
