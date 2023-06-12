@@ -79,9 +79,10 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 | --------------- | -------------------------------------------- | ----------- |
 | Lending Protocol| [Lending Protocol Audit Report](https://www.verilog.solutions/audits/benddao/) | May 24, 2022|
 | Liquidity Protocol| [Blue-chip NFT Liquidity Audit Report](https://www.verilog.solutions/audits/benddao_liquidity/) | August 3, 2022|
-| Ape Staking | [Apecoin Staking Audit Report](https://www.verilog.solutions/audits/bend_apecoin_staking/) | Dec 15, 2022|
-| Ape Vault | [Apecoin Vault Audit Report](https://www.verilog.solutions/audits/benddao_apecoin_vault/) | Feb 15, 2023|
+| BendDAO ApeCoin Staking | [BendDAO ApeCoin Staking Audit Report](https://www.verilog.solutions/audits/bend_apecoin_staking/) | Dec 15, 2022|
+| Ape Vault | [ApeCoin Vault Audit Report](https://www.verilog.solutions/audits/benddao_apecoin_vault/) | Feb 15, 2023|
 | NFT wrapper | [NFT wrapper Audit Report](https://www.verilog.solutions/audits/benddao_nft_wrapper/) | Feb 27, 2023|
+| BendDAO ApeCoin Staking V2 | [BendDAO ApeCoin Audit Report](https://www.verilog.solutions/audits/benddao_ape_staking_v2/) | Feb 27, 2023|
 
 ### :briefcase: STEPN Audit
 A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and earn rewards by engaging in outdoor activities.
@@ -230,6 +231,13 @@ Poolshark Range pool is a concentrated liquidity pool supporting both fungible a
 | Title           | Audit Report Link                            | Date        |
 | --------------- | -------------------------------------------- | ----------- |
 | Poolshark Audit | [Poolshark Audit Report](https://www.verilog.solutions/audits/poolshark/) |Apr 04, 2023|
+
+### :briefcase: Yama Finance Audit
+Yama Finance is an omnichain CDP protocol. It is a system of smart contracts that work together to maintain the health of the Yama stablecoin.
+
+| Title           | Audit Report Link                            | Date        |
+| --------------- | -------------------------------------------- | ----------- |
+| Yama Finance Audit | [Yama Finance Audit Report](https://www.verilog.solutions/audits/yama_finance/) |Apr 18, 2023|
 
 ---
 ## :round_pushpin: Severity Categories Standards
