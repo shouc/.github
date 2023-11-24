@@ -309,18 +309,18 @@ The Untangled Protocol is a decentralized lending and liquidity protocol for rea
 
 Mantle Network is a technology stack for scaling Ethereum, and we strive to be EVM-compatible while doing so. Being EVM-compatible means all the contracts and tools that work on Ethereum also work on Mantle Network with minimal modifications. Users can experiment with exciting web3 apps, and developers can deploy smart contracts in an efficient, low-fee environment.
 
-| Title                   | Audit Report Link                                                                              | Date         |
-| ----------------------- | ---------------------------------------------------------------------------------------------- | ------------ |
-| Mantle MDI Quests Audit | [Mantle MDI Quests Audit Report](../Audit/Mantle_Ecosystem_Audit/Mantle_MDI_Quests_Report.pdf) | Sep 28, 2023 |
-| Mantle LSP L2 Audit     | [Mantle LSP L2 Audit Report](../Audit/Mantle_Ecosystem_Audit/Mantle_LSP_L2_Report.pdf)         | Nov 21, 2023 |
+| Title                   | Audit Report Link                                                                                                                                  | Date         |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Mantle MDI Quests Audit | [Mantle MDI Quests Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_MDI_Quests_Report.pdf) | Sep 28, 2023 |
+| Mantle LSP L2 Audit     | [Mantle LSP L2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_LSP_L2_Report.pdf)         | Nov 21, 2023 |
 
 ### :briefcase: Redacted Hidden Hand Marionette Report
 
 Marionette veNFT wrapper is an ERC721-based voting and reward management service, engineered to interface with various voting escrowed protocols seamlessly. The service offers bribe optimization, reward consolidation, automatic compounding functionality, and automatization of veNFTs functionalities, thereby improving user experience within these protocols.
 
-| Title                                 | Audit Report Link                                                                                                        | Date         |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| Redacted Hidden Hand Marionette Audit | [Redacted Hidden Hand Marionette Audit Report](../Audit/Redacted_Hidden_Hand/Redacted_Hidden_Hand_Marionette_Report.pdf) | Nov 10, 2023 |
+| Title                                 | Audit Report Link                                                                                                                                                            | Date         |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Redacted Hidden Hand Marionette Audit | [Redacted Hidden Hand Marionette Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Redacted_Hidden_Hand_Marionette_Report.pdf) | Nov 10, 2023 |
 
 ---
 
