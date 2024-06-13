@@ -322,6 +322,7 @@ Marionette veNFT wrapper is an ERC721-based voting and reward management service
 | Title                                 | Audit Report Link                                                                                                                                                            | Date         |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | Redacted Hidden Hand Marionette Audit | [Redacted Hidden Hand Marionette Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Redacted_Hidden_Hand_Marionette_Report.pdf) | Nov 10, 2023 |
+| Marionette Thena Adapter Audit        | [Marionette Thena Adapter Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Marionette_Thena_Adapter_Report.pdf)               | Jan 22, 2024 |
 
 ---
 
