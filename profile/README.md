@@ -94,7 +94,7 @@ A decentralized peer-to-pool-based NFT liquidity protocol. Depositors provide ET
 | ApCoin Vault               | [ApeCoin Vault Audit Report](https://www.verilog.solutions/audits/benddao_apecoin_vault/)          | Feb 15, 2023   |
 | NFT wrapper                | [NFT wrapper Audit Report](https://www.verilog.solutions/audits/benddao_nft_wrapper/)              | Feb 27, 2023   |
 | BendDAO ApeCoin Staking V2 | [BendDAO ApeCoin Audit Report](https://www.verilog.solutions/audits/benddao_ape_staking_v2/)       | May 25, 2023   |
-| BendDAO V2 Lending and Liquidity Protocol | [BendDAO V2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/BendDAO_V2/BendDAO_v2_Audit_Report.pdf)       | June 4, 2024   |
+| BendDAO V2 Lending and Liquidity Protocol | [BendDAO V2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/BendDAO_V2/BendDAO_V2_Audit_Report.pdf)       | June 4, 2024   |
 
 ### :briefcase: STEPN Audit
 
