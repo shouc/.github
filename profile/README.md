@@ -104,14 +104,13 @@ A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and
 | ----- | ----------------------------------------------------------------- | ------------ |
 | STEPN | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022 |
 
-### :briefcase: Untangle Protocol Audit
+### :briefcase: Gemnify Audit
 
-Untangled Protocol is a decentralized lending and liquidity protocol for
-real-world asset collaterals.
+Gemnify is a decentralized derivative exchange tailored for pegged assets that aims to offer amplified leveraged trading and capital-efficient support for open interest.
 
 | Title             | Audit Report Link                                                                        | Date         |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Untangle Protocol | [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
+| Gemnify Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
 
 ### :briefcase: Cronus Finance Audit
 
@@ -306,7 +305,7 @@ The Untangled Protocol is a decentralized lending and liquidity protocol for rea
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
 | Untangled Protocol | [Untangled Protocol Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
 | Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
-| Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/update-missing-reports/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
+| Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
 
 ### :briefcase: Mantle Ecosystem
 
