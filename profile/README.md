@@ -304,7 +304,8 @@ The Untangled Protocol is a decentralized lending and liquidity protocol for rea
 
 | Title                  | Audit Report Link                                                                         | Date        |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| Untangle Finance Audit | [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
+| Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
+| Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/update-missing-reports/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
 
 ### :briefcase: Mantle Ecosystem
 
