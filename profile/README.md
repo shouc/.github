@@ -298,12 +298,13 @@ The U Protocol is an Arbitrum-based lending protocol. Users can collateralize us
 | ---------------- | --------------------------------------------------------------------------- | ------------ |
 | U Protocol Audit | [U Protocol Audit Report](https://www.verilog.solutions/audits/u_protocol/) | Aug 31, 2023 |
 
-### :briefcase: Untangle Finance
+### :briefcase: Untangled Finance
 
 The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
 
 | Title                  | Audit Report Link                                                                         | Date        |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Untangled Protocol | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
 | Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
 | Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/update-missing-reports/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
 
