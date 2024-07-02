@@ -104,6 +104,16 @@ A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and
 | ----- | ----------------------------------------------------------------- | ------------ |
 | STEPN | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022 |
 
+### :briefcase: Untangled Finance
+
+The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Untangled Protocol | [Untangled Protocol Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
+| Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
+| Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
+
 ### :briefcase: Cronus Finance Audit
 
 Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
@@ -288,16 +298,6 @@ The U Protocol is an Arbitrum-based lending protocol. Users can collateralize us
 | Title            | Audit Report Link                                                           | Date         |
 | ---------------- | --------------------------------------------------------------------------- | ------------ |
 | U Protocol Audit | [U Protocol Audit Report](https://www.verilog.solutions/audits/u_protocol/) | Aug 31, 2023 |
-
-### :briefcase: Untangled Finance
-
-The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
-
-| Title                  | Audit Report Link                                                                         | Date        |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| Untangled Protocol | [Untangled Protocol Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
-| Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
-| Untangled Finance V2 Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
 
 ### :briefcase: Mantle Ecosystem
 
