@@ -333,7 +333,7 @@ Security review on DODO's TimeLock staking contract.
 
 | Title                  | Audit Report Link                                                                         | Date        |
 | ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| DODO Stake Contract Audit | [DODO Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Audit_Report.pdf)  | Apr 12, 2024 |
+| DODO Stake Contract Audit | [DODO Stake Contract Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Stake_Contract_Audit_Report.pdf)  | Apr 12, 2024 |
 
 ### :briefcase: Gemnify Audit
 
