@@ -110,7 +110,7 @@ Gemnify is a decentralized derivative exchange tailored for pegged assets that a
 
 | Title             | Audit Report Link                                                                        | Date         |
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Gemnify Audit | [Untangled Finance Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
+| Gemnify Audit | [Gemnify Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
 
 ### :briefcase: Cronus Finance Audit
 
