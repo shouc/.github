@@ -297,6 +297,22 @@ The U Protocol is an Arbitrum-based lending protocol. Users can collateralize us
 | ---------------- | --------------------------------------------------------------------------- | ------------ |
 | U Protocol Audit | [U Protocol Audit Report](https://www.verilog.solutions/audits/u_protocol/) | Aug 31, 2023 |
 
+### :briefcase: Sonorus ERC20 and Vester Contracts
+
+Security review on Sonorus' ERC20 and Vester contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Sonorus ERC20 and Vester Audit | [Sonorus ERC20 and Vester Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Sonorus_Audit/Sonorus_ERC20_and_Vester_Audit_Report.pdf)  | Dec 7, 2023 |
+
+### :briefcase: DODO Stake Contract
+
+Security review on DODO's TimeLock staking contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| DODO stake contract Audit | [DODO Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Audit_Report.pdf)  | Apr 12, 2024 |
+
 ### :briefcase: Untangled Finance
 
 The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
@@ -316,6 +332,7 @@ Mantle Network is a technology stack for scaling Ethereum, and we strive to be E
 | Mantle L2 ERC20 Token Bridge Audit | [Mantle L2 ERC20 Token Bridge Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_L2_ERC20_Token_Bridge_Report.pdf) | Sep 28, 2023 |
 | Mantle MDI Quests Audit            | [Mantle MDI Quests Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_MDI_Quests_Report.pdf)                       | Oct 10, 2023 |
 | Mantle LSP L2 Audit                | [Mantle LSP L2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_LSP_L2_Report.pdf)                               | Nov 21, 2023 |
+| Mantle Staking Hub Audit           | [Mantle Staking Hub Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_Staking_Hub_Audit_Report.pdf)               | Apr 3, 2024 |
 
 ### :briefcase: Redacted Hidden Hand Marionette Report
 
