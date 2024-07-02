@@ -7,3 +7,4 @@ Mantle Network is a technology stack for scaling Ethereum, and we strive to be E
 | Mantle L2 ERC20 Token Bridge Audit | [Mantle L2 ERC20 Token Bridge Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_L2_ERC20_Token_Bridge_Report.pdf) | Sep 28, 2023 |
 | Mantle MDI Quests Audit            | [Mantle MDI Quests Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_MDI_Quests_Report.pdf)                       | Oct 10, 2023 |
 | Mantle LSP L2 Audit                | [Mantle LSP L2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_LSP_L2_Report.pdf)                               | Nov 21, 2023 |
+| Mantle Staking Hub Audit           | [Mantle Staking Hub Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_Staking_Hub_Audit_Report.pdf)               | Apr 3, 2024 |
