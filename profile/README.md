@@ -104,14 +104,15 @@ A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and
 | ----- | ----------------------------------------------------------------- | ------------ |
 | STEPN | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022 |
 
-### :briefcase: Untangle Protocol Audit
+### :briefcase: Untangled Finance
 
-Untangled Protocol is a decentralized lending and liquidity protocol for
-real-world asset collaterals.
+The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
 
-| Title             | Audit Report Link                                                                        | Date         |
-| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Untangle Protocol | [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Untangled Protocol | [Untangled Protocol Audit Report](https://www.verilog.solutions/audits/untangle_protocol/) | June 3, 2022 |
+| Untangled Finance Audit | [Untangled Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
+| Untangled Finance V2 Audit | [Untangled Finance V2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf)  | Apr 8, 2024 |
 
 ### :briefcase: Cronus Finance Audit
 
@@ -298,14 +299,6 @@ The U Protocol is an Arbitrum-based lending protocol. Users can collateralize us
 | ---------------- | --------------------------------------------------------------------------- | ------------ |
 | U Protocol Audit | [U Protocol Audit Report](https://www.verilog.solutions/audits/u_protocol/) | Aug 31, 2023 |
 
-### :briefcase: Untangle Finance
-
-The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
-
-| Title                  | Audit Report Link                                                                         | Date        |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| Untangle Finance Audit | [Untangle Finance Audit Report](https://www.verilog.solutions/audits/untangled_protocol/) | Oct 3, 2023 |
-
 ### :briefcase: Mantle Ecosystem
 
 Mantle Network is a technology stack for scaling Ethereum, and we strive to be EVM-compatible while doing so. Being EVM-compatible means all the contracts and tools that work on Ethereum also work on Mantle Network with minimal modifications. Users can experiment with exciting web3 apps, and developers can deploy smart contracts in an efficient, low-fee environment.
@@ -315,6 +308,7 @@ Mantle Network is a technology stack for scaling Ethereum, and we strive to be E
 | Mantle L2 ERC20 Token Bridge Audit | [Mantle L2 ERC20 Token Bridge Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_L2_ERC20_Token_Bridge_Report.pdf) | Sep 28, 2023 |
 | Mantle MDI Quests Audit            | [Mantle MDI Quests Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_MDI_Quests_Report.pdf)                       | Oct 10, 2023 |
 | Mantle LSP L2 Audit                | [Mantle LSP L2 Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_LSP_L2_Report.pdf)                               | Nov 21, 2023 |
+| Mantle Staking Hub Audit           | [Mantle Staking Hub Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Mantle_Ecosystem_Audit/Mantle_Staking_Hub_Audit_Report.pdf)               | Apr 3, 2024 |
 
 ### :briefcase: Redacted Hidden Hand Marionette Report
 
@@ -324,6 +318,30 @@ Marionette veNFT wrapper is an ERC721-based voting and reward management service
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | Redacted Hidden Hand Marionette Audit | [Redacted Hidden Hand Marionette Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Redacted_Hidden_Hand_Marionette_Report.pdf) | Nov 10, 2023 |
 | Marionette Thena Adapter Audit        | [Marionette Thena Adapter Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Marionette_Thena_Adapter_Report.pdf)               | Jan 22, 2024 |
+
+### :briefcase: Sonorus ERC20 and Vester Contracts
+
+Security review on Sonorus' ERC20 and Vester contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Sonorus ERC20 and Vester Audit | [Sonorus ERC20 and Vester Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Sonorus_Audit/Sonorus_ERC20_and_Vester_Audit_Report.pdf)  | Dec 7, 2023 |
+
+### :briefcase: DODO Stake Contract
+
+Security review on DODO's TimeLock staking contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| DODO Stake Contract Audit | [DODO Stake Contract Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Stake_Contract_Audit_Report.pdf)  | Apr 12, 2024 |
+
+### :briefcase: Gemnify Audit
+
+Gemnify is a decentralized derivative exchange tailored for pegged assets that aims to offer amplified leveraged trading and capital-efficient support for open interest.
+
+| Title             | Audit Report Link                                                                        | Date         |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| Gemnify Audit | [Gemnify Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
 
 ---
 
