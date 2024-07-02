@@ -14,7 +14,7 @@
 A curated list of awesome <a href="https://www.verilog.solutions/">Verilog</a> resources, information, audits, standards and more.
 
 - [assets](./assets/): contains verilog logo
-- [Audit](./Audit/): audit report html files
+- [Audit](./Audit/): audit report html and pdf files
 - [profile](./profile/): profile README.md
 
 ## :office: Official Channels
