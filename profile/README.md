@@ -104,14 +104,6 @@ A Game-Fi/Social-Fi Web3 application. Users could acquire STEPN NFT sneakers and
 | ----- | ----------------------------------------------------------------- | ------------ |
 | STEPN | [STEPN Audit Report](https://www.verilog.solutions/audits/stepn/) | June 3, 2022 |
 
-### :briefcase: Gemnify Audit
-
-Gemnify is a decentralized derivative exchange tailored for pegged assets that aims to offer amplified leveraged trading and capital-efficient support for open interest.
-
-| Title             | Audit Report Link                                                                        | Date         |
-| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
-| Gemnify Audit | [Gemnify Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
-
 ### :briefcase: Cronus Finance Audit
 
 Cronus Finance is an AMM DEX deployed on the EVMOS ecosystem. A portion of Cronus Finance’s code is based on SushiSwap, which features liquidity mining rewards and governance token staking. It is worth noting that Cronus Finance also implemented new features such as a Stable Cronus Staking that converts LP fees into stablecoins and allows $sCRN holders to claim exchange fees denominated in stablecoins.
@@ -297,22 +289,6 @@ The U Protocol is an Arbitrum-based lending protocol. Users can collateralize us
 | ---------------- | --------------------------------------------------------------------------- | ------------ |
 | U Protocol Audit | [U Protocol Audit Report](https://www.verilog.solutions/audits/u_protocol/) | Aug 31, 2023 |
 
-### :briefcase: Sonorus ERC20 and Vester Contracts
-
-Security review on Sonorus' ERC20 and Vester contract.
-
-| Title                  | Audit Report Link                                                                         | Date        |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| Sonorus ERC20 and Vester Audit | [Sonorus ERC20 and Vester Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Sonorus_Audit/Sonorus_ERC20_and_Vester_Audit_Report.pdf)  | Dec 7, 2023 |
-
-### :briefcase: DODO Stake Contract
-
-Security review on DODO's TimeLock staking contract.
-
-| Title                  | Audit Report Link                                                                         | Date        |
-| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| DODO Stake Contract Audit | [DODO Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Audit_Report.pdf)  | Apr 12, 2024 |
-
 ### :briefcase: Untangled Finance
 
 The Untangled Protocol is a decentralized lending and liquidity protocol for real-world asset collaterals. Below is a graph explaining the connections and relations between contracts. Additionally, there is some relevant information regarding the most important contracts and concepts:
@@ -342,6 +318,30 @@ Marionette veNFT wrapper is an ERC721-based voting and reward management service
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | Redacted Hidden Hand Marionette Audit | [Redacted Hidden Hand Marionette Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Redacted_Hidden_Hand_Marionette_Report.pdf) | Nov 10, 2023 |
 | Marionette Thena Adapter Audit        | [Marionette Thena Adapter Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Redacted_Hidden_Hand/Marionette_Thena_Adapter_Report.pdf)               | Jan 22, 2024 |
+
+### :briefcase: Sonorus ERC20 and Vester Contracts
+
+Security review on Sonorus' ERC20 and Vester contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| Sonorus ERC20 and Vester Audit | [Sonorus ERC20 and Vester Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Sonorus_Audit/Sonorus_ERC20_and_Vester_Audit_Report.pdf)  | Dec 7, 2023 |
+
+### :briefcase: DODO Stake Contract
+
+Security review on DODO's TimeLock staking contract.
+
+| Title                  | Audit Report Link                                                                         | Date        |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------- |
+| DODO Stake Contract Audit | [DODO Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/DODO_Audit/DODO_Audit_Report.pdf)  | Apr 12, 2024 |
+
+### :briefcase: Gemnify Audit
+
+Gemnify is a decentralized derivative exchange tailored for pegged assets that aims to offer amplified leveraged trading and capital-efficient support for open interest.
+
+| Title             | Audit Report Link                                                                        | Date         |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| Gemnify Audit | [Gemnify Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
 
 ---
 
