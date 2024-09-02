@@ -343,6 +343,16 @@ Gemnify is a decentralized derivative exchange tailored for pegged assets that a
 | ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
 | Gemnify Audit | [Gemnify Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/Gemnify_Audit/Gemnify_Audit_Report.pdf)  | Jun 13, 2024 |
 
+
+### :briefcase: NETZ Audit
+
+Security review on NETZ's liquidity pool contract.
+
+| Title             | Audit Report Link                                                                        | Date         |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------------ |
+| NETZ Audit | [NETZ Audit Report](https://github.com/Verilog-Solutions/.github/blob/main/Audit/NETZ_Audit/netz-audit-joint-report.pdf)  | Aug 12, 2024 |
+
+
 ---
 
 ## :round_pushpin: Severity Categories Standards
